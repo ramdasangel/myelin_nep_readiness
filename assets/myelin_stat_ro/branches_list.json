@@ -1,0 +1,2108 @@
+[
+  {
+    "_id": "588355b7c00eaa20406aee1a",
+    "Location": "Akurdi",
+    "BranchName": "Akurdi, English Medium Secondary School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "588442444845f9027cc1f0ca",
+    "Location": "Akurdi",
+    "BranchName": "Primary",
+    "School": {
+      "SchoolID": "588442344845f9027cc1f0c9",
+      "SchoolName": "PDEA Primary English School"
+    }
+  },
+  {
+    "_id": "5892f8603f4f681405166a93",
+    "Location": "Thane",
+    "BranchName": "Thane",
+    "School": {
+      "SchoolID": "5892f8593f4f681405166a92",
+      "SchoolName": "Little Millenium School and College,Thane"
+    }
+  },
+  {
+    "_id": "58a2efa75eade916500aa1c3",
+    "Location": "thane",
+    "BranchName": "mira road",
+    "School": {
+      "SchoolID": "58a2ef7f5eade916500aa1c2",
+      "SchoolName": "Rawal english school"
+    }
+  },
+  {
+    "_id": "58bec67daba9ca3e622f039c",
+    "Location": "Somalwada",
+    "BranchName": "cent  girls school",
+    "School": {
+      "SchoolID": "58bec50a5698933dec344e88",
+      "SchoolName": "Cent School"
+    }
+  },
+  {
+    "_id": "58bec67daba9ca3e622f039d",
+    "Location": "Jayatala",
+    "BranchName": "cent boys school",
+    "School": {
+      "SchoolID": "58bec50a5698933dec344e88",
+      "SchoolName": "Cent School"
+    }
+  },
+  {
+    "_id": "58bec67daba9ca3e622f039e",
+    "Location": "Jari",
+    "BranchName": "cent convent",
+    "School": {
+      "SchoolID": "58bec50a5698933dec344e88",
+      "SchoolName": "Cent School"
+    }
+  },
+  {
+    "_id": "59b2c0ad9edacc2698d07ef7",
+    "Location": "Akurdi",
+    "BranchName": "Primary",
+    "School": {
+      "SchoolID": "59b2c066dfcbf2261856cae8",
+      "SchoolName": "PDEA Primary School"
+    }
+  },
+  {
+    "_id": "5bebe3c450335cc5a54903f4",
+    "Location": "Akurdi",
+    "BranchName": "Akurdi, Primary English Medium School, Akurdi",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5bd420fab859aa3440d316e5",
+    "Location": "Akurdi",
+    "BranchName": "Akurdi, Shishuvihar Primary School, Akurdi",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5cc95e3a69be9b903c91576d",
+    "Location": "Aundh",
+    "BranchName": "Dnyaneshwar Balaji Murkute (Patil) Madhyamik Vidyalaya",
+    "School": {
+      "SchoolID": "5cc95d1769be9b903c91576c",
+      "SchoolName": "Vidyanchal School"
+    }
+  },
+  {
+    "_id": "5cd17817a2b82d31999dac12",
+    "Location": "Baner",
+    "BranchName": "Vidyanchal High School",
+    "School": {
+      "SchoolID": "5cc95d1769be9b903c91576c",
+      "SchoolName": "Vidyanchal School"
+    }
+  },
+  {
+    "_id": "5cdeb04c304d6020d37cea4d",
+    "Location": "Bahiratwadi",
+    "BranchName": "Dnyaneshwar Balaji Murkute (Patil) Prathamik Vidyalaya",
+    "School": {
+      "SchoolID": "5cc95d1769be9b903c91576c",
+      "SchoolName": "Vidyanchal School"
+    }
+  },
+  {
+    "_id": "5cecf8ba7149039a61eae21e",
+    "Location": "Bahiratwadi",
+    "BranchName": "Abhinav Balak Mandir - Balwadi",
+    "School": {
+      "SchoolID": "5cc95d1769be9b903c91576c",
+      "SchoolName": "Vidyanchal School"
+    }
+  },
+  {
+    "_id": "5d1d73e4a09b0032c63db146",
+    "Location": "Latur",
+    "BranchName": "श्री मारवाडी राजस्थान विद्यालय लातूर",
+    "School": {
+      "SchoolID": "5d19bd9a908f245728e9fa9c",
+      "SchoolName": "Shri Marwadi Rajasthan Shikshan Sanstha"
+    }
+  },
+  {
+    "_id": "5de61c393bbc0646f1eea788",
+    "Location": "Baner",
+    "BranchName": "प्राथमिक मराठी विद्यालय",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "5de61c133bbc0646f1eea787",
+    "Location": "Baner",
+    "BranchName": "Secondary English Medium",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "5e01fb70b919f635db592a52",
+    "Location": "Wagholi",
+    "BranchName": "Wagholi, Vitthalrao Satav English Meduim School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5e16d1a7a9632928a494c0c1",
+    "Location": "Charholi",
+    "BranchName": "Charholi, Pdea's English Medium Primary School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5e170b385bfd417863c49617",
+    "Location": "Kharadi",
+    "BranchName": "Kharadi, Eon Gyanankur English Medium School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5e183e263ae27d14456c5f18",
+    "Location": "Paud",
+    "BranchName": "Paud, Pdea English Medium Primary School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5e1c3f3caa16276619e4f5c8",
+    "Location": "Pirangut",
+    "BranchName": "Pirangut, Pdea's English Medium Primary School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5e1c4d19aa16276619e4fb83",
+    "Location": "Akurdi",
+    "BranchName": "Akurdi, Shri Mhalsakant High School And Jr College, Akurdi",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5cd2b19622273d7cb7c538a1",
+    "Location": "Pimple Gurav",
+    "BranchName": "Kidzee Pimple Gurav",
+    "School": {
+      "SchoolName": "Kidzee",
+      "SchoolID": "5cd2adbc22273d7cb7c5389f"
+    }
+  },
+  {
+    "_id": "5d35976adeea2a4adaa6627f",
+    "Location": "Wakad",
+    "BranchName": "Kidzee Chaudhari Park",
+    "School": {
+      "SchoolName": "Kidzee",
+      "SchoolID": "5cd2adbc22273d7cb7c5389f"
+    }
+  },
+  {
+    "_id": "5e87011baf3d15278eb92dbc",
+    "Location": "Kharadi",
+    "BranchName": "Kharadi, Pdea English Medium Secondary School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5e9f307e15ec0f734a82de1c",
+    "Location": "Aundh",
+    "BranchName": "Galaxy Open School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "5e9f310815ec0f734a82de7a",
+    "Location": "Wakad",
+    "BranchName": "SAM-Tutorials",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "5ec41af43fc3ad48652bc8b5",
+    "Location": "Kamshet",
+    "BranchName": "Kamshet, Pandit Nehru Secondary & Higher Secondary School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5ec65aae0fa46b6f24b7c66b",
+    "Location": "Charholi",
+    "BranchName": "Charholi, Shri Wagheshwar Vidyalaya",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5ec7b48bf6501033da9a28c8",
+    "Location": "Sangvi",
+    "BranchName": "Sangvi, Baburaoji Gholap Secondary And Higher Secondary School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5eccf6eafda1f40f0ce55700",
+    "Location": "Mulshi",
+    "BranchName": "Ghotawade Mulshi, New English School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5ece3a2cfda1f40f0ce5af95",
+    "Location": "Paud",
+    "BranchName": "Paud, Shri.chattrapati Shivaji  Secondary & Higher Secondary School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5ece6e316772b02fa36fad05",
+    "Location": "Kharadi",
+    "BranchName": "Chandannagar Kharadi, Kai.tukaram Dhondiba Pathare Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5ecf99916772b02fa36ff638",
+    "Location": "Shivane",
+    "BranchName": "Uttamnagar Shivane, Madhyamik Vidyalaya",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5ed109046772b02fa3705c3c",
+    "Location": "Kharadi",
+    "BranchName": "Kharadi, English Medium Primary School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5ed2583b32b5a02e63a56144",
+    "Location": "Panshet",
+    "BranchName": "Khanapur Panshet, Mahatma Gandhi Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5ed25b8c32b5a02e63a56414",
+    "Location": "Lohagaon",
+    "BranchName": "Lohagaon, Sant Tukaram Vidyalaya",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5ed358814009263e03aeb096",
+    "Location": "Moshi",
+    "BranchName": "Moshi, Shri Nageshwar Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5ed368d04009263e03aebaab",
+    "Location": "Wagholi",
+    "BranchName": "Wagholi, Shri Vishnuji Shekuji Satav Highschool",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5ed4d0e5ddaf6b7f9e7f3f1b",
+    "Location": "Shivane",
+    "BranchName": "Shivane, Navbharat Highschool",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5ed4e9be89bb660426d2eb25",
+    "Location": "Mundhava",
+    "BranchName": "Mundhava, Lonkar Madhyamic Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "5ee086c16aac325eef8833af",
+    "Location": "Pirangut",
+    "BranchName": "Pirangut, Pirangut English Medium School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "5f2146fb338843639cb0d3c7",
+    "Location": "PUNE",
+    "BranchName": "Bhilarewadi , Katraj",
+    "School": {
+      "SchoolID": "5f211f576b95cd5bef01e5ef",
+      "SchoolName": "Paramount International School"
+    }
+  },
+  {
+    "_id": "5fdb08b6bf7f162bcbd4e603",
+    "Location": "Rahatgaon",
+    "BranchName": "Muktangan English School, Amravati",
+    "School": {
+      "SchoolName": "Deep Pratishthan, Amravati",
+      "SchoolID": "5fd9c9b94ba9573e2996a424"
+    }
+  },
+  {
+    "_id": "5fe426c4f8769170fe0df599",
+    "Location": "Shivajinagar",
+    "BranchName": "Bangalore Branch School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "5ff2cbfab78afa2029cc2ab1",
+    "Location": "Mysuru",
+    "BranchName": "Malnad Hippocampus International School",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "5ff57d4b2acd0518c4a92290",
+    "Location": "Chikkabettahalli",
+    "BranchName": "DKS Hippocampus School",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "5ff57ed72acd0518c4a922d3",
+    "Location": "Sakleshpur",
+    "BranchName": "Oxford Hippocampus School",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "600ea42a7ab4350a85cc7a9a",
+    "Location": "Pinguli",
+    "BranchName": "Br. Nath Pai Central School",
+    "School": {
+      "SchoolID": "600ea1657ab4350a85cc79cc",
+      "SchoolName": "Br. Nath Pai Central School"
+    }
+  },
+  {
+    "_id": "6030adacc7b74b5e59f7b494",
+    "Location": "Kothrud",
+    "BranchName": "Somayya Engineering Academy",
+    "School": {
+      "SchoolID": "6030ac96c7b74b5e59f7b486",
+      "SchoolName": "Somayya Academy"
+    }
+  },
+  {
+    "_id": "603c83c9227a7b4fb68a364c",
+    "Location": "Vidyanagar",
+    "BranchName": "Ideal English School,varwade",
+    "School": {
+      "SchoolID": "603c8055227a7b4fb68a33a2",
+      "SchoolName": "Ideal English School"
+    }
+  },
+  {
+    "_id": "603deaa292c612583af021c9",
+    "Location": "Sawantwadi",
+    "BranchName": "Stepping Stone Global School, Sawantwadi",
+    "School": {
+      "SchoolID": "603de93c92c612583af0217a",
+      "SchoolName": "Stepping Stone Global School"
+    }
+  },
+  {
+    "_id": "6052e9c5d4601d3e7178ab46",
+    "Location": "Sindhudurg",
+    "BranchName": "Kudal High School, Sindhudurg",
+    "School": {
+      "SchoolID": "60519e794bb162642ebc24b1",
+      "SchoolName": "Kudal High School"
+    }
+  },
+  {
+    "_id": "607d58ad37e3435c82e1678b",
+    "Location": "Pune",
+    "BranchName": "Shital Pre School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "607e5a52110da10dbb8b4b18",
+    "Location": "DNLoc",
+    "BranchName": "DNBranch1",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "608250c70099ca449e4f8743",
+    "Location": "Baner",
+    "BranchName": "Myelin Marathi Medium School",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "60825b2f0099ca449e4f8883",
+    "Location": "Kharadi",
+    "BranchName": "Myelin Kidzilla Pre-Primary School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "608292cb0099ca449e4f942e",
+    "Location": "Kharadi",
+    "BranchName": "Myelin Cbse Primary & Secondary School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "6093a518738d47207b774257",
+    "Location": "Pune",
+    "BranchName": "CV Raman Pre-School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "60b9acfea4e0b92585ae8493",
+    "Location": "Chandkhed",
+    "BranchName": "Chandkhed, New English School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "60ba40d62654f77da6206e65",
+    "Location": "Khadki",
+    "BranchName": "Khadki, Bhairavnath Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "60bf0e97df48114f67dadcca",
+    "Location": "Pune",
+    "BranchName": "Kalas, Harneshwar Secondary And Higher Secondary School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "60c20a5828f7d1216292a136",
+    "Location": "Shere",
+    "BranchName": "Shere, Shri Mamasaheb Mohal Vidhyalaya,  Taluka.. Mulshi",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "60c4860843a4f83a14591d2d",
+    "Location": "Chandgad",
+    "BranchName": "St Stephen's English Medium School, Chandgad",
+    "School": {
+      "SchoolID": "60c48502e7600e3a09180009",
+      "SchoolName": "St Stephen's English Medium School"
+    }
+  },
+  {
+    "_id": "60cc9a62bce1e626ab0c1ae0",
+    "Location": "Gorhe",
+    "BranchName": "Donje ,Vidhyaniketan Madhyamik Vidhyalaya,",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "60d037a4036b6d74be040d68",
+    "Location": "Junnar",
+    "BranchName": "Shiroli Budruk, Junnar  New English School,",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "60d07e4283adc45151bb77b8",
+    "Location": "Nimgaon",
+    "BranchName": "Nimgaon - Ketki, Shri Ketkeshwar Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "60d0855d27b3a204317528fa",
+    "Location": "Kati",
+    "BranchName": "Kati, Kateshwar Vidyalaya",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "60d18c50a02b6847ef12b4ab",
+    "Location": "Dalaj",
+    "BranchName": "Dalaj, New English School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "60d1b94c06e4f01bd76fd3ef",
+    "Location": "Nhavare",
+    "BranchName": "Nhavare, Shri Mallikarjun Sec.& High.sec.school",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "60d2b858fe9f0f3be98ba20d",
+    "Location": "Pune",
+    "BranchName": "Pandeshwar, Yeshwant Vidyalaya Mavadi K P School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "61040ca27f2576599cd6c165",
+    "Location": "Bori",
+    "BranchName": "Bori, Bk, Shri Sambhaji Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "61165e919466fd14b0fcb219",
+    "Location": "Umbraj",
+    "BranchName": "Umbraj, Shri Mahalaxmi Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "6119f316a44850446331fff5",
+    "Location": "Tarabai Park",
+    "BranchName": "New Model English School & Junior College, Kolhapur",
+    "School": {
+      "SchoolID": "6119f1f1a44850446331feec",
+      "SchoolName": "New Model English School & Junior College"
+    }
+  },
+  {
+    "_id": "611ce3e3deba42237b93bb1e",
+    "Location": "Pune",
+    "BranchName": "Shelpimpalgaon ,  Shri Shivaji Vidyalay-tal-khed,dist-pune",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "6125c742e88ace62a7521421",
+    "Location": "Pune",
+    "BranchName": "Dehuroad , Shri Shivaji Sec.& Higher Secondary School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "612604d4dbcf817c5f99d0dd",
+    "Location": "Pune",
+    "BranchName": "Ane , Sardar Patel High School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "6131de3b0638f10355a943d5",
+    "Location": "Kesnand",
+    "BranchName": "Kesnand, Shri Jogeshwari Vidyalaya",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "61517448e47170624bb85436",
+    "Location": "Yenere",
+    "BranchName": "Yenere, Shri Chattrapati Highschool, Yenere",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "619b2dd330a9b010f71e836b",
+    "Location": "Nagpur",
+    "BranchName": "M.a.k Aazad Urdu High School And Jr. College",
+    "School": {
+      "SchoolID": "619b2d1030a9b010f71e805b",
+      "SchoolName": "NMC, Nagpur"
+    }
+  },
+  {
+    "_id": "61c2fb14dc51a92632357860",
+    "Location": "Pargaon",
+    "BranchName": "Pargaon, Shri Navkhand Secondary High School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "61c4559f3c29bd36c2c91a00",
+    "Location": "Inamgaon",
+    "BranchName": "Inamgaon ,New English School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "61c45b0b3c29bd36c2c92125",
+    "Location": "Karade",
+    "BranchName": "Karade, Shri Bhairavnath  Secondary And Higher Secondary Vidyalaya",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "61c9511adc56bb035e961287",
+    "Location": "Uralgaon",
+    "BranchName": "Uralgaon, New English School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "61cc0e9f515cb037dc7ce4bd",
+    "Location": "Daund Shahar",
+    "BranchName": "Daund, Sou.laxmidevi Banwarilal Agarawal Vidyalaya School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "61cc321327cdaf58e30cce1b",
+    "Location": "Pune",
+    "BranchName": "Supe, Shri Shahaji Secondary And  High School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "61cd58506f69ef016e1c3092",
+    "Location": "Wanewadi",
+    "BranchName": "Wanewadi, New English School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "61d2de0ce1fb383e186877db",
+    "Location": "Ozar, Junnar",
+    "BranchName": "Ozar, Shri Vighnahar Vidyalay , Ozar",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "61dd770c87a1ec2a14d90706",
+    "Location": "Kolvan",
+    "BranchName": "Kolvan, New English School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "62025f6c59f68512720ea409",
+    "Location": "Nagpur",
+    "BranchName": "Lal Bahadur Shastri School",
+    "School": {
+      "SchoolName": "NMC, Nagpur",
+      "SchoolID": "619b2d1030a9b010f71e805b"
+    }
+  },
+  {
+    "_id": "6202601d59f68512720ea535",
+    "Location": "Nagpur",
+    "BranchName": "G.m. Banatwala English High School",
+    "School": {
+      "SchoolName": "NMC, Nagpur",
+      "SchoolID": "619b2d1030a9b010f71e805b"
+    }
+  },
+  {
+    "_id": "620260d059f68512720ea62f",
+    "Location": "Nagpur",
+    "BranchName": "Durga Nagar Marathi High School",
+    "School": {
+      "SchoolName": "NMC, Nagpur",
+      "SchoolID": "619b2d1030a9b010f71e805b"
+    }
+  },
+  {
+    "_id": "62176b6c93e4e959a7741f76",
+    "Location": "Nagpur",
+    "BranchName": "Vivekanand High School",
+    "School": {
+      "SchoolName": "NMC, Nagpur",
+      "SchoolID": "619b2d1030a9b010f71e805b"
+    }
+  },
+  {
+    "_id": "621c780f7561d9460274c48d",
+    "Location": "Lohagaon",
+    "BranchName": "Lohagaon, Sant Tukaram Primary School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "62273fb721d165148ccf3afd",
+    "Location": "Nagpur",
+    "BranchName": "Lal Bahadur Shastri Secondary School",
+    "School": {
+      "SchoolID": "619b2d1030a9b010f71e805b",
+      "SchoolName": "NMC, Nagpur"
+    }
+  },
+  {
+    "_id": "622edc20b9a9817bbd5c5bed",
+    "Location": "Wagholi",
+    "BranchName": "Wagholi, Pdea's Marathi Medium Primary School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "623086888253401de077b248",
+    "Location": "Pune",
+    "BranchName": "Moshi, Pdea' S Primary Marathi Medium School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "623ac6c531243a1d5f9a95ed",
+    "Location": "Solapur",
+    "BranchName": "Shri Balwantrao Ghate Prashala Yawali",
+    "School": {
+      "SchoolName": "Shri Balwantrao Ghate Prashala Yawali ,Solapur",
+      "SchoolID": "623ac1b931243a1d5f9a90e7"
+    }
+  },
+  {
+    "_id": "623d5541b48d7e7266a44018",
+    "Location": "Solapur",
+    "BranchName": "Shri Balwantrao Ghate Prashala Yawali, Solapur",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "624c11a2c8743a6daa2316e6",
+    "Location": "Uttamnagar",
+    "BranchName": "Uttamnagar, Prathmik Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "624ee76bd40b8e5ab761a48d",
+    "Location": "Pune",
+    "BranchName": "Sangvi, Baburaoji Gholap Primary Marathi Medium School",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "624fff508f846f0f4e50ba0b",
+    "Location": "Shivane",
+    "BranchName": "Shivane, Navbharat Prathmik Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "6274fccd347a5b269816de0d",
+    "Location": "Baner",
+    "BranchName": "Baner School",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "62975150d5c95c6571310a12",
+    "Location": "Prasad Nagar",
+    "BranchName": "Saraswati Shishu Mandir Primary School",
+    "School": {
+      "SchoolName": "Keshav Madhav Shikshan Sanstha, Nagpur",
+      "SchoolID": "6297500ab0588464269d9489"
+    }
+  },
+  {
+    "_id": "62984cbb3e875f079b97f4ba",
+    "Location": "Bhavnagar",
+    "BranchName": "Demo Test",
+    "School": {
+      "SchoolID": "62984c633e875f079b97f497",
+      "SchoolName": "M N Mehta"
+    }
+  },
+  {
+    "_id": "5e947369dc497b6bb3611884",
+    "Location": "Shrirampur",
+    "BranchName": "स्व. सौ. एस. के सोमैया प्राथमिक विद्यामंदिर व संस्कार केंद्र, श्रीरामपूर",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "62c3e14263fafa74bdd23b1c",
+    "Location": "Nagpur",
+    "BranchName": "Saraswati Shishu Mandir Secondary School",
+    "School": {
+      "SchoolID": "6297500ab0588464269d9489",
+      "SchoolName": "Keshav Madhav Shikshan Sanstha, Nagpur"
+    }
+  },
+  {
+    "_id": "62c5273104ec5d4f66982a86",
+    "Location": "Dehuraod",
+    "BranchName": "Dehuroad, Shri. Shivaji Primary School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "62c6a93a6cc5dd534a8ec4a5",
+    "Location": "Baner",
+    "BranchName": "Baner, Dr. Shamrao Kalmadi High School",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "62cd3a72cfd7a8325acde519",
+    "Location": "Ketkar Road, Baner",
+    "BranchName": "Ketkar, Dr. Shamarao Kalmadi High School",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "62f62d7376b41505c263dba6",
+    "Location": "Panshet",
+    "BranchName": "Panshet, Shri Shivaji Veer Baji Pasalkar Highschool",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "630362d3a7e3bb080e149da9",
+    "Location": "Savindane",
+    "BranchName": "Savindane, Shri Gurudev Datta Vidyalaya",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "63036dbb17628407fed6a4ca",
+    "Location": "Nangaon",
+    "BranchName": "Nangaon, New English School",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "637386e6e134ed73c86439de",
+    "Location": "Akurdi",
+    "BranchName": "College Lms",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "637dd1c70764917b2e1d33aa",
+    "Location": "Pune",
+    "BranchName": "General Nursing Collage",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "63886d534e2a3b1f166d8bf9",
+    "Location": "Lohegaon",
+    "BranchName": "Kaveri International School",
+    "School": {
+      "SchoolName": "Myelin Model School",
+      "SchoolID": "5de618c73bbc0646f1eea786"
+    }
+  },
+  {
+    "_id": "638d826781d4a026cdd34a51",
+    "Location": "Padvi",
+    "BranchName": "Padvi, Shreeram Vidyalaya",
+    "School": {
+      "SchoolID": "588355acc00eaa20406aee19",
+      "SchoolName": "Pune District Education Association"
+    }
+  },
+  {
+    "_id": "639975424c969b15235b8645",
+    "Location": "Wakad",
+    "BranchName": "Kidzee Kaspate Wasti",
+    "School": {
+      "SchoolID": "5cd2adbc22273d7cb7c5389f",
+      "SchoolName": "Kidzee"
+    }
+  },
+  {
+    "_id": "639990e9aca156604a938031",
+    "Location": "Mutha",
+    "BranchName": "Mutha, Mamasaheb Mohol Vidyalay",
+    "School": {
+      "SchoolName": "Pune District Education Association",
+      "SchoolID": "588355acc00eaa20406aee19"
+    }
+  },
+  {
+    "_id": "639c1c735216af6456aa3ec2",
+    "Location": "Shivaji Nagar",
+    "BranchName": "Shivaji Ideal English School, Amravati",
+    "School": {
+      "SchoolName": "Shri Shivaji Education Society, Amravati",
+      "SchoolID": "639c1a41b54cc264817c19e9"
+    }
+  },
+  {
+    "_id": "647741463d0e042618d6321c",
+    "Location": "Chendhare",
+    "BranchName": "C.k.v. English Medium School, Alibag",
+    "School": {
+      "SchoolID": "64773fb6c656322613732d45",
+      "SchoolName": "Chintamanrao Kelkar Vidyalaya"
+    }
+  },
+  {
+    "_id": "6489963d9de24d21182474df",
+    "Location": "Chendhare",
+    "BranchName": "C.K.V. Marathi Medium School, Alibag",
+    "School": {
+      "SchoolID": "64773fb6c656322613732d45",
+      "SchoolName": "Dattajirao Khanvilkar Educational Trust Chintamanrao Kelkar Vidyalaya"
+    }
+  },
+  {
+    "_id": "649bc73204a4fc73e16c65ff",
+    "Location": "Erandwane",
+    "BranchName": "Erandwane, Dr.shamrao Kalmadi High School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "64c3568b9ef7162bc47426d0",
+    "Location": "Indrayani Nagar",
+    "BranchName": "Priyadarshani School & Junior College, Indrayani Nagar",
+    "School": {
+      "SchoolID": "64c355149ef7162bc47417ef",
+      "SchoolName": "Pgos, Myelin"
+    }
+  },
+  {
+    "_id": "64c75aa67fe17d6b3d624b4d",
+    "Location": "Solalpur",
+    "BranchName": "D Coding Branch-1",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64d605e55029db62196d4efc",
+    "Location": "Baner",
+    "BranchName": "Zenwork Myelin, Baner",
+    "School": {
+      "SchoolID": "64d604fe5029db62196d3f4c",
+      "SchoolName": "Zenwork Myelin"
+    }
+  },
+  {
+    "_id": "64e47b98550b5b1fa48c2155",
+    "Location": "Kalewadi",
+    "BranchName": "Kalewadi Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e47ce41a8ab91fce8a5f10",
+    "Location": "Kalewadi",
+    "BranchName": "Laul Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e47dff1a8ab91fce8a7f58",
+    "Location": "Rui",
+    "BranchName": "Rui Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e47e5d1a8ab91fce8a86b3",
+    "Location": "Rui",
+    "BranchName": "Malwasti Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e48020550b5b1fa48cd63c",
+    "Location": "Thengalwasti",
+    "BranchName": "Thengalwasti Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e480a81a8ab91fce8abe36",
+    "Location": "Tandulakr Wasti",
+    "BranchName": "Tandulkar Wasti Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e481b7550b5b1fa48cff65",
+    "Location": "Ujani",
+    "BranchName": "Ujani Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e482471a8ab91fce8ae63a",
+    "Location": "Warvade",
+    "BranchName": "Warvade Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e4831a1393a81bbf9b0bc2",
+    "Location": "Jagtap Wasti",
+    "BranchName": "Jagtap Wasti",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e484611bb76e1bafccd9f6",
+    "Location": "Stuar Wasti",
+    "BranchName": "Sutar Wasti",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e4852d1393a81bbf9b36d7",
+    "Location": "Ranzani",
+    "BranchName": "ZPPS Ranzani",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e485931bb76e1bafccf4b7",
+    "Location": "Konheri",
+    "BranchName": "Konheri Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e486d81393a81bbf9b63b6",
+    "Location": "Chandaj",
+    "BranchName": "ZPPS Chandaj Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e487af1393a81bbf9b75e2",
+    "Location": "Kudru",
+    "BranchName": "ZPPS Kudru Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e488571393a81bbf9b857c",
+    "Location": "Chopanwasti",
+    "BranchName": "Chopan Wasti Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e488ac1bb76e1bafcd3ea6",
+    "Location": "Kadam Wasti",
+    "BranchName": "Kadam Wasti Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e4891f1393a81bbf9b9cb4",
+    "Location": "Gaikwad Wasti",
+    "BranchName": "Gaikwad Wasti Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64e603f68f54d7135097a261",
+    "Location": "Baner",
+    "BranchName": "Galaxy International School, Lonikand",
+    "School": {
+      "SchoolID": "64e6030ace50a84631c3ab89",
+      "SchoolName": "Myelin Preprimary School"
+    }
+  },
+  {
+    "_id": "64e6ebe0ae1a22050ca10d65",
+    "Location": "Barshi",
+    "BranchName": "Suyash Vidyalaya",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64edbeadfe39dc0917ac6d47",
+    "Location": "Pune",
+    "BranchName": "Aran Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "64eddd5d21d3c408e14904f3",
+    "Location": "Devkarwadi",
+    "BranchName": "Galaxy International School, Devkarwadi",
+    "School": {
+      "SchoolID": "64e6030ace50a84631c3ab89",
+      "SchoolName": "Myelin Preprimary School"
+    }
+  },
+  {
+    "_id": "64f1ce98714d1c6e67374d30",
+    "Location": "Bembale",
+    "BranchName": "Bembale Branch",
+    "School": {
+      "SchoolID": "64c7599d9e40e06b4ba243f2",
+      "SchoolName": "D Coding A Future"
+    }
+  },
+  {
+    "_id": "65643e7241430e433e4d6ecd",
+    "Location": "Baner",
+    "BranchName": "Myelin Test Branch",
+    "School": {
+      "SchoolID": "65643d5241430e433e4d61cb",
+      "SchoolName": "Myelin  Test App"
+    }
+  },
+  {
+    "_id": "656d78945395d923be106b29",
+    "Location": "Baner",
+    "BranchName": "Myelin Scholarship Branch",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholership"
+    }
+  },
+  {
+    "_id": "6572faae093ff67aefd50bb5",
+    "Location": "Madha",
+    "BranchName": "Madha kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6572fb1dc7d7cb1dcb568aba",
+    "Location": "Madha",
+    "BranchName": "saptane kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6572fbc0093ff67aefd517ca",
+    "Location": "Madha",
+    "BranchName": "Darphal kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6572fc27c7d7cb1dcb56941f",
+    "Location": "Madha",
+    "BranchName": "Anjangaon kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6572fc85093ff67aefd51dee",
+    "Location": "Madha",
+    "BranchName": "uplai kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6572fdff093ff67aefd52c39",
+    "Location": "Madha",
+    "BranchName": "manegaon kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "657303fcc7d7cb1dcb56e826",
+    "Location": "Madha",
+    "BranchName": "Parite kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "65730570c7d7cb1dcb56f596",
+    "Location": "Laul",
+    "BranchName": "Laul kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "657305b9093ff67aefd57a1a",
+    "Location": "Varvade",
+    "BranchName": "Varvade kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "657305f8093ff67aefd57c97",
+    "Location": "Aran",
+    "BranchName": "Aran kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "65730661c7d7cb1dcb56fe6b",
+    "Location": "Modnimb",
+    "BranchName": "Modnimb kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "657308c4093ff67aefd59459",
+    "Location": "Modnimb",
+    "BranchName": "Pimpalner kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "65730a17c7d7cb1dcb572279",
+    "Location": "Adhegaon",
+    "BranchName": "Adhegaon kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "65730a8fc7d7cb1dcb5726dc",
+    "Location": "Adhegaon",
+    "BranchName": "Bembale kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "65730acfc7d7cb1dcb572cb2",
+    "Location": "Ujani",
+    "BranchName": "Ujani kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "65730b16093ff67aefd5aac5",
+    "Location": "Nimgon",
+    "BranchName": "Nimgaon kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6578095fa72fe95d21be4713",
+    "Location": "Kurdu",
+    "BranchName": "kurdu Kendra",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "657809fea72fe95d21be65d9",
+    "Location": "Barloni",
+    "BranchName": "Barloni Kendra",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "65780a55a72fe95d21be6e01",
+    "Location": "Kavhe",
+    "BranchName": "Kavhe Kendra",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "65780a98a72fe95d21be769c",
+    "Location": "Ropale",
+    "BranchName": "Ropale Kendra",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "65780b8ea72fe95d21be93d2",
+    "Location": "Mhausgaon",
+    "BranchName": "Kurduwadi  Kendra",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "657c233ccfab594f608d9acd",
+    "Location": "Pipari",
+    "BranchName": "Kavhe Kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "658012623038f43a5d6bf993",
+    "Location": "Kurwadi",
+    "BranchName": "kurduwadi Kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6580130b3038f43a5d6c0397",
+    "Location": "Kurdu",
+    "BranchName": "kurdu Kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "658018d23038f43a5d6c7d38",
+    "Location": "Barloni",
+    "BranchName": "Barloni Kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6582c2ee903e736ec95a35c8",
+    "Location": "Ropale",
+    "BranchName": "Ropale Kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "6583e0865b2c44786d2a6db1",
+    "Location": "Mhaisgaon",
+    "BranchName": "Mhaisgaon Kendra",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin Scholarship"
+    }
+  },
+  {
+    "_id": "65d43c613578da67f12c9243",
+    "Location": "Baner",
+    "BranchName": "saarathi",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "65dec241a690a05439b2be76",
+    "Location": "Baner",
+    "BranchName": "Myelin Demo Branch",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "65e6dc5725b060359dbffa51",
+    "Location": "Amaravati",
+    "BranchName": "Manibai Gujarati High school Amravati",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "66cdaf8a8dc51664daad66bd",
+    "Location": "Jamb Road",
+    "BranchName": "UBUNTU School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "672c6daba00ddd7d0456e6f5",
+    "Location": "Pune",
+    "BranchName": "Vid_RC_Testing_Branch",
+    "School": {
+      "SchoolID": "5cc95d1769be9b903c91576c",
+      "SchoolName": "Vidyanchal School"
+    }
+  },
+  {
+    "_id": "679b112a883ec20666cf05ff",
+    "Location": "Pune",
+    "BranchName": "Neha Testing School",
+    "School": {
+      "SchoolID": "5de618c73bbc0646f1eea786",
+      "SchoolName": "Myelin Model School"
+    }
+  },
+  {
+    "_id": "682ad436de6927764f0258d3",
+    "Location": "Wai",
+    "BranchName": "Shri Wai Harihareshwar prathmik vidya mandir",
+    "School": {
+      "SchoolID": "682ad319de6927764f0255ac",
+      "SchoolName": "Shri Wai Harihareshwar Prathmik Vidya Mandir, Wai"
+    }
+  },
+  {
+    "_id": "686b96cf61d9a35ca5eb933f",
+    "Location": "Sawarde",
+    "BranchName": "SVJCT's English Medium School",
+    "School": {
+      "SchoolID": "686b954c61d9a35ca5eb88eb",
+      "SchoolName": "Shri Vithalrao Joshi Charities Trust’s"
+    }
+  },
+  {
+    "_id": "68ca9f5ecb8df1488ae30650",
+    "Location": "Baner",
+    "BranchName": "Zenworks myelin school",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin School"
+    }
+  },
+  {
+    "_id": "68d24034f017974e1018f859",
+    "Location": "Hadapsar",
+    "BranchName": "Rayat - Sadhana Vidyalaya, Hadapsar, Pune",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin School"
+    }
+  },
+  {
+    "_id": "68d28da38760884b835ab423",
+    "Location": "Kadegaon",
+    "BranchName": "Rayat - Mahatma Gandhi Vidyalay, Kadegaon, Sangli",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin School"
+    }
+  },
+  {
+    "_id": "68d3b418eadd2d250b915174",
+    "Location": "Ashta",
+    "BranchName": "Rayat - Mahatma Gandhi Vidyalaya, Ashta, Sangli",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin School"
+    }
+  },
+  {
+    "_id": "68d3b8c4eadd2d250b91694d",
+    "Location": "Ashta",
+    "BranchName": "Rayat - Padmaraje Vidyalay, Shirol, Kolhapur",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin School"
+    }
+  },
+  {
+    "_id": "68da5d8ecb4a042c10bc1373",
+    "Location": "Hadapsar",
+    "BranchName": "Rayat - Chandrabhaga Baburao Tupe Sadhna Kanya Vidyalaya, Hadapsar, Pune",
+    "School": {
+      "SchoolID": "656d77f85395d923be105f1b",
+      "SchoolName": "Myelin School"
+    }
+  },
+  {
+    "_id": "6968b8e06b6f0226b05256b0",
+    "Location": "Shivajinagar",
+    "BranchName": "DES Demo",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "6968b963dd436e0dd3f0b9f2",
+    "Location": "Sadashiv Peth",
+    "BranchName": "NEW ENGLISH SCHOOL,TILAK ROAD",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "6968d8c334c75e4917802758",
+    "Location": "Morshi",
+    "BranchName": "Shri Shivaji Higher Secondary School, Morshi",
+    "School": {
+      "SchoolID": "6968d2d634c75e49178016a8",
+      "SchoolName": "Shri Shivaji Shikshan Sanstha, Amravati"
+    }
+  },
+  {
+    "_id": "696b2de52720b4315c5a766e",
+    "Location": "Pune",
+    "BranchName": "AHILYADEVI HIGH SCHOOL FOR GIRLS",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b35a02720b4315c5a9575",
+    "Location": "Ramanbag",
+    "BranchName": "NEW ENGLISH SCHOOL, RAMANBAG",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b36022720b4315c5a9656",
+    "Location": "Pune",
+    "BranchName": "NAVIN MARATHI SHALA,PUNE",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b365e2720b4315c5a9829",
+    "Location": "Pune",
+    "BranchName": "NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY UNIT)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b36992720b4315c5a99c9",
+    "Location": "Pune",
+    "BranchName": "NEW ENGLISH MEDIUM SCHOOL (PRIMARY UNIT)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b36a72720b4315c5a9a23",
+    "Location": "Pune",
+    "BranchName": "NEW ENGLISH MEDIUM SCHOOL SECONDARY SCHOOL",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b36bd2720b4315c5a9a54",
+    "Location": "Pune",
+    "BranchName": "NYA.RANADE BALAK MANDIR",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b36f92720b4315c5a9b22",
+    "Location": "Sadashiv Peth",
+    "BranchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PURVA-PRATHAMIK VIBHAG)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b370e2720b4315c5a9bd7",
+    "Location": "Sadashiv Peth",
+    "BranchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PRATHAMIK VIBHAG)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b37272720b4315c5a9c0b",
+    "Location": "Sadashiv Peth",
+    "BranchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAMIK VIDYALAYA",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b37602720b4315c5a9f02",
+    "Location": "Sadashiv Peth",
+    "BranchName": "MURLIDHAR LOHIYA MATRU MANDIR (D.E.S. PRE-PRIMARY) SCHOOL",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b37762720b4315c5a9f52",
+    "Location": "Sadashiv Peth",
+    "BranchName": "D.E.S. PRIMARY SCHOOL",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b37812720b4315c5a9f7b",
+    "Location": "Sadashiv Peth",
+    "BranchName": "D.E.S. SECONDARY SCHOOL",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b37b32720b4315c5a9fd6",
+    "Location": "Pimpri Chinchwad",
+    "BranchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b37c12720b4315c5aa014",
+    "Location": "Pimpri Chinchwad",
+    "BranchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b37cc2720b4315c5aa050",
+    "Location": "Pimpri Chinchwad",
+    "BranchName": "HINDUSTAN ANTIBIOTICS SCHOOL (SECONDARY UNIT)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b38012720b4315c5aa1dc",
+    "Location": "Shirur",
+    "BranchName": "ENGLISH MEDIUM PRE – PRIMARY SCHOOL, SHIRUR",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b381c2720b4315c5aa214",
+    "Location": "Shirur",
+    "BranchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b38252720b4315c5aa230",
+    "Location": "Shirur",
+    "BranchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b384d2720b4315c5aa386",
+    "Location": "Satara",
+    "BranchName": "NEW ENGLISH SCHOOL, SATARA",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b386d2720b4315c5aa3ba",
+    "Location": "Satara",
+    "BranchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMARY SCHOOL, SATARA",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b38942720b4315c5aa436",
+    "Location": "Satara",
+    "BranchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SCHOOL, SATARA",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b38a12720b4315c5aa452",
+    "Location": "Satara",
+    "BranchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY SCHOOL, SATARA",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b38ad2720b4315c5aa474",
+    "Location": "Satara",
+    "BranchName": "MATRUMANDIR SATARA",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b38ca2720b4315c5aa49c",
+    "Location": "Satara",
+    "BranchName": "BALAK MANDIR,SATARA",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b38e62720b4315c5aa4d6",
+    "Location": "Satara",
+    "BranchName": "NAVIN MARATHI SHALA, SATARA",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b391c2720b4315c5aa530",
+    "Location": "Wai",
+    "BranchName": "DRAVID HIGH SCHOOL,WAI",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b39742720b4315c5aa5bf",
+    "Location": "Wai",
+    "BranchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT), WAI",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b398d2720b4315c5aa60d",
+    "Location": "Wai",
+    "BranchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WAI",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b39a42720b4315c5aa657",
+    "Location": "Wai",
+    "BranchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT), WAI",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b3b502720b4315c5aac02",
+    "Location": "Sangli",
+    "BranchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK MANDIR (MARATHI MADHYAM-PURVA-PRATHAMIK VIBHAG)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b3c002720b4315c5aaf22",
+    "Location": "Sangli",
+    "BranchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASHALA (MARATHI MADHYAM-PRATHAMIK VIBHAG)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b3c112720b4315c5aaf45",
+    "Location": "Sangli",
+    "BranchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA  ( MARATHI MADHYAM-MADHYAMIK VIBHAG)",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b3c1e2720b4315c5aaf73",
+    "Location": "Sangli",
+    "BranchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK MANDIR [ENGLISH MEDIUM  PRE-PRIMARY SECTION]",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b3c252720b4315c5aaf7d",
+    "Location": "Sangli",
+    "BranchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM PRIMARY SECTION]",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696b3c4f2720b4315c5aafc9",
+    "Location": "Sangli",
+    "BranchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION]",
+    "School": {
+      "SchoolID": "6968b869dd436e0dd3f0b814",
+      "SchoolName": "Deccan Education Society"
+    }
+  },
+  {
+    "_id": "696f1db2d29e88779fe5c1e7",
+    "Location": "Papal",
+    "BranchName": "Dr. Panjabrao Deshmukh High School, Papal",
+    "School": {
+      "SchoolID": "6968d2d634c75e49178016a8",
+      "SchoolName": "Shri Shivaji Shikshan Sanstha, Amravati"
+    }
+  },
+  {
+    "_id": "6971f8bcab8e501024770744",
+    "Location": "Daryapur",
+    "BranchName": "Adarsh High School, Daryapur",
+    "School": {
+      "SchoolID": "6968d2d634c75e49178016a8",
+      "SchoolName": "Shri Shivaji Shikshan Sanstha, Amravati"
+    }
+  },
+  {
+    "_id": "697852fb82c04511c8aa5855",
+    "Location": "Jarud",
+    "BranchName": "Balasaheb Deshmukh Vidyalay, Jarud",
+    "School": {
+      "SchoolID": "6968d2d634c75e49178016a8",
+      "SchoolName": "Shri Shivaji Shikshan Sanstha, Amravati"
+    }
+  }
+]

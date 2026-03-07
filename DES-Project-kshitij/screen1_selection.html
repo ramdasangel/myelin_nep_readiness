@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Intervention Tasks | Myelin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --myelin-purple-900: #660099;
+            --myelin-purple-700: #7b23a7;
+            --myelin-purple-200: #e8d7ef;
+            --myelin-purple-50: #fbf8fd;
+            --primary-teal: #78dcca;
+            --myelin-dark: #383838;
+            --success: #22c55e;
+            --success-light: #dcfce7;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d4d4d8;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--gray-100);
+            color: var(--myelin-dark);
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--myelin-purple-700) 0%, var(--myelin-purple-900) 100%);
+            padding: 16px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(102, 0, 153, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--myelin-purple-700);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .logo-text { font-weight: 600; font-size: 22px; color: var(--white); }
+        .lang-toggle { display: flex; gap: 8px; align-items: center; }
+        .lang-btn {
+            padding: 6px 14px;
+            border: none;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.25); }
+        .lang-btn.active { background: var(--white); color: var(--myelin-purple-700); }
+        .container { max-width: 900px; margin: 0 auto; padding: 32px 24px 160px; }
+        .page-header { text-align: center; margin-bottom: 32px; }
+        .page-title { font-size: 26px; font-weight: 600; color: var(--myelin-purple-700); margin-bottom: 8px; }
+        .page-subtitle { font-size: 14px; color: var(--gray-500); }
+        .fp-section {
+            background: var(--white);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+        .fp-header {
+            background: var(--myelin-purple-50);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .fp-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--myelin-purple-700), var(--myelin-purple-900));
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-right: 12px;
+        }
+        .fp-title { font-size: 15px; font-weight: 600; color: var(--myelin-dark); }
+        .fp-title-mr { font-size: 13px; color: var(--gray-500); margin-left: 8px; display: none; }
+        .task-item {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--gray-200);
+            cursor: pointer;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            transition: all 0.2s;
+        }
+        .task-item:last-child { border-bottom: none; }
+        .task-item:hover { background: var(--gray-100); }
+        .task-item.selected { background: var(--myelin-purple-50); }
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--gray-300);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .task-item.selected .checkbox {
+            background: linear-gradient(135deg, var(--myelin-purple-700), var(--myelin-purple-900));
+            border-color: var(--myelin-purple-700);
+            color: #fff;
+        }
+        .task-content { flex: 1; }
+        .task-label { font-size: 15px; font-weight: 600; color: var(--myelin-dark); margin-bottom: 4px; }
+        .task-label-mr { display: none; font-size: 14px; font-weight: 600; color: var(--myelin-dark); margin-bottom: 4px; }
+        .task-id { color: var(--myelin-purple-700); }
+        .task-desc { font-size: 13px; color: var(--gray-500); }
+        .task-desc-mr { display: none; font-size: 12px; color: var(--gray-500); }
+        .footer {
+            background: var(--white);
+            padding: 24px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-top: 1px solid var(--gray-200);
+        }
+        .footer-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .count-info { display: flex; align-items: center; gap: 12px; }
+        .count-badge {
+            background: var(--success-light);
+            color: var(--success);
+            font-weight: 700;
+            font-size: 18px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            min-width: 50px;
+            text-align: center;
+        }
+        .count-badge.invalid { background: var(--myelin-purple-200); color: var(--myelin-purple-700); }
+        .count-text { font-size: 14px; color: var(--myelin-dark); }
+        .count-hint { font-size: 13px; color: var(--gray-500); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--myelin-purple-700), var(--myelin-purple-900));
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(102, 0, 153, 0.25);
+        }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(102, 0, 153, 0.3); }
+        .btn-primary:disabled { background: var(--gray-300); cursor: not-allowed; box-shadow: none; }
+        body.mr .task-label { display: none; }
+        body.mr .task-label-mr { display: block; }
+        body.mr .task-desc { display: none; }
+        body.mr .task-desc-mr { display: block; }
+        body.mr .fp-title-mr { display: inline; }
+        @media(max-width:768px) {
+            .header { padding: 12px 16px; }
+            .container { padding: 16px 16px 180px; }
+            .footer-inner { flex-direction: column; align-items: stretch; }
+            .btn-primary { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"><div class="logo-icon">M</div><span class="logo-text">myelin</span></div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" id="btnEn" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" id="btnMr" onclick="setLang('mr')">मराठी</button>
+        </div>
+    </header>
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Select Your Intervention Tasks</h1>
+            <p class="page-subtitle">Choose 3-5 tasks to practice over the next 21 days</p>
+        </div>
+
+        <section class="fp-section">
+            <div class="fp-header"><span class="fp-tag">FP-1</span><span class="fp-title">Every Child is Unique</span><span class="fp-title-mr">| हर बच्चा अनूठा है</span></div>
+            <div class="task-item selected" onclick="toggle(this)"><div class="checkbox">✓</div><div class="task-content"><div class="task-label"><span class="task-id">T01:</span> Notice One Learner</div><div class="task-label-mr"><span class="task-id">T01:</span> एका विद्यार्थ्याकडे लक्ष द्या</div><div class="task-desc">Pick one student today and notice how they engage (not marks)</div><div class="task-desc-mr">आज एका विद्यार्थ्याची निवड करा आणि तो कसा सहभागी होतो ते पहा</div></div></div>
+            <div class="task-item" onclick="toggle(this)"><div class="checkbox"></div><div class="task-content"><div class="task-label"><span class="task-id">T02:</span> One Adjustment</div><div class="task-label-mr"><span class="task-id">T02:</span> एक छोटा बदल करा</div><div class="task-desc">Make one small adjustment (pace, example, grouping) for a learner</div><div class="task-desc-mr">एका विद्यार्थ्यासाठी एक छोटा बदल करा (वेग, उदाहरण, गट)</div></div></div>
+            <div class="task-item" onclick="toggle(this)"><div class="checkbox"></div><div class="task-content"><div class="task-label"><span class="task-id">T11:</span> Student Voice</div><div class="task-label-mr"><span class="task-id">T11:</span> विद्यार्थ्याचा आवाज</div><div class="task-desc">Ask one student: "What helped you learn today?"</div><div class="task-desc-mr">एका विद्यार्थ्याला विचारा: "आज तुला शिकायला काय मदत झाली?"</div></div></div>
+        </section>
+
+        <section class="fp-section">
+            <div class="fp-header"><span class="fp-tag">FP-2</span><span class="fp-title">Holistic & Experiential Learning</span><span class="fp-title-mr">| समग्र शिक्षा</span></div>
+            <div class="task-item selected" onclick="toggle(this)"><div class="checkbox">✓</div><div class="task-content"><div class="task-label"><span class="task-id">T03:</span> Change One Example</div><div class="task-label-mr"><span class="task-id">T03:</span> एक उदाहरण बदला</div><div class="task-desc">Replace one textbook example with a real-life/contextual one</div><div class="task-desc-mr">पाठ्यपुस्तकातील एक उदाहरण वास्तविक जीवनाशी जोडा</div></div></div>
+            <div class="task-item selected" onclick="toggle(this)"><div class="checkbox">✓</div><div class="task-content"><div class="task-label"><span class="task-id">T04:</span> Ask a Why / How</div><div class="task-label-mr"><span class="task-id">T04:</span> का / कसे विचारा</div><div class="task-desc">Ask at least one "why" or "how" question during teaching</div><div class="task-desc-mr">शिकवताना किमान एक "का" किंवा "कसे" प्रश्न विचारा</div></div></div>
+        </section>
+
+        <section class="fp-section">
+            <div class="fp-header"><span class="fp-tag">FP-3</span><span class="fp-title">Reflective Practitioner</span><span class="fp-title-mr">| चिंतनशील शिक्षक</span></div>
+            <div class="task-item selected" onclick="toggle(this)"><div class="checkbox">✓</div><div class="task-content"><div class="task-label"><span class="task-id">T05:</span> End-of-Class Reflection</div><div class="task-label-mr"><span class="task-id">T05:</span> तासाअखेरीस चिंतन</div><div class="task-desc">At end of class, mentally note one thing that worked / didn't</div><div class="task-desc-mr">तासाच्या शेवटी एक गोष्ट जी चांगली झाली / नाही ती लक्षात ठेवा</div></div></div>
+            <div class="task-item" onclick="toggle(this)"><div class="checkbox"></div><div class="task-content"><div class="task-label"><span class="task-id">T06:</span> Try One Small Change</div><div class="task-label-mr"><span class="task-id">T06:</span> एक नवीन प्रयत्न करा</div><div class="task-desc">Try one change in the next class based on your reflection</div><div class="task-desc-mr">तुमच्या चिंतनावर आधारित पुढच्या तासात एक बदल करा</div></div></div>
+        </section>
+
+        <section class="fp-section">
+            <div class="fp-header"><span class="fp-tag">FP-4</span><span class="fp-title">Assessment for Learning</span><span class="fp-title-mr">| आकलन</span></div>
+            <div class="task-item" onclick="toggle(this)"><div class="checkbox"></div><div class="task-content"><div class="task-label"><span class="task-id">T07:</span> Quick Check</div><div class="task-label-mr"><span class="task-id">T07:</span> झटपट तपासणी</div><div class="task-desc">Ask 2-3 students to explain an answer in their own words</div><div class="task-desc-mr">२-३ विद्यार्थ्यांना त्यांच्या शब्दात उत्तर समजावून सांगायला सांगा</div></div></div>
+            <div class="task-item" onclick="toggle(this)"><div class="checkbox"></div><div class="task-content"><div class="task-label"><span class="task-id">T08:</span> Spot One Pattern</div><div class="task-label-mr"><span class="task-id">T08:</span> एक नमुना ओळखा</div><div class="task-desc">Notice one common mistake or misunderstanding today</div><div class="task-desc-mr">आज एक सामान्य चूक किंवा गैरसमज लक्षात घ्या</div></div></div>
+            <div class="task-item" onclick="toggle(this)"><div class="checkbox"></div><div class="task-content"><div class="task-label"><span class="task-id">T12:</span> Pause & Name</div><div class="task-label-mr"><span class="task-id">T12:</span> थांबा आणि सांगा</div><div class="task-desc">Pause once and name what students are doing well in learning</div><div class="task-desc-mr">एकदा थांबा आणि विद्यार्थी शिकण्यात काय चांगले करत आहेत ते सांगा</div></div></div>
+        </section>
+
+        <section class="fp-section">
+            <div class="fp-header"><span class="fp-tag">FP-5</span><span class="fp-title">Collaboration</span><span class="fp-title-mr">| सहभागिता</span></div>
+            <div class="task-item" onclick="toggle(this)"><div class="checkbox"></div><div class="task-content"><div class="task-label"><span class="task-id">T09:</span> Teacher Touchpoint</div><div class="task-label-mr"><span class="task-id">T09:</span> शिक्षक संवाद</div><div class="task-desc">Share one classroom moment with another teacher</div><div class="task-desc-mr">एका वर्गातील क्षण दुसऱ्या शिक्षकासोबत शेअर करा</div></div></div>
+            <div class="task-item" onclick="toggle(this)"><div class="checkbox"></div><div class="task-content"><div class="task-label"><span class="task-id">T10:</span> Parent Signal</div><div class="task-label-mr"><span class="task-id">T10:</span> पालक संवाद</div><div class="task-desc">Share one positive learning observation with a parent (informal)</div><div class="task-desc-mr">पालकांसोबत एक सकारात्मक शिक्षण निरीक्षण शेअर करा</div></div></div>
+        </section>
+    </main>
+
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="count-info">
+                <div class="count-badge" id="badge">5</div>
+                <div><div class="count-text">of 3-5 tasks selected</div><div class="count-hint" id="hint">✓ Ready to save</div></div>
+            </div>
+            <button class="btn-primary" id="saveBtn">Save My Choices</button>
+        </div>
+    </div>
+
+    <script>
+        let count = 5;
+        function toggle(el) {
+            if (el.classList.contains('selected')) {
+                el.classList.remove('selected');
+                el.querySelector('.checkbox').textContent = '';
+                count--;
+            } else {
+                if (count >= 5) { alert('Maximum 5 tasks. Deselect one first.'); return; }
+                el.classList.add('selected');
+                el.querySelector('.checkbox').textContent = '✓';
+                count++;
+            }
+            update();
+        }
+        function update() {
+            document.getElementById('badge').textContent = count;
+            const hint = document.getElementById('hint');
+            const btn = document.getElementById('saveBtn');
+            const badge = document.getElementById('badge');
+            if (count >= 3 && count <= 5) {
+                badge.classList.remove('invalid');
+                hint.textContent = '✓ Ready to save';
+                hint.style.color = '#22C55E';
+                btn.disabled = false;
+            } else {
+                badge.classList.add('invalid');
+                hint.textContent = 'Need ' + (3 - count) + ' more';
+                hint.style.color = '#ABABAB';
+                btn.disabled = true;
+            }
+        }
+        function setLang(l) {
+            document.getElementById('btnEn').classList.toggle('active', l === 'en');
+            document.getElementById('btnMr').classList.toggle('active', l === 'mr');
+            document.body.classList.toggle('mr', l === 'mr');
+            localStorage.setItem('lang', l);
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const l = localStorage.getItem('lang');
+            if (l) setLang(l);
+            update();
+        });
+    </script>
+</body>
+</html>

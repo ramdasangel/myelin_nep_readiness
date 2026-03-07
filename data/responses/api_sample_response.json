@@ -1,0 +1,2380 @@
+{
+    "status": 0,
+    "message": "Success",
+    "data": {
+        "diagnostic": {
+            "diagnosticId": "696654bd6b8dc25b96ea7e10",
+            "diagnosticType": "NEP_READINESS",
+            "diagnosticTitle": "Teacher Classroom Practice Baseline",
+            "setCode": "1234",
+            "status": "ACTIVE",
+            "validFrom": "2026-01-01T05:30:00.000Z",
+            "validTill": "2026-01-20T05:30:00.000Z"
+        },
+        "attempts": [
+            {
+                "attemptId": "6968e04ac17f300f7d8ba821",
+                "userId": "6968de60c17f300f7d8ba645",
+                "userName": "Yash Patil",
+                "firstName": "Yash",
+                "lastName": "Patil",
+                "mobileNo": "8625867943",
+                "roleName": "Teacher",
+                "branchId": "5cd17817a2b82d31999dac12",
+                "branchName": "Vidyanchal High School",
+                "branchCode": "b004",
+                "submittedAt": "2026-01-15T18:16:33.101Z",
+                "responses": [
+                    {
+                        "questionId": "696653613068ccbaadf0d347",
+                        "questionText": "How do you ensure shy students participate?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Each Child is Unique"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "Call them out randomly so they answer",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e10dc17f300f7d8ba8d6",
+                                "text": "Call them out randomly so they answer",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e10dc17f300f7d8ba8d7",
+                                "text": "Pair them with confident students",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e10dc17f300f7d8ba8d8",
+                                "text": "Create low-pressure activities where everyone contributes",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e10dc17f300f7d8ba8d9",
+                                "text": "Let them stay quiet\u2014they will talk when ready",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d357",
+                        "questionText": "When was the last time you changed or experimented with a classroom strategy because you realised something wasn\u2019t working?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Upskilling"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "In the last 1\u20132 months",
+                        "optionMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e111c17f300f7d8ba8ee",
+                                "text": "This week or last week",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "4"
+                                }
+                            },
+                            {
+                                "_id": "6968e111c17f300f7d8ba8ef",
+                                "text": "In the last 1\u20132 months",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e111c17f300f7d8ba8f0",
+                                "text": "Sometime this year",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e111c17f300f7d8ba8f1",
+                                "text": "I usually stick to the strategies I already know",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d353",
+                        "questionText": "How do you involve parents in the child\u2019s learning?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Parent\u2013Teacher Collaboration"
+                        },
+                        "selectedOption": "2",
+                        "selectedOptionIndex": 2,
+                        "optionText": "Share simple activities to do at home",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e116c17f300f7d8ba8fa",
+                                "text": "I don't involve them much",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e116c17f300f7d8ba8fb",
+                                "text": "Ask them to ensure homework is done",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e116c17f300f7d8ba8fc",
+                                "text": "Share simple activities to do at home",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e116c17f300f7d8ba8fd",
+                                "text": "Work with them as partners, discussing progress and strategies",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34d",
+                        "questionText": "Which activity do you prefer to build competencies?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Competency-Based Learning"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "Only textbook questions",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e119c17f300f7d8ba906",
+                                "text": "Only textbook questions",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e119c17f300f7d8ba907",
+                                "text": "Worksheets focused on recall",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e119c17f300f7d8ba908",
+                                "text": "Real-life problem-solving tasks",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e119c17f300f7d8ba909",
+                                "text": "Dictation and repetition",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d355",
+                        "questionText": "Which statement do you agree with the MOST?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Each Child is Unique"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Every child can learn, but some may need different types of support",
+                        "optionMetadata": {
+                            "fpLevel": "1",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "1",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e11cc17f300f7d8ba915",
+                                "text": "Some children are naturally better at learning than others",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e11cc17f300f7d8ba916",
+                                "text": "Every child can learn, but some may need different types of support",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e11cc17f300f7d8ba917",
+                                "text": "If students work hard, all students can reach the same level",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e11cc17f300f7d8ba918",
+                                "text": "Children who score well usually have higher ability",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d356",
+                        "questionText": "Your class has finished a chapter, but many students can\u2019t apply the concept to real-life problems. What do you do?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Competency-Based Learning"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "Move ahead because syllabus completion is important",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e11fc17f300f7d8ba921",
+                                "text": "Move ahead because syllabus completion is important",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e11fc17f300f7d8ba922",
+                                "text": "Give more revision worksheets for the same chapter",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e11fc17f300f7d8ba923",
+                                "text": "Pause and give new activities that involve using the concept in real situations",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e11fc17f300f7d8ba924",
+                                "text": "Ask students to memorise key points so they don\u2019t forget",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34b",
+                        "questionText": "What guides your lesson planning the most?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Competency-Based Learning"
+                        },
+                        "selectedOption": "2",
+                        "selectedOptionIndex": 2,
+                        "optionText": "Building specific competencies/skills",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e121c17f300f7d8ba936",
+                                "text": "Completing the chapter on time",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e121c17f300f7d8ba937",
+                                "text": "Ensuring students remember key facts",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e121c17f300f7d8ba938",
+                                "text": "Building specific competencies/skills",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e121c17f300f7d8ba939",
+                                "text": "Following what other teachers do",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34f",
+                        "questionText": "How do you view feedback on your teaching?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Upskilling"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "It is uncomfortable",
+                        "optionMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e12bc17f300f7d8ba945",
+                                "text": "It is uncomfortable",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e12bc17f300f7d8ba946",
+                                "text": "It is acceptable but not necessary",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e12bc17f300f7d8ba947",
+                                "text": "It helps me improve",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e12bc17f300f7d8ba948",
+                                "text": "I actively seek it",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34c",
+                        "questionText": "How do you check if students can apply their learning?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Competency-Based Learning"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "By asking them to memorise definitions",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e12ec17f300f7d8ba951",
+                                "text": "By asking them to memorise definitions",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e12ec17f300f7d8ba952",
+                                "text": "By giving tasks that require real-life application",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e12ec17f300f7d8ba953",
+                                "text": "By giving more fill-in-the-blanks",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e12ec17f300f7d8ba954",
+                                "text": "By checking notebook completeness",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d354",
+                        "questionText": "A student consistently makes the same mistake in Maths despite your explanations. What do you MOST likely do next?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Ask the child to practice more questions of the same type",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e130c17f300f7d8ba960",
+                                "text": "Repeat the explanation one more time, but more clearly",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e130c17f300f7d8ba961",
+                                "text": "Ask the child to practice more questions of the same type",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e130c17f300f7d8ba962",
+                                "text": "Give a small task to check exactly where the misconception is happening",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e130c17f300f7d8ba963",
+                                "text": "Tell the parent the child needs more practice at home",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d351",
+                        "questionText": "How often do you communicate learning progress to parents (not just marks)?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Parent\u2013Teacher Collaboration"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "Only during PTMs",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e133c17f300f7d8ba975",
+                                "text": "Only during PTMs",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e133c17f300f7d8ba976",
+                                "text": "Once every few months",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e133c17f300f7d8ba977",
+                                "text": "Monthly updates",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e133c17f300f7d8ba978",
+                                "text": "Regular short updates (weekly/fortnightly)",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d350",
+                        "questionText": "How do you stay updated about best practices?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Upskilling"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "I follow what senior teachers do",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e135c17f300f7d8ba981",
+                                "text": "I don\u2019t actively update myself",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e135c17f300f7d8ba982",
+                                "text": "I follow what senior teachers do",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e135c17f300f7d8ba983",
+                                "text": "I attend trainings when assigned",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e135c17f300f7d8ba984",
+                                "text": "I proactively learn from courses, reading, or peers",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d345",
+                        "questionText": "When two students learn at very different speeds, what do you usually do?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Each Child is Unique"
+                        },
+                        "selectedOption": "3",
+                        "selectedOptionIndex": 3,
+                        "optionText": "Ask the faster learner to help the slower one",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e138c17f300f7d8ba990",
+                                "text": "Continue teaching at the same pace for everyone",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e138c17f300f7d8ba991",
+                                "text": "Give extra homework to the slower learner",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e138c17f300f7d8ba992",
+                                "text": "Provide varied support so both can progress",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e138c17f300f7d8ba993",
+                                "text": "Ask the faster learner to help the slower one",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d349",
+                        "questionText": "When a child performs poorly, how do you find the cause?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "Assume the child didn\u2019t study",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e13bc17f300f7d8ba99c",
+                                "text": "Assume the child didn\u2019t study",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e13bc17f300f7d8ba99d",
+                                "text": "Re-check the question paper",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e13bc17f300f7d8ba99e",
+                                "text": "Use small diagnostic tasks to find exact gaps",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e13bc17f300f7d8ba99f",
+                                "text": "Talk to the parent first",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34a",
+                        "questionText": "How often do you assess progress during teaching?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Only when I feel students are slow",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e13dc17f300f7d8ba9a8",
+                                "text": "Only during exams",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e13dc17f300f7d8ba9a9",
+                                "text": "Only when I feel students are slow",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e13dc17f300f7d8ba9aa",
+                                "text": "Weekly informal checks",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e13dc17f300f7d8ba9ab",
+                                "text": "Daily quick checks (exit slips, oral checks, tasks)",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34e",
+                        "questionText": "When did you last try a new teaching method or tool?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Upskilling"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Within the last year",
+                        "optionMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e13fc17f300f7d8ba9b4",
+                                "text": "I rarely try new methods",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e13fc17f300f7d8ba9b5",
+                                "text": "Within the last year",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e13fc17f300f7d8ba9b6",
+                                "text": "Within the last few months",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e13fc17f300f7d8ba9b7",
+                                "text": "This week or last week",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d358",
+                        "questionText": "When parents ask what they can do to support learning at home, you MOST often:",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Parent\u2013Teacher Collaboration"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "Give them 1\u20132 simple activities they can do with the child",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e143c17f300f7d8ba9cc",
+                                "text": "Give them 1\u20132 simple activities they can do with the child",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e143c17f300f7d8ba9cd",
+                                "text": "Tell them to ensure the child completes homework on time",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e143c17f300f7d8ba9ce",
+                                "text": "Say that most learning happens in school and not to worry",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e143c17f300f7d8ba9cf",
+                                "text": "Usually do not give suggestions; parents choose their own methods",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d343",
+                        "questionText": "When students don\u2019t understand a topic, what do you usually think first?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "I need to explain it more clearly",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e147c17f300f7d8ba9d8",
+                                "text": "I need to explain it more clearly",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e147c17f300f7d8ba9d9",
+                                "text": "Which students are struggling and why",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e147c17f300f7d8ba9da",
+                                "text": "How many students answered correctly",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e147c17f300f7d8ba9db",
+                                "text": "What activity might help them grasp it",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d348",
+                        "questionText": "Before starting a new chapter, how do you check learning levels?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "I don\u2019t\u2014everyone starts fresh",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e14ac17f300f7d8ba9e4",
+                                "text": "I don\u2019t\u2014everyone starts fresh",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e14ac17f300f7d8ba9e5",
+                                "text": "By giving a quick informal check (questions/activity)",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e14ac17f300f7d8ba9e6",
+                                "text": "By checking the previous exam scores",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e14ac17f300f7d8ba9e7",
+                                "text": "By asking students if they already know the topic",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d352",
+                        "questionText": "What do you usually discuss with parents?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Parent\u2013Teacher Collaboration"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Mostly marks and homework",
+                        "optionMetadata": {
+                            "fpLevel": "4",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "4",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e14cc17f300f7d8ba9fc",
+                                "text": "Only if child is misbehaving",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e14cc17f300f7d8ba9fd",
+                                "text": "Mostly marks and homework",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e14cc17f300f7d8ba9fe",
+                                "text": "Strengths and areas for improvement",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e14cc17f300f7d8ba9ff",
+                                "text": "Specific strategies to support learning at home",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "3"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d344",
+                        "questionText": "When a lesson doesn\u2019t work as expected, you are most likely to:",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Reflection"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Discuss it with another teacher",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e14fc17f300f7d8baa08",
+                                "text": "Reflect on what you could change next time",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e14fc17f300f7d8baa09",
+                                "text": "Discuss it with another teacher",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968e14fc17f300f7d8baa0a",
+                                "text": "Stick to the plan and move ahead",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e14fc17f300f7d8baa0b",
+                                "text": "Check student work to see what went wrong",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d346",
+                        "questionText": "How do you understand a child\u2019s strengths or interests?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Each Child is Unique"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "By looking at test scores",
+                        "optionMetadata": {
+                            "fpLevel": "4",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "4",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968e1a9c17f300f7d8baa5c",
+                                "text": "By looking at test scores",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968e1a9c17f300f7d8baa5d",
+                                "text": "By observing classroom behaviour and interactions",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e1a9c17f300f7d8baa5e",
+                                "text": "By asking parents during PTMs",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968e1a9c17f300f7d8baa5f",
+                                "text": "I don\u2019t specifically track strengths or interests",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "attemptId": "6968c99c5f0d0e7bcb149e87",
+                "userId": "6968c9115f0d0e7bcb149deb",
+                "userName": "Sonal Thorve",
+                "firstName": "Sonal",
+                "lastName": "Thorve",
+                "mobileNo": "7875088757",
+                "roleName": "Teacher",
+                "branchId": "5cd17817a2b82d31999dac12",
+                "branchName": "Vidyanchal High School",
+                "branchCode": "b004",
+                "submittedAt": "2026-01-15T16:41:19.886Z",
+                "responses": [
+                    {
+                        "questionId": "696653613068ccbaadf0d357",
+                        "questionText": "When was the last time you changed or experimented with a classroom strategy because you realised something wasn\u2019t working?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Upskilling"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "This week or last week",
+                        "optionMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "4"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "4"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968c9b35f0d0e7bcb149ea6",
+                                "text": "This week or last week",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "4"
+                                }
+                            },
+                            {
+                                "_id": "6968c9b35f0d0e7bcb149ea7",
+                                "text": "In the last 1\u20132 months",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968c9b35f0d0e7bcb149ea8",
+                                "text": "Sometime this year",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968c9b35f0d0e7bcb149ea9",
+                                "text": "I usually stick to the strategies I already know",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d343",
+                        "questionText": "When students don\u2019t understand a topic, what do you usually think first?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Which students are struggling and why",
+                        "optionMetadata": {
+                            "fpLevel": "1",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "1",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968c9c85f0d0e7bcb149ec4",
+                                "text": "I need to explain it more clearly",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968c9c85f0d0e7bcb149ec5",
+                                "text": "Which students are struggling and why",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968c9c85f0d0e7bcb149ec6",
+                                "text": "How many students answered correctly",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968c9c85f0d0e7bcb149ec7",
+                                "text": "What activity might help them grasp it",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34a",
+                        "questionText": "How often do you assess progress during teaching?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "3",
+                        "selectedOptionIndex": 3,
+                        "optionText": "Daily quick checks (exit slips, oral checks, tasks)",
+                        "optionMetadata": {
+                            "fpLevel": "4",
+                            "depthLevel": "4"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "4",
+                            "depthLevel": "4"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968c9d75f0d0e7bcb149edc",
+                                "text": "Only during exams",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968c9d75f0d0e7bcb149edd",
+                                "text": "Only when I feel students are slow",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968c9d75f0d0e7bcb149ede",
+                                "text": "Weekly informal checks",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968c9d75f0d0e7bcb149edf",
+                                "text": "Daily quick checks (exit slips, oral checks, tasks)",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d347",
+                        "questionText": "How do you ensure shy students participate?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Each Child is Unique"
+                        },
+                        "selectedOption": "2",
+                        "selectedOptionIndex": 2,
+                        "optionText": "Create low-pressure activities where everyone contributes",
+                        "optionMetadata": {
+                            "fpLevel": "1",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "1",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968c9e55f0d0e7bcb149ef4",
+                                "text": "Call them out randomly so they answer",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968c9e55f0d0e7bcb149ef5",
+                                "text": "Pair them with confident students",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968c9e55f0d0e7bcb149ef6",
+                                "text": "Create low-pressure activities where everyone contributes",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968c9e55f0d0e7bcb149ef7",
+                                "text": "Let them stay quiet\u2014they will talk when ready",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d349",
+                        "questionText": "When a child performs poorly, how do you find the cause?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "3",
+                        "selectedOptionIndex": 3,
+                        "optionText": "Talk to the parent first",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968c9f25f0d0e7bcb149f0f",
+                                "text": "Assume the child didn\u2019t study",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968c9f25f0d0e7bcb149f10",
+                                "text": "Re-check the question paper",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968c9f25f0d0e7bcb149f11",
+                                "text": "Use small diagnostic tasks to find exact gaps",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968c9f25f0d0e7bcb149f12",
+                                "text": "Talk to the parent first",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d348",
+                        "questionText": "Before starting a new chapter, how do you check learning levels?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "I don\u2019t\u2014everyone starts fresh",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968ca045f0d0e7bcb149f2a",
+                                "text": "I don\u2019t\u2014everyone starts fresh",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca045f0d0e7bcb149f2b",
+                                "text": "By giving a quick informal check (questions/activity)",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968ca045f0d0e7bcb149f2c",
+                                "text": "By checking the previous exam scores",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca045f0d0e7bcb149f2d",
+                                "text": "By asking students if they already know the topic",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d350",
+                        "questionText": "How do you stay updated about best practices?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Upskilling"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "I don\u2019t actively update myself",
+                        "optionMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968ca175f0d0e7bcb149f4e",
+                                "text": "I don\u2019t actively update myself",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca175f0d0e7bcb149f4f",
+                                "text": "I follow what senior teachers do",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968ca175f0d0e7bcb149f50",
+                                "text": "I attend trainings when assigned",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968ca175f0d0e7bcb149f51",
+                                "text": "I proactively learn from courses, reading, or peers",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d352",
+                        "questionText": "What do you usually discuss with parents?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Parent\u2013Teacher Collaboration"
+                        },
+                        "selectedOption": "2",
+                        "selectedOptionIndex": 2,
+                        "optionText": "Strengths and areas for improvement",
+                        "optionMetadata": {
+                            "fpLevel": "1",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "1",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968ca285f0d0e7bcb149f69",
+                                "text": "Only if child is misbehaving",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca285f0d0e7bcb149f6a",
+                                "text": "Mostly marks and homework",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca285f0d0e7bcb149f6b",
+                                "text": "Strengths and areas for improvement",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968ca285f0d0e7bcb149f6c",
+                                "text": "Specific strategies to support learning at home",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "3"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34d",
+                        "questionText": "Which activity do you prefer to build competencies?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Competency-Based Learning"
+                        },
+                        "selectedOption": "2",
+                        "selectedOptionIndex": 2,
+                        "optionText": "Real-life problem-solving tasks",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "3"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "3"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968ca3b5f0d0e7bcb149f8d",
+                                "text": "Only textbook questions",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca3b5f0d0e7bcb149f8e",
+                                "text": "Worksheets focused on recall",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca3b5f0d0e7bcb149f8f",
+                                "text": "Real-life problem-solving tasks",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968ca3b5f0d0e7bcb149f90",
+                                "text": "Dictation and repetition",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34b",
+                        "questionText": "What guides your lesson planning the most?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Competency-Based Learning"
+                        },
+                        "selectedOption": "3",
+                        "selectedOptionIndex": 3,
+                        "optionText": "Following what other teachers do",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968ca635f0d0e7bcb149fbf",
+                                "text": "Completing the chapter on time",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca635f0d0e7bcb149fc0",
+                                "text": "Ensuring students remember key facts",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca635f0d0e7bcb149fc1",
+                                "text": "Building specific competencies/skills",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968ca635f0d0e7bcb149fc2",
+                                "text": "Following what other teachers do",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d358",
+                        "questionText": "When parents ask what they can do to support learning at home, you MOST often:",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Parent\u2013Teacher Collaboration"
+                        },
+                        "selectedOption": "3",
+                        "selectedOptionIndex": 3,
+                        "optionText": "Usually do not give suggestions; parents choose their own methods",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968ca7c5f0d0e7bcb149ff5",
+                                "text": "Give them 1\u20132 simple activities they can do with the child",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968ca7c5f0d0e7bcb149ff6",
+                                "text": "Tell them to ensure the child completes homework on time",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca7c5f0d0e7bcb149ff7",
+                                "text": "Say that most learning happens in school and not to worry",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca7c5f0d0e7bcb149ff8",
+                                "text": "Usually do not give suggestions; parents choose their own methods",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d354",
+                        "questionText": "A student consistently makes the same mistake in Maths despite your explanations. What do you MOST likely do next?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Diagnosing Learning Levels"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "Repeat the explanation one more time, but more clearly",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968ca915f0d0e7bcb14a019",
+                                "text": "Repeat the explanation one more time, but more clearly",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca915f0d0e7bcb14a01a",
+                                "text": "Ask the child to practice more questions of the same type",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca915f0d0e7bcb14a01b",
+                                "text": "Give a small task to check exactly where the misconception is happening",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968ca915f0d0e7bcb14a01c",
+                                "text": "Tell the parent the child needs more practice at home",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34e",
+                        "questionText": "When did you last try a new teaching method or tool?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Upskilling"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "I rarely try new methods",
+                        "optionMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968ca995f0d0e7bcb14a025",
+                                "text": "I rarely try new methods",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968ca995f0d0e7bcb14a026",
+                                "text": "Within the last year",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968ca995f0d0e7bcb14a027",
+                                "text": "Within the last few months",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968ca995f0d0e7bcb14a028",
+                                "text": "This week or last week",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d351",
+                        "questionText": "How often do you communicate learning progress to parents (not just marks)?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Parent\u2013Teacher Collaboration"
+                        },
+                        "selectedOption": "3",
+                        "selectedOptionIndex": 3,
+                        "optionText": "Regular short updates (weekly/fortnightly)",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "4"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "4"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968caa55f0d0e7bcb14a040",
+                                "text": "Only during PTMs",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968caa55f0d0e7bcb14a041",
+                                "text": "Once every few months",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968caa55f0d0e7bcb14a042",
+                                "text": "Monthly updates",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968caa55f0d0e7bcb14a043",
+                                "text": "Regular short updates (weekly/fortnightly)",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d355",
+                        "questionText": "Which statement do you agree with the MOST?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Each Child is Unique"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "Some children are naturally better at learning than others",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968cab45f0d0e7bcb14a058",
+                                "text": "Some children are naturally better at learning than others",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cab45f0d0e7bcb14a059",
+                                "text": "Every child can learn, but some may need different types of support",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968cab45f0d0e7bcb14a05a",
+                                "text": "If students work hard, all students can reach the same level",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968cab45f0d0e7bcb14a05b",
+                                "text": "Children who score well usually have higher ability",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d345",
+                        "questionText": "When two students learn at very different speeds, what do you usually do?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Each Child is Unique"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Give extra homework to the slower learner",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968cac25f0d0e7bcb14a067",
+                                "text": "Continue teaching at the same pace for everyone",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cac25f0d0e7bcb14a068",
+                                "text": "Give extra homework to the slower learner",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cac25f0d0e7bcb14a069",
+                                "text": "Provide varied support so both can progress",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968cac25f0d0e7bcb14a06a",
+                                "text": "Ask the faster learner to help the slower one",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d356",
+                        "questionText": "Your class has finished a chapter, but many students can\u2019t apply the concept to real-life problems. What do you do?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Competency-Based Learning"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Give more revision worksheets for the same chapter",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968cadd5f0d0e7bcb14a097",
+                                "text": "Move ahead because syllabus completion is important",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cadd5f0d0e7bcb14a098",
+                                "text": "Give more revision worksheets for the same chapter",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cadd5f0d0e7bcb14a099",
+                                "text": "Pause and give new activities that involve using the concept in real situations",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968cadd5f0d0e7bcb14a09a",
+                                "text": "Ask students to memorise key points so they don\u2019t forget",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34f",
+                        "questionText": "How do you view feedback on your teaching?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Upskilling"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "It is uncomfortable",
+                        "optionMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "3",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968caf55f0d0e7bcb14a0b5",
+                                "text": "It is uncomfortable",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968caf55f0d0e7bcb14a0b6",
+                                "text": "It is acceptable but not necessary",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968caf55f0d0e7bcb14a0b7",
+                                "text": "It helps me improve",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968caf55f0d0e7bcb14a0b8",
+                                "text": "I actively seek it",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d344",
+                        "questionText": "When a lesson doesn\u2019t work as expected, you are most likely to:",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Teacher Reflection"
+                        },
+                        "selectedOption": "3",
+                        "selectedOptionIndex": 3,
+                        "optionText": "Check student work to see what went wrong",
+                        "optionMetadata": {
+                            "fpLevel": "4",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "4",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968cb055f0d0e7bcb14a0cd",
+                                "text": "Reflect on what you could change next time",
+                                "metadata": {
+                                    "fpLevel": "3",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cb055f0d0e7bcb14a0ce",
+                                "text": "Discuss it with another teacher",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968cb055f0d0e7bcb14a0cf",
+                                "text": "Stick to the plan and move ahead",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cb055f0d0e7bcb14a0d0",
+                                "text": "Check student work to see what went wrong",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "2"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d353",
+                        "questionText": "How do you involve parents in the child\u2019s learning?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Parent\u2013Teacher Collaboration"
+                        },
+                        "selectedOption": "1",
+                        "selectedOptionIndex": 1,
+                        "optionText": "Ask them to ensure homework is done",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968cb345f0d0e7bcb14a103",
+                                "text": "I don't involve them much",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cb345f0d0e7bcb14a104",
+                                "text": "Ask them to ensure homework is done",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cb345f0d0e7bcb14a105",
+                                "text": "Share simple activities to do at home",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968cb345f0d0e7bcb14a106",
+                                "text": "Work with them as partners, discussing progress and strategies",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "4"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d34c",
+                        "questionText": "How do you check if students can apply their learning?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Competency-Based Learning"
+                        },
+                        "selectedOption": "0",
+                        "selectedOptionIndex": 0,
+                        "optionText": "By asking them to memorise definitions",
+                        "optionMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "2",
+                            "depthLevel": "1"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968cb495f0d0e7bcb14a127",
+                                "text": "By asking them to memorise definitions",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cb495f0d0e7bcb14a128",
+                                "text": "By giving tasks that require real-life application",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "3"
+                                }
+                            },
+                            {
+                                "_id": "6968cb495f0d0e7bcb14a129",
+                                "text": "By giving more fill-in-the-blanks",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cb495f0d0e7bcb14a12a",
+                                "text": "By checking notebook completeness",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "questionId": "696653613068ccbaadf0d346",
+                        "questionText": "How do you understand a child\u2019s strengths or interests?",
+                        "type": "MCQ",
+                        "questionMetadata": {
+                            "goal": "Each Child is Unique"
+                        },
+                        "selectedOption": "2",
+                        "selectedOptionIndex": 2,
+                        "optionText": "By asking parents during PTMs",
+                        "optionMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "responseMetadata": {
+                            "fpLevel": "5",
+                            "depthLevel": "2"
+                        },
+                        "allOptions": [
+                            {
+                                "_id": "6968cb575f0d0e7bcb14a13f",
+                                "text": "By looking at test scores",
+                                "metadata": {
+                                    "fpLevel": "4",
+                                    "depthLevel": "1"
+                                }
+                            },
+                            {
+                                "_id": "6968cb575f0d0e7bcb14a140",
+                                "text": "By observing classroom behaviour and interactions",
+                                "metadata": {
+                                    "fpLevel": "1",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968cb575f0d0e7bcb14a141",
+                                "text": "By asking parents during PTMs",
+                                "metadata": {
+                                    "fpLevel": "5",
+                                    "depthLevel": "2"
+                                }
+                            },
+                            {
+                                "_id": "6968cb575f0d0e7bcb14a142",
+                                "text": "I don\u2019t specifically track strengths or interests",
+                                "metadata": {
+                                    "fpLevel": "2",
+                                    "depthLevel": "1"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "totalAttempts": 2
+    }
+}

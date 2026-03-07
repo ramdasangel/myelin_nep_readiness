@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers NEP Readiness Dashboard | Myelin</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --myelin-purple-900: #660099;
+            --myelin-purple-700: #7b23a7;
+            --myelin-purple-200: #e8d7ef;
+            --myelin-purple-50: #fbf8fd;
+            --primary-teal: #0d9488;
+            --secondary-blue: #0284c7;
+            --orange: #d97706;
+            --violet: #7c3aed;
+            --myelin-dark: #383838;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            /* Depth colors */
+            --depth-d1: #ef4444;
+            --depth-d2: #f59e0b;
+            --depth-d3: #22c55e;
+            --depth-d4: #0284c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--myelin-purple-50) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--myelin-dark);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--myelin-purple-700) 0%, var(--myelin-purple-900) 100%);
+            color: white;
+            padding: 24px 32px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 20px rgba(102, 0, 153, 0.3);
+            position: relative;
+        }
+
+        .header-logo {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--myelin-purple-700);
+        }
+
+        .header-text h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .header-text .subtitle {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .demo-badge {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .selector-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .selector-label {
+            font-weight: 500;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-branch {
+            background: var(--gray-100);
+            color: var(--gray-600);
+        }
+
+        .btn-branch:hover {
+            background: var(--myelin-purple-200);
+            color: var(--myelin-purple-700);
+        }
+
+        .btn-branch.active {
+            background: var(--myelin-purple-700);
+            color: white;
+        }
+
+        .school-info {
+            margin-left: auto;
+            padding-left: 16px;
+            border-left: 1px solid var(--gray-200);
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* Summary Stats */
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .stat-card.total::before { background: var(--myelin-purple-700); }
+        .stat-card.d1::before { background: var(--depth-d1); }
+        .stat-card.d2::before { background: var(--depth-d2); }
+        .stat-card.d3::before { background: var(--depth-d3); }
+        .stat-card.d4::before { background: var(--depth-d4); }
+        .stat-card.avg::before { background: linear-gradient(90deg, var(--depth-d1), var(--depth-d4)); }
+
+        .stat-card .label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--myelin-dark);
+        }
+
+        .stat-card .sublabel {
+            font-size: 0.7rem;
+            color: var(--gray-400);
+            margin-top: 4px;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .card-full {
+            grid-column: span 2;
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--myelin-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h3 .count {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--gray-400);
+        }
+
+        /* FP x Depth Heatmap */
+        .fp-depth-heatmap {
+            overflow-x: auto;
+        }
+
+        .heatmap-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 4px;
+            font-size: 0.85rem;
+        }
+
+        .heatmap-table th {
+            padding: 12px 16px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .heatmap-table th.depth-header {
+            background: var(--gray-100);
+            border-radius: 8px;
+        }
+
+        .heatmap-table th.d1 { color: var(--depth-d1); }
+        .heatmap-table th.d2 { color: var(--depth-d2); }
+        .heatmap-table th.d3 { color: var(--depth-d3); }
+        .heatmap-table th.d4 { color: var(--depth-d4); }
+
+        .heatmap-table td {
+            padding: 16px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .heatmap-table td:hover {
+            transform: scale(1.05);
+        }
+
+        .heatmap-table td.fp-label {
+            background: var(--gray-50);
+            font-weight: 600;
+            text-align: left;
+            padding-left: 16px;
+            font-size: 0.8rem;
+        }
+
+        .heatmap-table td.fp-label .fp-code {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--gray-400);
+        }
+
+        .heatmap-table td.heat-cell {
+            min-width: 70px;
+            cursor: pointer;
+        }
+
+        /* Depth Legend */
+        .depth-legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .depth-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+        }
+
+        .depth-legend-item .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .depth-legend-item .dot.d1 { background: var(--depth-d1); }
+        .depth-legend-item .dot.d2 { background: var(--depth-d2); }
+        .depth-legend-item .dot.d3 { background: var(--depth-d3); }
+        .depth-legend-item .dot.d4 { background: var(--depth-d4); }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .chart-container.tall {
+            height: 400px;
+        }
+
+        /* Individual Responses Table */
+        .responses-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .responses-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .responses-table th {
+            position: sticky;
+            top: 0;
+            background: var(--gray-50);
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .responses-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .responses-table tr:hover {
+            background: var(--gray-50);
+        }
+
+        .depth-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .depth-badge.d1 { background: #fef2f2; color: var(--depth-d1); }
+        .depth-badge.d2 { background: #fffbeb; color: var(--depth-d2); }
+        .depth-badge.d3 { background: #f0fdf4; color: var(--depth-d3); }
+        .depth-badge.d4 { background: #eff6ff; color: var(--depth-d4); }
+
+        .fp-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--myelin-purple-50);
+            color: var(--myelin-purple-700);
+        }
+
+        /* Insights Panel */
+        .insights-panel {
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--myelin-purple-50) 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .insights-panel h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--myelin-purple-700);
+            margin-bottom: 12px;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 0.85rem;
+        }
+
+        .insight-item:last-child {
+            border-bottom: none;
+        }
+
+        .insight-icon {
+            font-size: 1rem;
+        }
+
+        .insight-icon.warning { color: var(--warning); }
+        .insight-icon.success { color: var(--success); }
+        .insight-icon.info { color: var(--secondary-blue); }
+
+        /* Responsive */
+        @media (max-width: 1199px) {
+            .summary-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-full {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 767px) {
+            body { padding: 12px; }
+            .header { padding: 16px 20px; }
+            .header-text h1 { font-size: 1.2rem; }
+            .summary-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .selector-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .school-info {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                border-top: 1px solid var(--gray-200);
+                padding-top: 12px;
+                margin-top: 8px;
+                text-align: center;
+            }
+            .heatmap-table th,
+            .heatmap-table td {
+                padding: 10px 8px;
+                font-size: 0.75rem;
+            }
+            .chart-container { height: 250px; }
+            .chart-container.tall { height: 300px; }
+        }
+
+        @media (max-width: 575px) {
+            .summary-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .stat-card { padding: 14px; }
+            .stat-card .value { font-size: 1.5rem; }
+            .stat-card .label { font-size: 0.6rem; }
+            .depth-legend { gap: 12px; }
+            .depth-legend-item { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">M</div>
+            <div class="header-text">
+                <h1>Teachers NEP Readiness Dashboard</h1>
+                <p class="subtitle">FP Orientation & Practice Depth Analysis</p>
+            </div>
+            <span class="demo-badge">DEMO</span>
+        </div>
+
+        <div class="selector-panel">
+            <span class="selector-label">School ABC - Select Branch:</span>
+            <button class="btn btn-branch active" id="btn-all" onclick="loadBranch('all')">All Branches</button>
+            <button class="btn btn-branch" id="btn-a" onclick="loadBranch('branch_a')">Branch A</button>
+            <button class="btn btn-branch" id="btn-b" onclick="loadBranch('branch_b')">Branch B</button>
+            <div class="school-info" id="school-info">
+                Loading...
+            </div>
+        </div>
+
+        <div class="summary-stats" id="summary-stats">
+            <!-- Populated by JS -->
+        </div>
+
+        <div class="dashboard-grid" id="dashboard">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <script>
+        // =====================================================
+        // CONFIGURATION
+        // =====================================================
+        const FP_CONFIG = {
+            FP1: { name: 'Every Child is Unique', short: 'FP1', color: '#7b23a7' },
+            FP2: { name: 'Holistic & Experiential', short: 'FP2', color: '#0d9488' },
+            FP3: { name: 'Reflective Practitioner', short: 'FP3', color: '#0284c7' },
+            FP4: { name: 'Assessment for Learning', short: 'FP4', color: '#d97706' },
+            FP5: { name: 'Collaboration & Community', short: 'FP5', color: '#7c3aed' }
+        };
+
+        const DEPTH_CONFIG = {
+            D1: { name: 'Procedural', short: 'D1', color: '#ef4444', meaning: 'Rule-based, default, surface action' },
+            D2: { name: 'Responsive', short: 'D2', color: '#f59e0b', meaning: 'Adjusts based on situation' },
+            D3: { name: 'Diagnostic', short: 'D3', color: '#22c55e', meaning: 'Uses evidence to decide next step' },
+            D4: { name: 'Adaptive', short: 'D4', color: '#0284c7', meaning: 'Intentionally redesigns practice' }
+        };
+
+        const FP_KEYS = ['FP1', 'FP2', 'FP3', 'FP4', 'FP5'];
+        const DEPTH_KEYS = ['D1', 'D2', 'D3', 'D4'];
+
+        // =====================================================
+        // SAMPLE DATA GENERATOR
+        // =====================================================
+        const FIRST_NAMES = ['Rajesh','Priya','Amit','Sunita','Vikram','Meera','Ravi','Anita','Kiran','Deepak','Sanjay','Lakshmi','Mohan','Kavita','Arun','Pooja','Nikhil','Swati','Rahul','Anjali','Arjun','Divya','Suresh','Neha','Prakash','Sneha','Vijay','Rekha','Ashok','Geeta'];
+        const LAST_NAMES = ['Kumar','Sharma','Patel','Reddy','Singh','Joshi','Verma','Desai','Rao','Nair','Gupta','Iyer','Das','Mehta','Krishnan','Bansal'];
+
+        const BRANCH_A_LOCATIONS = ['Branch A - Main Campus', 'Branch A - North Wing', 'Branch A - South Wing'];
+        const BRANCH_B_LOCATIONS = ['Branch B - Central Campus', 'Branch B - West Campus', 'Branch B - Riverside'];
+
+        function seededRandom(seed) {
+            const x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+        }
+
+        // Question distribution based on PDF (22 questions total)
+        // Each question maps to specific FP and has options with different depths
+        const QUESTION_FP_MAPPING = [
+            // Anchor questions
+            { primary: 'FP2', options: [{ fp: 2, d: 1 }, { fp: 1, d: 3 }, { fp: 4, d: 1 }, { fp: 2, d: 2 }] },
+            { primary: 'FP3', options: [{ fp: 3, d: 1 }, { fp: 5, d: 3 }, { fp: 2, d: 1 }, { fp: 4, d: 2 }] },
+            // Daily practice Q1-15
+            { primary: 'FP1', options: [{ fp: 2, d: 1 }, { fp: 2, d: 1 }, { fp: 1, d: 2 }, { fp: 5, d: 2 }] },
+            { primary: 'FP1', options: [{ fp: 4, d: 1 }, { fp: 1, d: 2 }, { fp: 5, d: 2 }, { fp: 2, d: 1 }] },
+            { primary: 'FP1', options: [{ fp: 2, d: 1 }, { fp: 5, d: 2 }, { fp: 1, d: 3 }, { fp: 2, d: 1 }] },
+            { primary: 'FP4', options: [{ fp: 2, d: 1 }, { fp: 4, d: 3 }, { fp: 4, d: 1 }, { fp: 1, d: 2 }] },
+            { primary: 'FP4', options: [{ fp: 2, d: 1 }, { fp: 4, d: 2 }, { fp: 4, d: 3 }, { fp: 5, d: 2 }] },
+            { primary: 'FP4', options: [{ fp: 4, d: 1 }, { fp: 2, d: 2 }, { fp: 4, d: 3 }, { fp: 4, d: 4 }] },
+            { primary: 'FP2', options: [{ fp: 2, d: 1 }, { fp: 2, d: 1 }, { fp: 2, d: 3 }, { fp: 5, d: 2 }] },
+            { primary: 'FP2', options: [{ fp: 2, d: 1 }, { fp: 2, d: 3 }, { fp: 2, d: 1 }, { fp: 2, d: 1 }] },
+            { primary: 'FP2', options: [{ fp: 2, d: 1 }, { fp: 2, d: 1 }, { fp: 2, d: 3 }, { fp: 2, d: 1 }] },
+            { primary: 'FP3', options: [{ fp: 3, d: 1 }, { fp: 3, d: 2 }, { fp: 3, d: 3 }, { fp: 3, d: 4 }] },
+            { primary: 'FP3', options: [{ fp: 3, d: 1 }, { fp: 3, d: 2 }, { fp: 3, d: 3 }, { fp: 3, d: 4 }] },
+            { primary: 'FP3', options: [{ fp: 3, d: 1 }, { fp: 5, d: 2 }, { fp: 3, d: 3 }, { fp: 3, d: 4 }] },
+            { primary: 'FP5', options: [{ fp: 5, d: 1 }, { fp: 5, d: 2 }, { fp: 5, d: 3 }, { fp: 5, d: 4 }] },
+            { primary: 'FP5', options: [{ fp: 2, d: 1 }, { fp: 4, d: 1 }, { fp: 1, d: 3 }, { fp: 5, d: 3 }] },
+            { primary: 'FP5', options: [{ fp: 2, d: 1 }, { fp: 2, d: 1 }, { fp: 5, d: 2 }, { fp: 5, d: 4 }] },
+            // Situation-based Q1-5
+            { primary: 'FP4', options: [{ fp: 2, d: 1 }, { fp: 2, d: 1 }, { fp: 4, d: 3 }, { fp: 5, d: 2 }] },
+            { primary: 'FP1', options: [{ fp: 2, d: 1 }, { fp: 1, d: 3 }, { fp: 2, d: 2 }, { fp: 4, d: 1 }] },
+            { primary: 'FP2', options: [{ fp: 2, d: 1 }, { fp: 2, d: 1 }, { fp: 2, d: 3 }, { fp: 2, d: 1 }] },
+            { primary: 'FP3', options: [{ fp: 3, d: 4 }, { fp: 3, d: 3 }, { fp: 3, d: 2 }, { fp: 3, d: 1 }] },
+            { primary: 'FP5', options: [{ fp: 5, d: 3 }, { fp: 2, d: 1 }, { fp: 2, d: 1 }, { fp: 2, d: 1 }] }
+        ];
+
+        function generateTeacherResponses(seed, depthBias = null) {
+            const responses = [];
+            for (let q = 0; q < QUESTION_FP_MAPPING.length; q++) {
+                const question = QUESTION_FP_MAPPING[q];
+                const rand = seededRandom(seed + q * 7);
+
+                // Apply depth bias if provided (tendency toward certain depth levels)
+                let optionIndex;
+                if (depthBias !== null) {
+                    // Bias toward higher or lower depth based on teacher profile
+                    const biasedRand = rand * 0.6 + (depthBias / 4) * 0.4;
+                    optionIndex = Math.min(3, Math.floor(biasedRand * 4));
+                } else {
+                    optionIndex = Math.floor(rand * 4);
+                }
+
+                const selected = question.options[optionIndex];
+                responses.push({
+                    questionId: `q${q + 1}`,
+                    responseMetadata: {
+                        fpLevel: String(selected.fp),
+                        depthLevel: String(selected.d)
+                    }
+                });
+            }
+            return responses;
+        }
+
+        function generateTeachers(count, locations, seedBase) {
+            const teachers = [];
+            for (let i = 0; i < count; i++) {
+                const seed = seedBase + i * 100;
+                const firstIdx = Math.floor(seededRandom(seed) * FIRST_NAMES.length);
+                const lastIdx = Math.floor(seededRandom(seed + 1) * LAST_NAMES.length);
+                const locIdx = Math.floor(seededRandom(seed + 2) * locations.length);
+
+                // Create depth bias profile for this teacher (0-3, where 0=low depth, 3=high depth)
+                const depthBias = Math.floor(seededRandom(seed + 3) * 4);
+
+                teachers.push({
+                    attemptId: `T${String(i + 1).padStart(3, '0')}`,
+                    userId: `teacher_${i + 1}`,
+                    userName: `${FIRST_NAMES[firstIdx]} ${LAST_NAMES[lastIdx]}`,
+                    roleName: 'Teacher',
+                    branchName: locations[locIdx],
+                    responses: generateTeacherResponses(seed + 10, depthBias)
+                });
+            }
+            return teachers;
+        }
+
+        // Generate branch data
+        const BRANCH_A_TEACHERS = generateTeachers(50, BRANCH_A_LOCATIONS, 12345);
+        const BRANCH_B_TEACHERS = generateTeachers(80, BRANCH_B_LOCATIONS, 67890);
+
+        const SAMPLE_DATA = {
+            all: {
+                status: 0,
+                message: 'Success',
+                data: {
+                    diagnostic: {
+                        diagnosticId: 'teachers_all',
+                        diagnosticType: 'NEP_READINESS_TEACHERS',
+                        diagnosticTitle: 'School ABC - Teachers NEP Readiness 2026 (All Branches)',
+                        status: 'ACTIVE'
+                    },
+                    attempts: [...BRANCH_A_TEACHERS, ...BRANCH_B_TEACHERS],
+                    totalAttempts: 130
+                }
+            },
+            branch_a: {
+                status: 0,
+                message: 'Success',
+                data: {
+                    diagnostic: {
+                        diagnosticId: 'teachers_branch_a',
+                        diagnosticType: 'NEP_READINESS_TEACHERS',
+                        diagnosticTitle: 'School ABC - Branch A - Teachers NEP Readiness 2026',
+                        status: 'ACTIVE'
+                    },
+                    attempts: BRANCH_A_TEACHERS,
+                    totalAttempts: 50
+                }
+            },
+            branch_b: {
+                status: 0,
+                message: 'Success',
+                data: {
+                    diagnostic: {
+                        diagnosticId: 'teachers_branch_b',
+                        diagnosticType: 'NEP_READINESS_TEACHERS',
+                        diagnosticTitle: 'School ABC - Branch B - Teachers NEP Readiness 2026',
+                        status: 'ACTIVE'
+                    },
+                    attempts: BRANCH_B_TEACHERS,
+                    totalAttempts: 80
+                }
+            }
+        };
+
+        // =====================================================
+        // DATA PROCESSING
+        // =====================================================
+        let currentData = null;
+        let charts = {};
+
+        function processTeacherData(attempts) {
+            // Initialize FP x Depth matrix
+            const matrix = {};
+            FP_KEYS.forEach(fp => {
+                matrix[fp] = { D1: 0, D2: 0, D3: 0, D4: 0, total: 0 };
+            });
+
+            // Process individual teachers
+            const processed = attempts.map(teacher => {
+                const fpDepthCounts = {};
+                FP_KEYS.forEach(fp => {
+                    fpDepthCounts[fp] = { D1: 0, D2: 0, D3: 0, D4: 0, total: 0 };
+                });
+
+                teacher.responses.forEach(response => {
+                    const fp = `FP${response.responseMetadata.fpLevel}`;
+                    const depth = `D${response.responseMetadata.depthLevel}`;
+
+                    if (fpDepthCounts[fp] && fpDepthCounts[fp][depth] !== undefined) {
+                        fpDepthCounts[fp][depth]++;
+                        fpDepthCounts[fp].total++;
+                        matrix[fp][depth]++;
+                        matrix[fp].total++;
+                    }
+                });
+
+                // Calculate average depth per FP for this teacher
+                const avgDepths = {};
+                FP_KEYS.forEach(fp => {
+                    const counts = fpDepthCounts[fp];
+                    if (counts.total > 0) {
+                        avgDepths[fp] = (counts.D1 * 1 + counts.D2 * 2 + counts.D3 * 3 + counts.D4 * 4) / counts.total;
+                    } else {
+                        avgDepths[fp] = 0;
+                    }
+                });
+
+                // Calculate overall average depth
+                let totalDepthSum = 0;
+                let totalCount = 0;
+                DEPTH_KEYS.forEach((d, i) => {
+                    FP_KEYS.forEach(fp => {
+                        totalDepthSum += fpDepthCounts[fp][d] * (i + 1);
+                        totalCount += fpDepthCounts[fp][d];
+                    });
+                });
+
+                return {
+                    ...teacher,
+                    fpDepthCounts,
+                    avgDepths,
+                    overallAvgDepth: totalCount > 0 ? totalDepthSum / totalCount : 0
+                };
+            });
+
+            // Calculate overall statistics
+            const depthTotals = { D1: 0, D2: 0, D3: 0, D4: 0 };
+            FP_KEYS.forEach(fp => {
+                DEPTH_KEYS.forEach(d => {
+                    depthTotals[d] += matrix[fp][d];
+                });
+            });
+
+            const totalResponses = Object.values(depthTotals).reduce((a, b) => a + b, 0);
+            const avgDepth = totalResponses > 0
+                ? (depthTotals.D1 * 1 + depthTotals.D2 * 2 + depthTotals.D3 * 3 + depthTotals.D4 * 4) / totalResponses
+                : 0;
+
+            return {
+                teachers: processed,
+                matrix,
+                depthTotals,
+                totalResponses,
+                avgDepth,
+                teacherCount: attempts.length
+            };
+        }
+
+        // =====================================================
+        // RENDERING
+        // =====================================================
+        function renderSummaryStats(data) {
+            const container = document.getElementById('summary-stats');
+            container.innerHTML = `
+                <div class="stat-card total">
+                    <div class="label">Total Teachers</div>
+                    <div class="value">${data.teacherCount}</div>
+                    <div class="sublabel">${data.totalResponses} responses</div>
+                </div>
+                <div class="stat-card d1">
+                    <div class="label">D1 Procedural</div>
+                    <div class="value">${data.depthTotals.D1}</div>
+                    <div class="sublabel">${((data.depthTotals.D1 / data.totalResponses) * 100).toFixed(1)}%</div>
+                </div>
+                <div class="stat-card d2">
+                    <div class="label">D2 Responsive</div>
+                    <div class="value">${data.depthTotals.D2}</div>
+                    <div class="sublabel">${((data.depthTotals.D2 / data.totalResponses) * 100).toFixed(1)}%</div>
+                </div>
+                <div class="stat-card d3">
+                    <div class="label">D3 Diagnostic</div>
+                    <div class="value">${data.depthTotals.D3}</div>
+                    <div class="sublabel">${((data.depthTotals.D3 / data.totalResponses) * 100).toFixed(1)}%</div>
+                </div>
+                <div class="stat-card d4">
+                    <div class="label">D4 Adaptive</div>
+                    <div class="value">${data.depthTotals.D4}</div>
+                    <div class="sublabel">${((data.depthTotals.D4 / data.totalResponses) * 100).toFixed(1)}%</div>
+                </div>
+                <div class="stat-card avg">
+                    <div class="label">Avg Depth</div>
+                    <div class="value">${data.avgDepth.toFixed(2)}</div>
+                    <div class="sublabel">Scale 1-4</div>
+                </div>
+            `;
+        }
+
+        function getHeatmapColor(value, maxValue) {
+            if (maxValue === 0 || value === 0) return 'rgba(229, 231, 235, 1)';
+            const ratio = value / maxValue;
+            const r = Math.round(123 + (229 - 123) * (1 - ratio));
+            const g = Math.round(35 + (231 - 35) * (1 - ratio));
+            const b = Math.round(167 + (235 - 167) * (1 - ratio));
+            return `rgba(${r}, ${g}, ${b}, 1)`;
+        }
+
+        function renderDashboard(data) {
+            const container = document.getElementById('dashboard');
+
+            // Find max value for heatmap coloring
+            let maxVal = 0;
+            FP_KEYS.forEach(fp => {
+                DEPTH_KEYS.forEach(d => {
+                    if (data.matrix[fp][d] > maxVal) maxVal = data.matrix[fp][d];
+                });
+            });
+
+            container.innerHTML = `
+                <!-- FP x Depth Heatmap -->
+                <div class="card card-full">
+                    <h3>FP × Practice Depth Heatmap <span class="count">(${data.teacherCount} Teachers)</span></h3>
+                    <div class="fp-depth-heatmap">
+                        <table class="heatmap-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 200px;">Foundational Principle</th>
+                                    <th class="depth-header d1">D1<br><small>Procedural</small></th>
+                                    <th class="depth-header d2">D2<br><small>Responsive</small></th>
+                                    <th class="depth-header d3">D3<br><small>Diagnostic</small></th>
+                                    <th class="depth-header d4">D4<br><small>Adaptive</small></th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${FP_KEYS.map(fp => `
+                                    <tr>
+                                        <td class="fp-label">
+                                            <span class="fp-code">${fp}</span>
+                                            ${FP_CONFIG[fp].name}
+                                        </td>
+                                        ${DEPTH_KEYS.map(d => `
+                                            <td class="heat-cell" style="background: ${getHeatmapColor(data.matrix[fp][d], maxVal)}; color: ${data.matrix[fp][d] > maxVal * 0.5 ? 'white' : '#333'};">
+                                                ${data.matrix[fp][d]}
+                                            </td>
+                                        `).join('')}
+                                        <td style="font-weight: 600; background: var(--gray-50);">${data.matrix[fp].total}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="depth-legend">
+                        ${DEPTH_KEYS.map(d => `
+                            <div class="depth-legend-item">
+                                <span class="dot ${d.toLowerCase()}"></span>
+                                <span><strong>${d}:</strong> ${DEPTH_CONFIG[d].name}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Depth Distribution by FP (Stacked Bar) -->
+                <div class="card">
+                    <h3>Depth Distribution by FP</h3>
+                    <div class="chart-container">
+                        <canvas id="depth-by-fp-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Average Depth per FP -->
+                <div class="card">
+                    <h3>Average Practice Depth per FP</h3>
+                    <div class="chart-container">
+                        <canvas id="avg-depth-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Overall Depth Distribution (Doughnut) -->
+                <div class="card">
+                    <h3>Overall Depth Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="depth-doughnut-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- FP Orientation Distribution -->
+                <div class="card">
+                    <h3>FP Orientation Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="fp-distribution-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Individual Teacher Responses -->
+                <div class="card card-full">
+                    <h3>Individual Teacher Profiles <span class="count">(n=${data.teacherCount})</span></h3>
+                    <div class="responses-container">
+                        <table class="responses-table">
+                            <thead>
+                                <tr>
+                                    <th>Teacher</th>
+                                    <th>Branch</th>
+                                    <th>Avg Depth</th>
+                                    <th>Dominant FP</th>
+                                    <th>D1</th>
+                                    <th>D2</th>
+                                    <th>D3</th>
+                                    <th>D4</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.teachers.slice(0, 50).map(t => {
+                                    // Find dominant FP
+                                    let dominantFP = 'FP1';
+                                    let maxCount = 0;
+                                    FP_KEYS.forEach(fp => {
+                                        if (t.fpDepthCounts[fp].total > maxCount) {
+                                            maxCount = t.fpDepthCounts[fp].total;
+                                            dominantFP = fp;
+                                        }
+                                    });
+
+                                    // Calculate total depths
+                                    const depthCounts = { D1: 0, D2: 0, D3: 0, D4: 0 };
+                                    FP_KEYS.forEach(fp => {
+                                        DEPTH_KEYS.forEach(d => {
+                                            depthCounts[d] += t.fpDepthCounts[fp][d];
+                                        });
+                                    });
+
+                                    const depthClass = t.overallAvgDepth < 1.5 ? 'd1' :
+                                                       t.overallAvgDepth < 2.5 ? 'd2' :
+                                                       t.overallAvgDepth < 3.5 ? 'd3' : 'd4';
+
+                                    return `
+                                        <tr>
+                                            <td><strong>${t.userName}</strong></td>
+                                            <td style="font-size: 0.75rem; color: var(--gray-500);">${t.branchName}</td>
+                                            <td><span class="depth-badge ${depthClass}">${t.overallAvgDepth.toFixed(2)}</span></td>
+                                            <td><span class="fp-badge">${dominantFP}</span></td>
+                                            <td>${depthCounts.D1}</td>
+                                            <td>${depthCounts.D2}</td>
+                                            <td>${depthCounts.D3}</td>
+                                            <td>${depthCounts.D4}</td>
+                                        </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Insights Panel -->
+                <div class="card card-full">
+                    <div class="insights-panel">
+                        <h4>Key Insights</h4>
+                        <div id="insights-container"></div>
+                    </div>
+                </div>
+            `;
+
+            // Render charts
+            setTimeout(() => {
+                renderDepthByFPChart(data);
+                renderAvgDepthChart(data);
+                renderDepthDoughnutChart(data);
+                renderFPDistributionChart(data);
+                generateInsights(data);
+            }, 100);
+        }
+
+        function renderDepthByFPChart(data) {
+            const ctx = document.getElementById('depth-by-fp-chart');
+            if (!ctx) return;
+
+            if (charts['depth-by-fp']) charts['depth-by-fp'].destroy();
+
+            charts['depth-by-fp'] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: FP_KEYS.map(fp => FP_CONFIG[fp].short),
+                    datasets: DEPTH_KEYS.map(d => ({
+                        label: `${d} - ${DEPTH_CONFIG[d].name}`,
+                        data: FP_KEYS.map(fp => data.matrix[fp][d]),
+                        backgroundColor: DEPTH_CONFIG[d].color,
+                        borderRadius: 4
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { size: 10 }, boxWidth: 12 }
+                        }
+                    },
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { stacked: true, beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } }
+                    }
+                }
+            });
+        }
+
+        function renderAvgDepthChart(data) {
+            const ctx = document.getElementById('avg-depth-chart');
+            if (!ctx) return;
+
+            if (charts['avg-depth']) charts['avg-depth'].destroy();
+
+            // Calculate average depth per FP
+            const avgDepths = FP_KEYS.map(fp => {
+                const counts = data.matrix[fp];
+                const total = counts.total;
+                if (total === 0) return 0;
+                return (counts.D1 * 1 + counts.D2 * 2 + counts.D3 * 3 + counts.D4 * 4) / total;
+            });
+
+            charts['avg-depth'] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: FP_KEYS.map(fp => FP_CONFIG[fp].short),
+                    datasets: [{
+                        label: 'Average Depth',
+                        data: avgDepths,
+                        backgroundColor: FP_KEYS.map(fp => FP_CONFIG[fp].color),
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: {
+                            min: 0,
+                            max: 4,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: {
+                                callback: function(value) {
+                                    const labels = ['', 'D1', 'D2', 'D3', 'D4'];
+                                    return labels[value] || '';
+                                }
+                            }
+                        },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderDepthDoughnutChart(data) {
+            const ctx = document.getElementById('depth-doughnut-chart');
+            if (!ctx) return;
+
+            if (charts['depth-doughnut']) charts['depth-doughnut'].destroy();
+
+            charts['depth-doughnut'] = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: DEPTH_KEYS.map(d => `${d} - ${DEPTH_CONFIG[d].name}`),
+                    datasets: [{
+                        data: DEPTH_KEYS.map(d => data.depthTotals[d]),
+                        backgroundColor: DEPTH_KEYS.map(d => DEPTH_CONFIG[d].color),
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: { font: { size: 10 }, padding: 12 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderFPDistributionChart(data) {
+            const ctx = document.getElementById('fp-distribution-chart');
+            if (!ctx) return;
+
+            if (charts['fp-distribution']) charts['fp-distribution'].destroy();
+
+            charts['fp-distribution'] = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: FP_KEYS.map(fp => `${fp} - ${FP_CONFIG[fp].name}`),
+                    datasets: [{
+                        data: FP_KEYS.map(fp => data.matrix[fp].total),
+                        backgroundColor: FP_KEYS.map(fp => FP_CONFIG[fp].color),
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: { font: { size: 10 }, padding: 12 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateInsights(data) {
+            const container = document.getElementById('insights-container');
+            const insights = [];
+
+            // Find dominant FP
+            let dominantFP = 'FP1';
+            let maxFPTotal = 0;
+            FP_KEYS.forEach(fp => {
+                if (data.matrix[fp].total > maxFPTotal) {
+                    maxFPTotal = data.matrix[fp].total;
+                    dominantFP = fp;
+                }
+            });
+
+            // Calculate D1 percentage
+            const d1Percent = (data.depthTotals.D1 / data.totalResponses * 100).toFixed(1);
+            const d4Percent = (data.depthTotals.D4 / data.totalResponses * 100).toFixed(1);
+
+            // Find FP with lowest depth
+            let lowestDepthFP = 'FP1';
+            let lowestAvg = 5;
+            FP_KEYS.forEach(fp => {
+                const counts = data.matrix[fp];
+                if (counts.total > 0) {
+                    const avg = (counts.D1 * 1 + counts.D2 * 2 + counts.D3 * 3 + counts.D4 * 4) / counts.total;
+                    if (avg < lowestAvg) {
+                        lowestAvg = avg;
+                        lowestDepthFP = fp;
+                    }
+                }
+            });
+
+            insights.push({
+                icon: 'info',
+                text: `<strong>${FP_CONFIG[dominantFP].name} (${dominantFP})</strong> dominates with ${maxFPTotal} responses, indicating strong orientation in this area.`
+            });
+
+            if (parseFloat(d1Percent) > 30) {
+                insights.push({
+                    icon: 'warning',
+                    text: `<strong>${d1Percent}% responses at D1 (Procedural)</strong> level - indicates rule-based, surface-level practice. Consider targeted interventions.`
+                });
+            }
+
+            if (parseFloat(d4Percent) < 15) {
+                insights.push({
+                    icon: 'warning',
+                    text: `<strong>Adaptive practice (D4) is sparse at ${d4Percent}%</strong> - a clear target for professional development and micro-interventions.`
+                });
+            } else {
+                insights.push({
+                    icon: 'success',
+                    text: `<strong>${d4Percent}% responses at D4 (Adaptive)</strong> level - shows intentional practice redesign capability.`
+                });
+            }
+
+            insights.push({
+                icon: 'warning',
+                text: `<strong>${FP_CONFIG[lowestDepthFP].name} (${lowestDepthFP})</strong> shows lowest average depth (${lowestAvg.toFixed(2)}) - priority area for deepening practice.`
+            });
+
+            container.innerHTML = insights.map(i => `
+                <div class="insight-item">
+                    <span class="insight-icon ${i.icon}">${i.icon === 'warning' ? '⚠️' : i.icon === 'success' ? '✅' : 'ℹ️'}</span>
+                    <span>${i.text}</span>
+                </div>
+            `).join('');
+        }
+
+        // =====================================================
+        // LOAD DATA
+        // =====================================================
+        function loadBranch(branch) {
+            // Update buttons
+            document.querySelectorAll('.btn-branch').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${branch === 'all' ? 'all' : branch.split('_')[1]}`).classList.add('active');
+
+            // Load data
+            const apiData = SAMPLE_DATA[branch];
+            const processed = processTeacherData(apiData.data.attempts);
+            currentData = processed;
+
+            // Update info
+            const branchLabel = branch === 'all' ? 'All Branches' : branch === 'branch_a' ? 'Branch A' : 'Branch B';
+            document.getElementById('school-info').innerHTML = `
+                <strong>${apiData.data.diagnostic.diagnosticTitle}</strong> - ${processed.teacherCount} Teachers
+            `;
+
+            // Render
+            renderSummaryStats(processed);
+            renderDashboard(processed);
+        }
+
+        // =====================================================
+        // INITIALIZATION
+        // =====================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadBranch('all');
+        });
+    </script>
+</body>
+</html>

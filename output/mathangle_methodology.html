@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathangle Assessment — Methodology & Formulas</title>
+<style>
+:root {
+  --blue:#2563EB;--green:#10B981;--amber:#F59E0B;--red:#EF4444;
+  --purple:#7C3AED;--text:#1E293B;--muted:#64748B;--bg:#F8FAFC;
+  --card:#FFFFFF;--border:#E2E8F0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.header{background:linear-gradient(135deg,#1E3A5F,#2563EB);color:white;padding:32px 40px}
+.header h1{font-size:28px;font-weight:700}
+.header p{opacity:.85;margin-top:6px;font-size:14px}
+.container{max-width:960px;margin:0 auto;padding:32px 24px}
+h2{font-size:22px;font-weight:700;margin:40px 0 16px;padding-bottom:8px;border-bottom:3px solid var(--blue);color:var(--blue)}
+h3{font-size:17px;font-weight:700;margin:28px 0 10px;color:var(--text)}
+h4{font-size:14px;font-weight:700;margin:20px 0 8px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+p,li{font-size:14px;color:var(--text)}
+ul,ol{margin:8px 0 12px 24px}
+li{margin-bottom:6px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin:16px 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.formula{background:#F1F5F9;border:1px solid #CBD5E1;border-radius:8px;padding:16px 20px;margin:12px 0;font-family:'Courier New',monospace;font-size:14px;line-height:1.8;overflow-x:auto}
+.formula .label{font-family:'Segoe UI',sans-serif;font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th{background:#F1F5F9;padding:10px 12px;text-align:left;font-weight:700;color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.3px;border-bottom:2px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid #F1F5F9;vertical-align:top}
+tr:hover td{background:#FAFBFC}
+.pill{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;color:white}
+.pill-green{background:var(--green)} .pill-blue{background:var(--blue)}
+.pill-amber{background:var(--amber);color:#1F2937} .pill-red{background:var(--red)}
+.pill-gray{background:#E2E8F0;color:#64748B}
+.note{background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px;color:#92400E}
+.note b{color:#78350F}
+.diagram{background:white;border:1px solid var(--border);border-radius:8px;padding:20px;margin:16px 0;font-family:'Courier New',monospace;font-size:13px;line-height:1.6;white-space:pre;overflow-x:auto}
+.toc{background:white;border:1px solid var(--border);border-radius:10px;padding:20px 28px;margin:20px 0}
+.toc h3{margin:0 0 12px;font-size:15px}
+.toc ol{margin:0 0 0 20px}
+.toc li{margin-bottom:4px}
+.toc a{color:var(--blue);text-decoration:none;font-size:14px}
+.toc a:hover{text-decoration:underline}
+.example{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:13px}
+.example b{color:#166534}
+hr{border:none;border-top:1px solid var(--border);margin:32px 0}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Mathangle Assessment — Methodology & Formulas</h1>
+  <p>Complete documentation of scoring, exit levels, indecision index, and competency mapping</p>
+</div>
+<div class="container">
+
+<!-- TOC -->
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#overview">Assessment Overview</a></li>
+    <li><a href="#data-sources">Data Sources & Schema</a></li>
+    <li><a href="#competency-mapping">Competency Area Mapping</a></li>
+    <li><a href="#scoring">Scoring & Ranking</a></li>
+    <li><a href="#blooms">Bloom's Cognitive Level Analysis</a></li>
+    <li><a href="#difficulty">Difficulty Level Analysis</a></li>
+    <li><a href="#exit-levels">NEP Exit Level Framework</a></li>
+    <li><a href="#indecision">Indecision Index</a></li>
+    <li><a href="#branch-heatmap">Branch-wise Heatmap</a></li>
+    <li><a href="#limitations">Limitations & Caveats</a></li>
+  </ol>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="overview">1. Assessment Overview</h2>
+
+<div class="card">
+  <table>
+    <tr><th style="width:200px">Parameter</th><th>Detail</th></tr>
+    <tr><td><b>Assessment Name</b></td><td>Mathangle (English) / Mathangle (मराठी)</td></tr>
+    <tr><td><b>Type</b></td><td>Adaptive — the engine selects questions based on prior answers</td></tr>
+    <tr><td><b>Subject</b></td><td>Mathematics (primary school curriculum, Grades 3–6 content)</td></tr>
+    <tr><td><b>Question Bank</b></td><td>30 unique questions (per language), across 11 topics</td></tr>
+    <tr><td><b>Questions Served</b></td><td>11 per respondent (selected adaptively from the 30)</td></tr>
+    <tr><td><b>Total Marks</b></td><td>32 (weighted by difficulty level)</td></tr>
+    <tr><td><b>Time Limit</b></td><td>45 minutes</td></tr>
+    <tr><td><b>Format</b></td><td>Multiple Choice Questions (MCQ), 4 options each</td></tr>
+    <tr><td><b>Target Audience</b></td><td>Teachers and Leaders across DES branches</td></tr>
+    <tr><td><b>Languages</b></td><td>English (22 respondents) and Marathi (87 respondents)</td></tr>
+    <tr><td><b>Total Responses</b></td><td>109 (from OnlineAssesmentAnalysisStudentLevel), 121 (from OnlineAssesmentStudentResult)</td></tr>
+    <tr><td><b>Period</b></td><td>February 2026</td></tr>
+  </table>
+</div>
+
+<h3>Adaptive Mechanism</h3>
+<p>
+  Each of the 11 topics contains exactly <b>3 questions at difficulty levels 1, 2, and 3</b> (30 total).
+  The adaptive engine selects 11 questions — not all topics are guaranteed to appear for every respondent.
+  Some topics may get 1 question, others 2–3, depending on the person's performance path.
+  This means <b>not every competency area is assessed for every person</b>.
+</p>
+
+<div class="diagram">Question Bank Structure (per language):
+
+  30 questions total
+   ├── 11 Topics × 3 Levels each
+   │    ├── Level 1 (Foundational / Easy)    — 1 mark
+   │    ├── Level 2 (Preparatory / Medium)   — 1 mark
+   │    └── Level 3 (Middle Stage / Hard)    — 1 mark
+   │
+   └── Adaptive Engine selects 11 of 30
+        └── Weighted scoring: Level 1 = 3 marks, Level 2 = 2 marks, Level 3 = 1 mark
+            Total possible = 32 marks (varies by selection)</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="data-sources">2. Data Sources & Schema</h2>
+
+<h3>Primary Collections (MongoDB — pdea_pilot)</h3>
+
+<div class="card">
+  <table>
+    <tr><th>Collection</th><th>Purpose</th><th>Key Fields</th></tr>
+    <tr>
+      <td><b>Diagnostic</b></td>
+      <td>Branch-level assessment configuration</td>
+      <td>setCode ("Mathangle (English)"), branchId, branchCode, onlineAssesmentID, Roles</td>
+    </tr>
+    <tr>
+      <td><b>OnlineAssesment</b></td>
+      <td>Assessment metadata per branch</td>
+      <td>TestName, TestType ("Adaptive"), TotalNoOfQuestions (11), TotalTestMark (11), Subject ("Maths")</td>
+    </tr>
+    <tr>
+      <td><b>OnlineAssesmentQuestions</b></td>
+      <td>Question bank (30 per language per branch)</td>
+      <td>Topic, Subtopic, Predecessor, Question_Level (1/2/3), CognitiveLevels, Marks, ActualAnswer</td>
+    </tr>
+    <tr>
+      <td><b>OnlineAssesmentStudentResult</b></td>
+      <td>Per-question responses with answer sequence</td>
+      <td>AssesmentResult[].Options, .Answer, .ActualAnswer, .ObtainedMarks, .TimeTaken, <b>.userOptionSequence[]</b></td>
+    </tr>
+    <tr>
+      <td><b>OnlineAssesmentAnalysisStudentLevel</b></td>
+      <td>Pre-computed analysis per respondent</td>
+      <td>Chapter_wise_count, Topic_wise_count, CognitiveLevel_wise_count, Question_Level_wise_count, Predecessor_wise_count, Percentage</td>
+    </tr>
+    <tr>
+      <td><b>UserTemp</b></td>
+      <td>User profiles</td>
+      <td>firstName, lastName, RoleName (Teacher/Leader), selectedBranchId</td>
+    </tr>
+    <tr>
+      <td><b>SchoolBranches</b></td>
+      <td>Branch/school info</td>
+      <td>BranchName, School.SchoolName</td>
+    </tr>
+  </table>
+</div>
+
+<h3>userOptionSequence — Answer Change Tracking</h3>
+<p>
+  Each question response may contain a <code>userOptionSequence</code> array that records
+  every option the respondent clicked, with timestamps:
+</p>
+<div class="formula">
+<span class="label">Example: userOptionSequence</span>
+[
+  { "optionText": "3",  "time": 2,  "sequenceNo": 1 },   ← first click
+  { "optionText": "4",  "time": 3,  "sequenceNo": 2 },   ← changed to "4"
+  { "optionText": "12", "time": 4,  "sequenceNo": 3 },   ← changed to "12"
+  { "optionText": "6",  "time": 5,  "sequenceNo": 4 },   ← changed to "6"
+  { "optionText": "4",  "time": 8,  "sequenceNo": 5 }    ← back to "4" (flip-flop!)
+]
+
+Final answer = last entry ("4")
+Changes = sequenceNo count − 1 = 4
+Flip-flop = YES (returned to "4" which was seen at seq 2)
+Deliberation time = time[last] − time[first] = 8 − 2 = 6 seconds
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="competency-mapping">3. Competency Area Mapping</h2>
+
+<p>
+  The 30 questions span 11 specific topics which we consolidate into <b>8 unified competency areas</b>.
+  Both English and Marathi topics map to the same areas:
+</p>
+
+<div class="card">
+  <table>
+    <tr><th>Competency Area</th><th>English Topics</th><th>Marathi Topics</th><th>Qs</th></tr>
+    <tr>
+      <td><b>Addition & Subtraction</b></td>
+      <td>Addition: 5/6-digit numbers – Word Problems</td>
+      <td>बेरीज : 5, 6 व 7 अंकी संख्या</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><b>Multiplication</b></td>
+      <td>Multiplication: 2,3,4-digit Multiplication</td>
+      <td>गुणाकार: 2, 3, 4 अंकी संख्या</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><b>Division</b></td>
+      <td>Division: Word Problems</td>
+      <td>भागाकार: शाब्दिक उदाहरणे</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><b>Factors & Multiples</b></td>
+      <td>Factors & Multiples: LCM & HCF<br>Factors & Multiples: Divisibility Rules</td>
+      <td>विभाज्य आणि विभाजक: ल. सा. वि. आणि म. सा. वि.<br>विभाज्य आणि विभाजक: विभाज्यतेच्या कसोट्या</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td><b>Geometry</b></td>
+      <td>Geometry: 2D/3D Shapes, Nets, Pentomino<br>Geometry: Measuring Angles</td>
+      <td>भूमिती: द्विमितीय व त्रिमितीय आकार<br>भूमिती : कोन आणि त्यांचे मापन</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td><b>Measurement</b></td>
+      <td>Measurement: Operations on Measurement, Word Problems</td>
+      <td>मापन: शाब्दिक उदाहरणे</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><b>Money</b></td>
+      <td>Money: Operations & Word Problems</td>
+      <td>पैसे: शाब्दिक उदाहरणे</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td><b>Time & Calendar</b></td>
+      <td>Time & Calendar: Days, Months and Years<br>Time & Calendar: AM, PM & 24 Hr Clock</td>
+      <td>वेळ आणि दिनदर्शिका: दिवस, महिने आणि वर्ष<br>वेळ आणि दिनदर्शिका: मध्यान्हपूर्व व मध्यान्होत्तर, 24 ताशी कालमापन</td>
+      <td>6</td>
+    </tr>
+  </table>
+</div>
+
+<h3>Subtopic → Competency Mapping (from question bank)</h3>
+<p>The <code>Subtopic</code> field on each question maps to the competency area:</p>
+<div class="card">
+  <table>
+    <tr><th>Subtopic (in question bank)</th><th>→ Competency Area</th></tr>
+    <tr><td>Multiplication</td><td>Multiplication</td></tr>
+    <tr><td>Currency, operations on money</td><td>Money</td></tr>
+    <tr><td>LCM / LCM, Time measurement</td><td>Factors & Multiples</td></tr>
+    <tr><td>Divisibility Tests</td><td>Factors & Multiples</td></tr>
+    <tr><td>Division</td><td>Division</td></tr>
+    <tr><td>Length measurement / Length measurement, conversion</td><td>Measurement</td></tr>
+    <tr><td>Addition, Subtraction</td><td>Addition & Subtraction</td></tr>
+    <tr><td>Minutes, Hours, Seconds measurement</td><td>Time & Calendar</td></tr>
+    <tr><td>Types of angles and shapes</td><td>Geometry</td></tr>
+    <tr><td>Measuring angles</td><td>Geometry</td></tr>
+  </table>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="scoring">4. Scoring & Ranking</h2>
+
+<h3>Raw Score</h3>
+<div class="formula">
+<span class="label">Per-person score</span>
+Obtained Marks = Σ (marks for each correctly answered question)
+
+Marks per question vary by difficulty level:
+  Level 1 (Easy)   → 3 marks
+  Level 2 (Medium) → 2 marks
+  Level 3 (Hard)   → 1 mark
+
+Total Possible Marks = 32  (sum of marks for the 11 served questions)
+</div>
+
+<div class="note">
+  <b>Note:</b> The marks weighting is <b>inverse</b> to difficulty — Level 1 (easy) questions carry
+  the most marks (3), while Level 3 (hard) carry the least (1). This means the assessment
+  rewards <b>foundational mastery</b> more heavily than advanced problem-solving.
+</div>
+
+<h3>Percentage Score</h3>
+<div class="formula">
+<span class="label">Formula</span>
+Percentage = (Obtained Marks / Total Test Marks) × 100
+
+where Total Test Marks = 32  (pre-computed in the system)
+</div>
+
+<h3>Competency Area Accuracy</h3>
+<div class="formula">
+<span class="label">Per-person per-area</span>
+Area Accuracy(%) = (Questions Right in Area / Total Questions Served in Area) × 100
+
+Note: "Questions Served" varies per person due to adaptive selection.
+A person may get 0, 1, 2, or 3 questions in any given area.
+</div>
+
+<h3>Aggregate Area Accuracy (for groups)</h3>
+<div class="formula">
+<span class="label">Group-level (e.g., all Teachers)</span>
+Group Area Accuracy(%) = (Σ Right answers across all people in area) / (Σ Total questions served across all people in area) × 100
+</div>
+
+<div class="example">
+  <b>Example:</b> If 75 teachers collectively answered 78 Multiplication questions and got 71 right:
+  <br>Teacher Multiplication Accuracy = 71 / 78 × 100 = <b>91.0%</b>
+</div>
+
+<h3>Ranking</h3>
+<p>Respondents are ranked by <b>Percentage score descending</b>. Ties share the same effective percentage but receive adjacent rank numbers.</p>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="blooms">5. Bloom's Cognitive Level Analysis</h2>
+
+<p>
+  Each question is tagged with a <b>Bloom's Taxonomy cognitive level</b> from the question bank:
+</p>
+
+<div class="card">
+  <table>
+    <tr><th>Level</th><th>Description</th><th>Question Count (in bank)</th></tr>
+    <tr><td><b>Understand</b></td><td>Recall, comprehension, basic interpretation</td><td>~2</td></tr>
+    <tr><td><b>Apply</b></td><td>Use knowledge in new situations, standard procedures</td><td>~4</td></tr>
+    <tr><td><b>Analyze</b></td><td>Break down, compare, identify patterns and relationships</td><td>~10</td></tr>
+    <tr><td><b>Evaluate</b></td><td>Judge, justify, make decisions based on criteria</td><td>~14</td></tr>
+  </table>
+</div>
+
+<div class="formula">
+<span class="label">Cognitive level accuracy (per person or group)</span>
+Cognitive Accuracy(level) = (Right answers at level / Total questions served at level) × 100
+</div>
+
+<div class="note">
+  <b>Note:</b> The distribution is skewed toward Evaluate (the highest level), with fewer
+  Understand/Apply questions. This is by design — the assessment targets higher-order thinking.
+  Not every person receives all 4 cognitive levels due to adaptive selection.
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="difficulty">6. Difficulty Level Analysis</h2>
+
+<p>Each question has a <code>Question_Level</code> (1, 2, or 3) independent of cognitive level:</p>
+
+<div class="card">
+  <table>
+    <tr><th>Question Level</th><th>Difficulty</th><th>Marks</th><th>Interpretation</th></tr>
+    <tr><td><b>Level 1</b></td><td>Easy / Foundational</td><td>3 marks</td><td>Straightforward application of the concept</td></tr>
+    <tr><td><b>Level 2</b></td><td>Medium / Preparatory</td><td>2 marks</td><td>Multi-step or complex application</td></tr>
+    <tr><td><b>Level 3</b></td><td>Hard / Middle Stage</td><td>1 mark</td><td>Higher-order, non-routine problem solving</td></tr>
+  </table>
+</div>
+
+<div class="formula">
+<span class="label">Difficulty level accuracy</span>
+Difficulty Accuracy(level) = (Right answers at level / Total questions served at level) × 100
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="exit-levels">7. NEP Exit Level Framework</h2>
+
+<h3>Concept</h3>
+<p>
+  The National Education Policy (NEP) 2020 defines four stages of school education.
+  The Mathangle assessment content spans <b>Preparatory</b> and <b>Middle</b> stage mathematics.
+  We derive an <b>exit level</b> per competency area — the highest stage at which the respondent
+  demonstrated mastery.
+</p>
+
+<div class="diagram">NEP School Education Stages:
+
+  ┌──────────────────┐
+  │  Foundational     │  Ages 3–8  (Grades Pre-K to 2)
+  │  Stage            │  Basic number sense, shapes, patterns
+  ├──────────────────┤
+  │  Preparatory      │  Ages 8–11 (Grades 3 to 5)
+  │  Stage            │  Arithmetic operations, measurement, basic geometry
+  ├──────────────────┤
+  │  Middle           │  Ages 11–14 (Grades 6 to 8)
+  │  Stage            │  Factors/multiples, advanced geometry, word problems
+  ├──────────────────┤
+  │  Secondary        │  Ages 14–18 (Grades 9 to 12)
+  │  Stage            │  Not assessed in Mathangle
+  └──────────────────┘</div>
+
+<h3>Mapping Question Levels to NEP Stages</h3>
+
+<p>Each topic has 3 questions at levels 1, 2, 3. We map these to NEP exit stages:</p>
+
+<div class="card">
+  <table>
+    <tr><th>Question Level</th><th>NEP Exit Stage</th><th>Color Code</th><th>Interpretation</th></tr>
+    <tr>
+      <td><b>Level 1</b> (Easy)</td>
+      <td><span class="pill pill-amber">Foundational</span></td>
+      <td>Amber</td>
+      <td>Can handle basic, straightforward application of the concept. Has exited the foundational stage for this skill.</td>
+    </tr>
+    <tr>
+      <td><b>Level 2</b> (Medium)</td>
+      <td><span class="pill pill-blue">Preparatory</span></td>
+      <td>Blue</td>
+      <td>Can handle multi-step problems. Has exited the preparatory stage for this skill.</td>
+    </tr>
+    <tr>
+      <td><b>Level 3</b> (Hard)</td>
+      <td><span class="pill pill-green">Middle</span></td>
+      <td>Green</td>
+      <td>Can handle advanced, non-routine problems. Has exited the middle stage for this skill.</td>
+    </tr>
+    <tr>
+      <td>All wrong (served but failed)</td>
+      <td><span class="pill pill-red">Below Foundational</span></td>
+      <td>Red</td>
+      <td>Could not demonstrate mastery at any level for this competency.</td>
+    </tr>
+    <tr>
+      <td>Not served by adaptive engine</td>
+      <td><span class="pill pill-gray">Not Assessed</span></td>
+      <td>Gray</td>
+      <td>The adaptive engine did not select questions from this competency area.</td>
+    </tr>
+  </table>
+</div>
+
+<h3>Exit Level Derivation Algorithm</h3>
+
+<div class="formula">
+<span class="label">Algorithm: Per-person per-competency exit level</span>
+For each person P and each competency area A:
+
+1. Collect all questions served to P in area A
+   (via Subtopic → Competency mapping from the question bank)
+
+2. For each question, record:
+   - Question_Level (1, 2, or 3)
+   - Whether it was answered correctly (ObtainedMarks > 0)
+
+3. If multiple subtopics map to the same competency (e.g., Geometry has
+   "Types of angles and shapes" AND "Measuring angles"), take the BEST
+   result at each level across subtopics.
+
+4. Find the HIGHEST level where at least one question was answered correctly:
+   - If Level 3 correct → Exit Stage = "Middle"
+   - Else if Level 2 correct → Exit Stage = "Preparatory"
+   - Else if Level 1 correct → Exit Stage = "Foundational"
+   - Else if questions were served but all wrong → "Below Foundational"
+   - Else (no questions served) → "Not Assessed"
+</div>
+
+<div class="example">
+  <b>Example:</b> Person X gets these questions in Geometry:
+  <br>• Level 2 (Measuring Angles): ✓ Correct
+  <br>• Level 3 (2D/3D Shapes): ✗ Wrong
+  <br><br>
+  Highest correct level = 2 → Exit Stage = <span class="pill pill-blue">Preparatory</span>
+  <br><br>
+  Even though they attempted Level 3, they only demonstrated mastery at Level 2.
+</div>
+
+<h3>Topic → Predecessor → NEP Stage Mapping</h3>
+
+<p>Each question's <code>Topic</code> represents the current-level skill, while <code>Predecessor</code>
+represents the prerequisite from a lower grade:</p>
+
+<div class="card">
+  <table>
+    <tr><th>Topic (Current Level)</th><th>Predecessor (Lower Level)</th><th>Approx NEP Stage</th></tr>
+    <tr><td>Addition: 5/6-digit Word Problems</td><td>Numbers: Place Value 4/5-digits</td><td>Preparatory → Middle</td></tr>
+    <tr><td>Multiplication: 2,3,4-digit</td><td>Multiplication: Properties, Tables, Operations</td><td>Preparatory</td></tr>
+    <tr><td>Division: Word Problems</td><td>Division: 3-digit ÷ 1/2/3-digit</td><td>Preparatory</td></tr>
+    <tr><td>Factors: LCM & HCF</td><td>Division: Equal Grouping</td><td>Middle</td></tr>
+    <tr><td>Factors: Divisibility Rules</td><td>Multiplication: 3/4-digit Numbers</td><td>Middle</td></tr>
+    <tr><td>Geometry: 2D/3D Shapes, Nets</td><td>Shapes: Edges & Corners</td><td>Preparatory → Middle</td></tr>
+    <tr><td>Geometry: Measuring Angles</td><td>Angles & Their Types</td><td>Middle</td></tr>
+    <tr><td>Measurement: Operations, Word Problems</td><td>Lengths & Weights Word Problems</td><td>Preparatory</td></tr>
+    <tr><td>Money: Operations & Word Problems</td><td>Conversion of Money</td><td>Preparatory</td></tr>
+    <tr><td>Time & Calendar: Days/Months/Years</td><td>Seconds, Minutes & Hours</td><td>Preparatory</td></tr>
+    <tr><td>Time & Calendar: AM/PM, 24Hr Clock</td><td>Seconds, Minutes & Hours</td><td>Preparatory → Middle</td></tr>
+  </table>
+</div>
+
+<h3>Stacked Bar Charts</h3>
+<div class="formula">
+<span class="label">Exit level distribution chart</span>
+For each competency area, count how many respondents fall into each exit stage:
+
+  % at stage S = (count of respondents with exit = S) / (total respondents with data) × 100
+
+Displayed as horizontal stacked bars, 100% = all respondents.
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="indecision">8. Indecision Index</h2>
+
+<h3>Purpose</h3>
+<p>
+  The Indecision Index quantifies how much a respondent <b>wavered between answer choices</b>
+  during the assessment. It captures uncertainty, second-guessing, and flip-flopping behavior
+  using the <code>userOptionSequence</code> data recorded per question.
+</p>
+
+<h3>Raw Metrics (per question)</h3>
+
+<div class="card">
+  <table>
+    <tr><th>Metric</th><th>Definition</th><th>Example</th></tr>
+    <tr>
+      <td><b>Number of Changes</b></td>
+      <td><code>len(userOptionSequence) − 1</code><br>0 if sequence length ≤ 1</td>
+      <td>Sequence [A, B, C] → 2 changes</td>
+    </tr>
+    <tr>
+      <td><b>Flip-Flop</b></td>
+      <td>Boolean: did the respondent return to a previously selected option?</td>
+      <td>Sequence [A, B, A] → flip-flop = true<br>Sequence [A, B, C] → flip-flop = false</td>
+    </tr>
+    <tr>
+      <td><b>Deliberation Time</b></td>
+      <td><code>time[last entry] − time[first entry]</code><br>Seconds spent actively changing answers</td>
+      <td>Sequence times [2, 3, 8] → 6 seconds</td>
+    </tr>
+    <tr>
+      <td><b>Changed From Correct</b></td>
+      <td>First choice was the correct answer, but final choice was wrong</td>
+      <td>Correct = "B", Sequence [B, C] → changed from correct = true</td>
+    </tr>
+    <tr>
+      <td><b>Changed To Correct</b></td>
+      <td>First choice was wrong, but final choice was the correct answer</td>
+      <td>Correct = "C", Sequence [A, C] → changed to correct = true</td>
+    </tr>
+  </table>
+</div>
+
+<h3>Aggregate Metrics (per person)</h3>
+
+<div class="formula">
+<span class="label">Aggregation across all 11 questions</span>
+Total Changes       = Σ (changes per question)
+Total Flip-Flops    = count of questions where flip-flop = true
+Changes Per Question = Total Changes / Total Questions Served
+Total Time           = Σ (TimeTaken per question)
+Change Time          = Σ (Deliberation Time per question with changes)
+Time Ratio           = min(Change Time / Total Time, 1.0)
+Changed From Correct = count of questions where first choice was correct but final was wrong
+Changed To Correct   = count of questions where first choice was wrong but final was correct
+</div>
+
+<h3>Indecision Score Formula</h3>
+
+<div class="formula">
+<span class="label">Indecision Index (0–100 scale)</span>
+                    ┌─────────────────────────────────────────────────────────────┐
+                    │                                                             │
+Indecision Score =  │  min(Changes_Per_Q / 4, 1.0)  ×  40     ← Raw Changes     │
+                    │                                          (40% weight)       │
+                    │+ Flip_Flop_Rate                ×  25     ← Flip-Flops      │
+                    │                                          (25% weight)       │
+                    │+ Time_Ratio                    ×  15     ← Deliberation    │
+                    │                                          (15% weight)       │
+                    │+ Changed_From_Correct_Rate     ×  20     ← Harmful Change  │
+                    │                                          (20% weight)       │
+                    │                                                             │
+                    └─────────────────────────────────────────────────────────────┘
+
+where:
+  Changes_Per_Q           = Total Changes / Total Questions
+  Flip_Flop_Rate          = Total Flip-Flops / Total Questions
+  Time_Ratio              = min(Change Time / Total Time, 1.0)
+  Changed_From_Correct_Rate = Changed From Correct / Total Questions
+
+Final Score = min(Score, 100)   (capped at 100)
+</div>
+
+<h3>Component Weights — Rationale</h3>
+
+<div class="card">
+  <table>
+    <tr><th>Component</th><th>Weight</th><th>Why</th></tr>
+    <tr>
+      <td><b>Raw Changes</b></td>
+      <td>40%</td>
+      <td>The most direct measure of indecision. Normalized by dividing by 4 (maximum practical changes per question, given 4 MCQ options). More changes = more uncertainty.</td>
+    </tr>
+    <tr>
+      <td><b>Flip-Flops</b></td>
+      <td>25%</td>
+      <td>Returning to a previously rejected option is a stronger signal of indecision than linear exploration. It indicates genuine confusion rather than methodical elimination.</td>
+    </tr>
+    <tr>
+      <td><b>Deliberation Time</b></td>
+      <td>15%</td>
+      <td>Time spent actively changing answers (as a ratio of total time). Low weight because some slow changers are being thoughtful, not indecisive.</td>
+    </tr>
+    <tr>
+      <td><b>Changed From Correct</b></td>
+      <td>20%</td>
+      <td>The most harmful type of indecision — the respondent initially knew the answer but second-guessed themselves into a wrong answer. This represents self-doubt undermining knowledge.</td>
+    </tr>
+  </table>
+</div>
+
+<h3>Interpretation & Color Coding</h3>
+
+<div class="card">
+  <table>
+    <tr><th>Score Range</th><th>Color</th><th>Label</th><th>Interpretation</th></tr>
+    <tr>
+      <td><b>0</b></td>
+      <td style="color:#10B981">■ Green</td>
+      <td>Decisive</td>
+      <td>Never changed any answer. Committed to first choice on all questions.</td>
+    </tr>
+    <tr>
+      <td><b>0.1 – 5.0</b></td>
+      <td style="color:#84CC16">■ Yellow-Green</td>
+      <td>Mild</td>
+      <td>Occasional answer changes (1–2 questions). Normal and often beneficial — reconsideration led to corrections.</td>
+    </tr>
+    <tr>
+      <td><b>5.1 – 10.0</b></td>
+      <td style="color:#F59E0B">■ Amber</td>
+      <td>Moderate</td>
+      <td>Multiple answer changes, possibly with flip-flops. Suggests uncertainty in several topic areas.</td>
+    </tr>
+    <tr>
+      <td><b>&gt; 10.0</b></td>
+      <td style="color:#EF4444">■ Red</td>
+      <td>High</td>
+      <td>Frequent changes, flip-flops, and/or harmful changes (correct→wrong). Significant uncertainty or test anxiety.</td>
+    </tr>
+  </table>
+</div>
+
+<div class="example">
+  <b>Example Calculation:</b><br><br>
+  Person answered 11 questions. On 2 questions they changed answers:
+  <ul>
+    <li>Q5: Changed once (seq length 2), no flip-flop, deliberation = 19 sec, was wrong→correct ✓</li>
+    <li>Q8: Changed 3 times (seq length 4), flip-flop = yes, deliberation = 51 sec, was correct→wrong ✗</li>
+  </ul>
+  <br>
+  <b>Aggregates:</b>
+  <ul>
+    <li>Total Changes = 1 + 3 = 4</li>
+    <li>Changes Per Q = 4 / 11 = 0.364</li>
+    <li>Flip-Flop Rate = 1 / 11 = 0.091</li>
+    <li>Time Ratio = 70 / 480 = 0.146 (total test time was 480 sec)</li>
+    <li>Changed From Correct Rate = 1 / 11 = 0.091</li>
+  </ul>
+  <br>
+  <b>Score:</b>
+  <ul>
+    <li>min(0.364/4, 1.0) × 40 = 0.091 × 40 = <b>3.64</b></li>
+    <li>0.091 × 25 = <b>2.27</b></li>
+    <li>0.146 × 15 = <b>2.19</b></li>
+    <li>0.091 × 20 = <b>1.82</b></li>
+  </ul>
+  <b>Total Indecision Score = 3.64 + 2.27 + 2.19 + 1.82 = 9.9</b> → <span style="color:#F59E0B"><b>Moderate (Amber)</b></span>
+</div>
+
+<h3>Net Harm Metric</h3>
+<div class="formula">
+<span class="label">Supplementary metric</span>
+Net Harm = Changed From Correct − Changed To Correct
+
+Positive → answer changes hurt the person overall (more marks lost than gained)
+Negative → answer changes helped (more corrections than regressions)
+Zero     → neutral effect
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="branch-heatmap">9. Branch-wise Heatmap</h2>
+
+<div class="formula">
+<span class="label">Per branch per competency</span>
+Branch Area Accuracy = (Σ right answers in area across all respondents in branch)
+                     / (Σ total questions in area across all respondents in branch) × 100
+</div>
+
+<h3>Color Scale</h3>
+<div class="card">
+  <table>
+    <tr><th>Accuracy Range</th><th>Background Color</th><th>Interpretation</th></tr>
+    <tr><td>≥ 75%</td><td style="background:#BBF7D0">Light Green</td><td>Strong mastery</td></tr>
+    <tr><td>60–74%</td><td style="background:#D9F99D">Yellow-Green</td><td>Good understanding</td></tr>
+    <tr><td>45–59%</td><td style="background:#FEF08A">Yellow</td><td>Moderate — needs reinforcement</td></tr>
+    <tr><td>30–44%</td><td style="background:#FED7AA">Orange</td><td>Weak — significant gaps</td></tr>
+    <tr><td>&lt; 30%</td><td style="background:#FECACA;color:#991B1B">Red</td><td>Critical — fundamental gaps</td></tr>
+  </table>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════ -->
+<h2 id="limitations">10. Limitations & Caveats</h2>
+
+<div class="card">
+  <ol>
+    <li>
+      <b>Adaptive Selection Bias:</b> Not all 8 competency areas are assessed for every person.
+      Some persons may have "Not Assessed" for 2–3 areas. Comparisons across persons for a
+      specific area are valid only among those who received questions in that area.
+    </li>
+    <li>
+      <b>Small Question Count per Area:</b> Most areas have only 1–3 questions served per person.
+      A single right/wrong answer can swing the area accuracy by 33–100%. Individual area scores
+      should be interpreted cautiously; aggregate (branch/group) scores are more reliable.
+    </li>
+    <li>
+      <b>Inverse Mark Weighting:</b> Easy questions (Level 1) carry 3 marks while hard questions
+      (Level 3) carry 1 mark. This means the percentage score rewards foundational mastery
+      disproportionately. Two persons with the same number of correct answers can have very
+      different percentages depending on which levels they got right.
+    </li>
+    <li>
+      <b>Exit Level = Highest Demonstrated, Not Guaranteed:</b> A person who got Level 3 correct
+      might have gotten Level 1 wrong (due to adaptive selection skipping it). The exit level
+      reflects the highest demonstrated capability, not a comprehensive mastery assessment at
+      every level below.
+    </li>
+    <li>
+      <b>Indecision ≠ Incompetence:</b> A high indecision score does not necessarily indicate
+      low competence. Some respondents change answers to arrive at correct ones (beneficial
+      indecision). The "Changed To Correct" vs "Changed From Correct" breakdown distinguishes
+      helpful reconsideration from harmful second-guessing.
+    </li>
+    <li>
+      <b>13 Missing Sequences:</b> 13 out of 1217 answer records did not have
+      <code>userOptionSequence</code> data (likely due to technical issues or instant submission).
+      These are treated as having 0 changes.
+    </li>
+    <li>
+      <b>Record Count Difference:</b> 109 records in the analysis collection
+      (OnlineAssesmentAnalysisStudentLevel) vs 121 in the raw results
+      (OnlineAssesmentStudentResult). The difference of 12 may be duplicate submissions
+      or re-attempts. The dashboard uses analysis data for scoring/ranking and raw results
+      for exit levels and indecision.
+    </li>
+    <li>
+      <b>TimeTaken Anomalies:</b> Some TimeTaken values are negative (minimum observed: −98 seconds),
+      likely due to clock synchronization issues. These are used as-is in deliberation time calculations
+      but have minimal impact on the indecision index due to the 15% weight cap.
+    </li>
+  </ol>
+</div>
+
+<hr>
+<p style="text-align:center;color:var(--muted);font-size:12px;margin-top:24px">
+  Document generated February 2026 &bull; Myelin NEP Readiness Project &bull; Deccan Education Society
+</p>
+
+</div>
+</body>
+</html>

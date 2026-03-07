@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Practice Log | Myelin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --myelin-purple-900: #660099;
+            --myelin-purple-700: #7b23a7;
+            --myelin-purple-200: #e8d7ef;
+            --myelin-purple-50: #fbf8fd;
+            --primary-teal: #78dcca;
+            --myelin-dark: #383838;
+            --success: #22c55e;
+            --success-light: #dcfce7;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d4d4d8;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--gray-100);
+            color: var(--myelin-dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--myelin-purple-700) 0%, var(--myelin-purple-900) 100%);
+            padding: 16px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(102, 0, 153, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg { width: 24px; height: 24px; fill: var(--myelin-purple-700); }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 22px;
+            color: var(--white);
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            padding: 6px 14px;
+            border: none;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover { background: rgba(255,255,255,0.25); }
+        .lang-btn.active { background: var(--white); color: var(--myelin-purple-700); }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--myelin-purple-700);
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        .date-badge {
+            background: var(--myelin-purple-50);
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--myelin-purple-200);
+        }
+
+        .date-day {
+            font-size: 11px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .date-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--myelin-purple-700);
+            line-height: 1.2;
+        }
+
+        .date-month {
+            font-size: 13px;
+            color: var(--myelin-dark);
+        }
+
+        .progress-bar {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 8px;
+            background: var(--gray-100);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--myelin-purple-700), var(--myelin-purple-900));
+            border-radius: 4px;
+            width: 24%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: var(--myelin-dark);
+            white-space: nowrap;
+        }
+
+        .progress-text strong {
+            color: var(--myelin-purple-700);
+        }
+
+        .task-card {
+            background: var(--white);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .task-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-card.completed {
+            border-left: 4px solid var(--success);
+        }
+
+        .task-header {
+            padding: 16px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            cursor: pointer;
+        }
+
+        .task-checkbox {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] { display: none; }
+
+        .checkbox-custom {
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--gray-300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .task-card.completed .checkbox-custom {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .checkbox-custom svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--white);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .task-card.completed .checkbox-custom svg { opacity: 1; }
+
+        .task-content { flex: 1; }
+
+        .task-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--myelin-dark);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-label-mr {
+            display: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--myelin-dark);
+            margin-bottom: 4px;
+        }
+
+        .task-id { color: var(--myelin-purple-700); }
+
+        .fp-badge {
+            font-size: 10px;
+            background: var(--myelin-purple-200);
+            color: var(--myelin-purple-700);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .task-description {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        .task-description-mr {
+            display: none;
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .task-comment {
+            padding: 0 20px 16px 64px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            color: var(--myelin-dark);
+            resize: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: var(--myelin-purple-700);
+            box-shadow: 0 0 0 3px rgba(123, 35, 167, 0.1);
+        }
+
+        .comment-input::placeholder {
+            color: var(--gray-500);
+        }
+
+        .comment-counter {
+            text-align: right;
+            font-size: 11px;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        .footer-actions {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .save-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .save-status svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--success);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--myelin-purple-700);
+            border: 2px solid var(--myelin-purple-700);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--myelin-purple-50);
+        }
+
+        body.marathi .task-label { display: none; }
+        body.marathi .task-label-mr { display: flex; align-items: center; gap: 8px; }
+        body.marathi .task-description { display: none; }
+        body.marathi .task-description-mr { display: block; }
+
+        @media (max-width: 768px) {
+            .header { padding: 12px 16px; }
+            .container { padding: 16px; }
+            .page-header { flex-direction: column; }
+            .task-header { padding: 12px 16px; }
+            .task-comment { padding: 0 16px 12px 56px; }
+            .footer-actions { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <span class="logo-text">myelin</span>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('mr')">मराठी</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Daily Practice Log</h1>
+                <p class="page-subtitle">Mark the tasks you practiced today</p>
+            </div>
+            <div class="date-badge">
+                <div class="date-day">Day 5</div>
+                <div class="date-number">13</div>
+                <div class="date-month">February</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-track">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-text"><strong>5</strong> of 21 days</div>
+        </div>
+
+        <!-- Task 1 - Completed with comment -->
+        <div class="task-card completed" onclick="toggleTask(this, event)">
+            <div class="task-header">
+                <div class="task-checkbox">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" checked>
+                        <div class="checkbox-custom">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-content">
+                    <div class="task-label">
+                        <span class="task-id">T01:</span> Notice One Learner
+                        <span class="fp-badge">FP-1</span>
+                    </div>
+                    <div class="task-label-mr">
+                        <span class="task-id">T01:</span> एका विद्यार्थ्याकडे लक्ष द्या
+                        <span class="fp-badge">FP-1</span>
+                    </div>
+                    <div class="task-description">Pick one student today and notice how they engage (not marks)</div>
+                    <div class="task-description-mr">आज एका विद्यार्थ्याची निवड करा आणि तो कसा सहभागी होतो ते पहा</div>
+                </div>
+            </div>
+            <div class="task-comment">
+                <textarea class="comment-input" rows="2" placeholder="Add a comment (optional)..." onclick="event.stopPropagation()">Noticed Ramesh was very engaged during group activity - he helped others understand the concept</textarea>
+                <div class="comment-counter">87 / 280</div>
+            </div>
+        </div>
+
+        <!-- Task 2 - Completed without comment -->
+        <div class="task-card completed" onclick="toggleTask(this, event)">
+            <div class="task-header">
+                <div class="task-checkbox">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" checked>
+                        <div class="checkbox-custom">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-content">
+                    <div class="task-label">
+                        <span class="task-id">T03:</span> Change One Example
+                        <span class="fp-badge">FP-2</span>
+                    </div>
+                    <div class="task-label-mr">
+                        <span class="task-id">T03:</span> एक उदाहरण बदला
+                        <span class="fp-badge">FP-2</span>
+                    </div>
+                    <div class="task-description">Replace one textbook example with a real-life/contextual one</div>
+                    <div class="task-description-mr">पाठ्यपुस्तकातील एक उदाहरण वास्तविक जीवनाशी जोडा</div>
+                </div>
+            </div>
+            <div class="task-comment">
+                <textarea class="comment-input" rows="2" placeholder="Add a comment (optional)..." onclick="event.stopPropagation()"></textarea>
+                <div class="comment-counter">0 / 280</div>
+            </div>
+        </div>
+
+        <!-- Task 3 - Not completed -->
+        <div class="task-card" onclick="toggleTask(this, event)">
+            <div class="task-header">
+                <div class="task-checkbox">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox">
+                        <div class="checkbox-custom">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-content">
+                    <div class="task-label">
+                        <span class="task-id">T04:</span> Ask a Why / How
+                        <span class="fp-badge">FP-2</span>
+                    </div>
+                    <div class="task-label-mr">
+                        <span class="task-id">T04:</span> का / कसे विचारा
+                        <span class="fp-badge">FP-2</span>
+                    </div>
+                    <div class="task-description">Ask at least one "why" or "how" question during teaching</div>
+                    <div class="task-description-mr">शिकवताना किमान एक "का" किंवा "कसे" प्रश्न विचारा</div>
+                </div>
+            </div>
+            <div class="task-comment">
+                <textarea class="comment-input" rows="2" placeholder="Add a comment (optional)..." onclick="event.stopPropagation()"></textarea>
+                <div class="comment-counter">0 / 280</div>
+            </div>
+        </div>
+
+        <!-- Task 4 - Completed with comment -->
+        <div class="task-card completed" onclick="toggleTask(this, event)">
+            <div class="task-header">
+                <div class="task-checkbox">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" checked>
+                        <div class="checkbox-custom">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-content">
+                    <div class="task-label">
+                        <span class="task-id">T05:</span> End-of-Class Reflection
+                        <span class="fp-badge">FP-3</span>
+                    </div>
+                    <div class="task-label-mr">
+                        <span class="task-id">T05:</span> तासाअखेरीस चिंतन
+                        <span class="fp-badge">FP-3</span>
+                    </div>
+                    <div class="task-description">At end of class, mentally note one thing that worked / didn't</div>
+                    <div class="task-description-mr">तासाच्या शेवटी एक गोष्ट जी चांगली झाली / नाही ती लक्षात ठेवा</div>
+                </div>
+            </div>
+            <div class="task-comment">
+                <textarea class="comment-input" rows="2" placeholder="Add a comment (optional)..." onclick="event.stopPropagation()">Group activity worked well today. Need to manage time better for individual work.</textarea>
+                <div class="comment-counter">78 / 280</div>
+            </div>
+        </div>
+
+        <!-- Task 5 - Not completed -->
+        <div class="task-card" onclick="toggleTask(this, event)">
+            <div class="task-header">
+                <div class="task-checkbox">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox">
+                        <div class="checkbox-custom">
+                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-content">
+                    <div class="task-label">
+                        <span class="task-id">T07:</span> Quick Check
+                        <span class="fp-badge">FP-4</span>
+                    </div>
+                    <div class="task-label-mr">
+                        <span class="task-id">T07:</span> झटपट तपासणी
+                        <span class="fp-badge">FP-4</span>
+                    </div>
+                    <div class="task-description">Ask 2–3 students to explain an answer in their own words</div>
+                    <div class="task-description-mr">२-३ विद्यार्थ्यांना त्यांच्या शब्दात उत्तर समजावून सांगायला सांगा</div>
+                </div>
+            </div>
+            <div class="task-comment">
+                <textarea class="comment-input" rows="2" placeholder="Add a comment (optional)..." onclick="event.stopPropagation()"></textarea>
+                <div class="comment-counter">0 / 280</div>
+            </div>
+        </div>
+
+        <div class="footer-actions">
+            <div class="save-status">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Auto-saved
+            </div>
+            <a href="screen1_selection.html" class="btn-secondary">Change My Selections</a>
+        </div>
+    </main>
+
+    <script>
+        function toggleTask(card, event) {
+            if (event.target.tagName === 'TEXTAREA') return;
+            
+            const checkbox = card.querySelector('input[type="checkbox"]');
+            const isCompleted = card.classList.contains('completed');
+            
+            if (isCompleted) {
+                card.classList.remove('completed');
+                checkbox.checked = false;
+            } else {
+                card.classList.add('completed');
+                checkbox.checked = true;
+            }
+            
+            showSaveStatus();
+        }
+
+        function showSaveStatus() {
+            const status = document.querySelector('.save-status');
+            status.innerHTML = `
+                <svg viewBox="0 0 24 24" style="animation: spin 1s linear infinite;"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                Saving...
+            `;
+            
+            setTimeout(() => {
+                status.innerHTML = `
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    Auto-saved
+                `;
+            }, 800);
+        }
+
+        function setLanguage(lang) {
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (lang === 'mr') {
+                document.body.classList.add('marathi');
+                buttons[1].classList.add('active');
+            } else {
+                document.body.classList.remove('marathi');
+                buttons[0].classList.add('active');
+            }
+            
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        document.querySelectorAll('.comment-input').forEach(input => {
+            input.addEventListener('input', function() {
+                const counter = this.parentElement.querySelector('.comment-counter');
+                counter.textContent = `${this.value.length} / 280`;
+                if (this.value.length > 280) {
+                    this.value = this.value.substring(0, 280);
+                    counter.textContent = '280 / 280';
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) setLanguage(savedLang);
+        });
+    </script>
+    <style>
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>

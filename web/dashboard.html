@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEP Readiness Dashboard | Myelin</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Myelin Purple Palette */
+            --myelin-purple-900: #660099;
+            --myelin-purple-700: #7b23a7;
+            --myelin-purple-200: #e8d7ef;
+            --myelin-purple-50: #fbf8fd;
+
+            /* Primary Colors */
+            --primary-teal: #78dcca;
+            --secondary-blue: #32c4ec;
+            --orange: #f49e4c;
+
+            /* Utility Colors */
+            --myelin-dark: #383838;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d4d4d8;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+
+            /* Semantic Colors */
+            --leader-color: var(--myelin-purple-700);
+            --teacher-color: #0d9488;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--gray-100);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--myelin-dark);
+        }
+
+        .container { max-width: 1600px; margin: 0 auto; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--myelin-purple-700) 0%, var(--myelin-purple-900) 100%);
+            border-radius: 12px;
+            padding: 24px 32px;
+            margin-bottom: 20px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 0, 153, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--myelin-purple-700);
+            font-size: 1.25rem;
+        }
+
+        .header-text h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .header-text .subtitle {
+            opacity: 0.9;
+            font-size: 0.875rem;
+            font-weight: 400;
+        }
+
+        /* Selector Panel */
+        .selector-panel {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .selector-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .selector-group label {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .selector-group input {
+            padding: 10px 14px;
+            border: 1px solid var(--gray-300);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            background: var(--white);
+            color: var(--myelin-dark);
+            transition: all 0.2s;
+            min-width: 320px;
+        }
+
+        .selector-group input:focus {
+            outline: none;
+            border-color: var(--myelin-purple-700);
+            box-shadow: 0 0 0 3px rgba(123, 35, 167, 0.1);
+        }
+
+        .selector-group input::placeholder {
+            color: var(--gray-500);
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-blue));
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: scale(0.98);
+            box-shadow: 0 4px 12px rgba(120, 220, 202, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary:disabled {
+            background: var(--gray-300);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .diagnostic-info {
+            flex: 1;
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            padding-left: 12px;
+        }
+
+        .diagnostic-info strong {
+            color: var(--myelin-purple-700);
+        }
+
+        /* Source Toggle */
+        .source-toggle {
+            display: flex;
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .source-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: inherit;
+            color: var(--gray-500);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .source-btn:hover {
+            color: var(--myelin-dark);
+        }
+
+        .source-btn.active {
+            background: var(--white);
+            color: var(--myelin-purple-700);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .source-btn svg {
+            opacity: 0.7;
+        }
+
+        .source-btn.active svg {
+            opacity: 1;
+        }
+
+        /* File Input */
+        .file-input-wrapper {
+            position: relative;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .file-input-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border: 2px dashed var(--gray-300);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            background: var(--gray-100);
+            min-width: 280px;
+            transition: all 0.2s;
+        }
+
+        .file-input-display:hover {
+            border-color: var(--myelin-purple-700);
+            background: var(--myelin-purple-50);
+        }
+
+        .file-input-display.has-file {
+            border-style: solid;
+            border-color: var(--primary-teal);
+            background: rgba(120, 220, 202, 0.1);
+            color: var(--myelin-dark);
+        }
+
+        .file-input-display.has-file svg {
+            color: var(--primary-teal);
+        }
+
+        /* Tabs */
+        .tabs-container {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+        }
+
+        .tabs-header {
+            display: flex;
+            background: var(--myelin-purple-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            background: transparent;
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--gray-500);
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.8);
+            color: var(--myelin-dark);
+        }
+
+        .tab-btn.active {
+            background: var(--white);
+            color: var(--myelin-dark);
+        }
+
+        .tab-btn.active.leader {
+            border-bottom-color: var(--myelin-purple-700);
+            color: var(--myelin-purple-700);
+        }
+
+        .tab-btn.active.teacher {
+            border-bottom-color: var(--primary-teal);
+            color: var(--teacher-color);
+        }
+
+        .tab-btn.active.comparison {
+            border-bottom-color: var(--secondary-blue);
+            color: #0284c7;
+        }
+
+        .tab-btn .badge {
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .tab-btn.active.leader .badge {
+            background: var(--myelin-purple-200);
+            color: var(--myelin-purple-700);
+        }
+
+        .tab-btn.active.teacher .badge {
+            background: rgba(120, 220, 202, 0.3);
+            color: var(--teacher-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 24px;
+        }
+
+        .tab-content.active { display: block; }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--gray-200);
+        }
+
+        .card-full { grid-column: span 2; }
+
+        .card h3 {
+            color: var(--myelin-purple-900);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h3 .count {
+            font-weight: 400;
+            color: var(--gray-500);
+            font-size: 0.8rem;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(15px, -15px);
+        }
+
+        .stat-card.fp1 { background: linear-gradient(135deg, var(--myelin-purple-700), var(--myelin-purple-900)); }
+        .stat-card.fp2 { background: linear-gradient(135deg, #0d9488, #14b8a6); }
+        .stat-card.fp3 { background: linear-gradient(135deg, #0284c7, #38bdf8); }
+        .stat-card.fp4 { background: linear-gradient(135deg, #d97706, #fbbf24); }
+        .stat-card.fp5 { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+
+        .stat-card .label {
+            font-size: 0.65rem;
+            opacity: 0.9;
+            margin-bottom: 6px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .stat-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .stat-card .sublabel {
+            font-size: 0.6rem;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        /* Heatmap */
+        .heatmap-container {
+            overflow-x: auto;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        .heatmap-container::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .heatmap-container::-webkit-scrollbar-track {
+            background: var(--myelin-purple-200);
+            border-radius: 3px;
+        }
+
+        .heatmap-container::-webkit-scrollbar-thumb {
+            background: rgba(123, 35, 167, 0.4);
+            border-radius: 3px;
+        }
+
+        .heatmap-container::-webkit-scrollbar-thumb:hover {
+            background: var(--myelin-purple-700);
+        }
+
+        .heatmap {
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            width: 100%;
+        }
+
+        .heatmap th, .heatmap td {
+            padding: 10px 14px;
+            text-align: center;
+            border: 2px solid var(--white);
+        }
+
+        .heatmap th {
+            background: var(--gray-100);
+            font-weight: 600;
+            color: var(--myelin-dark);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        .heatmap th.fp-header {
+            background: linear-gradient(135deg, var(--myelin-purple-700), var(--myelin-purple-900));
+            color: white;
+        }
+
+        .heatmap td.user-id {
+            background: var(--myelin-purple-50);
+            font-weight: 500;
+            color: var(--myelin-dark);
+            position: sticky;
+            left: 0;
+            z-index: 1;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .heatmap td.score {
+            font-weight: 600;
+            color: var(--myelin-dark);
+            border-radius: 6px;
+        }
+
+        .color-legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .color-scale {
+            width: 180px;
+            height: 12px;
+            border-radius: 6px;
+            background: linear-gradient(to right, #ef4444, #f59e0b, #fbbf24, #84cc16, #22c55e);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 280px;
+        }
+
+        /* Loading & Empty States */
+        .loading, .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray-500);
+        }
+
+        .loading-spinner {
+            border: 3px solid var(--myelin-purple-200);
+            border-top: 3px solid var(--myelin-purple-700);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            color: var(--myelin-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .empty-state p {
+            font-size: 0.875rem;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Sample Data Buttons */
+        .sample-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 12px;
+            padding-left: 12px;
+            border-left: 1px solid var(--gray-300);
+        }
+
+        .sample-label {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        .btn-sample {
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            background: var(--myelin-purple-50);
+            color: var(--myelin-purple-700);
+            border: 1px solid var(--myelin-purple-200);
+        }
+
+        .btn-sample:hover {
+            background: var(--myelin-purple-200);
+            border-color: var(--myelin-purple-700);
+        }
+
+        .btn-sample.school-a {
+            background: linear-gradient(135deg, rgba(123, 35, 167, 0.1), rgba(102, 0, 153, 0.1));
+            border-color: var(--myelin-purple-200);
+        }
+
+        .btn-sample.school-a:hover {
+            background: linear-gradient(135deg, rgba(123, 35, 167, 0.2), rgba(102, 0, 153, 0.2));
+        }
+
+        .btn-sample.school-b {
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(20, 184, 166, 0.1));
+            color: var(--teacher-color);
+            border-color: rgba(120, 220, 202, 0.5);
+        }
+
+        .btn-sample.school-b:hover {
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(20, 184, 166, 0.2));
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .card-full { grid-column: span 1; }
+            .stats-row { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 12px; }
+            .selector-panel { flex-direction: column; align-items: stretch; }
+            .selector-group input { min-width: 100%; }
+            .tabs-header { flex-direction: column; }
+            .tab-btn { justify-content: flex-start; padding: 12px 20px; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .header { padding: 16px 20px; }
+            .header-text h1 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-logo">M</div>
+            <div class="header-text">
+                <h1>NEP Readiness Dashboard</h1>
+                <p class="subtitle">Foundational Philosophy Analysis</p>
+            </div>
+        </div>
+
+        <!-- Selector Panel -->
+        <div class="selector-panel">
+            <!-- Data Source Toggle -->
+            <div class="source-toggle">
+                <button class="source-btn active" id="api-source-btn" onclick="toggleSource('api')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/>
+                    </svg>
+                    API
+                </button>
+                <button class="source-btn" id="file-source-btn" onclick="toggleSource('file')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                    File
+                </button>
+            </div>
+
+            <!-- API Input -->
+            <div class="selector-group" id="api-input-group">
+                <label>Diagnostic ID</label>
+                <input type="text" id="diagnostic-id" placeholder="Enter Diagnostic ID"
+                       value="696654bd6b8dc25b96ea7e10">
+            </div>
+
+            <!-- File Input -->
+            <div class="selector-group hidden" id="file-input-group">
+                <label>JSON File</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="file-input" accept=".json" onchange="onFileSelected()">
+                    <div class="file-input-display" id="file-display">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <span>Choose JSON file...</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="load-btn" onclick="loadDashboardData()">
+                Load Dashboard
+            </button>
+
+            <!-- Quick Load Sample Data -->
+            <div class="sample-buttons">
+                <span class="sample-label">Quick Load:</span>
+                <button class="btn btn-sample school-a" onclick="loadSampleData('school_a')">
+                    School A
+                </button>
+                <button class="btn btn-sample school-b" onclick="loadSampleData('school_b')">
+                    School B
+                </button>
+            </div>
+
+            <div class="diagnostic-info" id="diagnostic-info"></div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn leader active" onclick="switchTab('leader')">
+                    School Leaders
+                    <span class="badge" id="leader-count">0</span>
+                </button>
+                <button class="tab-btn teacher" onclick="switchTab('teacher')">
+                    Teachers
+                    <span class="badge" id="teacher-count">0</span>
+                </button>
+                <button class="tab-btn comparison" onclick="switchTab('comparison')">
+                    Comparison
+                </button>
+            </div>
+
+            <!-- Leader Tab -->
+            <div class="tab-content active" id="leader-tab">
+                <div class="empty-state" id="leader-empty">
+                    <div class="empty-state-icon">📊</div>
+                    <h3>No Data Loaded</h3>
+                    <p>Enter a Diagnostic ID and click Load Dashboard to view leader data.</p>
+                </div>
+                <div class="hidden" id="leader-loading">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading leader data...</p>
+                    </div>
+                </div>
+                <div class="hidden" id="leader-dashboard"></div>
+            </div>
+
+            <!-- Teacher Tab -->
+            <div class="tab-content" id="teacher-tab">
+                <div class="empty-state" id="teacher-empty">
+                    <div class="empty-state-icon">📊</div>
+                    <h3>No Data Loaded</h3>
+                    <p>Enter a Diagnostic ID and click Load Dashboard to view teacher data.</p>
+                </div>
+                <div class="hidden" id="teacher-loading">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading teacher data...</p>
+                    </div>
+                </div>
+                <div class="hidden" id="teacher-dashboard"></div>
+            </div>
+
+            <!-- Comparison Tab -->
+            <div class="tab-content" id="comparison-tab">
+                <div class="empty-state" id="comparison-empty">
+                    <div class="empty-state-icon">📈</div>
+                    <h3>No Data Available</h3>
+                    <p>Load data to see Leaders vs Teachers comparison.</p>
+                </div>
+                <div class="hidden" id="comparison-dashboard"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =====================================================
+        // API CONFIGURATION
+        // =====================================================
+        const API_CONFIG = {
+            baseUrl: 'https://devapi.myelin.co.in/v8/diagnostics',
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7IlVzZXJJRCI6IjY5NjdiMjk4NjViMmFmNTg1MzllZTJmMiIsIlVzZXJOYW1lIjoiQ2hldGFuIEtodWxlIiwiUm9sZSI6IkxlYWRlciIsIk1vYmlsZU5vIjoiNzUwOTMwOTE2NSIsIklzVGVtcFVzZXIiOnRydWV9fQ.NxfesyTC0vU3stK3vXLhIsulNSIjbTwmzv4gDhl6rZE'
+        };
+
+        // =====================================================
+        // FP CONFIGURATION
+        // =====================================================
+        const FP_CONFIG = {
+            FP1: { name: 'Each Child is Unique', short: 'FP1' },
+            FP2: { name: 'Holistic & Experiential', short: 'FP2' },
+            FP3: { name: 'Reflective Practitioner', short: 'FP3' },
+            FP4: { name: 'Assessment for Learning', short: 'FP4' },
+            FP5: { name: 'Collaboration & Community', short: 'FP5' }
+        };
+
+        const FP_KEYS = ['FP1', 'FP2', 'FP3', 'FP4', 'FP5'];
+
+        // Chart colors matching Myelin design
+        const CHART_COLORS = {
+            FP1: { bg: 'rgba(123, 35, 167, 0.8)', border: '#7b23a7' },
+            FP2: { bg: 'rgba(13, 148, 136, 0.8)', border: '#0d9488' },
+            FP3: { bg: 'rgba(2, 132, 199, 0.8)', border: '#0284c7' },
+            FP4: { bg: 'rgba(217, 119, 6, 0.8)', border: '#d97706' },
+            FP5: { bg: 'rgba(124, 58, 237, 0.8)', border: '#7c3aed' }
+        };
+
+        // =====================================================
+        // STATE
+        // =====================================================
+        let currentData = { leader: null, teacher: null };
+        let charts = {};
+        let dataSource = 'api'; // 'api' or 'file'
+        let selectedFile = null;
+
+        // =====================================================
+        // SOURCE TOGGLE
+        // =====================================================
+        function toggleSource(source) {
+            dataSource = source;
+
+            // Update button states
+            document.getElementById('api-source-btn').classList.toggle('active', source === 'api');
+            document.getElementById('file-source-btn').classList.toggle('active', source === 'file');
+
+            // Show/hide inputs
+            document.getElementById('api-input-group').classList.toggle('hidden', source !== 'api');
+            document.getElementById('file-input-group').classList.toggle('hidden', source !== 'file');
+
+            // Clear diagnostic info
+            document.getElementById('diagnostic-info').innerHTML = '';
+        }
+
+        function onFileSelected() {
+            const fileInput = document.getElementById('file-input');
+            const fileDisplay = document.getElementById('file-display');
+
+            if (fileInput.files.length > 0) {
+                selectedFile = fileInput.files[0];
+                fileDisplay.classList.add('has-file');
+                fileDisplay.querySelector('span').textContent = selectedFile.name;
+            } else {
+                selectedFile = null;
+                fileDisplay.classList.remove('has-file');
+                fileDisplay.querySelector('span').textContent = 'Choose JSON file...';
+            }
+        }
+
+        async function loadFromFile() {
+            if (!selectedFile) {
+                throw new Error('Please select a JSON file');
+            }
+
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        resolve(data);
+                    } catch (err) {
+                        reject(new Error('Invalid JSON file format'));
+                    }
+                };
+
+                reader.onerror = () => reject(new Error('Failed to read file'));
+                reader.readAsText(selectedFile);
+            });
+        }
+
+        // =====================================================
+        // TAB SWITCHING
+        // =====================================================
+        function switchTab(type) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`.tab-btn.${type}`).classList.add('active');
+            document.getElementById(`${type}-tab`).classList.add('active');
+        }
+
+        // =====================================================
+        // LOADING STATES
+        // =====================================================
+        function showLoading(type) {
+            document.getElementById(`${type}-empty`).classList.add('hidden');
+            document.getElementById(`${type}-dashboard`).classList.add('hidden');
+            document.getElementById(`${type}-loading`).classList.remove('hidden');
+        }
+
+        function hideLoading(type) {
+            document.getElementById(`${type}-loading`).classList.add('hidden');
+        }
+
+        function showDashboard(type) {
+            document.getElementById(`${type}-empty`).classList.add('hidden');
+            document.getElementById(`${type}-loading`).classList.add('hidden');
+            document.getElementById(`${type}-dashboard`).classList.remove('hidden');
+        }
+
+        function showEmpty(type) {
+            document.getElementById(`${type}-loading`).classList.add('hidden');
+            document.getElementById(`${type}-dashboard`).classList.add('hidden');
+            document.getElementById(`${type}-empty`).classList.remove('hidden');
+        }
+
+        // =====================================================
+        // API FUNCTIONS
+        // =====================================================
+        async function fetchDiagnosticData(diagnosticId) {
+            const response = await fetch(`${API_CONFIG.baseUrl}/get-attempt-results`, {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json',
+                    'x-access-token': API_CONFIG.token,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ diagnosticId })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API Error: ${response.status} ${response.statusText}`);
+            }
+
+            return await response.json();
+        }
+
+        // =====================================================
+        // DATA PROCESSING
+        // =====================================================
+        function processAPIResponse(apiData) {
+            if (apiData.status !== 0 || !apiData.data) {
+                throw new Error(apiData.message || 'Invalid API response');
+            }
+
+            const { diagnostic, attempts } = apiData.data;
+
+            // Update diagnostic info display
+            document.getElementById('diagnostic-info').innerHTML =
+                `<strong>${diagnostic.diagnosticTitle}</strong> - ${attempts.length} responses`;
+
+            // Group by role
+            const leaders = attempts.filter(a => a.roleName === 'Leader');
+            const teachers = attempts.filter(a => a.roleName === 'Teacher');
+
+            return { diagnostic, leaders, teachers, allAttempts: attempts };
+        }
+
+        function calculateFPScores(attempts) {
+            return attempts.map(attempt => {
+                const fpCounts = { FP1: 0, FP2: 0, FP3: 0, FP4: 0, FP5: 0 };
+                let totalQuestions = 0;
+
+                attempt.responses.forEach(response => {
+                    const fpLevel = parseInt(response.responseMetadata?.fpLevel || '0');
+                    if (fpLevel >= 1 && fpLevel <= 5) {
+                        fpCounts[`FP${fpLevel}`]++;
+                        totalQuestions++;
+                    }
+                });
+
+                return {
+                    user_id: attempt.userName || attempt.userId,
+                    user_name: attempt.userName,
+                    branch: attempt.branchName,
+                    ...fpCounts,
+                    totalQuestions
+                };
+            });
+        }
+
+        function calculateStats(processedData) {
+            const stats = {};
+            FP_KEYS.forEach(fp => {
+                const values = processedData.map(d => d[fp]);
+                const sum = values.reduce((a, b) => a + b, 0);
+                stats[fp] = {
+                    avg: values.length > 0 ? sum / values.length : 0,
+                    min: values.length > 0 ? Math.min(...values) : 0,
+                    max: values.length > 0 ? Math.max(...values) : 0,
+                    values: values
+                };
+            });
+            return stats;
+        }
+
+        // =====================================================
+        // HEATMAP COLOR
+        // =====================================================
+        function getHeatmapColor(value, max = 15) {
+            const ratio = Math.min(value / max, 1);
+
+            if (ratio < 0.2) {
+                return `rgba(239, 68, 68, ${0.3 + ratio * 2})`;
+            } else if (ratio < 0.4) {
+                return `rgba(245, 158, 11, ${0.3 + ratio * 1.5})`;
+            } else if (ratio < 0.6) {
+                return `rgba(251, 191, 36, ${0.4 + ratio})`;
+            } else if (ratio < 0.8) {
+                return `rgba(132, 204, 22, ${0.4 + ratio * 0.5})`;
+            } else {
+                return `rgba(34, 197, 94, ${0.5 + ratio * 0.4})`;
+            }
+        }
+
+        // =====================================================
+        // RENDERING
+        // =====================================================
+        function renderDashboardContent(type, processedData, stats) {
+            const container = document.getElementById(`${type}-dashboard`);
+            const maxScore = processedData[0]?.totalQuestions || 15;
+
+            container.innerHTML = `
+                <!-- Stats Row -->
+                <div class="stats-row">
+                    ${FP_KEYS.map((fp, i) => `
+                        <div class="stat-card fp${i + 1}">
+                            <div class="label">${FP_CONFIG[fp].name}</div>
+                            <div class="value">${stats[fp].avg.toFixed(1)}</div>
+                            <div class="sublabel">Avg Score (0-${maxScore})</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Heatmap -->
+                    <div class="card card-full">
+                        <h3>NEP Orientation Heatmap <span class="count">(n=${processedData.length})</span></h3>
+                        <div class="heatmap-container">
+                            <table class="heatmap">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        ${FP_KEYS.map(fp => `<th class="fp-header">${fp}</th>`).join('')}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${processedData.map(row => `
+                                        <tr>
+                                            <td class="user-id">${row.user_name || row.user_id}</td>
+                                            ${FP_KEYS.map(fp => `
+                                                <td class="score" style="background: ${getHeatmapColor(row[fp], maxScore)}">${row[fp]}</td>
+                                            `).join('')}
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="color-legend">
+                            <span>0 (Low)</span>
+                            <div class="color-scale"></div>
+                            <span>${maxScore} (High)</span>
+                        </div>
+                    </div>
+
+                    <!-- Bar Chart -->
+                    <div class="card">
+                        <h3>Average FP Scores</h3>
+                        <div class="chart-container">
+                            <canvas id="${type}-bar-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Radar Chart -->
+                    <div class="card">
+                        <h3>FP Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="${type}-radar-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            hideLoading(type);
+            showDashboard(type);
+
+            // Render charts
+            setTimeout(() => {
+                renderBarChart(type, stats);
+                renderRadarChart(type, stats);
+            }, 100);
+        }
+
+        function renderBarChart(type, stats) {
+            const ctx = document.getElementById(`${type}-bar-chart`);
+            if (!ctx) return;
+
+            if (charts[`${type}-bar`]) {
+                charts[`${type}-bar`].destroy();
+            }
+
+            charts[`${type}-bar`] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: FP_KEYS.map(fp => FP_CONFIG[fp].name),
+                    datasets: [{
+                        label: 'Average Score',
+                        data: FP_KEYS.map(fp => stats[fp].avg),
+                        backgroundColor: FP_KEYS.map(fp => CHART_COLORS[fp].bg),
+                        borderColor: FP_KEYS.map(fp => CHART_COLORS[fp].border),
+                        borderWidth: 2,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderRadarChart(type, stats) {
+            const ctx = document.getElementById(`${type}-radar-chart`);
+            if (!ctx) return;
+
+            if (charts[`${type}-radar`]) {
+                charts[`${type}-radar`].destroy();
+            }
+
+            const color = type === 'leader' ? '#7b23a7' : '#0d9488';
+
+            charts[`${type}-radar`] = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: FP_KEYS.map(fp => FP_CONFIG[fp].short),
+                    datasets: [{
+                        label: 'Average',
+                        data: FP_KEYS.map(fp => stats[fp].avg),
+                        backgroundColor: `${color}33`,
+                        borderColor: color,
+                        borderWidth: 2,
+                        pointBackgroundColor: color
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.08)' },
+                            angleLines: { color: 'rgba(0,0,0,0.08)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderComparison() {
+            const container = document.getElementById('comparison-dashboard');
+            const emptyState = document.getElementById('comparison-empty');
+
+            if (!currentData.leader && !currentData.teacher) {
+                emptyState.classList.remove('hidden');
+                container.classList.add('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            container.classList.remove('hidden');
+
+            const leaderStats = currentData.leader?.stats;
+            const teacherStats = currentData.teacher?.stats;
+
+            container.innerHTML = `
+                <div class="dashboard-grid">
+                    <div class="card card-full">
+                        <h3>Leaders vs Teachers Comparison</h3>
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="comparison-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            setTimeout(() => {
+                const ctx = document.getElementById('comparison-chart');
+                if (!ctx) return;
+
+                if (charts['comparison']) {
+                    charts['comparison'].destroy();
+                }
+
+                const datasets = [];
+
+                if (leaderStats) {
+                    datasets.push({
+                        label: 'Leaders',
+                        data: FP_KEYS.map(fp => leaderStats[fp].avg),
+                        backgroundColor: 'rgba(123, 35, 167, 0.7)',
+                        borderColor: '#7b23a7',
+                        borderWidth: 2,
+                        borderRadius: 4
+                    });
+                }
+
+                if (teacherStats) {
+                    datasets.push({
+                        label: 'Teachers',
+                        data: FP_KEYS.map(fp => teacherStats[fp].avg),
+                        backgroundColor: 'rgba(13, 148, 136, 0.7)',
+                        borderColor: '#0d9488',
+                        borderWidth: 2,
+                        borderRadius: 4
+                    });
+                }
+
+                charts['comparison'] = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: FP_KEYS.map(fp => FP_CONFIG[fp].name),
+                        datasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: { font: { family: 'Poppins' } }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(0,0,0,0.05)' }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { size: 10 } }
+                            }
+                        }
+                    }
+                });
+            }, 100);
+        }
+
+        // =====================================================
+        // SAMPLE DATA LOADING
+        // =====================================================
+        const SAMPLE_DATA_PATHS = {
+            school_a: '../data/responses/school_a_survey.json',
+            school_b: '../data/responses/school_b_survey.json'
+        };
+
+        async function loadSampleData(school) {
+            const path = SAMPLE_DATA_PATHS[school];
+            if (!path) {
+                alert('Invalid sample data selection');
+                return;
+            }
+
+            // Reset state
+            currentData = { leader: null, teacher: null };
+            document.getElementById('leader-count').textContent = '0';
+            document.getElementById('teacher-count').textContent = '0';
+
+            showLoading('leader');
+            showLoading('teacher');
+
+            try {
+                const response = await fetch(path);
+                if (!response.ok) {
+                    throw new Error(`Failed to load sample file: ${response.statusText}`);
+                }
+
+                const apiData = await response.json();
+                const { diagnostic, leaders, teachers, allAttempts } = processAPIResponse(apiData);
+
+                // Process leaders
+                if (leaders.length > 0) {
+                    const processedData = calculateFPScores(leaders);
+                    const stats = calculateStats(processedData);
+                    currentData.leader = { processed: processedData, stats };
+                    document.getElementById('leader-count').textContent = leaders.length;
+                    renderDashboardContent('leader', processedData, stats);
+                } else {
+                    showEmpty('leader');
+                }
+
+                // Process teachers
+                if (teachers.length > 0) {
+                    const processedData = calculateFPScores(teachers);
+                    const stats = calculateStats(processedData);
+                    currentData.teacher = { processed: processedData, stats };
+                    document.getElementById('teacher-count').textContent = teachers.length;
+                    renderDashboardContent('teacher', processedData, stats);
+                } else {
+                    showEmpty('teacher');
+                }
+
+                // Switch to leader tab
+                switchTab('leader');
+                renderComparison();
+
+            } catch (error) {
+                console.error('Error loading sample data:', error);
+
+                // Provide helpful error message for file:// protocol
+                if (window.location.protocol === 'file:') {
+                    alert('Cannot load sample files when opening HTML directly.\n\nPlease serve the files using a local web server:\n\n1. Open terminal in the project folder\n2. Run: python -m http.server 8000\n3. Open: http://localhost:8000/web/dashboard.html');
+                } else {
+                    alert(`Error loading sample data: ${error.message}`);
+                }
+
+                showEmpty('leader');
+                showEmpty('teacher');
+            }
+        }
+
+        // =====================================================
+        // MAIN LOAD FUNCTION
+        // =====================================================
+        async function loadDashboardData() {
+            // Validate input based on source
+            if (dataSource === 'api') {
+                const diagnosticId = document.getElementById('diagnostic-id').value.trim();
+                if (!diagnosticId) {
+                    alert('Please enter a Diagnostic ID');
+                    return;
+                }
+            } else {
+                if (!selectedFile) {
+                    alert('Please select a JSON file');
+                    return;
+                }
+            }
+
+            // Reset state
+            currentData = { leader: null, teacher: null };
+            document.getElementById('leader-count').textContent = '0';
+            document.getElementById('teacher-count').textContent = '0';
+
+            showLoading('leader');
+            showLoading('teacher');
+
+            try {
+                let apiData;
+
+                if (dataSource === 'api') {
+                    const diagnosticId = document.getElementById('diagnostic-id').value.trim();
+                    apiData = await fetchDiagnosticData(diagnosticId);
+                } else {
+                    apiData = await loadFromFile();
+                }
+
+                const { diagnostic, leaders, teachers, allAttempts } = processAPIResponse(apiData);
+
+                // Process leaders
+                if (leaders.length > 0) {
+                    const processedData = calculateFPScores(leaders);
+                    const stats = calculateStats(processedData);
+                    currentData.leader = { processed: processedData, stats };
+                    document.getElementById('leader-count').textContent = leaders.length;
+                    renderDashboardContent('leader', processedData, stats);
+                } else {
+                    showEmpty('leader');
+                }
+
+                // Process teachers
+                if (teachers.length > 0) {
+                    const processedData = calculateFPScores(teachers);
+                    const stats = calculateStats(processedData);
+                    currentData.teacher = { processed: processedData, stats };
+                    document.getElementById('teacher-count').textContent = teachers.length;
+                    renderDashboardContent('teacher', processedData, stats);
+                    switchTab('teacher');
+                } else {
+                    showEmpty('teacher');
+                }
+
+                // If no role-specific data but we have attempts, show as teachers
+                if (leaders.length === 0 && teachers.length === 0 && allAttempts.length > 0) {
+                    const processedData = calculateFPScores(allAttempts);
+                    const stats = calculateStats(processedData);
+                    currentData.teacher = { processed: processedData, stats };
+                    document.getElementById('teacher-count').textContent = allAttempts.length;
+                    renderDashboardContent('teacher', processedData, stats);
+                    switchTab('teacher');
+                }
+
+                renderComparison();
+
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                alert(`Error loading data: ${error.message}`);
+                showEmpty('leader');
+                showEmpty('teacher');
+            }
+        }
+
+        // =====================================================
+        // INITIALIZATION
+        // =====================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Enable load button if diagnostic ID is present
+            const input = document.getElementById('diagnostic-id');
+            input.addEventListener('input', () => {
+                document.getElementById('load-btn').disabled = !input.value.trim();
+            });
+        });
+    </script>
+</body>
+</html>

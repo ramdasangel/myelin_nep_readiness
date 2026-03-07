@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Practice Progress | Myelin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --myelin-purple-900: #660099;
+            --myelin-purple-700: #7b23a7;
+            --myelin-purple-200: #e8d7ef;
+            --myelin-purple-50: #fbf8fd;
+            --primary-teal: #78dcca;
+            --myelin-dark: #383838;
+            --success: #22c55e;
+            --success-light: #dcfce7;
+            --error: #ef4444;
+            --error-light: #fee2e2;
+            --warning: #f59e0b;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d4d4d8;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--gray-100);
+            color: var(--myelin-dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--myelin-purple-700) 0%, var(--myelin-purple-900) 100%);
+            padding: 16px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(102, 0, 153, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg { width: 24px; height: 24px; fill: var(--myelin-purple-700); }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 22px;
+            color: var(--white);
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            padding: 6px 14px;
+            border: none;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover { background: rgba(255,255,255,0.25); }
+        .lang-btn.active { background: var(--white); color: var(--myelin-purple-700); }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--myelin-purple-700);
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .summary-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--myelin-purple-700), var(--myelin-purple-900));
+        }
+
+        .summary-label {
+            font-size: 11px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .summary-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--myelin-purple-700);
+        }
+
+        .summary-value.green { color: var(--success); }
+
+        .summary-detail {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        .selections-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+        }
+
+        .selections-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .selections-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--myelin-dark);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--myelin-purple-700);
+            border: 2px solid var(--myelin-purple-700);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover { background: var(--myelin-purple-50); }
+
+        .selections-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .selection-tag {
+            background: var(--myelin-purple-50);
+            color: var(--myelin-dark);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--myelin-purple-200);
+        }
+
+        .selection-tag .fp {
+            background: linear-gradient(135deg, var(--myelin-purple-700), var(--myelin-purple-900));
+            color: var(--white);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .progress-table-container {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .table-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--myelin-dark);
+        }
+
+        .legend {
+            display: flex;
+            gap: 16px;
+            font-size: 11px;
+            color: var(--gray-500);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .legend-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .legend-icon.done { background: var(--success-light); color: var(--success); }
+        .legend-icon.done-comment { background: var(--success); color: var(--white); }
+        .legend-icon.missed { background: var(--error-light); color: var(--error); }
+        .legend-icon.future { background: var(--gray-100); color: var(--gray-500); }
+        .legend-icon.today { background: var(--myelin-purple-50); border: 2px solid var(--myelin-purple-700); }
+
+        .table-scroll {
+            overflow-x: auto;
+        }
+
+        .progress-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .progress-table th,
+        .progress-table td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .progress-table th {
+            background: var(--gray-100);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gray-500);
+        }
+
+        .progress-table th.task-col {
+            text-align: left;
+            padding-left: 20px;
+            min-width: 180px;
+            position: sticky;
+            left: 0;
+            background: var(--gray-100);
+            z-index: 10;
+        }
+
+        .progress-table td.task-col {
+            text-align: left;
+            padding-left: 20px;
+            position: sticky;
+            left: 0;
+            background: var(--white);
+            z-index: 10;
+        }
+
+        .progress-table th.today-col {
+            background: var(--myelin-purple-50);
+            color: var(--myelin-purple-700);
+        }
+
+        .progress-table td.today-col {
+            background: var(--myelin-purple-50);
+        }
+
+        .progress-table th.stat-col {
+            min-width: 70px;
+            position: sticky;
+            right: 0;
+            background: var(--gray-100);
+            z-index: 10;
+        }
+
+        .progress-table td.stat-col {
+            position: sticky;
+            right: 0;
+            background: var(--white);
+            z-index: 10;
+            font-weight: 600;
+        }
+
+        .task-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--myelin-dark);
+        }
+
+        .task-name-mr {
+            display: none;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--myelin-dark);
+        }
+
+        .task-fp {
+            font-size: 10px;
+            color: var(--gray-500);
+        }
+
+        .day-cell {
+            position: relative;
+            cursor: default;
+        }
+
+        .cell-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.15s;
+        }
+
+        .cell-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cell-icon.done {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .cell-icon.done-comment {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .cell-icon.missed {
+            background: var(--error-light);
+            color: var(--error);
+        }
+
+        .cell-icon.future {
+            background: var(--gray-100);
+            color: var(--gray-500);
+        }
+
+        .cell-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--myelin-dark);
+            color: var(--white);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            white-space: nowrap;
+            max-width: 250px;
+            white-space: normal;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--myelin-dark);
+        }
+
+        .cell-icon:hover .tooltip {
+            display: block;
+        }
+
+        .stat-percent {
+            font-size: 13px;
+            color: var(--myelin-dark);
+        }
+
+        .stat-percent.high { color: var(--success); }
+        .stat-percent.medium { color: var(--warning); }
+        .stat-percent.low { color: var(--error); }
+
+        .footer-actions {
+            margin-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--myelin-purple-700), var(--myelin-purple-900));
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(102, 0, 153, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(102, 0, 153, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gray-700);
+            background: var(--gray-100);
+        }
+
+        .btn-outline svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        body.marathi .task-name { display: none; }
+        body.marathi .task-name-mr { display: block; }
+
+        @media (max-width: 768px) {
+            .header { padding: 12px 16px; }
+            .container { padding: 16px; }
+            .page-title { font-size: 22px; }
+            .summary-cards { grid-template-columns: repeat(2, 1fr); }
+            .legend { justify-content: center; }
+            .footer-actions { flex-direction: column; align-items: stretch; }
+            .btn-primary, .btn-outline { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <span class="logo-text">myelin</span>
+        </div>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('mr')">मराठी</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">My Practice Progress</h1>
+            <p class="page-subtitle">21-Day Reflection Journey</p>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="summary-label">Current Day</div>
+                <div class="summary-value">5</div>
+                <div class="summary-detail">of 21 days</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Overall Completion</div>
+                <div class="summary-value green">72%</div>
+                <div class="summary-detail">18 of 25 task-days</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Current Streak</div>
+                <div class="summary-value">3</div>
+                <div class="summary-detail">days in a row</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Comments Added</div>
+                <div class="summary-value">8</div>
+                <div class="summary-detail">reflections logged</div>
+            </div>
+        </div>
+
+        <div class="selections-card">
+            <div class="selections-header">
+                <div class="selections-title">Your Selected Tasks</div>
+                <a href="screen1_selection.html" class="btn-secondary">Change Selections</a>
+            </div>
+            <div class="selections-list">
+                <div class="selection-tag">
+                    <span class="fp">FP-1</span>
+                    <span class="task-name">T01: Notice One Learner</span>
+                    <span class="task-name-mr">T01: एका विद्यार्थ्याकडे लक्ष द्या</span>
+                </div>
+                <div class="selection-tag">
+                    <span class="fp">FP-2</span>
+                    <span class="task-name">T03: Change One Example</span>
+                    <span class="task-name-mr">T03: एक उदाहरण बदला</span>
+                </div>
+                <div class="selection-tag">
+                    <span class="fp">FP-2</span>
+                    <span class="task-name">T04: Ask a Why / How</span>
+                    <span class="task-name-mr">T04: का / कसे विचारा</span>
+                </div>
+                <div class="selection-tag">
+                    <span class="fp">FP-3</span>
+                    <span class="task-name">T05: End-of-Class Reflection</span>
+                    <span class="task-name-mr">T05: तासाअखेरीस चिंतन</span>
+                </div>
+                <div class="selection-tag">
+                    <span class="fp">FP-4</span>
+                    <span class="task-name">T07: Quick Check</span>
+                    <span class="task-name-mr">T07: झटपट तपासणी</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-table-container">
+            <div class="table-header">
+                <div class="table-title">Daily Progress</div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-icon done-comment">✓</div>
+                        <span>Done + Comment</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon done">✓</div>
+                        <span>Done</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon missed">✗</div>
+                        <span>Not done</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon future">○</div>
+                        <span>Future</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon today"></div>
+                        <span>Today</span>
+                    </div>
+                </div>
+            </div>
+            <div class="table-scroll">
+                <table class="progress-table">
+                    <thead>
+                        <tr>
+                            <th class="task-col">Task</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th class="today-col">5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                            <th>13</th>
+                            <th>14</th>
+                            <th>15</th>
+                            <th>16</th>
+                            <th>17</th>
+                            <th>18</th>
+                            <th>19</th>
+                            <th>20</th>
+                            <th>21</th>
+                            <th class="stat-col">Done</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- T01 Row -->
+                        <tr>
+                            <td class="task-col">
+                                <div class="task-name">T01: Notice One Learner</div>
+                                <div class="task-name-mr">T01: एका विद्यार्थ्याकडे लक्ष द्या</div>
+                                <div class="task-fp">FP-1</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done-comment">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    <div class="tooltip">Noticed Priya was struggling with fractions today</div>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done-comment">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    <div class="tooltip">Ramesh showed great improvement in group work</div>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell today-col">
+                                <div class="cell-icon done-comment">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    <div class="tooltip">Noticed Ramesh was very engaged during group activity</div>
+                                </div>
+                            </td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="stat-col"><span class="stat-percent high">100%</span></td>
+                        </tr>
+                        <!-- T03 Row -->
+                        <tr>
+                            <td class="task-col">
+                                <div class="task-name">T03: Change One Example</div>
+                                <div class="task-name-mr">T03: एक उदाहरण बदला</div>
+                                <div class="task-fp">FP-2</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done-comment">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    <div class="tooltip">Used local market prices for percentage calculation</div>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon missed">✗</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell today-col">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="stat-col"><span class="stat-percent medium">80%</span></td>
+                        </tr>
+                        <!-- T04 Row -->
+                        <tr>
+                            <td class="task-col">
+                                <div class="task-name">T04: Ask a Why / How</div>
+                                <div class="task-name-mr">T04: का / कसे विचारा</div>
+                                <div class="task-fp">FP-2</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon missed">✗</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done-comment">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    <div class="tooltip">Asked "Why do plants need sunlight?" - got good responses</div>
+                                </div>
+                            </td>
+                            <td class="day-cell today-col">
+                                <div class="cell-icon missed">✗</div>
+                            </td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="stat-col"><span class="stat-percent medium">60%</span></td>
+                        </tr>
+                        <!-- T05 Row -->
+                        <tr>
+                            <td class="task-col">
+                                <div class="task-name">T05: End-of-Class Reflection</div>
+                                <div class="task-name-mr">T05: तासाअखेरीस चिंतन</div>
+                                <div class="task-fp">FP-3</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done-comment">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    <div class="tooltip">Need to slow down explanation for division</div>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon missed">✗</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon missed">✗</div>
+                            </td>
+                            <td class="day-cell today-col">
+                                <div class="cell-icon done-comment">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    <div class="tooltip">Group activity worked well. Need to manage time better.</div>
+                                </div>
+                            </td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="stat-col"><span class="stat-percent medium">60%</span></td>
+                        </tr>
+                        <!-- T07 Row -->
+                        <tr>
+                            <td class="task-col">
+                                <div class="task-name">T07: Quick Check</div>
+                                <div class="task-name-mr">T07: झटपट तपासणी</div>
+                                <div class="task-fp">FP-4</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon missed">✗</div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell">
+                                <div class="cell-icon done">
+                                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                </div>
+                            </td>
+                            <td class="day-cell today-col">
+                                <div class="cell-icon missed">✗</div>
+                            </td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="day-cell"><div class="cell-icon future">○</div></td>
+                            <td class="stat-col"><span class="stat-percent medium">60%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer-actions">
+            <a href="screen2_logging.html" class="btn-primary">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                Log Today's Practice
+            </a>
+            <button class="btn-outline">
+                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Export CSV
+            </button>
+        </div>
+    </main>
+
+    <script>
+        function setLanguage(lang) {
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (lang === 'mr') {
+                document.body.classList.add('marathi');
+                buttons[1].classList.add('active');
+            } else {
+                document.body.classList.remove('marathi');
+                buttons[0].classList.add('active');
+            }
+            
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>

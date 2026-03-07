@@ -1,0 +1,214 @@
+{
+  "status": 0,
+  "message": "Success",
+  "data": {
+    "diagnostic": {
+      "diagnosticId": "sample_001",
+      "diagnosticType": "NEP_READINESS",
+      "diagnosticTitle": "Sample NEP Assessment",
+      "status": "ACTIVE"
+    },
+    "attempts": [
+      {
+        "attemptId": "attempt_001",
+        "userId": "user_001",
+        "userName": "John Doe",
+        "firstName": "John",
+        "lastName": "Doe",
+        "roleName": "Teacher",
+        "branchId": "branch_001",
+        "branchName": "Sample School - Main Campus",
+        "submittedAt": "2026-01-15T10:00:00.000Z",
+        "responses": [
+          {
+            "questionId": "q1",
+            "questionText": "Sample Question 1",
+            "responseMetadata": {
+              "fpLevel": "1",
+              "depthLevel": "3"
+            }
+          },
+          {
+            "questionId": "q2",
+            "questionText": "Sample Question 2",
+            "responseMetadata": {
+              "fpLevel": "2",
+              "depthLevel": "2"
+            }
+          },
+          {
+            "questionId": "q3",
+            "questionText": "Sample Question 3",
+            "responseMetadata": {
+              "fpLevel": "3",
+              "depthLevel": "4"
+            }
+          },
+          {
+            "questionId": "q4",
+            "questionText": "Sample Question 4",
+            "responseMetadata": {
+              "fpLevel": "4",
+              "depthLevel": "2"
+            }
+          },
+          {
+            "questionId": "q5",
+            "questionText": "Sample Question 5",
+            "responseMetadata": {
+              "fpLevel": "5",
+              "depthLevel": "3"
+            }
+          },
+          {
+            "questionId": "q6",
+            "questionText": "Sample Question 6",
+            "responseMetadata": {
+              "fpLevel": "1",
+              "depthLevel": "2"
+            }
+          },
+          {
+            "questionId": "q7",
+            "questionText": "Sample Question 7",
+            "responseMetadata": {
+              "fpLevel": "2",
+              "depthLevel": "3"
+            }
+          },
+          {
+            "questionId": "q8",
+            "questionText": "Sample Question 8",
+            "responseMetadata": {
+              "fpLevel": "3",
+              "depthLevel": "1"
+            }
+          },
+          {
+            "questionId": "q9",
+            "questionText": "Sample Question 9",
+            "responseMetadata": {
+              "fpLevel": "4",
+              "depthLevel": "4"
+            }
+          },
+          {
+            "questionId": "q10",
+            "questionText": "Sample Question 10",
+            "responseMetadata": {
+              "fpLevel": "5",
+              "depthLevel": "2"
+            }
+          }
+        ]
+      },
+      {
+        "attemptId": "attempt_002",
+        "userId": "user_002",
+        "userName": "Jane Smith",
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "roleName": "Teacher",
+        "branchId": "branch_001",
+        "branchName": "Sample School - Main Campus",
+        "submittedAt": "2026-01-15T11:00:00.000Z",
+        "responses": [
+          {
+            "questionId": "q1",
+            "responseMetadata": { "fpLevel": "2", "depthLevel": "3" }
+          },
+          {
+            "questionId": "q2",
+            "responseMetadata": { "fpLevel": "2", "depthLevel": "2" }
+          },
+          {
+            "questionId": "q3",
+            "responseMetadata": { "fpLevel": "1", "depthLevel": "4" }
+          },
+          {
+            "questionId": "q4",
+            "responseMetadata": { "fpLevel": "3", "depthLevel": "2" }
+          },
+          {
+            "questionId": "q5",
+            "responseMetadata": { "fpLevel": "4", "depthLevel": "3" }
+          },
+          {
+            "questionId": "q6",
+            "responseMetadata": { "fpLevel": "5", "depthLevel": "2" }
+          },
+          {
+            "questionId": "q7",
+            "responseMetadata": { "fpLevel": "1", "depthLevel": "3" }
+          },
+          {
+            "questionId": "q8",
+            "responseMetadata": { "fpLevel": "2", "depthLevel": "1" }
+          },
+          {
+            "questionId": "q9",
+            "responseMetadata": { "fpLevel": "3", "depthLevel": "4" }
+          },
+          {
+            "questionId": "q10",
+            "responseMetadata": { "fpLevel": "4", "depthLevel": "2" }
+          }
+        ]
+      },
+      {
+        "attemptId": "attempt_003",
+        "userId": "user_003",
+        "userName": "Admin Leader",
+        "firstName": "Admin",
+        "lastName": "Leader",
+        "roleName": "Leader",
+        "branchId": "branch_001",
+        "branchName": "Sample School - Main Campus",
+        "submittedAt": "2026-01-15T09:00:00.000Z",
+        "responses": [
+          {
+            "questionId": "q1",
+            "responseMetadata": { "fpLevel": "1", "depthLevel": "4" }
+          },
+          {
+            "questionId": "q2",
+            "responseMetadata": { "fpLevel": "1", "depthLevel": "3" }
+          },
+          {
+            "questionId": "q3",
+            "responseMetadata": { "fpLevel": "2", "depthLevel": "4" }
+          },
+          {
+            "questionId": "q4",
+            "responseMetadata": { "fpLevel": "3", "depthLevel": "3" }
+          },
+          {
+            "questionId": "q5",
+            "responseMetadata": { "fpLevel": "4", "depthLevel": "4" }
+          },
+          {
+            "questionId": "q6",
+            "responseMetadata": { "fpLevel": "5", "depthLevel": "3" }
+          },
+          {
+            "questionId": "q7",
+            "responseMetadata": { "fpLevel": "1", "depthLevel": "4" }
+          },
+          {
+            "questionId": "q8",
+            "responseMetadata": { "fpLevel": "2", "depthLevel": "3" }
+          },
+          {
+            "questionId": "q9",
+            "responseMetadata": { "fpLevel": "3", "depthLevel": "4" }
+          },
+          {
+            "questionId": "q10",
+            "responseMetadata": { "fpLevel": "5", "depthLevel": "3" }
+          }
+        ]
+      }
+    ],
+    "totalAttempts": 3
+  }
+}
