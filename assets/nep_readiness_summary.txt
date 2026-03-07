@@ -1,0 +1,82 @@
+
+NEP READINESS ASSESSMENT - SUMMARY REPORT
+==========================================
+
+Dataset Overview:
+- School Leaders: 20 respondents
+- Teachers: 80 respondents
+- Questions per survey: 15
+- Assessment Framework: 5 Foundational Philosophies (FP)
+
+FP1: Each Child is Unique
+FP2: Holistic & Experiential Learning
+FP3: Teacher as Reflective Practitioner
+FP4: Assessment for Learning
+FP5: Collaboration & Community
+
+SCHOOL LEADERS ANALYSIS
+========================
+
+Average FP Scores (out of 15):
+  FP1: 3.05 (20.3%)
+  FP2: 4.75 (31.7%)
+  FP3: 2.45 (16.3%)
+  FP4: 2.95 (19.7%)
+  FP5: 1.80 (12.0%)
+
+Top Orientation: FP2 (Score: 4.75)
+Lowest Orientation: FP5 (Score: 1.80)
+
+Distribution:
+  Min scores: {'FP1': 0, 'FP2': 2, 'FP3': 1, 'FP4': 1, 'FP5': 0}
+  Max scores: {'FP1': 5, 'FP2': 7, 'FP3': 5, 'FP4': 6, 'FP5': 4}
+  Std Dev: {'FP1': 1.39, 'FP2': 1.62, 'FP3': 0.94, 'FP4': 1.23, 'FP5': 1.4}
+
+
+TEACHERS ANALYSIS
+==================
+
+Average FP Scores (out of 15):
+  FP1: 0.72 (4.8%)
+  FP2: 5.09 (33.9%)
+  FP3: 2.55 (17.0%)
+  FP4: 3.01 (20.1%)
+  FP5: 3.62 (24.2%)
+
+Top Orientation: FP2 (Score: 5.09)
+Lowest Orientation: FP1 (Score: 0.72)
+
+Distribution:
+  Min scores: {'FP1': 0, 'FP2': 0, 'FP3': 0, 'FP4': 1, 'FP5': 1}
+  Max scores: {'FP1': 3, 'FP2': 10, 'FP3': 4, 'FP4': 6, 'FP5': 6}
+  Std Dev: {'FP1': 0.69, 'FP2': 2.04, 'FP3': 0.87, 'FP4': 1.07, 'FP5': 1.26}
+
+
+COMPARATIVE INSIGHTS
+=====================
+
+Leaders show stronger orientation towards:
+  FP1: +2.32 points
+
+Teachers show stronger orientation towards:
+  FP2: -0.34 points
+  FP3: -0.10 points
+  FP4: -0.06 points
+  FP5: -1.82 points
+
+
+KEY FINDINGS
+=============
+
+1. Both leaders and teachers show highest alignment with FP2 (Holistic & Experiential Learning)
+2. FP1 (Each Child is Unique) shows lower scores, indicating an area for development
+3. Parent-Teacher Collaboration (FP5) varies significantly across respondents
+4. There is substantial variation within both groups, suggesting different readiness levels
+
+RECOMMENDATIONS
+================
+
+1. Targeted Training: Focus on FP1 (recognizing individual learner differences)
+2. Peer Learning: Create communities of practice around high-scoring FPs
+3. Leadership Development: Align leader and teacher orientations
+4. Continuous Monitoring: Conduct quarterly assessments to track progress

@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Sensitive files - contains credentials
+memory.md
+
+# Claude local settings
+.claude/
+
+# Node modules (if any)
+node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Embedded git repos
+myelin-react-admin-panel/

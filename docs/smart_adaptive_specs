@@ -1,0 +1,758 @@
+¯collection 
+OnlineAssesment  
+OnlineAssesmentQuestions
+OnlineAssesmentStudentResult
+
+api 
+GetTestTypesOfOnlineAssesment showvtests like adaptive giagnostics scholarship chapter wise 
+
+GetOnlineAssesmentListByFilter give online assesment as per subject you select 
+
+saveAndGetQuestionForSmartAdaptiveOnlineAssessment  show questions and save answers 
+
+Result Object 
+
+{
+  "_id": {
+    "$oid": "6996f65ef11c0425b86e7f50"
+  },
+  "OnlineAssesmentID": {
+    "$oid": "6996f1600753576a914c1a9f"
+  },
+  "StudentID": {
+    "$oid": "5fdc4836521df02dea6b68af"
+  },
+  "BranchID": {
+    "$oid": "5cd17817a2b82d31999dac12"
+  },
+  "ClassID": {
+    "$oid": "5cd17817a2b82d31999dac1e"
+  },
+  "EnterDate": {
+    "$date": "2026-02-19T11:39:10.224Z"
+  },
+  "GroupID": null,
+  "SaveFlag": 1,
+  "Subject": "Hindi",
+  "SubmitDate": {
+    "$date": "2026-02-19T11:41:37.891Z"
+  },
+  "SubmitFlag": 1,
+  "SubmitMarksFlag": 0,
+  "TimeLeft": -894,
+  "TotalObtainedMarks": 3,
+  "TotalTestMarks": null,
+  "TotalTimePerQuestion": 60,
+  "createdAt": {
+    "$date": "2026-02-19T11:39:10.224Z"
+  },
+  "subTopics": [
+    {
+      "subtopic": "Tenses",
+      "sequenceNo": 3,
+      "level": "L0"
+    },
+    {
+      "subtopic": "Singular–Plural",
+      "sequenceNo": 8,
+      "level": "L2"
+    },
+    {
+      "subtopic": "Verbs",
+      "sequenceNo": 3,
+      "level": "L0"
+    },
+    {
+      "subtopic": "Types of Sentences",
+      "sequenceNo": 3,
+      "level": "L0"
+    },
+    {
+      "subtopic": "Conjunctions",
+      "sequenceNo": 3,
+      "level": "L0"
+    },
+    {
+      "subtopic": "Pronouns",
+      "sequenceNo": 8,
+      "level": "L3"
+    },
+    {
+      "subtopic": "Prepositions",
+      "sequenceNo": 3,
+      "level": "L0"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2026-02-19T11:41:37.891Z"
+  },
+  "AssesmentResult": [
+    {
+      "Answer": "",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "yesterday"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "now"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "already"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "tomorrow"
+        }
+      ],
+      "Question": "Which word signals future tense?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55e8"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "tomorrow",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "Present simple",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "Present simple"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Past perfect"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Present perfect"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Future"
+        }
+      ],
+      "Question": "What tense is used in I have eaten lunch ?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55ea"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "Present perfect",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "mice",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "mouses"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "mice"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "mousez"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "meese"
+        }
+      ],
+      "Question": "What is the plural of \"mouse\"?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55f8"
+      },
+      "ObtainedMarks": 1,
+      "ActualAnswer": "mice",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "dish",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "deer"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "dish"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "class"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "fox"
+        }
+      ],
+      "Question": "Which of these nouns does not change in plural form?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55ed"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "deer",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "It already sounds plural",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "It’s too short"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "It already sounds plural"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "It’s irregular and doesn't change"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "It has no plural"
+        }
+      ],
+      "Question": "Why don’t we add -s to “sheep” in plural form?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55f4"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "It’s irregular and doesn't change",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "childs",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "women"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "childs"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "dancing"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "are"
+        }
+      ],
+      "Question": "Which plural form is used incorrectly in this sentence: “The women and childs are dancing.”",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55f2"
+      },
+      "ObtainedMarks": 1,
+      "ActualAnswer": "childs",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "went",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "go"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "went"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "goes"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "going"
+        }
+      ],
+      "Question": "What is the correct verb in: He ___ to school every day.",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55a2"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "goes",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "She went fast.",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "She ran fast."
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "She went fast."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "She moved fast."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "She walked fast."
+        }
+      ],
+      "Question": "Which sentence uses a better verb?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55a5"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "She ran fast.",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "Sit down.",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "I have a dog."
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "Sit down."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "What time is it?"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "That’s amazing!"
+        }
+      ],
+      "Question": "Which sentence is asking something?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55d6"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "What time is it?",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "Are you okay?",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "The boy fell."
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "Are you okay?"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Stop shouting."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "That’s a big dog!"
+        }
+      ],
+      "Question": "Choose the sentence that shows a command.",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55d8"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "Stop shouting.",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "Although played, raining we.",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Although it was raining, we played."
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "Although played, raining we."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "It raining although we played."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "We played although raining."
+        }
+      ],
+      "Question": "Choose the correct use of “although”.",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e560a"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "Although it was raining, we played.",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "He played and danced.",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "She was sad so cried."
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "He played and danced."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "I ran because I was late."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "I like tea or coffee."
+        }
+      ],
+      "Question": "Which sentence uses the conjunction incorrectly ?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e560d"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "She was sad so cried.",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "Him",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Dog"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "Him"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Happy"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Quickly"
+        }
+      ],
+      "Question": "Which one is a pronoun?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55b2"
+      },
+      "ObtainedMarks": 1,
+      "ActualAnswer": "Him",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "It",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "He"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "It"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "She"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "They"
+        }
+      ],
+      "Question": "Which word can replace the noun in the sentence: Ravi is running fast. ___ is tired.",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55a7"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "He",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "Her is going.",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Him is my brother."
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "Her is going."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "I am a student."
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "Us go to school."
+        }
+      ],
+      "Question": "Find the correct sentence.",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55ae"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "I am a student.",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "they",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "he"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "they"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "me"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "she"
+        }
+      ],
+      "Question": "Fill in the blank: Can you help ___?",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55ad"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "me",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "over",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "on"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "over"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "in"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "to"
+        }
+      ],
+      "Question": "Choose the correct preposition: The bird flew ___ the sky.",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55c4"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "in",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    },
+    {
+      "Answer": "at",
+      "AttachmentPath": [],
+      "IsMcqFlag": 1,
+      "Marks": 1,
+      "Options": [
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "behind"
+        },
+        {
+          "Check": 1,
+          "_id": null,
+          "Option": "at"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "for"
+        },
+        {
+          "Check": 0,
+          "_id": null,
+          "Option": "to"
+        }
+      ],
+      "Question": "Which sounds better? The gift is ___ the table.",
+      "_id": {
+        "$oid": "6996f1c2f11c0425b86e55c7"
+      },
+      "ObtainedMarks": 0,
+      "ActualAnswer": "behind",
+      "File": [],
+      "EditedFile": [],
+      "userOptionSequence": []
+    }
+  ],
+  "IsTestSubmitOnPortal": false
+}

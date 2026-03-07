@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Functional Steps: User Task Mapping & Daily Logging</title>
+<style>
+:root {
+  --primary: #1a365d; --accent: #2b6cb0; --green: #38a169; --amber: #d69e2e;
+  --red: #e53e3e; --bg: #f7fafc; --card: #ffffff; --border: #e2e8f0;
+  --text: #2d3748; --muted: #718096; --light: #ebf4ff;
+  --fp1: #6366f1; --fp2: #ec4899; --fp3: #f59e0b; --fp4: #10b981; --fp5: #3b82f6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 32px 40px; }
+.header h1 { font-size: 26px; margin-bottom: 6px; }
+.header p { font-size: 14px; opacity: 0.85; }
+.container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+.section { margin-bottom: 40px; }
+.section-title { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 3px solid var(--accent); }
+.sub-title { font-size: 16px; font-weight: 600; color: var(--primary); margin: 20px 0 10px; }
+p.desc { font-size: 14px; color: var(--muted); margin-bottom: 16px; max-width: 800px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 20px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+th { background: var(--primary); color: white; padding: 10px 14px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover { background: var(--light); }
+
+/* FP Tags */
+.fp-tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; margin: 2px; }
+.fp1 { background: #eef2ff; color: var(--fp1); }
+.fp2 { background: #fdf2f8; color: var(--fp2); }
+.fp3 { background: #fffbeb; color: var(--fp3); }
+.fp4 { background: #ecfdf5; color: var(--fp4); }
+.fp5 { background: #eff6ff; color: var(--fp5); }
+
+/* Depth Tags */
+.depth-tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; background: #f1f5f9; color: #475569; margin: 2px; }
+
+/* Phase Cards */
+.phase-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.phase-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 4px solid var(--accent); }
+.phase-card.p1 { border-top-color: var(--fp1); }
+.phase-card.p2 { border-top-color: var(--green); }
+.phase-card.p3 { border-top-color: var(--fp5); }
+.phase-card .phase-num { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+.phase-card h3 { font-size: 18px; color: var(--primary); margin-bottom: 8px; }
+.phase-card .phase-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+
+/* Step List */
+.steps { list-style: none; counter-reset: step; }
+.steps li { position: relative; padding: 10px 0 10px 44px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.steps li:last-child { border-bottom: none; }
+.steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 10px; width: 30px; height: 30px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.steps li strong { color: var(--primary); }
+
+/* Flow Diagram */
+.flow-diagram { background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 24px; }
+.flow-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.flow-box { background: var(--light); border: 2px solid var(--accent); border-radius: 12px; padding: 16px 24px; text-align: center; min-width: 180px; }
+.flow-box h4 { font-size: 13px; color: var(--primary); margin-bottom: 4px; }
+.flow-box p { font-size: 11px; color: var(--muted); }
+.flow-box.db { background: #f0fff4; border-color: var(--green); }
+.flow-box.out { background: #fffbeb; border-color: var(--amber); }
+.flow-arrow { font-size: 24px; color: var(--accent); font-weight: 700; }
+.flow-arrow.down { display: block; text-align: center; font-size: 28px; margin: 8px 0; }
+
+/* KPI Row */
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.kpi { background: white; border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 4px solid var(--accent); }
+.kpi .value { font-size: 28px; font-weight: 800; color: var(--primary); }
+.kpi .label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+.kpi.green { border-top-color: var(--green); } .kpi.green .value { color: var(--green); }
+.kpi.amber { border-top-color: var(--amber); } .kpi.amber .value { color: var(--amber); }
+.kpi.red { border-top-color: var(--red); } .kpi.red .value { color: var(--red); }
+
+/* Principles Grid */
+.fp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
+.fp-card { background: white; border-radius: 10px; padding: 16px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-top: 4px solid; }
+.fp-card h4 { font-size: 13px; margin-bottom: 6px; }
+.fp-card p { font-size: 11px; color: var(--muted); }
+.fp-card:nth-child(1) { border-top-color: var(--fp1); } .fp-card:nth-child(1) h4 { color: var(--fp1); }
+.fp-card:nth-child(2) { border-top-color: var(--fp2); } .fp-card:nth-child(2) h4 { color: var(--fp2); }
+.fp-card:nth-child(3) { border-top-color: var(--fp3); } .fp-card:nth-child(3) h4 { color: var(--fp3); }
+.fp-card:nth-child(4) { border-top-color: var(--fp4); } .fp-card:nth-child(4) h4 { color: var(--fp4); }
+.fp-card:nth-child(5) { border-top-color: var(--fp5); } .fp-card:nth-child(5) h4 { color: var(--fp5); }
+
+/* Scenario Cards */
+.scenario-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.scenario { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.scenario h4 { font-size: 14px; color: var(--primary); margin-bottom: 4px; }
+.scenario .role-tag { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; margin-bottom: 10px; display: inline-block; }
+.scenario .role-tag.teacher { background: #eff6ff; color: var(--fp5); }
+.scenario .role-tag.leader { background: #fffbeb; color: var(--fp3); }
+.scenario .timeline { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.scenario .timeline div { padding: 4px 0; border-bottom: 1px solid var(--border); }
+.scenario .result { font-size: 12px; font-weight: 600; padding: 8px; background: var(--light); border-radius: 6px; margin-top: 10px; }
+
+/* Metric table */
+.metric-table td:first-child { font-weight: 600; color: var(--primary); white-space: nowrap; }
+.metric-table td:last-child { font-family: 'SF Mono', monospace; font-size: 12px; }
+
+/* Design Principles */
+.principles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.principle-card { background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); display: flex; gap: 12px; align-items: flex-start; }
+.principle-card .icon { font-size: 24px; flex-shrink: 0; width: 40px; height: 40px; background: var(--light); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.principle-card h4 { font-size: 13px; color: var(--primary); margin-bottom: 4px; }
+.principle-card p { font-size: 12px; color: var(--muted); }
+
+.footer { text-align: center; padding: 24px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px; }
+
+@media print { body { background: white; } .container { max-width: 100%; } }
+@media (max-width: 800px) { .phase-grid, .fp-grid, .scenario-grid, .principles-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Functional Steps: User Task Mapping & Daily Logging</h1>
+  <p>Stage 5 — Micro-Intervention Practice &nbsp;|&nbsp; Myelin NEP Readiness Pilot &nbsp;|&nbsp; Deccan Education Society &nbsp;|&nbsp; 2026-02-18</p>
+</div>
+
+<div class="container">
+
+<!-- Section 1: Overview -->
+<div class="section">
+  <h2 class="section-title">1. Overview</h2>
+  <p class="desc">Stage 5 of the NEP Readiness pilot enables teachers and school leaders to select daily micro-intervention tasks aligned to NEP 2020's Foundational Principles and track their classroom practice through a 21-day daily logging mechanism.</p>
+  <div class="kpi-row">
+    <div class="kpi"><div class="value">12</div><div class="label">Tasks Available</div></div>
+    <div class="kpi green"><div class="value">5</div><div class="label">Foundational Principles</div></div>
+    <div class="kpi amber"><div class="value">21</div><div class="label">Day Practice Window</div></div>
+    <div class="kpi"><div class="value">2</div><div class="label">Languages (EN + MR)</div></div>
+    <div class="kpi"><div class="value">2</div><div class="label">Roles (Teacher + Leader)</div></div>
+  </div>
+</div>
+
+<!-- Section 2: Foundational Principles -->
+<div class="section">
+  <h2 class="section-title">2. NEP 2020 Foundational Principles</h2>
+  <div class="fp-grid">
+    <div class="fp-card">
+      <h4>FP-1</h4>
+      <p><strong>Every Child is Unique</strong><br>Recognizing individual differences, inclusive observation</p>
+    </div>
+    <div class="fp-card">
+      <h4>FP-2</h4>
+      <p><strong>Holistic & Experiential Learning</strong><br>Learning by doing, connecting to real life</p>
+    </div>
+    <div class="fp-card">
+      <h4>FP-3</h4>
+      <p><strong>Reflective Practitioner</strong><br>Self-reflection, continuous improvement</p>
+    </div>
+    <div class="fp-card">
+      <h4>FP-4</h4>
+      <p><strong>Assessment for Learning</strong><br>Formative assessment, understanding over marks</p>
+    </div>
+    <div class="fp-card">
+      <h4>FP-5</h4>
+      <p><strong>Collaboration & Community</strong><br>Teacher-parent-community partnership</p>
+    </div>
+  </div>
+</div>
+
+<!-- Section 3: 12 Tasks -->
+<div class="section">
+  <h2 class="section-title">3. The 12 Micro-Intervention Tasks</h2>
+  <table>
+    <thead>
+      <tr><th>Code</th><th>Task Name</th><th>FP</th><th>Depth</th><th>What the User Does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>T01</strong></td><td>Notice One Learner</td><td><span class="fp-tag fp1">FP-1</span></td><td><span class="depth-tag">D1&#8594;D2</span></td><td>Quietly watch one student — notice how they sit, listen, respond, or try</td></tr>
+      <tr><td><strong>T02</strong></td><td>One Adjustment</td><td><span class="fp-tag fp1">FP-1</span></td><td><span class="depth-tag">D2&#8594;D3</span></td><td>Change one small thing for a student — speak slower, simpler example, or pair them</td></tr>
+      <tr><td><strong>T03</strong></td><td>Change One Example</td><td><span class="fp-tag fp2">FP-2</span></td><td><span class="depth-tag">D1&#8594;D2</span></td><td>Replace textbook example with something from daily life students know</td></tr>
+      <tr><td><strong>T04</strong></td><td>Ask a Why/How</td><td><span class="fp-tag fp2">FP-2</span></td><td><span class="depth-tag">D2&#8594;D3</span></td><td>Ask at least one "Why?" or "How did you get this answer?"</td></tr>
+      <tr><td><strong>T05</strong></td><td>End-of-Class Reflection</td><td><span class="fp-tag fp3">FP-3</span></td><td><span class="depth-tag">D1&#8594;D2</span></td><td>After class, think: What went well? What didn't work?</td></tr>
+      <tr><td><strong>T06</strong></td><td>Try One Small Change</td><td><span class="fp-tag fp3">FP-3</span></td><td><span class="depth-tag">D2&#8594;D3</span></td><td>In next class, change one thing based on what you noticed</td></tr>
+      <tr><td><strong>T07</strong></td><td>Quick Check</td><td><span class="fp-tag fp4">FP-4</span></td><td><span class="depth-tag">D1&#8594;D2</span></td><td>Ask 2–3 students to explain the answer in their own words</td></tr>
+      <tr><td><strong>T08</strong></td><td>Spot One Pattern</td><td><span class="fp-tag fp4">FP-4</span></td><td><span class="depth-tag">D2&#8594;D3</span></td><td>Notice if many students make the same mistake or confusion</td></tr>
+      <tr><td><strong>T09</strong></td><td>Teacher Touchpoint</td><td><span class="fp-tag fp5">FP-5</span></td><td><span class="depth-tag">D1&#8594;D2</span></td><td>Tell another teacher about one thing that happened in your class</td></tr>
+      <tr><td><strong>T10</strong></td><td>Parent Signal</td><td><span class="fp-tag fp5">FP-5</span></td><td><span class="depth-tag">D1&#8594;D2</span></td><td>Share one good learning observation about a child with a parent</td></tr>
+      <tr><td><strong>T11</strong></td><td>Student Voice</td><td><span class="fp-tag fp1">FP-1</span></td><td><span class="depth-tag">Cross-FP</span></td><td>Ask one student: "What helped you learn today?"</td></tr>
+      <tr><td><strong>T12</strong></td><td>Pause & Name</td><td><span class="fp-tag fp4">FP-4</span></td><td><span class="depth-tag">Cross-FP</span></td><td>Pause once and name what students are doing well in learning</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">Depth Levels Explained</h3>
+  <table>
+    <thead><tr><th>Depth</th><th>Label</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><span class="depth-tag">D1&#8594;D2</span></td><td>Procedural &#8594; Responsive</td><td>Entry-level: start by noticing patterns, then respond to what you observe</td></tr>
+      <tr><td><span class="depth-tag">D2&#8594;D3</span></td><td>Responsive &#8594; Diagnostic</td><td>Growth: adjust responses based on deeper evidence and diagnosis</td></tr>
+      <tr><td><span class="depth-tag">Cross-FP</span></td><td>Multi-Principle Integration</td><td>Advanced: tasks that bridge multiple foundational principles</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Section 4: Three Phases -->
+<div class="section">
+  <h2 class="section-title">4. Functional Flow — Three Phases</h2>
+
+  <div class="phase-grid">
+    <div class="phase-card p1">
+      <div class="phase-num">Phase 1</div>
+      <h3>Task Mapping</h3>
+      <div class="phase-desc">User selects 3–12 tasks to practice over 21 days</div>
+    </div>
+    <div class="phase-card p2">
+      <div class="phase-num">Phase 2</div>
+      <h3>Daily Logging</h3>
+      <div class="phase-desc">User checks in daily to mark practiced tasks + reflect</div>
+    </div>
+    <div class="phase-card p3">
+      <div class="phase-num">Phase 3</div>
+      <h3>Progress Tracking</h3>
+      <div class="phase-desc">Dashboard shows engagement, completion, and consistency</div>
+    </div>
+  </div>
+
+  <!-- Phase 1 Detail -->
+  <h3 class="sub-title">Phase 1: Task Mapping (Enrollment)</h3>
+  <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);margin-bottom:24px;">
+    <ol class="steps">
+      <li>User <strong>logs in</strong> and navigates to the Micro-Intervention module</li>
+      <li>System displays all <strong>12 tasks organized by FP</strong> — each with name, description, FP tag, depth tag. Bilingual toggle: EN | &#2350;&#2352;&#2366;&#2336;&#2368;</li>
+      <li>User <strong>selects 3–12 tasks</strong>. Selection highlights FP coverage and depth distribution visually</li>
+      <li>User confirms selection &#8594; <strong>"Start My Practice"</strong></li>
+      <li>System saves to <strong>UserTaskMapping</strong>: userTempId, SelectedTasks[], createdAt</li>
+      <li>User sees <strong>confirmation screen</strong> with selected tasks and practice start date</li>
+    </ol>
+    <div style="margin-top:16px;padding:12px;background:#f0fff4;border-radius:8px;font-size:12px;">
+      <strong>Business Rules:</strong> Minimum 3 tasks, maximum 12. User can re-select at any time (overwrites previous). Same task library for Teachers and Leaders.
+    </div>
+  </div>
+
+  <!-- Phase 2 Detail -->
+  <h3 class="sub-title">Phase 2: Daily Logging (21-Day Practice Window)</h3>
+  <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);margin-bottom:24px;">
+    <ol class="steps">
+      <li>User opens <strong>"Daily Practice Log"</strong> screen. Current date shown prominently</li>
+      <li>System displays <strong>only the user's selected tasks</strong> (not all 12). Each task rendered as a card with checkbox + optional comment field</li>
+      <li>User <strong>checks off completed tasks</strong> &#8594; true (practiced) / false (not practiced)</li>
+      <li>User <strong>optionally adds a reflection</strong> comment (free text)</li>
+      <li>System <strong>auto-saves</strong> on each interaction (no submit button)</li>
+      <li>System creates <strong>UserDailyProgress</strong> record: UserTempId, SubmitDate, TasksProgress[]</li>
+      <li>User sees <strong>visual confirmation</strong> &#8212; checkmarks turn green</li>
+    </ol>
+    <div style="margin-top:16px;padding:12px;background:#fffbeb;border-radius:8px;font-size:12px;">
+      <strong>Business Rules:</strong> One log per user per day. All selected tasks appear (checked or unchecked). Comments optional. Past dates cannot be edited. All entries are append-only (no deletion).
+    </div>
+  </div>
+
+  <!-- Phase 3 Detail -->
+  <h3 class="sub-title">Phase 3: Progress Tracking (Dashboard)</h3>
+  <div style="background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);margin-bottom:24px;">
+    <ol class="steps">
+      <li>User navigates to <strong>"My Progress"</strong> screen</li>
+      <li>System displays a <strong>21-day progress grid</strong>: Rows = tasks, Columns = dates. Cell states: &#10003; Done | &#10003;+comment | &#10007; Not done | &#8212; Future</li>
+      <li>System calculates <strong>per-user metrics</strong>: completion rate, consistency %, comment rate</li>
+      <li>Admin dashboard <strong>aggregates across all users</strong>: KPIs, charts (daily timeline, task completion, FP radar), filterable user table</li>
+    </ol>
+  </div>
+</div>
+
+<!-- Section 5: Data Flow -->
+<div class="section">
+  <h2 class="section-title">5. End-to-End Data Flow</h2>
+  <div class="flow-diagram">
+    <div class="flow-row">
+      <div class="flow-box">
+        <h4>LOGIN</h4>
+        <p>User authenticates</p>
+      </div>
+      <span class="flow-arrow">&#8594;</span>
+      <div class="flow-box">
+        <h4>SELECT TASKS</h4>
+        <p>Choose 3–12 tasks</p>
+      </div>
+      <span class="flow-arrow">&#8594;</span>
+      <div class="flow-box">
+        <h4>DAILY LOG</h4>
+        <p>Check off + reflect</p>
+      </div>
+      <span class="flow-arrow">&#8594;</span>
+      <div class="flow-box out">
+        <h4>DASHBOARD</h4>
+        <p>View progress</p>
+      </div>
+    </div>
+    <div class="flow-arrow down">&#8595;</div>
+    <div class="flow-row">
+      <div class="flow-box db">
+        <h4>UserTaskMapping</h4>
+        <p>userTempId<br>SelectedTasks[]<br>createdAt</p>
+      </div>
+      <span class="flow-arrow" style="visibility:hidden">&#8594;</span>
+      <div class="flow-box db">
+        <h4>UserDailyProgress</h4>
+        <p>UserTempId, SubmitDate<br>TasksProgress[]<br>{ taskId, isChecked, comment }</p>
+      </div>
+      <span class="flow-arrow">&#8594;</span>
+      <div class="flow-box out">
+        <h4>Computed Metrics</h4>
+        <p>Completion Rate<br>Consistency %<br>Comment Rate</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 6: Metrics -->
+<div class="section">
+  <h2 class="section-title">6. Key Metrics & Formulas</h2>
+  <table class="metric-table">
+    <thead><tr><th>Metric</th><th>Formula</th><th>Scope</th></tr></thead>
+    <tbody>
+      <tr><td>Completion Rate</td><td>totalChecked / (totalChecked + totalUnchecked) &times; 100</td><td>Per user + global</td></tr>
+      <tr><td>Consistency</td><td>daysLogged / min(daysSinceMapping, 21) &times; 100</td><td>Per user</td></tr>
+      <tr><td>Comment Rate</td><td>totalComments / totalLogEntries &times; 100</td><td>Per user + global</td></tr>
+      <tr><td>Active Users</td><td>Count of users with &ge;1 log entry</td><td>Global</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Section 7: Scenarios -->
+<div class="section">
+  <h2 class="section-title">7. Typical User Scenarios</h2>
+  <div class="scenario-grid">
+    <div class="scenario">
+      <h4>Scenario A: Engaged Teacher</h4>
+      <span class="role-tag teacher">Teacher</span>
+      <div class="timeline">
+        <div><strong>Feb 3:</strong> Maps 5 tasks (one per FP, all D1&#8594;D2)</div>
+        <div><strong>Feb 4–17:</strong> Logs 11 of 14 days, adds 4 comments</div>
+      </div>
+      <div class="result">Consistency: 79% &nbsp;|&nbsp; Completion: 85% &nbsp;|&nbsp; Comments: 7%</div>
+    </div>
+    <div class="scenario">
+      <h4>Scenario B: Selective Leader</h4>
+      <span class="role-tag leader">Leader</span>
+      <div class="timeline">
+        <div><strong>Feb 4:</strong> Maps 3 growth tasks (D2&#8594;D3)</div>
+        <div><strong>Feb 5–17:</strong> Logs 6 of 13 days</div>
+      </div>
+      <div class="result">Consistency: 46% &nbsp;|&nbsp; Completion: 72% &nbsp;|&nbsp; Comments: 0%</div>
+    </div>
+    <div class="scenario">
+      <h4>Scenario C: Drop-Off Teacher</h4>
+      <span class="role-tag teacher">Teacher</span>
+      <div class="timeline">
+        <div><strong>Feb 3:</strong> Maps 7 tasks across all FPs</div>
+        <div><strong>Feb 5–7:</strong> Logs 3 days (enthusiastic), then stops</div>
+      </div>
+      <div class="result">Consistency: 20% &nbsp;|&nbsp; Completion: 95% &nbsp;|&nbsp; Comments: 15%</div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 8: Design Principles -->
+<div class="section">
+  <h2 class="section-title">8. Design Principles</h2>
+  <div class="principles-grid">
+    <div class="principle-card">
+      <div class="icon">&#128172;</div>
+      <div><h4>Trust-Based Reflection</h4><p>Self-reported check-ins, not surveillance. No external validation required.</p></div>
+    </div>
+    <div class="principle-card">
+      <div class="icon">&#9889;</div>
+      <div><h4>Minimal Friction</h4><p>Auto-save on interaction. No submit button. Card-based mobile UI.</p></div>
+    </div>
+    <div class="principle-card">
+      <div class="icon">&#127463;</div>
+      <div><h4>Bilingual From Day 1</h4><p>English + Marathi toggle on all screens. Tasks, descriptions, UI labels.</p></div>
+    </div>
+    <div class="principle-card">
+      <div class="icon">&#128241;</div>
+      <div><h4>Mobile-First</h4><p>Cards on mobile, tables on desktop. Responsive layout throughout.</p></div>
+    </div>
+    <div class="principle-card">
+      <div class="icon">&#128274;</div>
+      <div><h4>Append-Only Data</h4><p>No edits or deletes. All log entries are permanent and immutable.</p></div>
+    </div>
+    <div class="principle-card">
+      <div class="icon">&#129309;</div>
+      <div><h4>Role-Agnostic Tasks</h4><p>Same 12-task library for Teachers and Leaders. Context differs, tasks don't.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 9: Current Stats -->
+<div class="section">
+  <h2 class="section-title">9. Current Production Statistics (2026-02-18)</h2>
+  <div class="kpi-row">
+    <div class="kpi"><div class="value">124</div><div class="label">Total Users (DES)</div></div>
+    <div class="kpi green"><div class="value">119</div><div class="label">Active (&#8805;1 Log)</div></div>
+    <div class="kpi red"><div class="value">5</div><div class="label">Zero-Log Users</div></div>
+    <div class="kpi amber"><div class="value">5.7</div><div class="label">Avg Days Logged</div></div>
+    <div class="kpi green"><div class="value">~88%</div><div class="label">Completion Rate</div></div>
+    <div class="kpi"><div class="value">2,994</div><div class="label">Total Log Entries</div></div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  Myelin NEP Readiness Pilot &nbsp;|&nbsp; Deccan Education Society &nbsp;|&nbsp; Stage 5 Micro-Intervention &nbsp;|&nbsp; Generated 2026-02-18
+</div>
+
+</body>
+</html>

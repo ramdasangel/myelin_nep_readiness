@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kshitij Dashboard API Specification</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm 20mm 18mm; }
+  body {
+    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px; line-height: 1.55; color: #1e293b;
+    max-width: 100%; padding: 0; margin: 0;
+  }
+  h1 { font-size: 22px; color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 8px; margin-top: 30px; page-break-after: avoid; }
+  h2 { font-size: 16px; color: #1e40af; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-top: 24px; page-break-after: avoid; }
+  h3 { font-size: 13px; color: #334155; margin-top: 18px; page-break-after: avoid; }
+  h4 { font-size: 11px; color: #475569; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 16px 0; font-size: 10px; page-break-inside: avoid; }
+  th { background: #f1f5f9; color: #334155; font-weight: 600; text-align: left; padding: 6px 8px; border: 1px solid #cbd5e1; }
+  td { padding: 5px 8px; border: 1px solid #e2e8f0; vertical-align: top; }
+  tr:nth-child(even) { background: #f8fafc; }
+  code { font-family: 'SF Mono', 'Menlo', monospace; font-size: 10px; background: #f1f5f9; padding: 1px 4px; border-radius: 3px; }
+  pre { background: #1e293b; color: #e2e8f0; padding: 12px 14px; border-radius: 6px; overflow-x: auto; font-size: 9.5px; line-height: 1.45; page-break-inside: avoid; }
+  pre code { background: none; padding: 0; color: #e2e8f0; }
+  blockquote { border-left: 3px solid #3b82f6; margin: 10px 0; padding: 6px 14px; color: #475569; background: #f8fafc; }
+  strong { color: #0f172a; }
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+  a { color: #2563eb; text-decoration: none; }
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 3px; }
+  .toc { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px 18px; border-radius: 6px; margin-bottom: 20px; }
+  .toc a { color: #1e40af; }
+</style>
+</head>
+<body>
+<h1 id="project-kshitij-dashboard-api-database-query-specification">Project Kshitij — Dashboard API &amp; Database Query Specification</h1>
+<p><strong>Project:</strong> क्षितिज (Kshitij) — NEP-2020 Readiness Index
+<strong>Prepared For:</strong> Backend API Team
+<strong>Version:</strong> 1.0
+<strong>Date:</strong> 2026-02-16
+<strong>Scope:</strong> APIs required to serve two dashboards — Task Mapping Dashboard &amp; Daily Progress Dashboard</p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-overview">Overview</a></li>
+<li><a href="#2-mongodb-collections--schemas">MongoDB Collections &amp; Schemas</a></li>
+<li><a href="#3-static-reference-data">Static Reference Data</a></li>
+<li><a href="#4-dashboard-1--task-mapping">Dashboard 1 — Task Mapping</a></li>
+<li><a href="#5-dashboard-2--daily-progress">Dashboard 2 — Daily Progress</a></li>
+<li><a href="#6-api-endpoint-specifications">API Endpoint Specifications</a></li>
+<li><a href="#7-aggregation-pipeline-reference">Aggregation Pipeline Reference</a></li>
+<li><a href="#8-computed-metric-formulas">Computed Metric Formulas</a></li>
+<li><a href="#9-filter--sort-requirements">Filter &amp; Sort Requirements</a></li>
+<li><a href="#10-data-volume--performance-notes">Data Volume &amp; Performance Notes</a></li>
+</ol>
+<hr />
+<h2 id="1-overview">1. Overview</h2>
+<p>Both dashboards visualise data from the <strong>Micro-Intervention</strong> pipeline of Project Kshitij:</p>
+<pre><code>MicroInterventionTasks (12 tasks)
+        │
+        ▼
+UserTaskMapping (user selects 3-5 tasks)
+        │
+        ▼
+UserDailyProgress (daily check-in logs over 21-day period)
+</code></pre>
+<p><strong>Dashboard 1 (Task Mapping)</strong> shows task selection patterns — who chose what, FP coverage, depth intent, enrollment timeline.</p>
+<p><strong>Dashboard 2 (Daily Progress)</strong> adds logging behaviour — completion rates, consistency, daily activity, FP-level engagement, and per-task mapped-vs-logged breakdowns.</p>
+<p><strong>Scope:</strong> Only users belonging to <strong>Deccan Education Society</strong> schools. Filter out records where <code>SchoolName</code> is blank, "Unknown", or "Myelin Model School".</p>
+<hr />
+<h2 id="2-mongodb-collections-schemas">2. MongoDB Collections &amp; Schemas</h2>
+<h3 id="21-usertemp">2.1 UserTemp</h3>
+<p>Stores user profiles. This is the user identity collection for the Kshitij pilot.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_id</code></td>
+<td>ObjectId</td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>firstName</code></td>
+<td>String</td>
+<td>User first name</td>
+</tr>
+<tr>
+<td><code>lastName</code></td>
+<td>String</td>
+<td>User last name</td>
+</tr>
+<tr>
+<td><code>RoleName</code></td>
+<td>String</td>
+<td>"Teacher" or "Leader"</td>
+</tr>
+<tr>
+<td><code>selectedBranchId</code></td>
+<td>ObjectId</td>
+<td>FK → SchoolBranches._id</td>
+</tr>
+<tr>
+<td><code>mobile</code></td>
+<td>String</td>
+<td>Phone number</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>String</td>
+<td>Email address</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Query note:</strong> Use <code>selectedBranchId</code> to join to SchoolBranches.</p>
+<h3 id="22-schoolbranches">2.2 SchoolBranches</h3>
+<p>Branch-level school information. Note: <code>BranchCode</code> field is <strong>not reliably present</strong> in this collection — derive from <code>Diagnostic</code> collection if needed.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_id</code></td>
+<td>ObjectId</td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>BranchName</code></td>
+<td>String</td>
+<td>Branch display name</td>
+</tr>
+<tr>
+<td><code>School</code></td>
+<td>Object</td>
+<td>Embedded object</td>
+</tr>
+<tr>
+<td><code>School.SchoolName</code></td>
+<td>String</td>
+<td>Parent school/society name</td>
+</tr>
+<tr>
+<td><code>School.SchoolCode</code></td>
+<td>String</td>
+<td>School code</td>
+</tr>
+<tr>
+<td><code>BranchCode</code></td>
+<td>String</td>
+<td>May be empty — not reliable</td>
+</tr>
+<tr>
+<td><code>BranchMedium</code></td>
+<td>String</td>
+<td>Medium of instruction</td>
+</tr>
+<tr>
+<td><code>IsActive</code></td>
+<td>Boolean</td>
+<td>Active flag</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Filter rule:</strong> Only include branches where <code>School.SchoolName === "Deccan Education Society"</code>.</p>
+<h3 id="23-microinterventiontasks">2.3 MicroInterventionTasks</h3>
+<p>The 12 micro-intervention task definitions. Two ObjectId series exist (original + duplicate); both map positionally to T01–T12.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_id</code></td>
+<td>ObjectId</td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>task.en.TaskPrefix</code></td>
+<td>String</td>
+<td>Task code, e.g., "T01"</td>
+</tr>
+<tr>
+<td><code>task.en.title</code></td>
+<td>String</td>
+<td>Task title in English</td>
+</tr>
+<tr>
+<td><code>task.mr.title</code></td>
+<td>String</td>
+<td>Task title in Marathi</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>String</td>
+<td>Task category</td>
+</tr>
+<tr>
+<td><code>isActive</code></td>
+<td>Boolean</td>
+<td>Active flag</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two ID series (both valid, map positionally T01→T12):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Original (<code>697b1e2c</code> series)</th>
+<th>Duplicate (<code>697b1e3b</code> series)</th>
+<th>Task Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>697b1e2cc01f188423ea7e0f</code></td>
+<td><code>697b1e3bc671c89acb64125a</code></td>
+<td>T01</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e10</code></td>
+<td><code>697b1e3bc671c89acb64125b</code></td>
+<td>T02</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e11</code></td>
+<td><code>697b1e3bc671c89acb64125c</code></td>
+<td>T03</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e12</code></td>
+<td><code>697b1e3bc671c89acb64125d</code></td>
+<td>T04</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e13</code></td>
+<td><code>697b1e3bc671c89acb64125e</code></td>
+<td>T05</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e14</code></td>
+<td><code>697b1e3bc671c89acb64125f</code></td>
+<td>T06</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e15</code></td>
+<td><code>697b1e3bc671c89acb641260</code></td>
+<td>T07</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e16</code></td>
+<td><code>697b1e3bc671c89acb641261</code></td>
+<td>T08</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e17</code></td>
+<td><code>697b1e3bc671c89acb641262</code></td>
+<td>T09</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e18</code></td>
+<td><code>697b1e3bc671c89acb641263</code></td>
+<td>T10</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e19</code></td>
+<td><code>697b1e3bc671c89acb641264</code></td>
+<td>T11</td>
+</tr>
+<tr>
+<td><code>697b1e2cc01f188423ea7e1a</code></td>
+<td><code>697b1e3bc671c89acb641265</code></td>
+<td>T12</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-usertaskmapping">2.4 UserTaskMapping</h3>
+<p>One document per user — contains the array of tasks the user selected.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_id</code></td>
+<td>ObjectId</td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>userTempId</code></td>
+<td>ObjectId</td>
+<td>FK → UserTemp._id</td>
+</tr>
+<tr>
+<td><code>SelectedTasks</code></td>
+<td>Array</td>
+<td>Array of selected task objects</td>
+</tr>
+<tr>
+<td><code>SelectedTasks[].taskId</code></td>
+<td>ObjectId</td>
+<td>FK → MicroInterventionTasks._id</td>
+</tr>
+<tr>
+<td><code>createdAt</code></td>
+<td>Date</td>
+<td>When the user made their selection</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> Each <code>SelectedTasks[]</code> entry contains a <code>taskId</code> that maps to one of the two ObjectId series above. Use the positional mapping to resolve to T01–T12.</p>
+<h3 id="25-userdailyprogress">2.5 UserDailyProgress</h3>
+<p>One document per user per day. Contains an array of task-level progress entries.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_id</code></td>
+<td>ObjectId</td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>UserTempId</code></td>
+<td>ObjectId</td>
+<td>FK → UserTemp._id</td>
+</tr>
+<tr>
+<td><code>SubmitDate</code></td>
+<td>Date</td>
+<td>The date of the log submission</td>
+</tr>
+<tr>
+<td><code>CreatedAt</code></td>
+<td>Date</td>
+<td>Server timestamp of creation</td>
+</tr>
+<tr>
+<td><code>TasksProgress</code></td>
+<td>Array</td>
+<td>Array of per-task progress entries</td>
+</tr>
+<tr>
+<td><code>TasksProgress[].taskId</code></td>
+<td>ObjectId</td>
+<td>FK → MicroInterventionTasks._id</td>
+</tr>
+<tr>
+<td><code>TasksProgress[].isChecked</code></td>
+<td>Boolean</td>
+<td>Whether the user marked the task as done</td>
+</tr>
+<tr>
+<td><code>TasksProgress[].comment</code></td>
+<td>String</td>
+<td>Optional free-text comment</td>
+</tr>
+</tbody>
+</table>
+<h3 id="26-diagnostic-for-branchcode-derivation">2.6 Diagnostic (for BranchCode derivation)</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_id</code></td>
+<td>ObjectId</td>
+<td>Primary key</td>
+</tr>
+<tr>
+<td><code>branchCode</code></td>
+<td>String</td>
+<td>Branch code (M001–M038)</td>
+</tr>
+<tr>
+<td><code>branchId</code></td>
+<td>ObjectId</td>
+<td>FK → SchoolBranches._id</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Usage:</strong> Join <code>Diagnostic.branchId → SchoolBranches._id</code> to get the branchCode for a given branch, since <code>SchoolBranches.BranchCode</code> is unreliable.</p>
+<hr />
+<h2 id="3-static-reference-data">3. Static Reference Data</h2>
+<p>The following mappings are <strong>static</strong> and can be hardcoded or served from a config endpoint.</p>
+<h3 id="31-task-fp-depth-mapping">3.1 Task → FP → Depth Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Task Code</th>
+<th>Task Title</th>
+<th>Foundational Principle</th>
+<th>Depth Intent</th>
+<th>Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T01</td>
+<td>Notice One Learner</td>
+<td>FP-1: Every Child is Unique</td>
+<td>D1→D2</td>
+<td>Entry</td>
+</tr>
+<tr>
+<td>T02</td>
+<td>One Adjustment</td>
+<td>FP-1: Every Child is Unique</td>
+<td>D2→D3</td>
+<td>Growth</td>
+</tr>
+<tr>
+<td>T03</td>
+<td>Change One Example</td>
+<td>FP-2: Holistic &amp; Experiential</td>
+<td>D1→D2</td>
+<td>Entry</td>
+</tr>
+<tr>
+<td>T04</td>
+<td>Ask a Why/How</td>
+<td>FP-2: Holistic &amp; Experiential</td>
+<td>D2→D3</td>
+<td>Growth</td>
+</tr>
+<tr>
+<td>T05</td>
+<td>End-of-Class Reflection</td>
+<td>FP-3: Reflective Practitioner</td>
+<td>D1→D2</td>
+<td>Entry</td>
+</tr>
+<tr>
+<td>T06</td>
+<td>Try One Small Change</td>
+<td>FP-3: Reflective Practitioner</td>
+<td>D2→D3</td>
+<td>Growth</td>
+</tr>
+<tr>
+<td>T07</td>
+<td>Quick Check</td>
+<td>FP-4: Assessment for Learning</td>
+<td>D1→D2</td>
+<td>Entry</td>
+</tr>
+<tr>
+<td>T08</td>
+<td>Spot One Pattern</td>
+<td>FP-4: Assessment for Learning</td>
+<td>D2→D3</td>
+<td>Growth</td>
+</tr>
+<tr>
+<td>T09</td>
+<td>Teacher Touchpoint</td>
+<td>FP-5: Collaboration</td>
+<td>D1→D2</td>
+<td>Entry</td>
+</tr>
+<tr>
+<td>T10</td>
+<td>Parent Signal</td>
+<td>FP-5: Collaboration</td>
+<td>D1→D2</td>
+<td>Entry</td>
+</tr>
+<tr>
+<td>T11</td>
+<td>Student Voice</td>
+<td>FP-1: Every Child is Unique</td>
+<td>Cross-FP</td>
+<td>Cross</td>
+</tr>
+<tr>
+<td>T12</td>
+<td>Pause &amp; Name</td>
+<td>FP-4: Assessment for Learning</td>
+<td>Cross-FP</td>
+<td>Cross</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-foundational-principles">3.2 Foundational Principles</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Full Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FP-1</td>
+<td>Every Child is Unique</td>
+</tr>
+<tr>
+<td>FP-2</td>
+<td>Holistic &amp; Experiential Learning</td>
+</tr>
+<tr>
+<td>FP-3</td>
+<td>Reflective Practitioner</td>
+</tr>
+<tr>
+<td>FP-4</td>
+<td>Assessment for Learning</td>
+</tr>
+<tr>
+<td>FP-5</td>
+<td>Collaboration &amp; Community</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-dashboard-1-task-mapping">4. Dashboard 1 — Task Mapping</h2>
+<h3 id="41-kpi-cards-6-metrics">4.1 KPI Cards (6 metrics)</h3>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Definition</th>
+<th>Data Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total Users Enrolled</td>
+<td>Count of DES users with a UserTaskMapping record</td>
+<td><code>UserTaskMapping</code> + <code>UserTemp</code> + <code>SchoolBranches</code></td>
+</tr>
+<tr>
+<td>Users Who Logged ≥1 Day</td>
+<td>Users with at least one <code>UserDailyProgress</code> document</td>
+<td><code>UserDailyProgress</code></td>
+</tr>
+<tr>
+<td>Avg Tasks / User</td>
+<td>Mean of <code>SelectedTasks.length</code> across all DES users</td>
+<td><code>UserTaskMapping</code></td>
+</tr>
+<tr>
+<td>Teachers</td>
+<td>Count where <code>UserTemp.RoleName = "Teacher"</code></td>
+<td><code>UserTemp</code></td>
+</tr>
+<tr>
+<td>Leaders</td>
+<td>Count where <code>UserTemp.RoleName = "Leader"</code></td>
+<td><code>UserTemp</code></td>
+</tr>
+<tr>
+<td>Zero Logs</td>
+<td>Users with no <code>UserDailyProgress</code> records</td>
+<td><code>UserDailyProgress</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-charts-7-visualisations">4.2 Charts (7 visualisations)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Chart</th>
+<th>Type</th>
+<th>X-Axis</th>
+<th>Y-Axis</th>
+<th>Data Needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Task Adoption — Users per Task</td>
+<td>Vertical Bar</td>
+<td>T01–T12 (label)</td>
+<td>User count</td>
+<td>Count of users who selected each task</td>
+</tr>
+<tr>
+<td>2</td>
+<td>FP Coverage — Selections by FP</td>
+<td>Vertical Bar</td>
+<td>FP-1 to FP-5</td>
+<td>Selection count</td>
+<td>Sum of task selections grouped by FP</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Depth Intent Distribution</td>
+<td>Doughnut</td>
+<td>—</td>
+<td>—</td>
+<td>Count of selections by depth category (D1→D2, D2→D3, Cross-FP)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Tasks Chosen per User — Distribution</td>
+<td>Vertical Bar</td>
+<td>Task count (1,2,3,4,5)</td>
+<td>User count</td>
+<td>Histogram of <code>SelectedTasks.length</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Role Distribution</td>
+<td>Pie</td>
+<td>—</td>
+<td>—</td>
+<td>Count by <code>RoleName</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>FP Coverage — Radar</td>
+<td>Radar</td>
+<td>FP-1 to FP-5</td>
+<td>User count</td>
+<td>Users covering each FP (distinct)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Enrollment Timeline</td>
+<td>Bar + Line</td>
+<td>Date (with day name)</td>
+<td>Users per day (bar) + Cumulative (line)</td>
+<td>Group <code>UserTaskMapping.createdAt</code> by date</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-user-detail-table-10-columns">4.3 User Detail Table (10 columns)</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Source</th>
+<th>Computation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td><code>UserTemp.firstName</code> + <code>UserTemp.lastName</code></td>
+<td>Concatenate</td>
+</tr>
+<tr>
+<td>Role</td>
+<td><code>UserTemp.RoleName</code></td>
+<td>Direct</td>
+</tr>
+<tr>
+<td>School / Branch (Code)</td>
+<td><code>SchoolBranches.BranchName</code>, <code>School.SchoolName</code>, <code>Diagnostic.branchCode</code></td>
+<td>Join via <code>selectedBranchId</code></td>
+</tr>
+<tr>
+<td>Tasks</td>
+<td><code>UserTaskMapping.SelectedTasks.length</code></td>
+<td>Count</td>
+</tr>
+<tr>
+<td>FP Coverage</td>
+<td>Map each selected taskId → task code → FP</td>
+<td>Derive from Task→FP mapping</td>
+</tr>
+<tr>
+<td>Depth Intent</td>
+<td>Map each selected taskId → task code → depth</td>
+<td>Derive from Task→Depth mapping</td>
+</tr>
+<tr>
+<td>Selected Tasks</td>
+<td>List of task codes (T01, T05, etc.)</td>
+<td>Map taskId → task code</td>
+</tr>
+<tr>
+<td>Mapped On</td>
+<td><code>UserTaskMapping.createdAt</code></td>
+<td>Direct (date part)</td>
+</tr>
+<tr>
+<td>Days Logged</td>
+<td>Count of distinct <code>UserDailyProgress.SubmitDate</code> for this user</td>
+<td>Aggregate</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-dashboard-2-daily-progress">5. Dashboard 2 — Daily Progress</h2>
+<h3 id="51-kpi-cards-8-metrics">5.1 KPI Cards (8 metrics)</h3>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Definition</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total Users</td>
+<td>Count of DES users with UserTaskMapping</td>
+<td><code>count(users)</code></td>
+</tr>
+<tr>
+<td>Active (≥1 Log)</td>
+<td>Users with at least one UserDailyProgress</td>
+<td><code>count(users where daysLogged &gt; 0)</code></td>
+</tr>
+<tr>
+<td>Zero Logs</td>
+<td>Users with no daily progress</td>
+<td><code>totalUsers - activeUsers</code></td>
+</tr>
+<tr>
+<td>Avg Days (Active)</td>
+<td>Mean days logged among active users</td>
+<td><code>sum(daysLogged) / activeUsers</code></td>
+</tr>
+<tr>
+<td>Completion Rate</td>
+<td>Global checked vs total</td>
+<td><code>totalChecked / (totalChecked + totalUnchecked) × 100</code></td>
+</tr>
+<tr>
+<td>Comment Rate</td>
+<td>Entries with non-empty comment</td>
+<td><code>totalComments / totalLogEntries × 100</code></td>
+</tr>
+<tr>
+<td>Avg Consistency</td>
+<td>Mean consistency across users with consistency &gt; 0</td>
+<td>See Section 8</td>
+</tr>
+<tr>
+<td>Total Log Entries</td>
+<td>Sum of all task-level log rows</td>
+<td><code>sum(TasksProgress[] entries across all docs)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-role-comparison-cards">5.2 Role Comparison Cards</h3>
+<p>For each role (Teacher, Leader):</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Count</td>
+<td><code>count(users where role = X)</code></td>
+</tr>
+<tr>
+<td>Avg Days Logged</td>
+<td><code>sum(daysLogged for role X) / count(role X)</code></td>
+</tr>
+<tr>
+<td>Avg Consistency</td>
+<td><code>sum(consistency for role X) / count(role X)</code></td>
+</tr>
+<tr>
+<td>Avg Completion Rate</td>
+<td><code>sum(completionRate for active role X) / count(active role X)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-charts-7-visualisations">5.3 Charts (7 visualisations)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Chart</th>
+<th>Type</th>
+<th>Data Needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Daily Activity Timeline</td>
+<td>Stacked Bar + Line</td>
+<td>Per-date: count of checked entries, unchecked entries, distinct active users. X-axis labels include day name (Mon, Tue, ...)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Task Completion Rate (T01–T12)</td>
+<td>Horizontal Bar</td>
+<td>Per-task: <code>checked / (checked + unchecked) × 100</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>FP: Mapped vs Logged Users</td>
+<td>Grouped Bar</td>
+<td>Per-FP: count of users who mapped ≥1 task in that FP vs count who checked ≥1 entry in that FP</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Depth: Selections vs Checked Logs</td>
+<td>Grouped Bar</td>
+<td>Per-depth-category: mapped count, checked count, unchecked count</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Consistency Distribution</td>
+<td>Bar</td>
+<td>Bucket users into: 0%, 1-10%, 11-20%, 21-30%, 31-50%, &gt;50%</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Correlation: Tasks Mapped vs Days Logged</td>
+<td>Scatter</td>
+<td>Per-user: x = tasksMappedCount, y = daysLogged, colour = role</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Completion Rate by FP</td>
+<td>Radar</td>
+<td>Per-FP: <code>checked / (checked + unchecked) × 100</code> across all tasks in that FP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="54-user-detail-table-15-columns">5.4 User Detail Table (15 columns)</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Source</th>
+<th>Computation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td><code>UserTemp</code></td>
+<td><code>firstName + lastName</code></td>
+</tr>
+<tr>
+<td>Role</td>
+<td><code>UserTemp.RoleName</code></td>
+<td>Direct</td>
+</tr>
+<tr>
+<td>School / Branch</td>
+<td><code>SchoolBranches</code> + <code>Diagnostic</code></td>
+<td>Join via <code>selectedBranchId</code></td>
+</tr>
+<tr>
+<td>Mapped (count)</td>
+<td><code>UserTaskMapping.SelectedTasks.length</code></td>
+<td>Count</td>
+</tr>
+<tr>
+<td>FP</td>
+<td>Selected tasks → FP mapping</td>
+<td>Derive unique FPs</td>
+</tr>
+<tr>
+<td>Depth</td>
+<td>Selected tasks → Depth mapping</td>
+<td>Derive unique depths</td>
+</tr>
+<tr>
+<td>Mapped On</td>
+<td><code>UserTaskMapping.createdAt</code></td>
+<td>Date part. If missing, infer as <code>firstLogDate - 1 day</code></td>
+</tr>
+<tr>
+<td>Days Logged</td>
+<td>Distinct <code>SubmitDate</code> count from <code>UserDailyProgress</code></td>
+<td>Aggregate</td>
+</tr>
+<tr>
+<td>Checked</td>
+<td>Count of <code>TasksProgress[].isChecked === true</code></td>
+<td>Aggregate</td>
+</tr>
+<tr>
+<td>Unchecked</td>
+<td>Count of <code>TasksProgress[].isChecked === false</code></td>
+<td>Aggregate</td>
+</tr>
+<tr>
+<td>Comments</td>
+<td>Count of <code>TasksProgress[].comment</code> non-empty</td>
+<td>Aggregate</td>
+</tr>
+<tr>
+<td>Completion %</td>
+<td><code>checked / (checked + unchecked) × 100</code></td>
+<td>Computed</td>
+</tr>
+<tr>
+<td>Consistency %</td>
+<td>See Section 8</td>
+<td>Computed</td>
+</tr>
+<tr>
+<td>Mapped→Logged</td>
+<td>Per-task breakdown: "T01: 8/10, T05: 7/10"</td>
+<td>Per-task checked vs total</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-api-endpoint-specifications">6. API Endpoint Specifications</h2>
+<h3 id="api-1-get-apidashboardtask-mapping">API 1: <code>GET /api/dashboard/task-mapping</code></h3>
+<p><strong>Purpose:</strong> Returns all data needed for Dashboard 1.</p>
+<p><strong>Response Structure:</strong></p>
+<pre><code class="language-json">{
+  &quot;summary&quot;: {
+    &quot;totalUsers&quot;: 124,
+    &quot;activeLoggers&quot;: 119,
+    &quot;zeroLogs&quot;: 5,
+    &quot;avgTasksPerUser&quot;: 3.4,
+    &quot;teachers&quot;: 91,
+    &quot;leaders&quot;: 33
+  },
+  &quot;charts&quot;: {
+    &quot;taskAdoption&quot;: {
+      &quot;T01&quot;: 72, &quot;T02&quot;: 45, &quot;...&quot;: &quot;...&quot;
+    },
+    &quot;fpCoverage&quot;: {
+      &quot;FP-1&quot;: 210, &quot;FP-2&quot;: 130, &quot;FP-3&quot;: 98, &quot;FP-4&quot;: 85, &quot;FP-5&quot;: 100
+    },
+    &quot;depthDistribution&quot;: {
+      &quot;D1→D2&quot;: 250, &quot;D2→D3&quot;: 120, &quot;Cross-FP&quot;: 55
+    },
+    &quot;tasksPerUserDistribution&quot;: {
+      &quot;1&quot;: 0, &quot;2&quot;: 5, &quot;3&quot;: 80, &quot;4&quot;: 25, &quot;5&quot;: 14
+    },
+    &quot;roleDistribution&quot;: {
+      &quot;Teacher&quot;: 91, &quot;Leader&quot;: 33
+    },
+    &quot;fpRadar&quot;: {
+      &quot;FP-1&quot;: 110, &quot;FP-2&quot;: 75, &quot;FP-3&quot;: 60, &quot;FP-4&quot;: 55, &quot;FP-5&quot;: 70
+    },
+    &quot;enrollmentTimeline&quot;: [
+      {&quot;date&quot;: &quot;2026-02-03&quot;, &quot;dayName&quot;: &quot;Mon&quot;, &quot;count&quot;: 20, &quot;cumulative&quot;: 20},
+      {&quot;date&quot;: &quot;2026-02-04&quot;, &quot;dayName&quot;: &quot;Tue&quot;, &quot;count&quot;: 56, &quot;cumulative&quot;: 76}
+    ]
+  },
+  &quot;users&quot;: [
+    {
+      &quot;userId&quot;: &quot;696ddd09c6f1e9689723f2b4&quot;,
+      &quot;name&quot;: &quot;Priya Mandlik&quot;,
+      &quot;role&quot;: &quot;Teacher&quot;,
+      &quot;schoolName&quot;: &quot;Deccan Education Society&quot;,
+      &quot;branchName&quot;: &quot;NAVIN MARATHI SHALA,PUNE&quot;,
+      &quot;branchCode&quot;: &quot;M001&quot;,
+      &quot;tasksMapped&quot;: [&quot;T01&quot;, &quot;T03&quot;, &quot;T09&quot;, &quot;T10&quot;],
+      &quot;tasksMappedCount&quot;: 4,
+      &quot;fpCoverage&quot;: [&quot;FP-1&quot;, &quot;FP-2&quot;, &quot;FP-5&quot;],
+      &quot;depthIntent&quot;: [&quot;D1→D2&quot;, &quot;D2→D3&quot;],
+      &quot;mappedOn&quot;: &quot;2026-02-03&quot;,
+      &quot;daysLogged&quot;: 11
+    }
+  ]
+}
+</code></pre>
+<p><strong>Database Queries Required:</strong></p>
+<pre><code class="language-javascript">// 1. Get all DES user IDs with task mappings
+const desBranches = db.SchoolBranches.find(
+  {&quot;School.SchoolName&quot;: &quot;Deccan Education Society&quot;},
+  {_id: 1}
+).map(b =&gt; b._id);
+
+const desUsers = db.UserTemp.find(
+  {selectedBranchId: {$in: desBranches}},
+  {firstName: 1, lastName: 1, RoleName: 1, selectedBranchId: 1}
+);
+
+// 2. Get task mappings for DES users
+db.UserTaskMapping.find(
+  {userTempId: {$in: desUserIds}},
+  {userTempId: 1, SelectedTasks: 1, createdAt: 1}
+);
+
+// 3. Get daily progress summary (days logged per user)
+db.UserDailyProgress.aggregate([
+  {$match: {UserTempId: {$in: desUserIds}}},
+  {$group: {
+    _id: &quot;$UserTempId&quot;,
+    daysLogged: {$addToSet: &quot;$SubmitDate&quot;},
+  }},
+  {$project: {
+    _id: 1,
+    daysLogged: {$size: &quot;$daysLogged&quot;}
+  }}
+]);
+
+// 4. Branch code derivation
+db.Diagnostic.aggregate([
+  {$match: {branchId: {$in: desBranches}}},
+  {$group: {
+    _id: &quot;$branchId&quot;,
+    branchCode: {$first: &quot;$branchCode&quot;}
+  }}
+]);
+</code></pre>
+<hr />
+<h3 id="api-2-get-apidashboarddaily-progress">API 2: <code>GET /api/dashboard/daily-progress</code></h3>
+<p><strong>Purpose:</strong> Returns all data needed for Dashboard 2.</p>
+<p><strong>Response Structure:</strong></p>
+<pre><code class="language-json">{
+  &quot;summary&quot;: {
+    &quot;totalUsers&quot;: 124,
+    &quot;activeUsers&quot;: 119,
+    &quot;zeroLogs&quot;: 5,
+    &quot;avgDaysActive&quot;: 5.7,
+    &quot;globalCompletionRate&quot;: 87.9,
+    &quot;globalCommentRate&quot;: 10.7,
+    &quot;avgConsistency&quot;: 47.9,
+    &quot;totalLogEntries&quot;: 2502
+  },
+  &quot;roleComparison&quot;: {
+    &quot;Teacher&quot;: {
+      &quot;count&quot;: 91,
+      &quot;avgDays&quot;: 5.5,
+      &quot;avgConsistency&quot;: 47.1,
+      &quot;avgCompletion&quot;: 88.4
+    },
+    &quot;Leader&quot;: {
+      &quot;count&quot;: 33,
+      &quot;avgDays&quot;: 5.2,
+      &quot;avgConsistency&quot;: 43.0,
+      &quot;avgCompletion&quot;: 85.5
+    }
+  },
+  &quot;charts&quot;: {
+    &quot;dailyTimeline&quot;: [
+      {
+        &quot;date&quot;: &quot;2026-02-03&quot;,
+        &quot;dayName&quot;: &quot;Tue&quot;,
+        &quot;checked&quot;: 201,
+        &quot;unchecked&quot;: 15,
+        &quot;activeUsers&quot;: 72
+      }
+    ],
+    &quot;taskCompletionRate&quot;: {
+      &quot;T01&quot;: 90.1,
+      &quot;T02&quot;: 88.5
+    },
+    &quot;fpMappedVsLogged&quot;: {
+      &quot;FP-1&quot;: {&quot;mappedUsers&quot;: 110, &quot;loggedUsers&quot;: 105},
+      &quot;FP-2&quot;: {&quot;mappedUsers&quot;: 75, &quot;loggedUsers&quot;: 70}
+    },
+    &quot;depthMappedVsLogged&quot;: {
+      &quot;D1→D2 (Entry)&quot;: {&quot;mapped&quot;: 250, &quot;checked&quot;: 1200, &quot;unchecked&quot;: 150},
+      &quot;D2→D3 (Growth)&quot;: {&quot;mapped&quot;: 120, &quot;checked&quot;: 600, &quot;unchecked&quot;: 80},
+      &quot;Cross-FP&quot;: {&quot;mapped&quot;: 55, &quot;checked&quot;: 300, &quot;unchecked&quot;: 40}
+    },
+    &quot;consistencyDistribution&quot;: {
+      &quot;0%&quot;: 6, &quot;1-10%&quot;: 3, &quot;11-20%&quot;: 5,
+      &quot;21-30%&quot;: 10, &quot;31-50%&quot;: 40, &quot;&gt;50%&quot;: 60
+    },
+    &quot;scatter&quot;: [
+      {&quot;userId&quot;: &quot;...&quot;, &quot;tasksMapped&quot;: 4, &quot;daysLogged&quot;: 11, &quot;role&quot;: &quot;Teacher&quot;}
+    ],
+    &quot;fpCompletionRadar&quot;: {
+      &quot;FP-1&quot;: 90.1, &quot;FP-2&quot;: 87.6, &quot;FP-3&quot;: 83.4,
+      &quot;FP-4&quot;: 87.0, &quot;FP-5&quot;: 87.7
+    }
+  },
+  &quot;users&quot;: [
+    {
+      &quot;userId&quot;: &quot;696ddd09c6f1e9689723f2b4&quot;,
+      &quot;name&quot;: &quot;Priya Mandlik&quot;,
+      &quot;role&quot;: &quot;Teacher&quot;,
+      &quot;schoolName&quot;: &quot;Deccan Education Society&quot;,
+      &quot;branchName&quot;: &quot;NAVIN MARATHI SHALA,PUNE&quot;,
+      &quot;branchCode&quot;: &quot;M001&quot;,
+      &quot;tasksMapped&quot;: [&quot;T01&quot;, &quot;T03&quot;, &quot;T09&quot;, &quot;T10&quot;],
+      &quot;tasksMappedCount&quot;: 4,
+      &quot;fpCoverage&quot;: [&quot;FP-1&quot;, &quot;FP-2&quot;, &quot;FP-5&quot;],
+      &quot;depthIntent&quot;: [&quot;D1→D2&quot;, &quot;D2→D3&quot;],
+      &quot;mappedOn&quot;: &quot;2026-02-03&quot;,
+      &quot;daysLogged&quot;: 11,
+      &quot;totalChecked&quot;: 44,
+      &quot;totalUnchecked&quot;: 0,
+      &quot;totalComments&quot;: 0,
+      &quot;completionRate&quot;: 100.0,
+      &quot;commentRate&quot;: 0.0,
+      &quot;consistency&quot;: 84.6,
+      &quot;taskLogSummary&quot;: {
+        &quot;T01&quot;: {&quot;checked&quot;: 11, &quot;unchecked&quot;: 0, &quot;total&quot;: 11},
+        &quot;T03&quot;: {&quot;checked&quot;: 11, &quot;unchecked&quot;: 0, &quot;total&quot;: 11},
+        &quot;T09&quot;: {&quot;checked&quot;: 11, &quot;unchecked&quot;: 0, &quot;total&quot;: 11},
+        &quot;T10&quot;: {&quot;checked&quot;: 11, &quot;unchecked&quot;: 0, &quot;total&quot;: 11}
+      }
+    }
+  ]
+}
+</code></pre>
+<p><strong>Database Queries Required:</strong></p>
+<pre><code class="language-javascript">// 1. DES branch + user filtering (same as API 1)
+// ...reuse from API 1...
+
+// 2. Full daily progress with task-level detail
+db.UserDailyProgress.aggregate([
+  {$match: {UserTempId: {$in: desUserIds}}},
+  {$unwind: &quot;$TasksProgress&quot;},
+  {$project: {
+    userId: &quot;$UserTempId&quot;,
+    submitDate: &quot;$SubmitDate&quot;,
+    createdAt: &quot;$CreatedAt&quot;,
+    taskId: &quot;$TasksProgress.taskId&quot;,
+    isChecked: &quot;$TasksProgress.isChecked&quot;,
+    hasComment: {
+      $and: [
+        {$ne: [&quot;$TasksProgress.comment&quot;, null]},
+        {$ne: [{$trim: {input: {$ifNull: [&quot;$TasksProgress.comment&quot;, &quot;&quot;]}}}, &quot;&quot;]}
+      ]
+    }
+  }}
+]);
+
+// 3. Daily activity timeline aggregate
+db.UserDailyProgress.aggregate([
+  {$match: {UserTempId: {$in: desUserIds}}},
+  {$unwind: &quot;$TasksProgress&quot;},
+  {$group: {
+    _id: &quot;$SubmitDate&quot;,
+    checked: {$sum: {$cond: [&quot;$TasksProgress.isChecked&quot;, 1, 0]}},
+    unchecked: {$sum: {$cond: [&quot;$TasksProgress.isChecked&quot;, 0, 1]}},
+    activeUsers: {$addToSet: &quot;$UserTempId&quot;}
+  }},
+  {$project: {
+    date: &quot;$_id&quot;,
+    checked: 1,
+    unchecked: 1,
+    activeUsers: {$size: &quot;$activeUsers&quot;}
+  }},
+  {$sort: {date: 1}}
+]);
+
+// 4. Per-user summary aggregate
+db.UserDailyProgress.aggregate([
+  {$match: {UserTempId: {$in: desUserIds}}},
+  {$unwind: &quot;$TasksProgress&quot;},
+  {$group: {
+    _id: {
+      userId: &quot;$UserTempId&quot;,
+      taskId: &quot;$TasksProgress.taskId&quot;
+    },
+    checked: {$sum: {$cond: [&quot;$TasksProgress.isChecked&quot;, 1, 0]}},
+    unchecked: {$sum: {$cond: [&quot;$TasksProgress.isChecked&quot;, 0, 1]}},
+    comments: {$sum: {$cond: [
+      {$and: [
+        {$ne: [&quot;$TasksProgress.comment&quot;, null]},
+        {$gt: [{$strLenCP: {$trim: {input: {$ifNull: [&quot;$TasksProgress.comment&quot;, &quot;&quot;]}}}}, 0]}
+      ]}, 1, 0
+    ]}},
+    dates: {$addToSet: &quot;$SubmitDate&quot;}
+  }},
+  {$group: {
+    _id: &quot;$_id.userId&quot;,
+    tasks: {$push: {
+      taskId: &quot;$_id.taskId&quot;,
+      checked: &quot;$checked&quot;,
+      unchecked: &quot;$unchecked&quot;,
+      comments: &quot;$comments&quot;
+    }},
+    totalChecked: {$sum: &quot;$checked&quot;},
+    totalUnchecked: {$sum: &quot;$unchecked&quot;},
+    totalComments: {$sum: &quot;$comments&quot;},
+    allDates: {$push: &quot;$dates&quot;}
+  }},
+  {$project: {
+    tasks: 1,
+    totalChecked: 1,
+    totalUnchecked: 1,
+    totalComments: 1,
+    daysLogged: {$size: {$reduce: {
+      input: &quot;$allDates&quot;,
+      initialValue: [],
+      in: {$setUnion: [&quot;$$value&quot;, &quot;$$this&quot;]}
+    }}}
+  }}
+]);
+</code></pre>
+<hr />
+<h3 id="api-3-get-apireferencetask-metadata">API 3: <code>GET /api/reference/task-metadata</code></h3>
+<p><strong>Purpose:</strong> Returns static task metadata (FP mapping, depth intent).</p>
+<p><strong>Response:</strong></p>
+<pre><code class="language-json">{
+  &quot;tasks&quot;: {
+    &quot;T01&quot;: {&quot;label&quot;: &quot;Notice One Learner&quot;, &quot;fp&quot;: &quot;FP-1&quot;, &quot;depth&quot;: &quot;D1→D2&quot;, &quot;category&quot;: &quot;entry&quot;},
+    &quot;T02&quot;: {&quot;label&quot;: &quot;One Adjustment&quot;, &quot;fp&quot;: &quot;FP-1&quot;, &quot;depth&quot;: &quot;D2→D3&quot;, &quot;category&quot;: &quot;growth&quot;},
+    &quot;T03&quot;: {&quot;label&quot;: &quot;Change One Example&quot;, &quot;fp&quot;: &quot;FP-2&quot;, &quot;depth&quot;: &quot;D1→D2&quot;, &quot;category&quot;: &quot;entry&quot;},
+    &quot;T04&quot;: {&quot;label&quot;: &quot;Ask a Why/How&quot;, &quot;fp&quot;: &quot;FP-2&quot;, &quot;depth&quot;: &quot;D2→D3&quot;, &quot;category&quot;: &quot;growth&quot;},
+    &quot;T05&quot;: {&quot;label&quot;: &quot;End-of-Class Reflection&quot;, &quot;fp&quot;: &quot;FP-3&quot;, &quot;depth&quot;: &quot;D1→D2&quot;, &quot;category&quot;: &quot;entry&quot;},
+    &quot;T06&quot;: {&quot;label&quot;: &quot;Try One Small Change&quot;, &quot;fp&quot;: &quot;FP-3&quot;, &quot;depth&quot;: &quot;D2→D3&quot;, &quot;category&quot;: &quot;growth&quot;},
+    &quot;T07&quot;: {&quot;label&quot;: &quot;Quick Check&quot;, &quot;fp&quot;: &quot;FP-4&quot;, &quot;depth&quot;: &quot;D1→D2&quot;, &quot;category&quot;: &quot;entry&quot;},
+    &quot;T08&quot;: {&quot;label&quot;: &quot;Spot One Pattern&quot;, &quot;fp&quot;: &quot;FP-4&quot;, &quot;depth&quot;: &quot;D2→D3&quot;, &quot;category&quot;: &quot;growth&quot;},
+    &quot;T09&quot;: {&quot;label&quot;: &quot;Teacher Touchpoint&quot;, &quot;fp&quot;: &quot;FP-5&quot;, &quot;depth&quot;: &quot;D1→D2&quot;, &quot;category&quot;: &quot;entry&quot;},
+    &quot;T10&quot;: {&quot;label&quot;: &quot;Parent Signal&quot;, &quot;fp&quot;: &quot;FP-5&quot;, &quot;depth&quot;: &quot;D1→D2&quot;, &quot;category&quot;: &quot;entry&quot;},
+    &quot;T11&quot;: {&quot;label&quot;: &quot;Student Voice&quot;, &quot;fp&quot;: &quot;FP-1&quot;, &quot;depth&quot;: &quot;Cross-FP&quot;, &quot;category&quot;: &quot;cross&quot;},
+    &quot;T12&quot;: {&quot;label&quot;: &quot;Pause &amp; Name&quot;, &quot;fp&quot;: &quot;FP-4&quot;, &quot;depth&quot;: &quot;Cross-FP&quot;, &quot;category&quot;: &quot;cross&quot;}
+  },
+  &quot;taskIdMapping&quot;: {
+    &quot;697b1e2cc01f188423ea7e0f&quot;: &quot;T01&quot;,
+    &quot;697b1e3bc671c89acb64125a&quot;: &quot;T01&quot;,
+    &quot;...&quot;: &quot;...&quot;
+  },
+  &quot;fps&quot;: {
+    &quot;FP-1&quot;: &quot;Every Child is Unique&quot;,
+    &quot;FP-2&quot;: &quot;Holistic &amp; Experiential Learning&quot;,
+    &quot;FP-3&quot;: &quot;Reflective Practitioner&quot;,
+    &quot;FP-4&quot;: &quot;Assessment for Learning&quot;,
+    &quot;FP-5&quot;: &quot;Collaboration &amp; Community&quot;
+  }
+}
+</code></pre>
+<p><strong>Database Query:</strong></p>
+<pre><code class="language-javascript">db.MicroInterventionTasks.find({}, {
+  &quot;task.en.TaskPrefix&quot;: 1,
+  &quot;task.en.title&quot;: 1,
+  category: 1
+}).sort({_id: 1});
+</code></pre>
+<hr />
+<h2 id="7-aggregation-pipeline-reference">7. Aggregation Pipeline Reference</h2>
+<h3 id="71-task-adoption-count-dashboard-1-chart-1">7.1 Task Adoption Count (Dashboard 1, Chart 1)</h3>
+<pre><code class="language-javascript">db.UserTaskMapping.aggregate([
+  {$match: {userTempId: {$in: desUserIds}}},
+  {$unwind: &quot;$SelectedTasks&quot;},
+  {$group: {
+    _id: &quot;$SelectedTasks.taskId&quot;,
+    userCount: {$sum: 1}
+  }},
+  {$sort: {_id: 1}}
+]);
+// Post-process: map taskId → taskCode using the ID mapping table
+</code></pre>
+<h3 id="72-enrollment-timeline-dashboard-1-chart-7">7.2 Enrollment Timeline (Dashboard 1, Chart 7)</h3>
+<pre><code class="language-javascript">db.UserTaskMapping.aggregate([
+  {$match: {userTempId: {$in: desUserIds}}},
+  {$group: {
+    _id: {$dateToString: {format: &quot;%Y-%m-%d&quot;, date: &quot;$createdAt&quot;}},
+    count: {$sum: 1}
+  }},
+  {$sort: {_id: 1}}
+]);
+// Post-process: compute cumulative sum, add dayOfWeek name
+</code></pre>
+<h3 id="73-per-task-completion-rate-dashboard-2-chart-2">7.3 Per-Task Completion Rate (Dashboard 2, Chart 2)</h3>
+<pre><code class="language-javascript">db.UserDailyProgress.aggregate([
+  {$match: {UserTempId: {$in: desUserIds}}},
+  {$unwind: &quot;$TasksProgress&quot;},
+  {$group: {
+    _id: &quot;$TasksProgress.taskId&quot;,
+    checked: {$sum: {$cond: [&quot;$TasksProgress.isChecked&quot;, 1, 0]}},
+    unchecked: {$sum: {$cond: [&quot;$TasksProgress.isChecked&quot;, 0, 1]}}
+  }},
+  {$project: {
+    taskId: &quot;$_id&quot;,
+    checked: 1,
+    unchecked: 1,
+    completionRate: {
+      $round: [{$multiply: [{$divide: [&quot;$checked&quot;, {$add: [&quot;$checked&quot;, &quot;$unchecked&quot;]}]}, 100]}, 1]
+    }
+  }},
+  {$sort: {_id: 1}}
+]);
+</code></pre>
+<h3 id="74-fp-mapped-vs-logged-dashboard-2-chart-3">7.4 FP Mapped vs Logged (Dashboard 2, Chart 3)</h3>
+<pre><code class="language-javascript">// Mapped: count distinct users who selected any task in each FP
+// Logged: count distinct users who have isChecked=true for any task in each FP
+
+// This requires post-processing:
+// 1. For each user, get their selected tasks → map to FPs → count per FP (mapped)
+// 2. From daily progress, for each user, get tasks with isChecked=true → map to FPs (logged)
+// 3. Per FP, count distinct users in each set
+</code></pre>
+<h3 id="75-consistency-distribution-dashboard-2-chart-5">7.5 Consistency Distribution (Dashboard 2, Chart 5)</h3>
+<pre><code class="language-javascript">// Computed in application layer after calculating per-user consistency
+// See Section 8 for consistency formula
+// Bucket users into: 0%, 1-10%, 11-20%, 21-30%, 31-50%, &gt;50%
+</code></pre>
+<hr />
+<h2 id="8-computed-metric-formulas">8. Computed Metric Formulas</h2>
+<h3 id="81-completion-rate-per-user">8.1 Completion Rate (per user)</h3>
+<pre><code>completionRate = totalChecked / (totalChecked + totalUnchecked) × 100
+</code></pre>
+<ul>
+<li><strong>totalChecked</strong>: Count of <code>TasksProgress[]</code> entries where <code>isChecked === true</code> across all the user's <code>UserDailyProgress</code> documents</li>
+<li><strong>totalUnchecked</strong>: Count where <code>isChecked === false</code></li>
+<li>If no log entries exist → <code>0%</code></li>
+</ul>
+<h3 id="82-comment-rate-per-user">8.2 Comment Rate (per user)</h3>
+<pre><code>commentRate = totalComments / (totalChecked + totalUnchecked) × 100
+</code></pre>
+<ul>
+<li><strong>totalComments</strong>: Count of <code>TasksProgress[]</code> entries where <code>comment</code> is non-null and non-empty (after trim)</li>
+</ul>
+<h3 id="83-consistency-per-user">8.3 Consistency (per user)</h3>
+<pre><code>consistency = daysLogged / min(daysSinceMapping, 21) × 100
+</code></pre>
+<ul>
+<li><strong>daysLogged</strong>: Count of distinct <code>SubmitDate</code> values across the user's <code>UserDailyProgress</code> documents</li>
+<li><strong>daysSinceMapping</strong>: <code>(currentDate - mappingDate)</code> in days</li>
+<li><code>mappingDate</code> = <code>UserTaskMapping.createdAt</code> (date part)</li>
+<li>If <code>mappingDate</code> is missing/null and user has logs: <strong>infer as <code>firstLogDate - 1 day</code></strong></li>
+<li>Cap at <strong>21 days</strong> (the intervention program duration per PRD)</li>
+<li>If <code>mappingDate</code> is missing AND no logs exist → <code>0%</code></li>
+</ul>
+<h3 id="84-per-task-log-summary">8.4 Per-Task Log Summary</h3>
+<p>For each user and each task in their <code>SelectedTasks</code>:</p>
+<pre><code>checked  = count(TasksProgress entries for this taskId where isChecked = true)
+unchecked = count(TasksProgress entries for this taskId where isChecked = false)
+total    = checked + unchecked
+</code></pre>
+<p>Display format in table: <code>T01: {checked}/{total}</code></p>
+<h3 id="85-fp-completion-rate-radar-chart">8.5 FP Completion Rate (Radar chart)</h3>
+<p>For each FP, across all users:</p>
+<pre><code>fpCompletionRate = totalCheckedForFP / (totalCheckedForFP + totalUncheckedForFP) × 100
+</code></pre>
+<p>Where totals are summed across all tasks belonging to that FP.</p>
+<hr />
+<h2 id="9-filter-sort-requirements">9. Filter &amp; Sort Requirements</h2>
+<h3 id="91-filters-both-dashboards">9.1 Filters (both dashboards)</h3>
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Type</th>
+<th>Options</th>
+<th>Applies To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search</td>
+<td>Text</td>
+<td>Free text match on name, school, branch</td>
+<td>User table</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>Dropdown</td>
+<td>All, Teacher, Leader</td>
+<td>All charts + table</td>
+</tr>
+<tr>
+<td>Activity</td>
+<td>Dropdown</td>
+<td>All, Active (≥1 log), Zero Logs</td>
+<td>All charts + table</td>
+</tr>
+<tr>
+<td>FP</td>
+<td>Dropdown (Dashboard 1 only)</td>
+<td>All, FP-1, FP-2, FP-3, FP-4, FP-5</td>
+<td>Charts + table</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-sort-options-user-table">9.2 Sort Options (user table)</h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Sort</th>
+<th>Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Alphabetical</td>
+<td>Asc / Desc</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>Alphabetical</td>
+<td>Asc / Desc</td>
+</tr>
+<tr>
+<td>School / Branch</td>
+<td>Alphabetical</td>
+<td>Asc / Desc</td>
+</tr>
+<tr>
+<td>Tasks Mapped</td>
+<td>Numeric</td>
+<td>Asc / Desc</td>
+</tr>
+<tr>
+<td>Days Logged</td>
+<td>Numeric</td>
+<td>Asc / Desc</td>
+</tr>
+<tr>
+<td>Completion %</td>
+<td>Numeric</td>
+<td>Asc / Desc</td>
+</tr>
+<tr>
+<td>Consistency %</td>
+<td>Numeric</td>
+<td>Asc / Desc</td>
+</tr>
+<tr>
+<td>Mapped On</td>
+<td>Date</td>
+<td>Asc / Desc</td>
+</tr>
+</tbody>
+</table>
+<h3 id="93-default-sort">9.3 Default Sort</h3>
+<ul>
+<li>Dashboard 1: by Mapped On (ascending), then Days Logged (descending)</li>
+<li>Dashboard 2: by Consistency % (descending), then Days Logged (descending), then Name (ascending)</li>
+</ul>
+<hr />
+<h2 id="10-data-volume-performance-notes">10. Data Volume &amp; Performance Notes</h2>
+<h3 id="current-data-volumes">Current Data Volumes</h3>
+<table>
+<thead>
+<tr>
+<th>Collection</th>
+<th>Total Records</th>
+<th>DES Filtered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UserTaskMapping</td>
+<td>~138 documents</td>
+<td>124 users</td>
+</tr>
+<tr>
+<td>UserDailyProgress</td>
+<td>~700 documents</td>
+<td>~650 documents (124 users × ~5.3 avg days)</td>
+</tr>
+<tr>
+<td>TasksProgress (unwound)</td>
+<td>~3,140 entries</td>
+<td>~2,502 entries</td>
+</tr>
+<tr>
+<td>MicroInterventionTasks</td>
+<td>12 (×2 series = 24 ObjectIds)</td>
+<td>12 tasks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="indexing-recommendations">Indexing Recommendations</h3>
+<pre><code class="language-javascript">// Critical indexes for dashboard queries
+db.UserTemp.createIndex({selectedBranchId: 1});
+db.SchoolBranches.createIndex({&quot;School.SchoolName&quot;: 1});
+db.UserTaskMapping.createIndex({userTempId: 1});
+db.UserDailyProgress.createIndex({UserTempId: 1, SubmitDate: 1});
+db.Diagnostic.createIndex({branchId: 1});
+</code></pre>
+<h3 id="caching-strategy">Caching Strategy</h3>
+<ul>
+<li><strong>Task metadata</strong> (API 3): Cache indefinitely — static data, changes only on task redesign</li>
+<li><strong>Task mapping</strong> (API 1): Cache for 1 hour — changes only when new users enroll</li>
+<li><strong>Daily progress</strong> (API 2): Cache for 15 minutes — changes as users submit daily logs</li>
+<li>Consider pre-computing aggregates nightly if user volume grows beyond 500</li>
+</ul>
+<h3 id="field-name-casing-warning">Field Name Casing Warning</h3>
+<p>MongoDB field names are <strong>inconsistent</strong> across collections:</p>
+<table>
+<thead>
+<tr>
+<th>Collection</th>
+<th>Casing Pattern</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UserTemp</td>
+<td>camelCase</td>
+<td><code>firstName</code>, <code>lastName</code>, <code>selectedBranchId</code></td>
+</tr>
+<tr>
+<td>UserTemp</td>
+<td>PascalCase</td>
+<td><code>RoleName</code></td>
+</tr>
+<tr>
+<td>SchoolBranches</td>
+<td>PascalCase</td>
+<td><code>BranchName</code>, <code>School.SchoolName</code></td>
+</tr>
+<tr>
+<td>UserTaskMapping</td>
+<td>camelCase</td>
+<td><code>userTempId</code>, <code>createdAt</code></td>
+</tr>
+<tr>
+<td>UserTaskMapping</td>
+<td>PascalCase</td>
+<td><code>SelectedTasks</code></td>
+</tr>
+<tr>
+<td>UserDailyProgress</td>
+<td>PascalCase</td>
+<td><code>UserTempId</code>, <code>SubmitDate</code>, <code>CreatedAt</code>, <code>TasksProgress</code></td>
+</tr>
+<tr>
+<td>UserDailyProgress (nested)</td>
+<td>camelCase</td>
+<td><code>TasksProgress[].taskId</code>, <code>TasksProgress[].isChecked</code>, <code>TasksProgress[].comment</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Backend must handle mixed casing carefully in all queries.</strong></p>
+<hr />
+<p><em>Document Version: 1.0 | Project Kshitij | Myelin | Confidential</em>
+<em>Generated: 2026-02-16</em></p>
+</body>
+</html>

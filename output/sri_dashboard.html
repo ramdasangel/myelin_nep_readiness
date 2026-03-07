@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRI Dashboard — Deccan Education Society</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f5f6fa;--card:#fff;--border:#e0e3ea;--text:#1a1a2e;--muted:#6b7280;
+--blue:#2563eb;--green:#16a34a;--amber:#d97706;--red:#dc2626;--purple:#7c3aed;--teal:#0d9488;
+--c1:#3b82f6;--c2:#8b5cf6;--c3:#10b981;--c4:#f59e0b;--c5:#6b7280;--sri:#1e3a5f;
+--radius:8px;--shadow:0 1px 3px rgba(0,0,0,.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+.header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;padding:20px 32px;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
+.header .sub{font-size:13px;opacity:.8}
+.tabs{display:flex;background:#fff;border-bottom:2px solid var(--border);padding:0 24px;overflow-x:auto;gap:2px}
+.tab{padding:12px 18px;cursor:pointer;font-weight:600;font-size:13px;border-bottom:3px solid transparent;color:var(--muted);white-space:nowrap;transition:.15s}
+.tab:hover{color:var(--text);background:#f8f9fb}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.content{display:none;padding:24px 32px;max-width:1600px;margin:0 auto}
+.content.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.card .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+.card .value{font-size:28px;font-weight:700}
+.card .sub{font-size:12px;color:var(--muted);margin-top:2px}
+.card.c1 .value{color:var(--c1)}.card.c2 .value{color:var(--c2)}.card.c3 .value{color:var(--c3)}.card.c4 .value{color:var(--c4)}.card.c5 .value{color:var(--c5)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:13px}
+th{background:#f1f3f8;font-weight:600;text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);position:sticky;top:0;white-space:nowrap}
+td{padding:8px 12px;border-bottom:1px solid var(--border)}
+tr:hover td{background:#f8f9fc}
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius);margin-bottom:24px}
+.bar{height:8px;border-radius:4px;background:#e5e7eb;position:relative;min-width:60px}
+.bar-fill{height:100%;border-radius:4px;transition:.3s}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.badge-green{background:#dcfce7;color:#166534}.badge-amber{background:#fef3c7;color:#92400e}.badge-red{background:#fee2e2;color:#991b1b}.badge-gray{background:#f3f4f6;color:#6b7280}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:24px}
+.chart-box h3{font-size:15px;margin-bottom:12px;color:var(--text)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.section-title{font-size:17px;font-weight:700;margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.section-title:first-child{margin-top:0}
+.info-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:13px;color:#1e40af}
+.no-data{text-align:center;padding:60px 20px;color:var(--muted)}
+.no-data .icon{font-size:48px;margin-bottom:12px}
+.no-data h3{font-size:18px;margin-bottom:8px}
+.doc h2{font-size:18px;margin:28px 0 10px;color:var(--sri);border-bottom:2px solid var(--border);padding-bottom:6px}
+.doc h3{font-size:15px;margin:18px 0 8px;color:#374151}
+.doc p,.doc li{font-size:13.5px;line-height:1.7;margin-bottom:6px}
+.doc ul{padding-left:20px}
+.doc code{background:#f1f3f8;padding:1px 5px;border-radius:3px;font-size:12px;font-family:'SF Mono',Consolas,monospace}
+.doc .formula{background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;margin:10px 0;font-family:'SF Mono',Consolas,monospace;font-size:12.5px;line-height:1.8;overflow-x:auto}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:12px}
+.legend-dot{width:12px;height:12px;border-radius:3px}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}.header{padding:16px}.content{padding:16px}}
+.sort-btn{cursor:pointer;user-select:none}.sort-btn:after{content:' \u2195';font-size:10px;opacity:.4}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div><h1>School Readiness Index (SRI)</h1><div class="sub">Deccan Education Society — NEP Readiness Assessment</div></div>
+  <div style="text-align:right"><div style="font-size:13px;opacity:.8">37 Branches</div><div style="font-size:13px;opacity:.6">Max achievable: 85 / 100</div></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <div class="tab active" data-tab="summary">Summary</div>
+  <div class="tab" data-tab="c1">C1 Intent</div>
+  <div class="tab" data-tab="c2">C2 Practice</div>
+  <div class="tab" data-tab="c3">C3 Capacity</div>
+  <div class="tab" data-tab="c4">C4 System</div>
+  <div class="tab" data-tab="c5">C5 Ecosystem</div>
+  <div class="tab" data-tab="docs">Methodology</div>
+</div>
+
+<!-- ═══ TAB 1: SUMMARY ═══ -->
+<div class="content active" id="tab-summary">
+  <div class="cards" id="summary-cards"></div>
+  <div class="grid-2">
+    <div class="chart-box"><h3>SRI Total Distribution</h3><canvas id="ch-sri-dist" height="220"></canvas></div>
+    <div class="chart-box"><h3>Construct Averages (% of Max)</h3><canvas id="ch-construct-avg" height="220"></canvas></div>
+  </div>
+  <div class="section-title">Branch Scores — Ranked by SRI Total</div>
+  <div class="tbl-wrap"><table id="tbl-summary"></table></div>
+</div>
+
+<!-- ═══ TAB 2: C1 INTENT ═══ -->
+<div class="content" id="tab-c1">
+  <div class="info-box"><strong>C1 — Intent Readiness (max 20)</strong> — Measures aspirational depth across 5 NEP focus points, coverage, balance between FPs, and teacher-leader alignment. Data from 717 intent survey responses.</div>
+  <div class="cards" id="c1-cards"></div>
+  <div class="grid-2">
+    <div class="chart-box"><h3>C1 Score Distribution</h3><canvas id="ch-c1-dist" height="220"></canvas></div>
+    <div class="chart-box"><h3>Teacher vs Leader Scores</h3><canvas id="ch-c1-scatter" height="220"></canvas></div>
+  </div>
+  <div class="section-title">C1 Branch Detail</div>
+  <div class="tbl-wrap"><table id="tbl-c1"></table></div>
+</div>
+
+<!-- ═══ TAB 3: C2 PRACTICE ═══ -->
+<div class="content" id="tab-c2">
+  <div class="info-box"><strong>C2 — Practice Readiness (max 25)</strong> — Analyzes depth of teaching practice across FPs using a Practice Depth Distribution Matrix (PDDM). Based on teacher intent responses with observability masking.</div>
+  <div class="cards" id="c2-cards"></div>
+  <div class="grid-2">
+    <div class="chart-box"><h3>C2 Score Distribution</h3><canvas id="ch-c2-dist" height="220"></canvas></div>
+    <div class="chart-box"><h3>Depth Effectiveness by Branch</h3><canvas id="ch-c2-bar" height="220"></canvas></div>
+  </div>
+  <div class="section-title">C2 Branch Detail</div>
+  <div class="tbl-wrap"><table id="tbl-c2"></table></div>
+</div>
+
+<!-- ═══ TAB 4: C3 CAPACITY ═══ -->
+<div class="content" id="tab-c3">
+  <div class="info-box"><strong>C3 — Capacity Readiness (max 20)</strong> — Cognitive Proficiency Index from MathTangle adaptive assessment. 4 CPD dimensions: higher-order thinking, difficulty progression, revision quality, consistency. 107 respondents across 28 branches.</div>
+  <div class="cards" id="c3-cards"></div>
+  <div class="grid-2">
+    <div class="chart-box"><h3>C3 Score Distribution</h3><canvas id="ch-c3-dist" height="220"></canvas></div>
+    <div class="chart-box"><h3>CPI vs Respondent Count</h3><canvas id="ch-c3-scatter" height="220"></canvas></div>
+  </div>
+  <div class="section-title">C3 Branch Detail</div>
+  <div class="tbl-wrap"><table id="tbl-c3"></table></div>
+</div>
+
+<!-- ═══ TAB 5: C4 SYSTEM ═══ -->
+<div class="content" id="tab-c4">
+  <div class="info-box"><strong>C4 — System Readiness (max 20)</strong> — School infrastructure & culture survey. Enablement Index (teacher areas A1-A4) + Routine Index (leader areas B1-B5). Likert responses binarized: SA/A→1, D/SD→0. 676 respondents.</div>
+  <div class="cards" id="c4-cards"></div>
+  <div class="grid-2">
+    <div class="chart-box"><h3>C4 Score Distribution</h3><canvas id="ch-c4-dist" height="220"></canvas></div>
+    <div class="chart-box"><h3>Enablement vs Routine</h3><canvas id="ch-c4-scatter" height="220"></canvas></div>
+  </div>
+  <div class="section-title">C4 Branch Detail</div>
+  <div class="tbl-wrap"><table id="tbl-c4"></table></div>
+</div>
+
+<!-- ═══ TAB 6: C5 ECOSYSTEM ═══ -->
+<div class="content" id="tab-c5">
+  <div class="no-data">
+    <div class="icon">&#128736;</div>
+    <h3>C5 — Ecosystem Readiness (max 15)</h3>
+    <p>No data collected yet. This construct measures parent, student, and community engagement with NEP implementation.</p>
+    <p style="margin-top:16px;font-size:12px">Planned instruments: Parent Perception Survey, Student Voice Survey, Community Partnership Audit</p>
+    <p style="margin-top:8px;font-size:12px">All branches currently score <strong>0 / 15</strong> for this construct.</p>
+  </div>
+</div>
+
+<!-- ═══ TAB 7: METHODOLOGY ═══ -->
+<div class="content doc" id="tab-docs">
+  <h2>SRI Framework Overview</h2>
+  <p>The School Readiness Index (SRI) measures a school branch's readiness to implement India's National Education Policy (NEP 2020) across five constructs. The maximum total score is <strong>100</strong> (85 achievable with current data).</p>
+
+  <div class="legend" style="margin:16px 0">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--c1)"></div>C1 Intent (20)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--c2)"></div>C2 Practice (25)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--c3)"></div>C3 Capacity (20)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--c4)"></div>C4 System (20)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--c5)"></div>C5 Ecosystem (15)</div>
+  </div>
+
+  <h2>C1 — Intent Readiness (max 20)</h2>
+  <h3>Data Source</h3>
+  <p>Teacher intent surveys (setCodes 1234/103) and leader intent surveys (setCodes 7890/104). 22 questions for teachers, 20 for leaders. ~15,500 response rows across English and Marathi.</p>
+
+  <h3>Goal → Focus Point Mapping</h3>
+  <ul>
+    <li><strong>FP1</strong> — Each Child is Unique (Teacher) / Understanding Learners (Leader EN)</li>
+    <li><strong>FP2</strong> — Competency-Based Learning (Teacher) / Classroom Quality (Leader EN)</li>
+    <li><strong>FP3</strong> — Teacher Upskilling (Teacher) / Professional Development (Leader EN)</li>
+    <li><strong>FP4</strong> — Diagnosing Learning Levels (Teacher) / Data Use (Leader EN)</li>
+    <li><strong>FP5</strong> — Parent-Teacher Collaboration (both roles)</li>
+  </ul>
+  <p>Leader Marathi surveys use the same 5 goals as teachers (translated).</p>
+
+  <h3>Computation</h3>
+  <div class="formula">
+ADV[fp] = mean(selectedOption for questions in fp) / 3.0    // Aspirational Depth Vector, normalized to [0,1]<br>
+Coverage = count(ADV[fp] > 0.10) / 5                        // fraction of FPs above threshold &tau;=0.10<br>
+Balance  = max(0, 1 &minus; Var(ADV) / 0.16)                    // 0.16 = max variance for 5 uniform bins<br>
+Alignment = cosine_similarity(teacher_ADV, leader_ADV)<br><br>
+TeacherScore = TeacherCoverage &times; TeacherBalance &times; Alignment<br>
+LeaderScore  = LeaderCoverage  &times; LeaderBalance  &times; Alignment<br>
+<strong>C1 = 10 &times; TeacherScore + 10 &times; LeaderScore</strong>
+  </div>
+  <p><strong>Note:</strong> Branches with only one role (teacher or leader) get Alignment=0, resulting in C1=0. This is by design — intent readiness requires both roles to be aligned.</p>
+
+  <h2>C2 — Practice Readiness (max 25)</h2>
+  <h3>Data Source</h3>
+  <p>Same teacher intent responses (setCodes 1234/103). selectedOption 0-3 mapped to depth levels D1-D4.</p>
+
+  <h3>Computation</h3>
+  <div class="formula">
+PDDM[fp][depth] = count of teacher responses at each depth    // 5&times;4 Practice Depth Distribution Matrix<br><br>
+Non-observable cells masked to 0:<br>
+&nbsp;&nbsp;FP1-D1 (opt 0), FP1-D4 (opt 3), FP2-D4 (opt 3)<br><br>
+Achievable max depth after masking:<br>
+&nbsp;&nbsp;FP1: 2.0, FP2: 2.0, FP3-FP5: 3.0<br><br>
+E_depth[fp]  = weighted_avg(depth &times; masked_count) / total<br>
+E_norm[fp]   = E_depth[fp] / max_depth[fp]<br>
+CoverageFP   = covered_FPs / 5<br>
+DepthEffectiveness = CoverageFP &times; mean(E_norm)<br>
+<strong>C2 = 25 &times; DepthEffectiveness</strong>
+  </div>
+
+  <h2>C3 — Capacity Readiness (max 20)</h2>
+  <h3>Data Source</h3>
+  <p>MathTangle adaptive cognitive assessment (<code>mathangle_master.csv</code>). 107 respondents across 28 branches. Measures cognitive levels (Understand/Apply/Analyze/Evaluate), difficulty levels (L1-L3), and behavioral metacognition.</p>
+
+  <h3>Computation — 4 CPD Dimensions</h3>
+  <div class="formula">
+CPD1 (Higher-order)  = (Cog:Analyze_Right + Cog:Evaluate_Right) / all_cog_total<br>
+CPD2 (Decomposition) = (L2_accuracy + L3_accuracy) / 2<br>
+CPD3 (Revision)      = 1 &minus; IndecisionScore / max_indecision_across_all_users<br>
+CPD4 (Consistency)   = 1 &minus; FlipFlops / TotalQuestions<br><br>
+CPI_user   = mean(CPD1, CPD2, CPD3, CPD4)<br>
+CPI_branch = mean(CPI across all users in branch)<br>
+<strong>C3 = 20 &times; CPI_branch</strong>
+  </div>
+
+  <h2>C4 — System Readiness (max 20)</h2>
+  <h3>Data Source</h3>
+  <p>Stage-2 baseline survey (<code>system_readiness_responses_detail.csv</code>). 12,576 response rows. 68 questions across English and Marathi. Teacher areas: A1 (Continuous Learning Diagnostics), A2 (Teacher Development), A3 (Holistic Progress Card), A4 (Parent & Community). Leader areas: B1 (NEP Governance), B2 (Data-Informed Decisions), B3 (Teacher Development Culture), B4 (HPC & Reporting), B5 (Parent & Community Partnerships).</p>
+
+  <h3>Computation</h3>
+  <div class="formula">
+Binary = 1 if selectedOption &le; 1 (SA/A),  0 if selectedOption &ge; 2 (D/SD)<br><br>
+A_mean[area] = mean(binary) for each area A1..A4<br>
+B_mean[area] = mean(binary) for each area B1..B5<br><br>
+EnablementIndex = mean(A1_mean, A2_mean, A3_mean, A4_mean)<br>
+RoutineIndex    = mean(B1_mean, B2_mean, B3_mean, B4_mean, B5_mean)<br>
+<strong>C4 = 10 &times; EnablementIndex + 10 &times; RoutineIndex</strong>
+  </div>
+  <p><strong>Note:</strong> Branches without leader respondents get RoutineIndex=0, capping C4 at ~10.</p>
+
+  <h2>C5 — Ecosystem Readiness (max 15)</h2>
+  <p>Not yet instrumented. Will measure parent perception, student voice, and community partnership engagement. Currently contributes 0 for all branches.</p>
+
+  <h2>SRI Assembly</h2>
+  <div class="formula">
+<strong>SRI_Total = C1 + C2 + C3 + C4 + C5</strong><br>
+Max achievable (with C5=0): 20 + 25 + 20 + 20 + 0 = <strong>85</strong><br>
+Theoretical max: 20 + 25 + 20 + 20 + 15 = <strong>100</strong>
+  </div>
+
+  <h2>Data Coverage</h2>
+  <ul>
+    <li>C1 (Intent): 29 branches with non-zero scores (8 have C1=0 due to missing teacher or leader data)</li>
+    <li>C2 (Practice): 36 branches scored</li>
+    <li>C3 (Capacity): 28 branches with MathTangle data</li>
+    <li>C4 (System): 36 branches scored</li>
+    <li>25 branches have all 4 constructs with non-zero data</li>
+  </ul>
+
+  <h2>Exclusions</h2>
+  <ul>
+    <li><strong>M008 (DES Demo)</strong> — Test/demo branch, excluded from dashboard</li>
+    <li><strong>m942e (Myelin CBSE)</strong> — Internal test school, excluded from dashboard</li>
+  </ul>
+</div>
+
+<script>
+// ═══ DATA ═══
+const DATA=[{"BranchCode":"M001","BranchName":"AHILYADEVI HIGH SCHOOL FOR GIRLS","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9894,"C1_LeaderScore":0.971,"C1_Alignment":0.9943,"C1":19.6,"C2_DepthEffectiveness":0.5462,"C2":13.65,"C3_CPI":0.7628,"C3_Respondents":7,"C3":15.26,"C4_Enablement":0.9106,"C4_Routine":0.85,"C4":17.61,"C5":0,"SRI_Total":66.12,"SRI_Max":85},{"BranchCode":"M002","BranchName":"BALAK MANDIR, SATARA","SchoolName":"Deccan Education Society","C1_TeacherScore":0,"C1_LeaderScore":0,"C1_Alignment":0,"C1":0,"C2_DepthEffectiveness":0.6371,"C2":15.93,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":0.9786,"C4_Routine":0,"C4":9.79,"C5":0,"SRI_Total":25.72,"SRI_Max":85},{"BranchCode":"M003","BranchName":"D.E.S. PRIMARY SCHOOL","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9649,"C1_LeaderScore":0.8935,"C1_Alignment":0.9699,"C1":18.58,"C2_DepthEffectiveness":0.5158,"C2":12.89,"C3_CPI":0.7926,"C3_Respondents":2,"C3":15.85,"C4_Enablement":0.9668,"C4_Routine":0.9667,"C4":19.33,"C5":0,"SRI_Total":66.65,"SRI_Max":85},{"BranchCode":"M004","BranchName":"D.E.S. SECONDARY SCHOOL","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9891,"C1_LeaderScore":0.958,"C1_Alignment":0.9901,"C1":19.47,"C2_DepthEffectiveness":0.567,"C2":14.18,"C3_CPI":0.7728,"C3_Respondents":5,"C3":15.46,"C4_Enablement":0.9045,"C4_Routine":0.8533,"C4":17.58,"C5":0,"SRI_Total":66.69,"SRI_Max":85},{"BranchCode":"M005","BranchName":"DATAR-SHENDURE EM PRE-PRIMARY, SATARA","SchoolName":"Deccan Education Society","C1_TeacherScore":0,"C1_LeaderScore":0,"C1_Alignment":0,"C1":0,"C2_DepthEffectiveness":0.567,"C2":14.17,"C3_CPI":0.8295,"C3_Respondents":1,"C3":16.59,"C4_Enablement":0.975,"C4_Routine":0,"C4":9.75,"C5":0,"SRI_Total":40.51,"SRI_Max":85},{"BranchCode":"M006","BranchName":"DATAR-SHENDURE EM PRIMARY, SATARA","SchoolName":"Deccan Education Society","C1_TeacherScore":0,"C1_LeaderScore":0,"C1_Alignment":0,"C1":0,"C2_DepthEffectiveness":0.5955,"C2":14.89,"C3_CPI":0.6801,"C3_Respondents":1,"C3":13.6,"C4_Enablement":0.975,"C4_Routine":0,"C4":9.75,"C5":0,"SRI_Total":38.24,"SRI_Max":85},{"BranchCode":"M007","BranchName":"DATAR-SHENDURE EM SECONDARY, SATARA","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9334,"C1_LeaderScore":0.8806,"C1_Alignment":0.9785,"C1":18.14,"C2_DepthEffectiveness":0.536,"C2":13.4,"C3_CPI":0.453,"C3_Respondents":1,"C3":9.06,"C4_Enablement":0.8725,"C4_Routine":0.9667,"C4":18.39,"C5":0,"SRI_Total":58.99,"SRI_Max":85},{"BranchCode":"M009","BranchName":"DRAVID HIGH SCHOOL, WAI","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9803,"C1_LeaderScore":0.9129,"C1_Alignment":0.9816,"C1":18.93,"C2_DepthEffectiveness":0.558,"C2":13.95,"C3_CPI":0.7702,"C3_Respondents":10,"C3":15.4,"C4_Enablement":0.92,"C4_Routine":0.9,"C4":18.2,"C5":0,"SRI_Total":66.48,"SRI_Max":85},{"BranchCode":"M010","BranchName":"EM PRE-PRIMARY, SHIRUR","SchoolName":"Deccan Education Society","C1_TeacherScore":null,"C1_LeaderScore":null,"C1_Alignment":null,"C1":null,"C2_DepthEffectiveness":null,"C2":null,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":0.7937,"C4_Routine":0,"C4":7.94,"C5":0,"SRI_Total":7.94,"SRI_Max":85},{"BranchCode":"M011","BranchName":"EM PRIMARY, SHIRUR","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9648,"C1_LeaderScore":0.9531,"C1_Alignment":0.9801,"C1":19.18,"C2_DepthEffectiveness":0.5559,"C2":13.9,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":0.95,"C4_Routine":0,"C4":9.5,"C5":0,"SRI_Total":42.58,"SRI_Max":85},{"BranchCode":"M012","BranchName":"EM SECONDARY, SHIRUR","SchoolName":"Deccan Education Society","C1_TeacherScore":0,"C1_LeaderScore":0,"C1_Alignment":0,"C1":0,"C2_DepthEffectiveness":0.625,"C2":15.62,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":null,"C4_Routine":null,"C4":null,"C5":0,"SRI_Total":15.62,"SRI_Max":85},{"BranchCode":"M013","BranchName":"HA SCHOOL (PRE-PRIMARY)","SchoolName":"Deccan Education Society","C1_TeacherScore":0,"C1_LeaderScore":0,"C1_Alignment":0,"C1":0,"C2_DepthEffectiveness":0.5473,"C2":13.68,"C3_CPI":0.7624,"C3_Respondents":5,"C3":15.25,"C4_Enablement":0.9063,"C4_Routine":0.8667,"C4":17.73,"C5":0,"SRI_Total":46.66,"SRI_Max":85},{"BranchCode":"M014","BranchName":"HA SCHOOL (PRIMARY)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.945,"C1_LeaderScore":0.5522,"C1_Alignment":0.9484,"C1":14.97,"C2_DepthEffectiveness":0.541,"C2":13.53,"C3_CPI":0.771,"C3_Respondents":19,"C3":15.42,"C4_Enablement":0.9494,"C4_Routine":0,"C4":9.49,"C5":0,"SRI_Total":53.41,"SRI_Max":85},{"BranchCode":"M015","BranchName":"HA SCHOOL (SECONDARY)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9668,"C1_LeaderScore":0.8929,"C1_Alignment":0.9697,"C1":18.6,"C2_DepthEffectiveness":0.5675,"C2":14.19,"C3_CPI":0.8211,"C3_Respondents":2,"C3":16.42,"C4_Enablement":0.9395,"C4_Routine":0.9667,"C4":19.06,"C5":0,"SRI_Total":68.27,"SRI_Max":85},{"BranchCode":"M016","BranchName":"MSG GURUJI MADHYAMIK VIDYALAYA","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9336,"C1_LeaderScore":0.859,"C1_Alignment":0.9533,"C1":17.93,"C2_DepthEffectiveness":0.5773,"C2":14.43,"C3_CPI":0.8631,"C3_Respondents":3,"C3":17.26,"C4_Enablement":0.8318,"C4_Routine":1,"C4":18.32,"C5":0,"SRI_Total":67.94,"SRI_Max":85},{"BranchCode":"M017","BranchName":"MSG GURUJI VIDYALAYA (PRATHAMIK)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9379,"C1_LeaderScore":0.8246,"C1_Alignment":0.9459,"C1":17.63,"C2_DepthEffectiveness":0.5464,"C2":13.66,"C3_CPI":0.804,"C3_Respondents":2,"C3":16.08,"C4_Enablement":0.9545,"C4_Routine":0.9778,"C4":19.32,"C5":0,"SRI_Total":66.69,"SRI_Max":85},{"BranchCode":"M018","BranchName":"MSG GURUJI VIDYALAYA (PURVA-PRATHAMIK)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9893,"C1_LeaderScore":0.9554,"C1_Alignment":0.9904,"C1":19.45,"C2_DepthEffectiveness":0.5478,"C2":13.69,"C3_CPI":0.7952,"C3_Respondents":3,"C3":15.9,"C4_Enablement":0.8758,"C4_Routine":0.9333,"C4":18.09,"C5":0,"SRI_Total":67.13,"SRI_Max":85},{"BranchCode":"M019","BranchName":"MATRUMANDIR SATARA","SchoolName":"Deccan Education Society","C1_TeacherScore":0,"C1_LeaderScore":0,"C1_Alignment":0,"C1":0,"C2_DepthEffectiveness":0.4833,"C2":12.08,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":0.95,"C4_Routine":0,"C4":9.5,"C5":0,"SRI_Total":21.58,"SRI_Max":85},{"BranchCode":"M020","BranchName":"MURLIDHAR LOHIYA MATRU MANDIR (PRE-PRIMARY)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9861,"C1_LeaderScore":0.9282,"C1_Alignment":0.9866,"C1":19.14,"C2_DepthEffectiveness":0.5531,"C2":13.83,"C3_CPI":0.7878,"C3_Respondents":4,"C3":15.76,"C4_Enablement":0.973,"C4_Routine":1,"C4":19.73,"C5":0,"SRI_Total":68.46,"SRI_Max":85},{"BranchCode":"M021","BranchName":"NAVIN MARATHI SHALA, SATARA","SchoolName":"Deccan Education Society","C1_TeacherScore":0.987,"C1_LeaderScore":0.9631,"C1_Alignment":0.9887,"C1":19.5,"C2_DepthEffectiveness":0.5721,"C2":14.3,"C3_CPI":0.8239,"C3_Respondents":1,"C3":16.48,"C4_Enablement":0.9558,"C4_Routine":1,"C4":19.56,"C5":0,"SRI_Total":69.84,"SRI_Max":85},{"BranchCode":"M022","BranchName":"NAVIN MARATHI SHALA, PUNE","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9062,"C1_LeaderScore":0.7365,"C1_Alignment":0.9224,"C1":16.43,"C2_DepthEffectiveness":0.5215,"C2":13.04,"C3_CPI":0.7322,"C3_Respondents":3,"C3":14.64,"C4_Enablement":0.9543,"C4_Routine":0.8333,"C4":17.88,"C5":0,"SRI_Total":61.99,"SRI_Max":85},{"BranchCode":"M023","BranchName":"NEM SCHOOL (PRE-PRIMARY)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.984,"C1_LeaderScore":0.941,"C1_Alignment":0.9877,"C1":19.25,"C2_DepthEffectiveness":0.5783,"C2":14.46,"C3_CPI":0.7071,"C3_Respondents":1,"C3":14.14,"C4_Enablement":0.9696,"C4_Routine":1,"C4":19.7,"C5":0,"SRI_Total":67.55,"SRI_Max":85},{"BranchCode":"M024","BranchName":"NEM SCHOOL (PRIMARY)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9846,"C1_LeaderScore":0.9572,"C1_Alignment":0.9927,"C1":19.42,"C2_DepthEffectiveness":0.5743,"C2":14.36,"C3_CPI":0.7615,"C3_Respondents":3,"C3":15.23,"C4_Enablement":0.9333,"C4_Routine":1,"C4":19.33,"C5":0,"SRI_Total":68.34,"SRI_Max":85},{"BranchCode":"M025","BranchName":"NEM SCHOOL SECONDARY","SchoolName":"Deccan Education Society","C1_TeacherScore":0.912,"C1_LeaderScore":0.9372,"C1_Alignment":0.976,"C1":18.49,"C2_DepthEffectiveness":0.5842,"C2":14.6,"C3_CPI":0.7655,"C3_Respondents":2,"C3":15.31,"C4_Enablement":0.99,"C4_Routine":0.9778,"C4":19.68,"C5":0,"SRI_Total":68.08,"SRI_Max":85},{"BranchCode":"M026","BranchName":"NES, RAMANBAG","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9846,"C1_LeaderScore":0.9484,"C1_Alignment":0.99,"C1":19.33,"C2_DepthEffectiveness":0.5558,"C2":13.89,"C3_CPI":0.796,"C3_Respondents":4,"C3":15.92,"C4_Enablement":0.8284,"C4_Routine":0.6833,"C4":15.12,"C5":0,"SRI_Total":64.26,"SRI_Max":85},{"BranchCode":"M027","BranchName":"NES, SATARA","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9835,"C1_LeaderScore":0.9702,"C1_Alignment":0.9879,"C1":19.54,"C2_DepthEffectiveness":0.5646,"C2":14.12,"C3_CPI":0.7474,"C3_Respondents":12,"C3":14.95,"C4_Enablement":0.8829,"C4_Routine":0.85,"C4":17.33,"C5":0,"SRI_Total":65.94,"SRI_Max":85},{"BranchCode":"M028","BranchName":"NES, TILAK ROAD","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9912,"C1_LeaderScore":0.9884,"C1_Alignment":0.997,"C1":19.8,"C2_DepthEffectiveness":0.5551,"C2":13.88,"C3_CPI":0.7081,"C3_Respondents":4,"C3":14.16,"C4_Enablement":0.9073,"C4_Routine":0.9333,"C4":18.41,"C5":0,"SRI_Total":66.25,"SRI_Max":85},{"BranchCode":"M029","BranchName":"NYA. RANADE BALAK MANDIR","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9446,"C1_LeaderScore":0.907,"C1_Alignment":0.97,"C1":18.52,"C2_DepthEffectiveness":0.5588,"C2":13.97,"C3_CPI":0.7324,"C3_Respondents":3,"C3":14.65,"C4_Enablement":0.8577,"C4_Routine":1,"C4":18.58,"C5":0,"SRI_Total":65.72,"SRI_Max":85},{"BranchCode":"M030","BranchName":"RG SCHOOL (PRE-PRIMARY), WAI","SchoolName":"Deccan Education Society","C1_TeacherScore":0,"C1_LeaderScore":0,"C1_Alignment":0,"C1":0,"C2_DepthEffectiveness":0.6039,"C2":15.1,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":1,"C4_Routine":0,"C4":10,"C5":0,"SRI_Total":25.1,"SRI_Max":85},{"BranchCode":"M031","BranchName":"RG SCHOOL (PRIMARY), WAI","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9466,"C1_LeaderScore":0.8795,"C1_Alignment":0.96,"C1":18.26,"C2_DepthEffectiveness":0.5693,"C2":14.23,"C3_CPI":0.7909,"C3_Respondents":1,"C3":15.82,"C4_Enablement":0.9319,"C4_Routine":0.9667,"C4":18.99,"C5":0,"SRI_Total":67.3,"SRI_Max":85},{"BranchCode":"M032","BranchName":"RG SCHOOL (SECONDARY), WAI","SchoolName":"Deccan Education Society","C1_TeacherScore":0,"C1_LeaderScore":0,"C1_Alignment":0,"C1":0,"C2_DepthEffectiveness":0.4661,"C2":11.65,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":1,"C4_Routine":0,"C4":10,"C5":0,"SRI_Total":21.65,"SRI_Max":85},{"BranchCode":"M033","BranchName":"SKP SHAH BM [EM PRE-PRIMARY]","SchoolName":"Deccan Education Society","C1_TeacherScore":0.7926,"C1_LeaderScore":0.7406,"C1_Alignment":0.9195,"C1":15.33,"C2_DepthEffectiveness":0.53,"C2":13.25,"C3_CPI":0.8778,"C3_Respondents":1,"C3":17.56,"C4_Enablement":1,"C4_Routine":0.9333,"C4":19.33,"C5":0,"SRI_Total":65.47,"SRI_Max":85},{"BranchCode":"M034","BranchName":"SKP SHAH PRASHALA (MM MADHYAMIK)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9524,"C1_LeaderScore":0.9227,"C1_Alignment":0.9893,"C1":18.75,"C2_DepthEffectiveness":0.6292,"C2":15.73,"C3_CPI":0.8841,"C3_Respondents":1,"C3":17.68,"C4_Enablement":0.8125,"C4_Routine":0.5333,"C4":13.46,"C5":0,"SRI_Total":65.62,"SRI_Max":85},{"BranchCode":"M035","BranchName":"SKP SHAH PRASHALA [EM PRIMARY]","SchoolName":"Deccan Education Society","C1_TeacherScore":0.9547,"C1_LeaderScore":0.8815,"C1_Alignment":0.9721,"C1":18.36,"C2_DepthEffectiveness":0.5309,"C2":13.27,"C3_CPI":0.7021,"C3_Respondents":1,"C3":14.04,"C4_Enablement":0.8714,"C4_Routine":1,"C4":18.71,"C5":0,"SRI_Total":64.38,"SRI_Max":85},{"BranchCode":"M036","BranchName":"SKP SHAH PRASHALA [EM SECONDARY]","SchoolName":"Deccan Education Society","C1_TeacherScore":0.986,"C1_LeaderScore":0.9666,"C1_Alignment":0.9915,"C1":19.53,"C2_DepthEffectiveness":0.5764,"C2":14.41,"C3_CPI":0.7805,"C3_Respondents":5,"C3":15.61,"C4_Enablement":0.906,"C4_Routine":0.8933,"C4":17.99,"C5":0,"SRI_Total":67.54,"SRI_Max":85},{"BranchCode":"M037","BranchName":"SKP SHAH BM (MM PURVA-PRATHAMIK)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.7429,"C1_LeaderScore":0.3811,"C1_Alignment":0.8308,"C1":11.24,"C2_DepthEffectiveness":0.5292,"C2":13.23,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":0.9,"C4_Routine":0,"C4":9,"C5":0,"SRI_Total":33.47,"SRI_Max":85},{"BranchCode":"M038","BranchName":"SKP SHAH PRASHALA (MM PRATHAMIK)","SchoolName":"Deccan Education Society","C1_TeacherScore":0.8924,"C1_LeaderScore":0.5709,"C1_Alignment":0.9129,"C1":14.63,"C2_DepthEffectiveness":0.5202,"C2":13,"C3_CPI":null,"C3_Respondents":null,"C3":null,"C4_Enablement":0.8969,"C4_Routine":1,"C4":18.97,"C5":0,"SRI_Total":46.6,"SRI_Max":85}];
+
+// ═══ HELPERS ═══
+const v=x=>x!=null?x:null;
+const f=(x,d=1)=>x!=null?x.toFixed(d):'—';
+const pct=(x,mx)=>x!=null?((x/mx)*100).toFixed(0)+'%':'—';
+const barHtml=(val,mx,color)=>{if(val==null)return'<span style="color:#aaa">—</span>';const p=Math.round(val/mx*100);return`<div class="bar"><div class="bar-fill" style="width:${p}%;background:${color}"></div></div><span style="font-size:11px;color:#666">${val.toFixed(1)}/${mx}</span>`};
+const badge=(val,mx)=>{if(val==null)return'<span class="badge badge-gray">N/A</span>';const p=val/mx;if(p>=.75)return`<span class="badge badge-green">${pct(val,mx)}</span>`;if(p>=.5)return`<span class="badge badge-amber">${pct(val,mx)}</span>`;return`<span class="badge badge-red">${pct(val,mx)}</span>`};
+
+function avg(arr,key){const vals=arr.map(r=>r[key]).filter(x=>x!=null);return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:0}
+function med(arr,key){const vals=arr.map(r=>r[key]).filter(x=>x!=null).sort((a,b)=>a-b);if(!vals.length)return 0;const m=Math.floor(vals.length/2);return vals.length%2?vals[m]:(vals[m-1]+vals[m])/2}
+
+// ═══ TABS ═══
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.content').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-'+t.dataset.tab).classList.add('active');
+  });
+});
+
+// ═══ SUMMARY TAB ═══
+(function(){
+  const sorted=[...DATA].sort((a,b)=>(b.SRI_Total||0)-(a.SRI_Total||0));
+  const n=DATA.length;
+  const withAll=DATA.filter(r=>r.C1!=null&&r.C1>0&&r.C2!=null&&r.C3!=null&&r.C4!=null);
+
+  // Cards
+  document.getElementById('summary-cards').innerHTML=`
+    <div class="card"><div class="label">Branches</div><div class="value">${n}</div><div class="sub">${withAll.length} with all 4 constructs</div></div>
+    <div class="card c1"><div class="label">Avg C1 Intent</div><div class="value">${f(avg(DATA,'C1'))}</div><div class="sub">/ 20</div></div>
+    <div class="card c2"><div class="label">Avg C2 Practice</div><div class="value">${f(avg(DATA,'C2'))}</div><div class="sub">/ 25</div></div>
+    <div class="card c3"><div class="label">Avg C3 Capacity</div><div class="value">${f(avg(DATA,'C3'))}</div><div class="sub">/ 20</div></div>
+    <div class="card c4"><div class="label">Avg C4 System</div><div class="value">${f(avg(DATA,'C4'))}</div><div class="sub">/ 20</div></div>
+    <div class="card" style="border-left:3px solid var(--sri)"><div class="label">Avg SRI Total</div><div class="value" style="color:var(--sri)">${f(avg(DATA,'SRI_Total'))}</div><div class="sub">/ 85 achievable</div></div>
+  `;
+
+  // Summary table
+  let h='<thead><tr><th>#</th><th>Branch</th><th>C1<br><small>/20</small></th><th>C2<br><small>/25</small></th><th>C3<br><small>/20</small></th><th>C4<br><small>/20</small></th><th>SRI Total<br><small>/85</small></th><th>%</th></tr></thead><tbody>';
+  sorted.forEach((r,i)=>{
+    const p=r.SRI_Total/85*100;
+    h+=`<tr><td>${i+1}</td><td><strong>${r.BranchCode}</strong> ${r.BranchName}</td>
+    <td>${barHtml(r.C1,20,'var(--c1)')}</td><td>${barHtml(r.C2,25,'var(--c2)')}</td>
+    <td>${barHtml(r.C3,20,'var(--c3)')}</td><td>${barHtml(r.C4,20,'var(--c4)')}</td>
+    <td><strong>${f(r.SRI_Total)}</strong></td><td>${badge(r.SRI_Total,85)}</td></tr>`;
+  });
+  h+='</tbody>';
+  document.getElementById('tbl-summary').innerHTML=h;
+
+  // SRI Distribution chart
+  const bins=[0,20,40,50,60,70,85];const binLabels=['0-20','20-40','40-50','50-60','60-70','70-85'];
+  const counts=new Array(6).fill(0);
+  DATA.forEach(r=>{const v=r.SRI_Total||0;for(let i=bins.length-2;i>=0;i--){if(v>=bins[i]){counts[i]++;break;}}});
+  new Chart(document.getElementById('ch-sri-dist'),{type:'bar',data:{labels:binLabels,datasets:[{data:counts,backgroundColor:['#fee2e2','#fed7aa','#fef3c7','#d9f99d','#bbf7d0','#86efac'],borderColor:['#ef4444','#f97316','#eab308','#84cc16','#22c55e','#16a34a'],borderWidth:1}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Branches'}},x:{title:{display:true,text:'SRI Score Range'}}}}});
+
+  // Construct averages radar
+  const ca=[avg(DATA,'C1')/20*100,avg(DATA,'C2')/25*100,avg(DATA,'C3')/20*100,avg(DATA,'C4')/20*100,0];
+  new Chart(document.getElementById('ch-construct-avg'),{type:'radar',data:{labels:['C1 Intent','C2 Practice','C3 Capacity','C4 System','C5 Ecosystem'],datasets:[{label:'Avg % of Max',data:ca,fill:true,backgroundColor:'rgba(37,99,235,.15)',borderColor:'var(--blue)',pointBackgroundColor:'var(--blue)',pointRadius:4}]},options:{scales:{r:{min:0,max:100,ticks:{stepSize:25}}},plugins:{legend:{display:false}}}});
+})();
+
+// ═══ C1 TAB ═══
+(function(){
+  const d=DATA.filter(r=>r.C1!=null);
+  const withScore=d.filter(r=>r.C1>0);
+  const noAlign=d.filter(r=>r.C1===0);
+  document.getElementById('c1-cards').innerHTML=`
+    <div class="card c1"><div class="label">Avg C1 Score</div><div class="value">${f(avg(withScore,'C1'))}</div><div class="sub">among ${withScore.length} aligned branches</div></div>
+    <div class="card"><div class="label">Avg Alignment</div><div class="value">${f(avg(withScore,'C1_Alignment'),2)}</div><div class="sub">cosine similarity</div></div>
+    <div class="card"><div class="label">Zero-Alignment</div><div class="value">${noAlign.length}</div><div class="sub">missing teacher or leader</div></div>
+    <div class="card"><div class="label">Top Score</div><div class="value">${f(Math.max(...d.map(r=>r.C1||0)))}</div><div class="sub">/ 20</div></div>
+  `;
+  // C1 distribution
+  const bins=[0,5,10,15,18,20];const bl=['0-5','5-10','10-15','15-18','18-20'];
+  const counts=new Array(5).fill(0);
+  d.forEach(r=>{const v=r.C1||0;for(let i=bins.length-2;i>=0;i--){if(v>=bins[i]){counts[i]++;break;}}});
+  new Chart(document.getElementById('ch-c1-dist'),{type:'bar',data:{labels:bl,datasets:[{data:counts,backgroundColor:'rgba(59,130,246,.6)',borderColor:'var(--c1)',borderWidth:1}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Branches'}}}}});
+
+  // Scatter: teacher vs leader
+  new Chart(document.getElementById('ch-c1-scatter'),{type:'scatter',data:{datasets:[{label:'Branches',data:withScore.map(r=>({x:r.C1_TeacherScore,y:r.C1_LeaderScore,label:r.BranchCode})),backgroundColor:'var(--c1)',pointRadius:5},{label:'Parity',data:[{x:0,y:0},{x:1,y:1}],type:'line',borderColor:'#ccc',borderDash:[4,4],pointRadius:0}]},options:{scales:{x:{min:0,max:1,title:{display:true,text:'Teacher Score'}},y:{min:0,max:1,title:{display:true,text:'Leader Score'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw.label+': T='+ctx.raw.x.toFixed(2)+' L='+ctx.raw.y.toFixed(2)}}}}});
+
+  // Table
+  const sorted=[...d].sort((a,b)=>(b.C1||0)-(a.C1||0));
+  let h='<thead><tr><th>Branch</th><th>Teacher Score</th><th>Leader Score</th><th>Alignment</th><th>C1</th></tr></thead><tbody>';
+  sorted.forEach(r=>{h+=`<tr><td><strong>${r.BranchCode}</strong> ${r.BranchName}</td><td>${f(r.C1_TeacherScore,3)}</td><td>${f(r.C1_LeaderScore,3)}</td><td>${f(r.C1_Alignment,3)}</td><td><strong>${f(r.C1)}</strong> ${badge(r.C1,20)}</td></tr>`;});
+  h+='</tbody>';
+  document.getElementById('tbl-c1').innerHTML=h;
+})();
+
+// ═══ C2 TAB ═══
+(function(){
+  const d=DATA.filter(r=>r.C2!=null);
+  document.getElementById('c2-cards').innerHTML=`
+    <div class="card c2"><div class="label">Avg C2 Score</div><div class="value">${f(avg(d,'C2'))}</div><div class="sub">/ 25</div></div>
+    <div class="card"><div class="label">Avg Depth Eff.</div><div class="value">${f(avg(d,'C2_DepthEffectiveness'),3)}</div><div class="sub">coverage &times; mean E_norm</div></div>
+    <div class="card"><div class="label">Min</div><div class="value">${f(Math.min(...d.map(r=>r.C2)))}</div><div class="sub">/ 25</div></div>
+    <div class="card"><div class="label">Max</div><div class="value">${f(Math.max(...d.map(r=>r.C2)))}</div><div class="sub">/ 25</div></div>
+  `;
+  const bins=[10,12,13,14,15,16];const bl=['10-12','12-13','13-14','14-15','15-16'];
+  const counts=new Array(5).fill(0);
+  d.forEach(r=>{const v=r.C2;for(let i=bins.length-2;i>=0;i--){if(v>=bins[i]){counts[i]++;break;}}});
+  new Chart(document.getElementById('ch-c2-dist'),{type:'bar',data:{labels:bl,datasets:[{data:counts,backgroundColor:'rgba(139,92,246,.6)',borderColor:'var(--c2)',borderWidth:1}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Branches'}}}}});
+
+  // Horizontal bar
+  const s=[...d].sort((a,b)=>b.C2-a.C2);
+  new Chart(document.getElementById('ch-c2-bar'),{type:'bar',data:{labels:s.map(r=>r.BranchCode),datasets:[{data:s.map(r=>r.C2_DepthEffectiveness),backgroundColor:'rgba(139,92,246,.5)',borderColor:'var(--c2)',borderWidth:1}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{min:0.4,max:0.7,title:{display:true,text:'Depth Effectiveness'}}}}});
+
+  const sorted=[...d].sort((a,b)=>b.C2-a.C2);
+  let h='<thead><tr><th>Branch</th><th>Depth Effectiveness</th><th>C2</th><th>% of Max</th></tr></thead><tbody>';
+  sorted.forEach(r=>{h+=`<tr><td><strong>${r.BranchCode}</strong> ${r.BranchName}</td><td>${f(r.C2_DepthEffectiveness,4)}</td><td><strong>${f(r.C2)}</strong></td><td>${badge(r.C2,25)}</td></tr>`;});
+  h+='</tbody>';
+  document.getElementById('tbl-c2').innerHTML=h;
+})();
+
+// ═══ C3 TAB ═══
+(function(){
+  const d=DATA.filter(r=>r.C3!=null);
+  const totalR=d.reduce((s,r)=>s+(r.C3_Respondents||0),0);
+  document.getElementById('c3-cards').innerHTML=`
+    <div class="card c3"><div class="label">Avg C3 Score</div><div class="value">${f(avg(d,'C3'))}</div><div class="sub">/ 20</div></div>
+    <div class="card"><div class="label">Branches</div><div class="value">${d.length}</div><div class="sub">with MathTangle data</div></div>
+    <div class="card"><div class="label">Total Respondents</div><div class="value">${totalR}</div><div class="sub">teachers + leaders</div></div>
+    <div class="card"><div class="label">Avg CPI</div><div class="value">${f(avg(d,'C3_CPI'),3)}</div><div class="sub">composite proficiency</div></div>
+  `;
+  const bins=[8,10,12,14,16,18];const bl=['8-10','10-12','12-14','14-16','16-18'];
+  const counts=new Array(5).fill(0);
+  d.forEach(r=>{const v=r.C3;for(let i=bins.length-2;i>=0;i--){if(v>=bins[i]){counts[i]++;break;}}});
+  new Chart(document.getElementById('ch-c3-dist'),{type:'bar',data:{labels:bl,datasets:[{data:counts,backgroundColor:'rgba(16,185,129,.6)',borderColor:'var(--c3)',borderWidth:1}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Branches'}}}}});
+
+  new Chart(document.getElementById('ch-c3-scatter'),{type:'scatter',data:{datasets:[{label:'Branches',data:d.map(r=>({x:r.C3_Respondents,y:r.C3_CPI,label:r.BranchCode})),backgroundColor:'var(--c3)',pointRadius:5}]},options:{scales:{x:{title:{display:true,text:'Respondents'}},y:{min:0.4,max:1,title:{display:true,text:'CPI'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw.label+': CPI='+ctx.raw.y.toFixed(3)+' (n='+ctx.raw.x+')'}}}}});
+
+  const sorted=[...d].sort((a,b)=>b.C3-a.C3);
+  let h='<thead><tr><th>Branch</th><th>CPI</th><th>Respondents</th><th>C3</th><th>% of Max</th></tr></thead><tbody>';
+  sorted.forEach(r=>{h+=`<tr><td><strong>${r.BranchCode}</strong> ${r.BranchName}</td><td>${f(r.C3_CPI,4)}</td><td>${r.C3_Respondents}</td><td><strong>${f(r.C3)}</strong></td><td>${badge(r.C3,20)}</td></tr>`;});
+  h+='</tbody>';
+  document.getElementById('tbl-c3').innerHTML=h;
+})();
+
+// ═══ C4 TAB ═══
+(function(){
+  const d=DATA.filter(r=>r.C4!=null);
+  const bothHalves=d.filter(r=>r.C4_Enablement>0&&r.C4_Routine>0);
+  document.getElementById('c4-cards').innerHTML=`
+    <div class="card c4"><div class="label">Avg C4 Score</div><div class="value">${f(avg(d,'C4'))}</div><div class="sub">/ 20</div></div>
+    <div class="card"><div class="label">Avg Enablement</div><div class="value">${f(avg(d,'C4_Enablement'),2)}</div><div class="sub">teacher A1-A4</div></div>
+    <div class="card"><div class="label">Avg Routine</div><div class="value">${f(avg(bothHalves,'C4_Routine'),2)}</div><div class="sub">leader B1-B5 (${bothHalves.length} branches)</div></div>
+    <div class="card"><div class="label">Routine = 0</div><div class="value">${d.filter(r=>r.C4_Routine===0).length}</div><div class="sub">missing leader data</div></div>
+  `;
+  const bins=[0,5,10,15,18,20];const bl=['0-5','5-10','10-15','15-18','18-20'];
+  const counts=new Array(5).fill(0);
+  d.forEach(r=>{const v=r.C4;for(let i=bins.length-2;i>=0;i--){if(v>=bins[i]){counts[i]++;break;}}});
+  new Chart(document.getElementById('ch-c4-dist'),{type:'bar',data:{labels:bl,datasets:[{data:counts,backgroundColor:'rgba(245,158,11,.6)',borderColor:'var(--c4)',borderWidth:1}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Branches'}}}}});
+
+  new Chart(document.getElementById('ch-c4-scatter'),{type:'scatter',data:{datasets:[{label:'Branches',data:d.map(r=>({x:r.C4_Enablement,y:r.C4_Routine,label:r.BranchCode})),backgroundColor:'var(--c4)',pointRadius:5}]},options:{scales:{x:{min:0,max:1.05,title:{display:true,text:'Enablement (A1-A4)'}},y:{min:0,max:1.05,title:{display:true,text:'Routine (B1-B5)'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.raw.label+': E='+ctx.raw.x.toFixed(2)+' R='+ctx.raw.y.toFixed(2)}}}}});
+
+  const sorted=[...d].sort((a,b)=>b.C4-a.C4);
+  let h='<thead><tr><th>Branch</th><th>Enablement</th><th>Routine</th><th>C4</th><th>% of Max</th></tr></thead><tbody>';
+  sorted.forEach(r=>{h+=`<tr><td><strong>${r.BranchCode}</strong> ${r.BranchName}</td><td>${f(r.C4_Enablement,3)}</td><td>${f(r.C4_Routine,3)}</td><td><strong>${f(r.C4)}</strong></td><td>${badge(r.C4,20)}</td></tr>`;});
+  h+='</tbody>';
+  document.getElementById('tbl-c4').innerHTML=h;
+})();
+</script>
+</body>
+</html>
