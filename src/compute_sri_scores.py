@@ -15,6 +15,7 @@ Outputs:
 """
 
 import csv
+import json
 import math
 import os
 from collections import defaultdict
@@ -539,6 +540,7 @@ def main():
     ]
 
     csv_path = os.path.join(OUT, 'sri_branch_scores.csv')
+    json_records = []
     with open(csv_path, 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=fields)
         w.writeheader()
@@ -562,8 +564,29 @@ def main():
 
             w.writerow(row)
 
+            # Build JSON record (convert '' to None for JSON)
+            jrow = {}
+            for k, v in row.items():
+                if v == '':
+                    jrow[k] = None
+                elif isinstance(v, str):
+                    try:
+                        jrow[k] = float(v)
+                        if jrow[k] == int(jrow[k]):
+                            jrow[k] = int(jrow[k])
+                    except ValueError:
+                        jrow[k] = v
+                else:
+                    jrow[k] = v
+            json_records.append(jrow)
+
+    # ── Write JSON data ──
+    json_path = os.path.join(OUT, 'sri_dashboard_data.json')
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump({"main": json_records}, f, ensure_ascii=False)
     print(f"\n{'─' * 60}")
     print(f"CSV written: {csv_path}")
+    print(f"JSON written: {json_path}")
     print(f"Total branches: {len(all_bc)}")
 
     # ── Quick summary ──
@@ -627,6 +650,25 @@ def main():
     wb.save(wb_path)
     print(f"\nWorkbook updated: {wb_path}")
     print(f"Sheet 'SRI Scores' — {ws.max_row - 1} data rows")
+
+    # ── Update SRI dashboard HTML with new data ──
+    html_path = os.path.join(OUT, 'sri_dashboard.html')
+    if os.path.exists(html_path):
+        with open(html_path, 'r', encoding='utf-8') as f:
+            html = f.read()
+
+        # Find and replace the DATA array
+        marker = 'const DATA='
+        idx = html.index(marker)
+        end_idx = html.index(';', idx)
+        new_data = marker + json.dumps(json_records, ensure_ascii=False)
+        html = html[:idx] + new_data + html[end_idx:]
+
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        print(f"\nHTML dashboard updated: {html_path}")
+    else:
+        print(f"\nHTML dashboard not found at {html_path} — skipped")
 
 
 if __name__ == '__main__':
