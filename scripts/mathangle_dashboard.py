@@ -49,6 +49,9 @@ CHAPTER_MAP = {
     "वेळ आणि दिनदर्शिका": "Time &\nCalendar",
 }
 
+# Exclude test/demo branches and test users
+EXCLUDED_BRANCHES = {"DES Demo", "Myelin Cbse Primary & Secondary School"}
+
 def map_chapter(ch):
     for k, v in CHAPTER_MAP.items():
         if ch.startswith(k):
@@ -472,6 +475,8 @@ def build_dashboard(rows):
 
 if __name__ == "__main__":
     rows = load()
-    print(f"Loaded {len(rows)} records")
+    rows = [r for r in rows if r.get("branchName", "") not in EXCLUDED_BRANCHES
+            and (r.get("lastName", "") or "").strip().lower() != "test"]
+    print(f"Loaded {len(rows)} records (after exclusions)")
     rows = enrich(rows)
     build_dashboard(rows)

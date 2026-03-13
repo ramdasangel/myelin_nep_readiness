@@ -42,6 +42,17 @@ EXIT_LABELS = {1: "Foundational", 2: "Preparatory", 3: "Middle"}
 EXIT_COLORS = {"Middle": "#10B981", "Preparatory": "#3B82F6", "Foundational": "#F59E0B",
                "Below Foundational": "#EF4444", "Not Assessed": "#CBD5E1"}
 
+# Exclude test/demo branches and test users
+EXCLUDED_BRANCHES = {"DES Demo", "Myelin Cbse Primary & Secondary School"}
+
+def _is_excluded(row):
+    if row.get("branchName", "") in EXCLUDED_BRANCHES:
+        return True
+    ln = row.get("lastName", "")
+    if ln and ln.strip().lower() == "test":
+        return True
+    return False
+
 def mc(ch):
     for k, v in CHAPTER_MAP.items():
         if ch.startswith(k): return v
@@ -52,7 +63,10 @@ def load():
     with open(INPUT) as f:
         for line in f:
             line = line.strip()
-            if line.startswith("{"): rows.append(json.loads(line))
+            if line.startswith("{"):
+                r = json.loads(line)
+                if not _is_excluded(r):
+                    rows.append(r)
     return rows
 
 def load_exit():
@@ -60,7 +74,12 @@ def load_exit():
     with open(EXIT_INPUT) as f:
         for line in f:
             line = line.strip()
-            if line.startswith("{"): rows.append(json.loads(line))
+            if line.startswith("{"):
+                r = json.loads(line)
+                if r.get("branch", "") not in EXCLUDED_BRANCHES:
+                    name = r.get("name", "")
+                    if not (name.split()[-1:] and name.split()[-1].lower() == "test"):
+                        rows.append(r)
     return rows
 
 def load_indecision():
@@ -68,7 +87,12 @@ def load_indecision():
     with open(INDECISION_INPUT) as f:
         for line in f:
             line = line.strip()
-            if line.startswith("{"): rows.append(json.loads(line))
+            if line.startswith("{"):
+                r = json.loads(line)
+                if r.get("branch", "") not in EXCLUDED_BRANCHES:
+                    name = r.get("name", "")
+                    if not (name.split()[-1:] and name.split()[-1].lower() == "test"):
+                        rows.append(r)
     return rows
 
 def compute_indecision(indecision_rows):

@@ -51,62 +51,60 @@ Rank,Name,Role,Branch,School,Language,Score,Total,Percentage,Time Taken,Addition
 50,Jaya Bhise,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,8,11,72.7,22 mins 22 secs,100.0,,100.0,100.0,100.0,100.0,,0.0,,100,100,63,5/7,2/3,1/1
 51,Ranjana Kumbhar,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,8,11,72.7,13 mins 34 secs,,,50.0,100.0,100.0,100.0,100.0,33.3,,100,100,57,5/7,2/3,1/1
 52,Vidya Manokar,Leader,SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK MANDIR [ENGLISH MEDIUM  PRE-PRIMARY SECTION],Deccan Education Society,MR,8,11,72.7,18 mins 50 secs,33.3,100.0,50.0,100.0,,100.0,100.0,,,100,100,50,4/6,3/4,1/1
-53,Abhi Ghodekar,Teacher,DES Demo,Deccan Education Society,EN,7,11,63.6,13 mins 27 secs,100.0,,66.7,0.0,0.0,100.0,100.0,100.0,,,100,56,3/6,3/4,1/1
-54,Deepa Abhyankar,Leader,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,MR,7,11,63.6,9 mins 57 secs,100.0,0.0,100.0,33.3,100.0,0.0,100.0,100.0,0,50,67,80,0/0,7/9,0/2
-55,Pallavi Parundekar,Leader,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,MR,7,11,63.6,14 mins 57 secs,100.0,,75.0,,100.0,0.0,50.0,100.0,,50,100,57,3/5,3/4,1/2
-56,Aparna Kulkarni,Teacher,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,MR,7,11,63.6,10 mins 27 secs,,100.0,33.3,66.7,,100.0,100.0,0.0,,,80,50,4/7,3/4,0/0
-57,Umesh Sapkal,Teacher,"NEW ENGLISH SCHOOL, RAMANBAG",Deccan Education Society,MR,7,11,63.6,13 mins 52 secs,,,100.0,33.3,,100.0,100.0,50.0,,0,67,71,5/6,1/3,1/2
-58,Priya Indulkar,Leader,"NAVIN MARATHI SHALA,PUNE",Deccan Education Society,MR,7,11,63.6,21 mins 46 secs,0.0,100.0,100.0,0.0,100.0,100.0,100.0,66.7,,100,60,50,2/2,1/5,4/4
-59,Rupali Sawant,Teacher,"NAVIN MARATHI SHALA,PUNE",Deccan Education Society,MR,7,11,63.6,5 mins 54 secs,,,100.0,66.7,33.3,100.0,0.0,,,67,50,67,2/3,2/5,3/3
-60,Devashree Deolankar,Leader,MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PURVA-PRATHAMIK VIBHAG),Deccan Education Society,MR,7,11,63.6,7 mins 30 secs,,,66.7,0.0,,100.0,50.0,66.7,,100,75,50,2/5,4/5,1/1
-61,Varsha Dandekar,Teacher,MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PURVA-PRATHAMIK VIBHAG),Deccan Education Society,MR,7,11,63.6,15 mins 44 secs,100.0,0.0,66.7,0.0,,100.0,66.7,100.0,,0,0,78,3/5,2/4,2/2
-62,Soniya Tambekar,Leader,MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PRATHAMIK VIBHAG),Deccan Education Society,MR,7,11,63.6,7 mins 56 secs,50.0,100.0,100.0,0.0,0.0,100.0,100.0,66.7,,100,50,63,0/0,4/8,3/3
-63,Purva Apte,Teacher,D.E.S. SECONDARY SCHOOL,Deccan Education Society,EN,7,11,63.6,14 mins 2 secs,66.7,,50.0,0.0,100.0,,100.0,50.0,,50,,67,4/6,2/3,1/2
-64,Anagha Jodh,Teacher,D.E.S. SECONDARY SCHOOL,Deccan Education Society,EN,7,11,63.6,14 mins 37 secs,100.0,0.0,50.0,50.0,,,100.0,66.7,,50,67,67,3/5,3/4,1/2
-65,Dhanashri Patil,Leader,HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,MR,7,11,63.6,12 mins 0 secs,100.0,50.0,75.0,50.0,,100.0,,0.0,0,100,60,75,4/4,1/3,2/4
-66,Mani sha Bhise,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,MR,7,11,63.6,6 mins 10 secs,0.0,,50.0,50.0,100.0,100.0,100.0,100.0,,100,33,71,3/4,1/4,3/3
-67,Mayureshwar Hiremath,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,7,11,63.6,3 mins 43 secs,0.0,100.0,50.0,33.3,,,100.0,100.0,,100,80,40,2/5,4/5,1/1
-68,Anagha Kadu,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,7,11,63.6,15 mins 35 secs,50.0,50.0,,,100.0,100.0,100.0,0.0,,100,100,50,4/7,3/4,0/0
-69,Archana Gore,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,EN,7,11,63.6,22 mins 9 secs,0.0,,100.0,0.0,50.0,,100.0,66.7,,100,50,63,2/2,1/5,4/4
-70,Balaji Chavan,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,7,11,63.6,9 mins 49 secs,0.0,100.0,50.0,100.0,50.0,,100.0,50.0,100,100,,56,4/6,2/4,1/1
-71,Rupali Desai,Leader,"RAMESH GARWARE SCHOOL (PRIMARY UNIT), WAI",Deccan Education Society,MR,7,11,63.6,19 mins 15 secs,,100.0,100.0,0.0,0.0,100.0,100.0,0.0,100,100,33,60,2/4,3/5,2/2
-72,Urmila Kulkarni,Leader,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA  ( MARATHI MADHYAM-MADHYAMIK VIBHAG),Deccan Education Society,EN,7,11,63.6,12 mins 37 secs,,50.0,50.0,,100.0,,100.0,50.0,,,50,67,2/5,4/5,1/1
-73,Anuja Shinde,Teacher,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,MR,7,11,63.6,16 mins 23 secs,100.0,50.0,100.0,50.0,,100.0,,33.3,,,50,71,2/5,4/5,1/1
-74,Geeta Jagtap,Teacher,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,MR,7,11,63.6,9 mins 28 secs,0.0,0.0,50.0,100.0,100.0,100.0,,100.0,,,83,40,4/6,2/4,1/1
-75,Pushpa Raut,Teacher,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,MR,7,11,63.6,16 mins 26 secs,0.0,100.0,50.0,50.0,,100.0,100.0,50.0,,100,100,50,3/7,4/4,0/0
-76,Vaishali Gokhale,Leader,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,EN,7,11,63.6,19 mins 29 secs,,100.0,100.0,50.0,0.0,100.0,100.0,33.3,,,67,63,2/4,3/5,2/2
-77,Rohini Panse,Leader,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,MR,6,11,54.5,17 mins 4 secs,50.0,,66.7,100.0,50.0,,,33.3,,,100,44,2/4,2/4,2/3
-78,Archana Abhyankar,Teacher,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,EN,6,11,54.5,28 mins 14 secs,100.0,100.0,100.0,50.0,0.0,0.0,100.0,0.0,,,50,57,1/2,2/5,3/4
-79,Pratibha Jakka,Leader,"NEW ENGLISH SCHOOL, RAMANBAG",Deccan Education Society,MR,6,11,54.5,17 mins 14 secs,100.0,,100.0,33.3,66.7,,,0.0,,0,50,63,1/3,3/5,2/3
-80,Siddhi Deshpande,Teacher,"NEW ENGLISH SCHOOL, RAMANBAG",Deccan Education Society,MR,6,11,54.5,17 mins 24 secs,,33.3,100.0,,100.0,100.0,50.0,33.3,100,0,67,50,1/3,2/5,3/3
-81,Sucheta Vaze,Leader,NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,EN,6,11,54.5,6 mins 59 secs,,0.0,0.0,50.0,100.0,0.0,100.0,100.0,,100,0,83,2/4,2/5,2/2
-82,Rupali Shukla,Teacher,NYA.RANADE BALAK MANDIR,Deccan Education Society,MR,6,11,54.5,7 mins 54 secs,,0.0,100.0,0.0,,100.0,100.0,50.0,,100,0,71,1/2,2/5,3/4
-83,Arti Sahasrabudhe,Teacher,MURLIDHAR LOHIYA MATRU MANDIR (D.E.S. PRE-PRIMARY) SCHOOL,Deccan Education Society,MR,6,11,54.5,19 mins 12 secs,100.0,0.0,66.7,0.0,,0.0,100.0,66.7,,50,0,71,1/2,2/5,3/4
-84,Ruchira Shinde,Teacher,D.E.S. PRIMARY SCHOOL,Deccan Education Society,EN,6,11,54.5,9 mins 55 secs,100.0,,66.7,0.0,0.0,100.0,100.0,50.0,,100,50,50,0/2,3/6,3/3
-85,Darpanika Kadam,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,MR,6,11,54.5,10 mins 53 secs,100.0,100.0,50.0,100.0,0.0,50.0,100.0,0.0,100,100,0,43,0/0,2/6,4/5
-86,Shahanaz Hebbalkar,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,6,11,54.5,10 mins 14 secs,0.0,50.0,0.0,100.0,100.0,100.0,,0.0,100,100,33,50,3/4,1/3,2/4
-87,Pratibha Potghan,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,6,11,54.5,26 mins 36 secs,33.3,100.0,,0.0,0.0,100.0,100.0,0.0,100,100,50,33,1/3,2/5,3/3
-88,Rupa Shinde,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,6,11,54.5,9 mins 16 secs,,100.0,66.7,33.3,100.0,0.0,,50.0,100,,25,67,2/3,1/5,3/3
-89,Santosh Mane,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,6,11,54.5,6 mins 36 secs,0.0,,50.0,50.0,50.0,100.0,100.0,,,,50,57,2/4,2/4,2/3
-90,Nilesh Ramugade,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,6,11,54.5,10 mins 59 secs,50.0,,50.0,50.0,0.0,100.0,100.0,100.0,,,50,56,2/4,2/5,2/2
-91,Mangal Salunkhe,Leader,"NAVIN MARATHI SHALA, SATARA",Deccan Education Society,MR,6,11,54.5,16 mins 6 secs,0.0,,66.7,33.3,,,,100.0,,,50,57,0/2,3/6,3/3
-92,Mahadev Jadhav,Leader,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,6,11,54.5,14 mins 33 secs,0.0,,100.0,50.0,,100.0,100.0,50.0,,,33,63,1/2,2/5,3/4
-93,Swapna Wable,Teacher,"NAVIN MARATHI SHALA,PUNE",Deccan Education Society,MR,5,11,45.5,13 mins 8 secs,,100.0,75.0,0.0,0.0,,,33.3,,,80,17,1/3,2/5,2/3
-94,Vidula Avatepujari,Leader,NYA.RANADE BALAK MANDIR,Deccan Education Society,MR,5,11,45.5,8 mins 20 secs,0.0,,66.7,33.3,50.0,,0.0,100.0,,0,67,50,1/2,1/5,3/4
-95,Shamala Dabhade,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,MR,5,11,45.5,12 mins 40 secs,0.0,,50.0,33.3,100.0,100.0,100.0,0.0,,,0,63,0/2,2/5,3/4
-96,Anita Yengul,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,EN,5,11,45.5,10 mins 49 secs,100.0,,33.3,33.3,100.0,,,33.3,,,25,57,1/2,2/4,2/5
-97,Nilam Shevate,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,5,11,45.5,9 mins 51 secs,,,100.0,0.0,0.0,0.0,100.0,0.0,,50,50,43,0/2,3/5,2/4
-98,Gopal Garud,Teacher,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,5,11,45.5,15 mins 15 secs,100.0,100.0,50.0,33.3,50.0,,,0.0,,,50,44,0/3,3/5,2/3
-99,Pooja Joshi,Leader,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM PRIMARY SECTION],Deccan Education Society,MR,5,11,45.5,9 mins 26 secs,100.0,50.0,66.7,50.0,0.0,,0.0,0.0,100,,50,33,1/4,3/5,1/2
-100,Chetan Khule,Leader,DES Demo,Deccan Education Society,MR,4,11,36.4,0 mins 14 secs,0.0,50.0,50.0,50.0,0.0,0.0,0.0,100.0,100,100,0,29,0/1,1/5,3/5
-101,Rupali Mali,Teacher,"NEW ENGLISH SCHOOL,TILAK ROAD",Deccan Education Society,MR,4,11,36.4,30 mins 13 secs,0.0,,100.0,25.0,,100.0,,0.0,,100,25,33,0/1,1/4,3/6
-102,Vaishali Wargad,Leader,NEW ENGLISH MEDIUM SCHOOL SECONDARY SCHOOL,Deccan Education Society,EN,4,11,36.4,11 mins 1 secs,0.0,0.0,100.0,33.3,50.0,100.0,,0.0,0,,0,50,0/2,2/5,2/4
-103,Kanchan Solapurkar,Leader,D.E.S. SECONDARY SCHOOL,Deccan Education Society,MR,4,11,36.4,15 mins 55 secs,100.0,0.0,33.3,100.0,0.0,100.0,0.0,0.0,0,0,0,50,0/1,1/5,3/5
-104,Yogesh Ambekar,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,4,11,36.4,6 mins 20 secs,0.0,0.0,33.3,0.0,,100.0,50.0,100.0,0,100,0,33,1/1,1/3,2/7
-105,Umakant Koli,Teacher,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,4,11,36.4,6 mins 8 secs,0.0,,100.0,33.3,100.0,50.0,,0.0,,50,33,33,0/1,1/5,3/5
-106,Neeraja Belsare,Teacher,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,MR,4,11,36.4,5 mins 31 secs,,,66.7,0.0,0.0,100.0,0.0,33.3,,50,50,29,0/1,1/4,3/6
-107,Sandip Mali,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,3,11,27.3,4 mins 52 secs,0.0,0.0,50.0,0.0,100.0,0.0,100.0,0.0,,0,0,38,0/0,0/4,3/7
-108,Anita Ghadge,Leader,"DATAR-SHENDURE ENGLISH MEDIUM SECONDARY SCHOOL, SATARA",Deccan Education Society,MR,3,11,27.3,20 mins 40 secs,,100.0,,50.0,0.0,,0.0,0.0,100,0,67,0,0/2,2/5,1/4
-109,prashantkumar mallade,Teacher,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,3,11,27.3,2 mins 23 secs,0.0,0.0,0.0,0.0,100.0,0.0,50.0,100.0,0,0,33,50,0/1,1/4,2/6
-110,Rajashree Bhalerao,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,2,11,18.2,24 mins 28 secs,,,0.0,0.0,100.0,0.0,50.0,0.0,,0,0,50,0/0,0/3,2/8
-111,Vaishali Hirave,Teacher,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,2,11,18.2,4 mins 52 secs,,0.0,0.0,0.0,,0.0,100.0,50.0,0,0,25,20,0/0,0/3,2/8
+53,Deepa Abhyankar,Leader,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,MR,7,11,63.6,9 mins 57 secs,100.0,0.0,100.0,33.3,100.0,0.0,100.0,100.0,0,50,67,80,0/0,7/9,0/2
+54,Pallavi Parundekar,Leader,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,MR,7,11,63.6,14 mins 57 secs,100.0,,75.0,,100.0,0.0,50.0,100.0,,50,100,57,3/5,3/4,1/2
+55,Aparna Kulkarni,Teacher,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,MR,7,11,63.6,10 mins 27 secs,,100.0,33.3,66.7,,100.0,100.0,0.0,,,80,50,4/7,3/4,0/0
+56,Umesh Sapkal,Teacher,"NEW ENGLISH SCHOOL, RAMANBAG",Deccan Education Society,MR,7,11,63.6,13 mins 52 secs,,,100.0,33.3,,100.0,100.0,50.0,,0,67,71,5/6,1/3,1/2
+57,Priya Indulkar,Leader,"NAVIN MARATHI SHALA,PUNE",Deccan Education Society,MR,7,11,63.6,21 mins 46 secs,0.0,100.0,100.0,0.0,100.0,100.0,100.0,66.7,,100,60,50,2/2,1/5,4/4
+58,Rupali Sawant,Teacher,"NAVIN MARATHI SHALA,PUNE",Deccan Education Society,MR,7,11,63.6,5 mins 54 secs,,,100.0,66.7,33.3,100.0,0.0,,,67,50,67,2/3,2/5,3/3
+59,Devashree Deolankar,Leader,MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PURVA-PRATHAMIK VIBHAG),Deccan Education Society,MR,7,11,63.6,7 mins 30 secs,,,66.7,0.0,,100.0,50.0,66.7,,100,75,50,2/5,4/5,1/1
+60,Varsha Dandekar,Teacher,MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PURVA-PRATHAMIK VIBHAG),Deccan Education Society,MR,7,11,63.6,15 mins 44 secs,100.0,0.0,66.7,0.0,,100.0,66.7,100.0,,0,0,78,3/5,2/4,2/2
+61,Soniya Tambekar,Leader,MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PRATHAMIK VIBHAG),Deccan Education Society,MR,7,11,63.6,7 mins 56 secs,50.0,100.0,100.0,0.0,0.0,100.0,100.0,66.7,,100,50,63,0/0,4/8,3/3
+62,Purva Apte,Teacher,D.E.S. SECONDARY SCHOOL,Deccan Education Society,EN,7,11,63.6,14 mins 2 secs,66.7,,50.0,0.0,100.0,,100.0,50.0,,50,,67,4/6,2/3,1/2
+63,Anagha Jodh,Teacher,D.E.S. SECONDARY SCHOOL,Deccan Education Society,EN,7,11,63.6,14 mins 37 secs,100.0,0.0,50.0,50.0,,,100.0,66.7,,50,67,67,3/5,3/4,1/2
+64,Dhanashri Patil,Leader,HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,MR,7,11,63.6,12 mins 0 secs,100.0,50.0,75.0,50.0,,100.0,,0.0,0,100,60,75,4/4,1/3,2/4
+65,Mani sha Bhise,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,MR,7,11,63.6,6 mins 10 secs,0.0,,50.0,50.0,100.0,100.0,100.0,100.0,,100,33,71,3/4,1/4,3/3
+66,Mayureshwar Hiremath,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,7,11,63.6,3 mins 43 secs,0.0,100.0,50.0,33.3,,,100.0,100.0,,100,80,40,2/5,4/5,1/1
+67,Anagha Kadu,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,7,11,63.6,15 mins 35 secs,50.0,50.0,,,100.0,100.0,100.0,0.0,,100,100,50,4/7,3/4,0/0
+68,Archana Gore,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,EN,7,11,63.6,22 mins 9 secs,0.0,,100.0,0.0,50.0,,100.0,66.7,,100,50,63,2/2,1/5,4/4
+69,Balaji Chavan,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,7,11,63.6,9 mins 49 secs,0.0,100.0,50.0,100.0,50.0,,100.0,50.0,100,100,,56,4/6,2/4,1/1
+70,Rupali Desai,Leader,"RAMESH GARWARE SCHOOL (PRIMARY UNIT), WAI",Deccan Education Society,MR,7,11,63.6,19 mins 15 secs,,100.0,100.0,0.0,0.0,100.0,100.0,0.0,100,100,33,60,2/4,3/5,2/2
+71,Urmila Kulkarni,Leader,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA  ( MARATHI MADHYAM-MADHYAMIK VIBHAG),Deccan Education Society,EN,7,11,63.6,12 mins 37 secs,,50.0,50.0,,100.0,,100.0,50.0,,,50,67,2/5,4/5,1/1
+72,Anuja Shinde,Teacher,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,MR,7,11,63.6,16 mins 23 secs,100.0,50.0,100.0,50.0,,100.0,,33.3,,,50,71,2/5,4/5,1/1
+73,Geeta Jagtap,Teacher,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,MR,7,11,63.6,9 mins 28 secs,0.0,0.0,50.0,100.0,100.0,100.0,,100.0,,,83,40,4/6,2/4,1/1
+74,Pushpa Raut,Teacher,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,MR,7,11,63.6,16 mins 26 secs,0.0,100.0,50.0,50.0,,100.0,100.0,50.0,,100,100,50,3/7,4/4,0/0
+75,Vaishali Gokhale,Leader,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,EN,7,11,63.6,19 mins 29 secs,,100.0,100.0,50.0,0.0,100.0,100.0,33.3,,,67,63,2/4,3/5,2/2
+76,Rohini Panse,Leader,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,MR,6,11,54.5,17 mins 4 secs,50.0,,66.7,100.0,50.0,,,33.3,,,100,44,2/4,2/4,2/3
+77,Archana Abhyankar,Teacher,AHILYADEVI HIGH SCHOOL FOR GIRLS,Deccan Education Society,EN,6,11,54.5,28 mins 14 secs,100.0,100.0,100.0,50.0,0.0,0.0,100.0,0.0,,,50,57,1/2,2/5,3/4
+78,Pratibha Jakka,Leader,"NEW ENGLISH SCHOOL, RAMANBAG",Deccan Education Society,MR,6,11,54.5,17 mins 14 secs,100.0,,100.0,33.3,66.7,,,0.0,,0,50,63,1/3,3/5,2/3
+79,Siddhi Deshpande,Teacher,"NEW ENGLISH SCHOOL, RAMANBAG",Deccan Education Society,MR,6,11,54.5,17 mins 24 secs,,33.3,100.0,,100.0,100.0,50.0,33.3,100,0,67,50,1/3,2/5,3/3
+80,Sucheta Vaze,Leader,NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,EN,6,11,54.5,6 mins 59 secs,,0.0,0.0,50.0,100.0,0.0,100.0,100.0,,100,0,83,2/4,2/5,2/2
+81,Rupali Shukla,Teacher,NYA.RANADE BALAK MANDIR,Deccan Education Society,MR,6,11,54.5,7 mins 54 secs,,0.0,100.0,0.0,,100.0,100.0,50.0,,100,0,71,1/2,2/5,3/4
+82,Arti Sahasrabudhe,Teacher,MURLIDHAR LOHIYA MATRU MANDIR (D.E.S. PRE-PRIMARY) SCHOOL,Deccan Education Society,MR,6,11,54.5,19 mins 12 secs,100.0,0.0,66.7,0.0,,0.0,100.0,66.7,,50,0,71,1/2,2/5,3/4
+83,Ruchira Shinde,Teacher,D.E.S. PRIMARY SCHOOL,Deccan Education Society,EN,6,11,54.5,9 mins 55 secs,100.0,,66.7,0.0,0.0,100.0,100.0,50.0,,100,50,50,0/2,3/6,3/3
+84,Darpanika Kadam,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,MR,6,11,54.5,10 mins 53 secs,100.0,100.0,50.0,100.0,0.0,50.0,100.0,0.0,100,100,0,43,0/0,2/6,4/5
+85,Shahanaz Hebbalkar,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,6,11,54.5,10 mins 14 secs,0.0,50.0,0.0,100.0,100.0,100.0,,0.0,100,100,33,50,3/4,1/3,2/4
+86,Pratibha Potghan,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,6,11,54.5,26 mins 36 secs,33.3,100.0,,0.0,0.0,100.0,100.0,0.0,100,100,50,33,1/3,2/5,3/3
+87,Rupa Shinde,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,6,11,54.5,9 mins 16 secs,,100.0,66.7,33.3,100.0,0.0,,50.0,100,,25,67,2/3,1/5,3/3
+88,Santosh Mane,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,6,11,54.5,6 mins 36 secs,0.0,,50.0,50.0,50.0,100.0,100.0,,,,50,57,2/4,2/4,2/3
+89,Nilesh Ramugade,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,6,11,54.5,10 mins 59 secs,50.0,,50.0,50.0,0.0,100.0,100.0,100.0,,,50,56,2/4,2/5,2/2
+90,Mangal Salunkhe,Leader,"NAVIN MARATHI SHALA, SATARA",Deccan Education Society,MR,6,11,54.5,16 mins 6 secs,0.0,,66.7,33.3,,,,100.0,,,50,57,0/2,3/6,3/3
+91,Mahadev Jadhav,Leader,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,6,11,54.5,14 mins 33 secs,0.0,,100.0,50.0,,100.0,100.0,50.0,,,33,63,1/2,2/5,3/4
+92,Swapna Wable,Teacher,"NAVIN MARATHI SHALA,PUNE",Deccan Education Society,MR,5,11,45.5,13 mins 8 secs,,100.0,75.0,0.0,0.0,,,33.3,,,80,17,1/3,2/5,2/3
+93,Vidula Avatepujari,Leader,NYA.RANADE BALAK MANDIR,Deccan Education Society,MR,5,11,45.5,8 mins 20 secs,0.0,,66.7,33.3,50.0,,0.0,100.0,,0,67,50,1/2,1/5,3/4
+94,Shamala Dabhade,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT),Deccan Education Society,MR,5,11,45.5,12 mins 40 secs,0.0,,50.0,33.3,100.0,100.0,100.0,0.0,,,0,63,0/2,2/5,3/4
+95,Anita Yengul,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,EN,5,11,45.5,10 mins 49 secs,100.0,,33.3,33.3,100.0,,,33.3,,,25,57,1/2,2/4,2/5
+96,Nilam Shevate,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,5,11,45.5,9 mins 51 secs,,,100.0,0.0,0.0,0.0,100.0,0.0,,50,50,43,0/2,3/5,2/4
+97,Gopal Garud,Teacher,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,5,11,45.5,15 mins 15 secs,100.0,100.0,50.0,33.3,50.0,,,0.0,,,50,44,0/3,3/5,2/3
+98,Pooja Joshi,Leader,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM PRIMARY SECTION],Deccan Education Society,MR,5,11,45.5,9 mins 26 secs,100.0,50.0,66.7,50.0,0.0,,0.0,0.0,100,,50,33,1/4,3/5,1/2
+99,Rupali Mali,Teacher,"NEW ENGLISH SCHOOL,TILAK ROAD",Deccan Education Society,MR,4,11,36.4,30 mins 13 secs,0.0,,100.0,25.0,,100.0,,0.0,,100,25,33,0/1,1/4,3/6
+100,Vaishali Wargad,Leader,NEW ENGLISH MEDIUM SCHOOL SECONDARY SCHOOL,Deccan Education Society,EN,4,11,36.4,11 mins 1 secs,0.0,0.0,100.0,33.3,50.0,100.0,,0.0,0,,0,50,0/2,2/5,2/4
+101,Kanchan Solapurkar,Leader,D.E.S. SECONDARY SCHOOL,Deccan Education Society,MR,4,11,36.4,15 mins 55 secs,100.0,0.0,33.3,100.0,0.0,100.0,0.0,0.0,0,0,0,50,0/1,1/5,3/5
+102,Yogesh Ambekar,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,4,11,36.4,6 mins 20 secs,0.0,0.0,33.3,0.0,,100.0,50.0,100.0,0,100,0,33,1/1,1/3,2/7
+103,Umakant Koli,Teacher,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,4,11,36.4,6 mins 8 secs,0.0,,100.0,33.3,100.0,50.0,,0.0,,50,33,33,0/1,1/5,3/5
+104,Neeraja Belsare,Teacher,SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION],Deccan Education Society,MR,4,11,36.4,5 mins 31 secs,,,66.7,0.0,0.0,100.0,0.0,33.3,,50,50,29,0/1,1/4,3/6
+105,Sandip Mali,Teacher,"NEW ENGLISH SCHOOL, SATARA",Deccan Education Society,MR,3,11,27.3,4 mins 52 secs,0.0,0.0,50.0,0.0,100.0,0.0,100.0,0.0,,0,0,38,0/0,0/4,3/7
+106,Anita Ghadge,Leader,"DATAR-SHENDURE ENGLISH MEDIUM SECONDARY SCHOOL, SATARA",Deccan Education Society,MR,3,11,27.3,20 mins 40 secs,,100.0,,50.0,0.0,,0.0,0.0,100,0,67,0,0/2,2/5,1/4
+107,prashantkumar mallade,Teacher,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,3,11,27.3,2 mins 23 secs,0.0,0.0,0.0,0.0,100.0,0.0,50.0,100.0,0,0,33,50,0/1,1/4,2/6
+108,Rajashree Bhalerao,Teacher,HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT),Deccan Education Society,MR,2,11,18.2,24 mins 28 secs,,,0.0,0.0,100.0,0.0,50.0,0.0,,0,0,50,0/0,0/3,2/8
+109,Vaishali Hirave,Teacher,"DRAVID HIGH SCHOOL,WAI",Deccan Education Society,MR,2,11,18.2,4 mins 52 secs,,0.0,0.0,0.0,,0.0,100.0,50.0,0,0,25,20,0/0,0/3,2/8

@@ -112,6 +112,9 @@ const indecisionLines = [];
 
 let processed = 0;
 
+// Exclude test/demo branches and test users
+const EXCLUDED_BRANCHES = new Set(["DES Demo", "Myelin Cbse Primary & Secondary School"]);
+
 db.OnlineAssesmentStudentResult.find({
   OnlineAssesmentID: {$in: oaIds},
   SubmitFlag: 1,
@@ -123,6 +126,9 @@ db.OnlineAssesmentStudentResult.find({
   const branchId = user.branchId || oaInfo.branchId;
   const branchInfo = branchCache[branchId] || {branchName: "", schoolName: ""};
   const branchCode = branchCodeMap[branchId] || oaInfo.branchCode;
+
+  if (EXCLUDED_BRANCHES.has(branchInfo.branchName)) return;
+  if ((user.lastName || "").trim().toLowerCase() === "test") return;
 
   const questions = result.AssesmentResult || [];
   const totalMarks = result.TotalTestMarks || questions.length;
