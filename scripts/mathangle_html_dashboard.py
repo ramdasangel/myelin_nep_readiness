@@ -151,7 +151,8 @@ def compute_exit_levels(exit_rows):
         sid = er["studentId"]
         comp_levels = defaultdict(dict)  # competency -> {level: right}
         for subtopic, levels in er.get("topicLevels", {}).items():
-            comp = SUBTOPIC_MAP.get(subtopic)
+            # topicLevels keys may already be mapped area names or raw subtopics
+            comp = subtopic if subtopic in AREA_ORDER else SUBTOPIC_MAP.get(subtopic)
             if not comp: continue
             for lv_str, data in levels.items():
                 lv = int(lv_str)
