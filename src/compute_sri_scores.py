@@ -83,6 +83,12 @@ LEADER_MR_GOAL_FP = {k: v for k, v in TEACHER_GOAL_FP.items()}
 
 FPS = ['FP1', 'FP2', 'FP3', 'FP4', 'FP5']
 
+# Exclude test/demo branches and test users
+EXCLUDED_BRANCH_CODES = {'M008', 'm942e'}
+
+def _is_test_user(row):
+    return (row.get('lastName', '') or '').strip().lower() == 'test'
+
 # ═══════════════════════════════════════════════════════════
 #  Helpers
 # ═══════════════════════════════════════════════════════════
@@ -200,7 +206,7 @@ def compute_c1():
             bc   = row['branchCode'].strip()
             goal = row['goal'].strip()
             opt  = safe_int(row.get('selectedOption', ''), -1)
-            if opt < 0 or not bc:
+            if opt < 0 or not bc or bc in EXCLUDED_BRANCH_CODES or _is_test_user(row):
                 continue
             fp = goal_map.get(goal)
             if not fp:
@@ -302,7 +308,7 @@ def compute_c2():
             bc   = row['branchCode'].strip()
             goal = row['goal'].strip()
             opt  = safe_int(row.get('selectedOption', ''), -1)
-            if opt < 0 or not bc:
+            if opt < 0 or not bc or bc in EXCLUDED_BRANCH_CODES or _is_test_user(row):
                 continue
             fp = TEACHER_GOAL_FP.get(goal)
             if not fp:
@@ -461,7 +467,7 @@ def compute_c4():
         bc  = row['branchCode'].strip()
         qid = row['questionId'].strip()
         opt = safe_int(row.get('selectedOption', ''), -1)
-        if opt < 0 or not bc:
+        if opt < 0 or not bc or bc in EXCLUDED_BRANCH_CODES or _is_test_user(row):
             continue
         area = q_area.get(qid)
         if not area:
@@ -521,8 +527,8 @@ def main():
     print("\nC5: Ecosystem Readiness (max 15)")
     print("  No data — all branches get 0")
 
-    # ── Outer join all constructs on branchCode ──
-    all_bc = sorted(set(c1) | set(c2) | set(c3) | set(c4))
+    # ── Outer join all constructs on branchCode (excluding test/demo branches) ──
+    all_bc = sorted((set(c1) | set(c2) | set(c3) | set(c4)) - EXCLUDED_BRANCH_CODES)
     code_to_name = build_code_to_name()
 
     C1_EMPTY = {'C1_TeacherScore': '', 'C1_LeaderScore': '', 'C1_Alignment': '', 'C1': ''}

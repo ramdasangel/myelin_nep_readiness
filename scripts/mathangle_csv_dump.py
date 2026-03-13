@@ -37,6 +37,20 @@ AREAS = ["Multiplication", "Money", "Factors & Multiples", "Division",
          "Measurement", "Addition & Subtraction", "Time & Calendar", "Geometry"]
 COGS = ["Understand", "Apply", "Analyze", "Evaluate"]
 
+# Exclude test/demo branches and test users
+EXCLUDED_BRANCHES = {"DES Demo", "Myelin Cbse Primary & Secondary School"}
+
+def _is_excluded(row):
+    if row.get("branchName", row.get("branch", "")) in EXCLUDED_BRANCHES:
+        return True
+    ln = row.get("lastName", "")
+    if not ln:
+        name = row.get("name", "")
+        ln = name.split()[-1] if name.split() else ""
+    if ln and ln.strip().lower() == "test":
+        return True
+    return False
+
 def mc(ch):
     for k, v in CHAPTER_MAP.items():
         if ch.startswith(k): return v
@@ -105,9 +119,9 @@ def compute_indecision(ind_rows):
     return result
 
 def main():
-    raw = load_jsonl(RAW)
-    exit_rows = load_jsonl(EXIT)
-    ind_rows = load_jsonl(INDECISION)
+    raw = [r for r in load_jsonl(RAW) if not _is_excluded(r)]
+    exit_rows = [r for r in load_jsonl(EXIT) if not _is_excluded(r)]
+    ind_rows = [r for r in load_jsonl(INDECISION) if not _is_excluded(r)]
     exits = compute_exit(exit_rows)
     inds = compute_indecision(ind_rows)
 

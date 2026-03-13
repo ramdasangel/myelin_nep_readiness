@@ -36,6 +36,9 @@ CHAPTER_MAP = {
 }
 
 
+# Exclude test/demo branches and test users
+EXCLUDED_BRANCHES = {"DES Demo", "Myelin Cbse Primary & Secondary School"}
+
 def map_chapter(chapter_name):
     """Map a chapter name to a unified competency area."""
     for key, area in CHAPTER_MAP.items():
@@ -213,7 +216,9 @@ def print_summary(people):
 
 if __name__ == "__main__":
     rows = load_data()
-    print(f"Loaded {len(rows)} Mathangle results")
+    rows = [r for r in rows if r.get("branchName", "") not in EXCLUDED_BRANCHES
+            and (r.get("lastName", "") or "").strip().lower() != "test"]
+    print(f"Loaded {len(rows)} Mathangle results (after exclusions)")
     people = build_ranking(rows)
     write_overall_csv(people)
     print_summary(people)

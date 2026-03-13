@@ -1,26 +1,4 @@
 StudentId,Name,Role,Branch,Language,QuestionId,Subtopic,CompetencyArea,QuestionLevel,Correct,TimeTaken(s),SeqLength,NumChanges,FlipFlop,DeliberationTime(s),FirstChoice,FinalChoice,CorrectAnswer,ChangedFromCorrect,ChangedToCorrect
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e76,Types of angles and shapes,Geometry,2,False,9,0,0,False,0,नाही,नाही,होय,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e70,Length measurement,Measurement,3,False,1,0,0,False,0,209 cm,209 cm,199 cm,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e74,Division,Division,3,True,0,0,0,False,0,287 आणि 5,287 आणि 5,287 आणि 5,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e6e,"Currency, openarions on money",Money,2,False,0,0,0,False,0,23725,23725,24725,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e6a,Types of angles and shapes,Geometry,3,True,0,0,0,False,0,3,3,3,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e6c,LCM,Factors & Multiples,2,True,0,0,0,False,0,3,3,3,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35d7995f37541d64e5b,"Addition, Subtraction",Addition & Subtraction,1,False,0,0,0,False,0,20 जोडा,20 जोडा,40 वजा करा,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e75,Division,Division,2,False,0,0,0,False,0,303,303,101,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e6f,"Minutes, Hours, Seconds measurement",Time & Calendar,3,True,0,0,0,False,0,345,345,345,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35e7995f37541d64e78,Divisibility Tests,Factors & Multiples,2,False,0,0,0,False,0,20,20,30,False,False
-6985d5e74c36bd3676d07da6,Chetan Khule,Leader,DES Demo,MR,698da35d7995f37541d64e58,Multiplication,Multiplication,3,False,4,0,0,False,0,128,128,256,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e99,Length measurement,Measurement,2,False,93,1,0,False,0,Yes,Yes,No,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e7b,Multiplication,Multiplication,3,True,4,1,0,False,0,256,256,256,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e81,"Addition, Subtraction",Addition & Subtraction,2,True,46,1,0,False,0,Subtract 400,Subtract 400,Subtract 400,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e83,"Currency, openarions on money",Money,1,True,86,1,0,False,0,Rs. 6900,Rs. 6900,Rs. 6900,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e90,"LCM, Time measurement",Factors & Multiples,1,False,81,1,0,False,0,6,6,2,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e98,"Currency, openarions on money",Money,2,True,159,1,0,False,0,24725,24725,24725,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e9b,"Minutes, Hours, Seconds measurement",Time & Calendar,1,True,145,1,0,False,0,5min 32sec,5min 32sec,5min 32sec,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e91,Divisibility Tests,Factors & Multiples,1,True,42,1,0,False,0,100,100,100,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e8d,"Length measurement, conversion",Measurement,1,False,98,1,0,False,0,0.81,0.81,0.69,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e95,Divisibility Tests,Factors & Multiples,2,True,33,1,0,False,0,30,30,30,False,False
-697851cb82c04511c8aa53e8,Abhi Ghodekar,Teacher,DES Demo,EN,698da35e7995f37541d64e7f,Types of angles and shapes,Geometry,1,False,20,1,0,False,0,17,17,18,False,False
 696ddcab7c028268c457d9a6,Devidas Zodge,Leader,"NEW ENGLISH SCHOOL,TILAK ROAD",MR,698df69a5948c89966162db5,Division,Division,2,True,69,1,0,False,0,101,101,101,False,False
 696ddcab7c028268c457d9a6,Devidas Zodge,Leader,"NEW ENGLISH SCHOOL,TILAK ROAD",MR,698df69a5948c89966162da4,"Minutes, Hours, Seconds measurement",Time & Calendar,1,True,131,2,1,False,19,5min 22sec,5min 32sec,5min 32sec,False,True
 696ddcab7c028268c457d9a6,Devidas Zodge,Leader,"NEW ENGLISH SCHOOL,TILAK ROAD",MR,698df69a5948c89966162da1,"Currency, openarions on money",Money,1,True,72,1,0,False,0,Rs. 6900,Rs. 6900,Rs. 6900,False,False
