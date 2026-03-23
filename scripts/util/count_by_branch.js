@@ -1,5 +1,5 @@
 // Count documents by BranchID for all collections
-// Run: mongosh --port 27017 -u $MONGO_USER -p '$MONGO_PASS' --authenticationDatabase pdea_pilot pdea_pilot < count_by_branch.js > branch_counts_output.json
+// Run: mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < count_by_branch.js > branch_counts_output.json
 
 // Step 1: Get all unique Branch IDs from SchoolBranchClassesView
 print("=== Extracting Branch IDs from SchoolBranchClassesView ===");

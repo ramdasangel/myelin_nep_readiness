@@ -27,16 +27,16 @@ Self-contained HTML dashboard showing which micro-intervention tasks each DES te
 
 ```bash
 # SCP the script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/micro_intervention_report.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run on prod
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" --authenticationDatabase pdea_pilot pdea_pilot < micro_intervention_report.js > mi_output.txt 2>&1'
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < micro_intervention_report.js > mi_output.txt 2>&1'
 
 # Transfer the generated CSV
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/micro_intervention_report.csv \
   output/micro_intervention_report.csv
 ```
@@ -45,16 +45,16 @@ scp -i ~/.ssh/$SSH_KEY \
 
 ```bash
 # SCP the script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_mapping_dates_v2.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run on prod
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" --authenticationDatabase pdea_pilot pdea_pilot < extract_mapping_dates_v2.js > mapping_dates.txt 2>&1'
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_mapping_dates_v2.js > mapping_dates.txt 2>&1'
 
 # Transfer output
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/mapping_dates.txt \
   /tmp/mapping_dates.txt
 ```
@@ -76,7 +76,7 @@ python3 scripts/build_task_mapping_dashboard.py
 ### Step 5: Clean up prod temp files
 
 ```bash
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   'rm -f ~/myelin_stat_ro/micro_intervention_report.js ~/myelin_stat_ro/extract_mapping_dates_v2.js ~/myelin_stat_ro/mi_output.txt ~/myelin_stat_ro/mapping_dates.txt'
 ```
 

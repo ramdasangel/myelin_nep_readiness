@@ -27,16 +27,16 @@ Self-contained HTML dashboard showing Teacher (A1-A4) and Leader (B1-B5) baselin
 
 ```bash
 # SCP the extraction script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_baseline_v2.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run on prod via SSH
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" --authenticationDatabase pdea_pilot pdea_pilot < extract_baseline_v2.js > baseline_output.txt 2>&1'
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_baseline_v2.js > baseline_output.txt 2>&1'
 
 # Transfer output back
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/baseline_output.txt \
   data/baseline_responses.json
 ```
@@ -62,7 +62,7 @@ This reads both CSVs and embeds the data as JSON inside the HTML.
 ### Step 4: Clean up prod temp files
 
 ```bash
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   'rm -f ~/myelin_stat_ro/extract_baseline_v2.js ~/myelin_stat_ro/baseline_output.txt'
 ```
 

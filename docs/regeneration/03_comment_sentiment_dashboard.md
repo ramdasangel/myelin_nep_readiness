@@ -27,16 +27,16 @@ Self-contained HTML dashboard with keyword-based sentiment analysis on teacher d
 
 ```bash
 # SCP the script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_comments.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run on prod
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" --authenticationDatabase pdea_pilot pdea_pilot < extract_comments.js > comments_output.txt 2>&1'
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_comments.js > comments_output.txt 2>&1'
 
 # Transfer the generated CSV
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/comments_full.csv \
   assets/myelin_stat_ro/comments_full.csv
 ```
@@ -54,7 +54,7 @@ python3 scripts/build_comment_sentiment_dashboard.py
 ### Step 4: Clean up prod temp files
 
 ```bash
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   'rm -f ~/myelin_stat_ro/extract_comments.js ~/myelin_stat_ro/comments_output.txt'
 ```
 

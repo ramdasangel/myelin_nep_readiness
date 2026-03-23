@@ -89,24 +89,24 @@ Always run this — it picks up new users and updated daily log counts.
 
 ```bash
 # Upload extraction script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/micro_intervention_report.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run extraction
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  "mongosh --port 27017 -u $MONGO_USER -p '$MONGO_PASS' \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  "mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS \
    --authenticationDatabase pdea_pilot pdea_pilot \
    --quiet ~/myelin_stat_ro/micro_intervention_report.js \
    > ~/myelin_stat_ro/micro_intervention_report.csv"
 
 # Download
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/micro_intervention_report.csv \
   output/micro_intervention_report.csv
 
 # Cleanup prod
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   "rm ~/myelin_stat_ro/micro_intervention_report.js \
       ~/myelin_stat_ro/micro_intervention_report.csv"
 ```
@@ -145,16 +145,16 @@ If the output shows `New users needing mapping dates: 0`, skip to Step 4.
 2. Run on prod:
 
 ```bash
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_mapping_dates_v2.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  "mongosh --port 27017 -u $MONGO_USER -p '$MONGO_PASS' \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  "mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS \
    --authenticationDatabase pdea_pilot pdea_pilot \
    --quiet ~/myelin_stat_ro/extract_mapping_dates_v2.js"
 
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   "rm ~/myelin_stat_ro/extract_mapping_dates_v2.js"
 ```
 
@@ -262,7 +262,7 @@ The dashboard's "Days Logged" column and "Users Who Logged ≥1 Day" KPI depend 
 
 ## 8. Prerequisites
 
-- **SSH access** to prod server (`~/.ssh/$SSH_KEY`)
+- **SSH access** to prod server (`$SSH_KEY`)
 - **Python 3.8+** with standard library only (no pip dependencies)
 - **mongosh** installed on prod server
 - `output/micro_intervention_report.csv` must exist before running the builder

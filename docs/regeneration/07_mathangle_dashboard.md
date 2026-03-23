@@ -47,16 +47,16 @@ The extraction script generates 3 JSONL files via a two-step process:
 
 ```bash
 # SCP the extraction script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_mathangle_jsonl.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run on prod
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" --authenticationDatabase pdea_pilot pdea_pilot < extract_mathangle_jsonl.js > mathangle_extraction.txt 2>&1'
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_mathangle_jsonl.js > mathangle_extraction.txt 2>&1'
 
 # Transfer output
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/mathangle_extraction.txt \
   assets/myelin_stat_ro/mathangle_extraction.txt
 ```
@@ -118,7 +118,7 @@ These produce:
 ### Step 5: Clean up prod temp files
 
 ```bash
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   'rm -f ~/myelin_stat_ro/extract_mathangle_jsonl.js ~/myelin_stat_ro/mathangle_extraction.txt'
 ```
 

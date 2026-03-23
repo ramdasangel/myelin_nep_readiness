@@ -103,24 +103,24 @@ A dictionary of ~120 `userId → mappingDate` entries (lines 48–110 of the bui
 
 ```bash
 # Upload extraction script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_daily_progress_full.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run mongosh extraction
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  "mongosh --port 27017 -u $MONGO_USER -p '$MONGO_PASS' \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  "mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS \
    --authenticationDatabase pdea_pilot pdea_pilot \
    --quiet ~/myelin_stat_ro/extract_daily_progress_full.js \
    > ~/myelin_stat_ro/daily_progress_full.csv"
 
 # Download CSV to local
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/daily_progress_full.csv \
   assets/myelin_stat_ro/daily_progress_full.csv
 
 # Cleanup prod temp files
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   "rm ~/myelin_stat_ro/extract_daily_progress_full.js \
       ~/myelin_stat_ro/daily_progress_full.csv"
 ```
@@ -130,21 +130,21 @@ ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
 Only needed if **new users have mapped tasks** since the last build.
 
 ```bash
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/micro_intervention_report.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  "mongosh --port 27017 -u $MONGO_USER -p '$MONGO_PASS' \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  "mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS \
    --authenticationDatabase pdea_pilot pdea_pilot \
    --quiet ~/myelin_stat_ro/micro_intervention_report.js \
    > ~/myelin_stat_ro/micro_intervention_report.csv"
 
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/micro_intervention_report.csv \
   output/micro_intervention_report.csv
 
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   "rm ~/myelin_stat_ro/micro_intervention_report.js \
       ~/myelin_stat_ro/micro_intervention_report.csv"
 ```
@@ -284,7 +284,7 @@ If the report script output format changes (column names, delimiter), the builde
 
 ## 9. Prerequisites
 
-- **SSH access** to prod server (`~/.ssh/$SSH_KEY`)
+- **SSH access** to prod server (`$SSH_KEY`)
 - **Python 3.8+** with standard library only (no pip dependencies for the builder)
 - **mongosh** installed on prod server
 - `output/micro_intervention_report.csv` must exist before running the builder

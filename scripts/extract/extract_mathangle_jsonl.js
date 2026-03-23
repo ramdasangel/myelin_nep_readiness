@@ -4,9 +4,9 @@
 //
 // Usage:
 //   scp scripts/extract_mathangle_jsonl.js $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
-//   ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-//     'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" --authenticationDatabase pdea_pilot pdea_pilot < extract_mathangle_jsonl.js'
-//   scp -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST:/tmp/mathangle_*.jsonl /tmp/
+//   ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+//     'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_mathangle_jsonl.js'
+//   scp -i $SSH_KEY $PROD_USER@$PROD_HOST:/tmp/mathangle_*.jsonl /tmp/
 
 // ─── Build lookup maps ───
 

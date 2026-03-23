@@ -1,5 +1,5 @@
 // Fast aggregation-based count by BranchID
-// Run: mongosh --port 27017 -u $MONGO_USER -p '$MONGO_PASS' --authenticationDatabase pdea_pilot pdea_pilot < count_by_branch_fast.js
+// Run: mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < count_by_branch_fast.js
 
 // Get branch info
 var branches = db.SchoolBranches.find({}, {_id: 1, BranchName: 1, Location: 1, "School.SchoolName": 1}).toArray();

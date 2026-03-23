@@ -36,20 +36,20 @@ Self-contained HTML dashboard showing teacher intent survey depth distribution (
 
 ```bash
 # SCP the extraction script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_all_constructs.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run on prod
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" --authenticationDatabase pdea_pilot pdea_pilot < extract_all_constructs.js > constructs_output.txt 2>&1'
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_all_constructs.js > constructs_output.txt 2>&1'
 
 # Transfer generated CSVs
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/intent_teacher_english_responses.csv \
   assets/myelin_stat_ro/
 
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/intent_teacher_marathi_responses.csv \
   assets/myelin_stat_ro/
 ```
@@ -63,7 +63,7 @@ python3 scripts/build_intent_depth_dashboard.py
 ### Step 3: Clean up prod temp files
 
 ```bash
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   'rm -f ~/myelin_stat_ro/extract_all_constructs.js ~/myelin_stat_ro/constructs_output.txt'
 ```
 

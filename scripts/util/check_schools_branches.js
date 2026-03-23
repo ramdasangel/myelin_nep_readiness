@@ -1,5 +1,5 @@
 // Query SchoolBranchClassesView to check schools with branches
-// Run on prod: mongosh --port 27017 -u $MONGO_USER -p '$MONGO_PASS' --authenticationDatabase pdea_pilot pdea_pilot < check_schools_branches.js
+// Run on prod: mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < check_schools_branches.js
 
 // Check the structure of SchoolBranchClassesView
 print("=== SchoolBranchClassesView Sample Documents ===");

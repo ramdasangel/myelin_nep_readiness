@@ -42,19 +42,19 @@ Self-contained HTML dashboard showing the composite School Readiness Index (SRI)
 
 ```bash
 # SCP the extraction script to prod
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_all_constructs.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 
 # Run on prod
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" --authenticationDatabase pdea_pilot pdea_pilot < extract_all_constructs.js > constructs_output.txt 2>&1'
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_all_constructs.js > constructs_output.txt 2>&1'
 
 # Transfer ALL generated CSVs
 for f in intent_teacher_english_responses.csv intent_teacher_marathi_responses.csv \
          intent_leader_english_responses.csv intent_leader_marathi_responses.csv \
          system_readiness_responses_detail.csv; do
-  scp -i ~/.ssh/$SSH_KEY \
+  scp -i $SSH_KEY \
     $PROD_USER@$PROD_HOST:~/myelin_stat_ro/$f \
     assets/myelin_stat_ro/
 done
@@ -93,7 +93,7 @@ The `sri_dashboard.html` has SRI data embedded inline as a `const DATA=[...]` ar
 ### Step 5: Clean up prod temp files
 
 ```bash
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   'rm -f ~/myelin_stat_ro/extract_all_constructs.js ~/myelin_stat_ro/constructs_output.txt'
 ```
 

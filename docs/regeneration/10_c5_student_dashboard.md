@@ -50,7 +50,7 @@ OnlineAssesmentStudentResult.StudentID → Students._id
 
 ## Prerequisites
 
-- SSH access to prod server (`ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST`)
+- SSH access to prod server (`ssh -i $SSH_KEY $PROD_USER@$PROD_HOST`)
 - mongosh credentials (see memory.md)
 - Python 3.x
 
@@ -61,7 +61,7 @@ OnlineAssesmentStudentResult.StudentID → Students._id
 The extraction script queries all 10 collections listed above and produces a single JSON file with the complete data structure.
 
 ```bash
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   scripts/extract_nep_sharable.js \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 ```
@@ -69,8 +69,8 @@ scp -i ~/.ssh/$SSH_KEY \
 ### Step 2: Run extraction on prod
 
 ```bash
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
-  'mongosh --port 27017 -u $MONGO_USER -p "$MONGO_PASS" \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
+  'mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS \
    --authenticationDatabase pdea_pilot pdea_pilot --quiet \
    ~/myelin_stat_ro/extract_nep_sharable.js \
    > ~/myelin_stat_ro/nep_sharable_output.json 2>&1'
@@ -79,7 +79,7 @@ ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
 ### Step 3: Transfer JSON to local
 
 ```bash
-scp -i ~/.ssh/$SSH_KEY \
+scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/nep_sharable_output.json \
   output/nep_sharable_exam_data.json
 ```
@@ -102,7 +102,7 @@ This reads `output/nep_sharable_exam_data.json` and writes `output/c5_student_da
 ### Step 5: Clean up prod temp files
 
 ```bash
-ssh -i ~/.ssh/$SSH_KEY $PROD_USER@$PROD_HOST \
+ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   'rm -f ~/myelin_stat_ro/extract_nep_sharable.js ~/myelin_stat_ro/nep_sharable_output.json'
 ```
 
