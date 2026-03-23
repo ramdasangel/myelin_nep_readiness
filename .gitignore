@@ -17,3 +17,6 @@ node_modules/
 
 # Embedded git repos
 myelin-react-admin-panel/
+
+# Archived/superseded files
+archive/
