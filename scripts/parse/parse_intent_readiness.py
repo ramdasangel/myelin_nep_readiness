@@ -4,8 +4,8 @@ import json
 import csv
 import os
 
-RAW_FILE = os.path.join(os.path.dirname(__file__), '..', 'assets', 'myelin_stat_ro', 'intent_readiness_raw.txt')
-OUT_DIR = os.path.join(os.path.dirname(__file__), '..', 'assets', 'myelin_stat_ro')
+RAW_FILE = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'extracted', 'intent', 'intent_readiness_raw.txt')
+OUT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'extracted', 'intent')
 
 # Read raw file
 with open(RAW_FILE, 'r') as f:

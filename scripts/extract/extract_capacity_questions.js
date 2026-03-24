@@ -3,7 +3,7 @@
 //   scp scripts/extract_capacity_questions.js $PROD_USER@$PROD_HOST:~/myelin_stat_ro/
 //   ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
 //     'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_capacity_questions.js > capacity_output.txt 2>&1'
-//   scp $PROD_USER@$PROD_HOST:~/myelin_stat_ro/capacity_output.txt assets/myelin_stat_ro/
+//   scp $PROD_USER@$PROD_HOST:~/myelin_stat_ro/capacity_output.txt data/extracted/mathangle/
 
 // ============================
 // STEP 1: Find MathTangle question set(s)

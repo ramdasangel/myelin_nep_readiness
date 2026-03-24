@@ -22,7 +22,7 @@ This document describes the full regeneration pipeline: data sources, extraction
 ┌────────────────────┐      SCP/SSH       ┌──────────────────────┐
 │  Prod MongoDB      │ ◄────────────────► │  Local Machine       │
 │  ($PROD_HOST)    │   extract script   │                      │
-│                    │                    │  assets/myelin_stat_ro/│
+│                    │                    │  data/extracted/│
 │  Collections:      │                    │    daily_progress_    │
 │  - UserDailyProgress│                   │    full.csv           │
 │  - UserTemp        │                    │                      │
@@ -66,7 +66,7 @@ This document describes the full regeneration pipeline: data sources, extraction
 
 **Extraction script:** `scripts/extract_daily_progress_full.js`
 **Output CSV columns:** `userId, submitDate, progressCreatedAt, taskId, isChecked, hasComment`
-**Output location:** `assets/myelin_stat_ro/daily_progress_full.csv`
+**Output location:** `data/extracted/daily_progress_full.csv`
 
 ### 3.2 Secondary: `micro_intervention_report.csv`
 
@@ -117,7 +117,7 @@ ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
 # Download CSV to local
 scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/daily_progress_full.csv \
-  assets/myelin_stat_ro/daily_progress_full.csv
+  data/extracted/daily_progress_full.csv
 
 # Cleanup prod temp files
 ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
@@ -167,7 +167,7 @@ python3 scripts/build_daily_progress_dashboard.py
 
 **Reads:**
 - `output/micro_intervention_report.csv`
-- `assets/myelin_stat_ro/daily_progress_full.csv`
+- `data/extracted/daily_progress_full.csv`
 
 **Writes:**
 - `output/daily_progress_dashboard.html`
@@ -276,7 +276,7 @@ If the report script output format changes (column names, delimiter), the builde
 | `scripts/extract_daily_progress_full.js` | mongosh script | Extracts `UserDailyProgress` → CSV |
 | `scripts/micro_intervention_report.js` | mongosh script | Extracts user-task mapping → CSV |
 | `scripts/build_daily_progress_dashboard.py` | Python 3 | Reads 2 CSVs, produces HTML |
-| `assets/myelin_stat_ro/daily_progress_full.csv` | CSV | Raw daily progress data |
+| `data/extracted/daily_progress_full.csv` | CSV | Raw daily progress data |
 | `output/micro_intervention_report.csv` | CSV | User-task mapping data |
 | `output/daily_progress_dashboard.html` | HTML | Final dashboard output |
 

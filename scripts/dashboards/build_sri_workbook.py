@@ -6,37 +6,38 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
-BASE = os.path.join(os.path.dirname(__file__), '..')
-STAT = os.path.join(BASE, 'assets', 'myelin_stat_ro')
+BASE = os.path.join(os.path.dirname(__file__), '..', '..')
+INTENT_DIR = os.path.join(BASE, 'data', 'extracted', 'intent')
+CONSTRUCTS_DIR = os.path.join(BASE, 'data', 'extracted', 'constructs')
 OUT = os.path.join(BASE, 'output')
 
 # Sheet name max 31 chars in Excel
 SHEETS = [
     # Construct 1 & 2: Intent / Practice — Teacher English
-    ('C1 Tchr EN Qs',       os.path.join(STAT, 'intent_teacher_english_questions.csv')),
-    ('C1 Tchr EN Attempts',  os.path.join(STAT, 'intent_teacher_english_attempts.csv')),
-    ('C1 Tchr EN Responses', os.path.join(STAT, 'intent_teacher_english_responses.csv')),
+    ('C1 Tchr EN Qs',       os.path.join(INTENT_DIR, 'intent_teacher_english_questions.csv')),
+    ('C1 Tchr EN Attempts',  os.path.join(INTENT_DIR, 'intent_teacher_english_attempts.csv')),
+    ('C1 Tchr EN Responses', os.path.join(INTENT_DIR, 'intent_teacher_english_responses.csv')),
     # Construct 1 & 2: Intent / Practice — Teacher Marathi
-    ('C1 Tchr MR Qs',       os.path.join(STAT, 'intent_teacher_marathi_questions.csv')),
-    ('C1 Tchr MR Attempts',  os.path.join(STAT, 'intent_teacher_marathi_attempts.csv')),
-    ('C1 Tchr MR Responses', os.path.join(STAT, 'intent_teacher_marathi_responses.csv')),
+    ('C1 Tchr MR Qs',       os.path.join(INTENT_DIR, 'intent_teacher_marathi_questions.csv')),
+    ('C1 Tchr MR Attempts',  os.path.join(INTENT_DIR, 'intent_teacher_marathi_attempts.csv')),
+    ('C1 Tchr MR Responses', os.path.join(INTENT_DIR, 'intent_teacher_marathi_responses.csv')),
     # Construct 1: Intent — Leader English
-    ('C1 Ldr EN Qs',        os.path.join(STAT, 'intent_leader_english_questions.csv')),
-    ('C1 Ldr EN Attempts',   os.path.join(STAT, 'intent_leader_english_attempts.csv')),
-    ('C1 Ldr EN Responses',  os.path.join(STAT, 'intent_leader_english_responses.csv')),
+    ('C1 Ldr EN Qs',        os.path.join(INTENT_DIR, 'intent_leader_english_questions.csv')),
+    ('C1 Ldr EN Attempts',   os.path.join(INTENT_DIR, 'intent_leader_english_attempts.csv')),
+    ('C1 Ldr EN Responses',  os.path.join(INTENT_DIR, 'intent_leader_english_responses.csv')),
     # Construct 1: Intent — Leader Marathi
-    ('C1 Ldr MR Qs',        os.path.join(STAT, 'intent_leader_marathi_questions.csv')),
-    ('C1 Ldr MR Attempts',   os.path.join(STAT, 'intent_leader_marathi_attempts.csv')),
-    ('C1 Ldr MR Responses',  os.path.join(STAT, 'intent_leader_marathi_responses.csv')),
+    ('C1 Ldr MR Qs',        os.path.join(INTENT_DIR, 'intent_leader_marathi_questions.csv')),
+    ('C1 Ldr MR Attempts',   os.path.join(INTENT_DIR, 'intent_leader_marathi_attempts.csv')),
+    ('C1 Ldr MR Responses',  os.path.join(INTENT_DIR, 'intent_leader_marathi_responses.csv')),
     # Construct 3: Capacity — MathTangle
     ('C3 MathTangle Master', os.path.join(OUT, 'mathangle_master.csv')),
     ('C3 MathTangle PerQ',   os.path.join(OUT, 'mathangle_per_question.csv')),
     ('C3 MathTangle Branch', os.path.join(OUT, 'mathangle_branch_summary.csv')),
     ('C3 MathTangle Exit',   os.path.join(OUT, 'mathangle_exit_levels.csv')),
     # Construct 4: System Readiness
-    ('C4 System Qs',         os.path.join(STAT, 'system_readiness_questions.csv')),
-    ('C4 System Attempts',   os.path.join(STAT, 'system_readiness_attempts.csv')),
-    ('C4 System Responses',  os.path.join(STAT, 'system_readiness_responses_detail.csv')),
+    ('C4 System Qs',         os.path.join(CONSTRUCTS_DIR, 'system_readiness_questions.csv')),
+    ('C4 System Attempts',   os.path.join(CONSTRUCTS_DIR, 'system_readiness_attempts.csv')),
+    ('C4 System Responses',  os.path.join(CONSTRUCTS_DIR, 'system_readiness_responses_detail.csv')),
 ]
 
 # Construct colors for header styling

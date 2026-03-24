@@ -3,7 +3,7 @@
 import csv
 import os
 
-BASE = os.path.join(os.path.dirname(__file__), '..', 'assets', 'myelin_stat_ro')
+BASE = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'extracted', 'intent')
 
 SET_LABELS = {
     '1234': 'intent_teacher_english',

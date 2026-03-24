@@ -13,8 +13,8 @@ import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
-BASE = Path(__file__).resolve().parent.parent
-COMMENTS_CSV = BASE / "assets" / "myelin_stat_ro" / "comments_full.csv"
+BASE = Path(__file__).resolve().parent.parent.parent
+COMMENTS_CSV = BASE / "data" / "extracted" / "comments_full.csv"
 TASK_MAPPING_CSV = BASE / "output" / "micro_intervention_report.csv"
 OUTPUT_HTML = BASE / "output" / "daily_progress_logging_sentiment.html"
 

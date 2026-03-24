@@ -19,7 +19,7 @@ Self-contained HTML dashboard showing daily logging activity for micro-intervent
 | File | Source | Description |
 |------|--------|-------------|
 | `output/micro_intervention_report.csv` | `scripts/micro_intervention_report.js` | 133 users, task selections + daily log counts |
-| `assets/myelin_stat_ro/daily_progress_full.csv` | `scripts/extract_daily_progress_full.js` | Per-user daily task logs with timestamps |
+| `data/extracted/daily_progress_full.csv` | `scripts/extract_daily_progress_full.js` | Per-user daily task logs with timestamps |
 
 ## Step-by-Step Regeneration
 
@@ -56,7 +56,7 @@ ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
 # Transfer the generated CSV
 scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/daily_progress_full.csv \
-  assets/myelin_stat_ro/daily_progress_full.csv
+  data/extracted/daily_progress_full.csv
 ```
 
 ### Step 3: Build the HTML dashboard

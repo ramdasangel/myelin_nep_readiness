@@ -5,9 +5,9 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
-BASE = Path(__file__).resolve().parent.parent
+BASE = Path(__file__).resolve().parent.parent.parent
 TASK_MAPPING_CSV = BASE / "output" / "micro_intervention_report.csv"
-DAILY_PROGRESS_CSV = BASE / "assets" / "myelin_stat_ro" / "daily_progress_full.csv"
+DAILY_PROGRESS_CSV = BASE / "data" / "extracted" / "daily_progress_full.csv"
 OUTPUT_HTML = BASE / "output" / "daily_progress_dashboard.html"
 
 # ── Task metadata ──

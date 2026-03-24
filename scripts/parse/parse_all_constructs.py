@@ -4,8 +4,9 @@ import json
 import csv
 import os
 
-RAW_FILE = os.path.join(os.path.dirname(__file__), '..', 'assets', 'myelin_stat_ro', 'all_constructs_raw.txt')
-OUT_DIR = os.path.join(os.path.dirname(__file__), '..', 'assets', 'myelin_stat_ro')
+RAW_FILE = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'extracted', 'constructs', 'all_constructs_raw.txt')
+CONSTRUCTS_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'extracted', 'constructs')
+REFERENCE_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'reference')
 
 with open(RAW_FILE, 'r') as f:
     content = f.read()
@@ -19,7 +20,7 @@ def extract_json(content, start_marker, end_marker):
 # 1. All Question Sets inventory
 # ============================
 all_sets = extract_json(content, 'JSON_START_ALLSETS\n', '\nJSON_END_ALLSETS')
-out = os.path.join(OUT_DIR, 'all_question_sets.csv')
+out = os.path.join(REFERENCE_DIR, 'all_question_sets.csv')
 with open(out, 'w', newline='', encoding='utf-8') as f:
     w = csv.writer(f)
     w.writerow(['setCode', 'setName', 'questionCount'])
@@ -33,7 +34,7 @@ print(f"Wrote {len(all_sets)} question sets to {out}")
 baseline_questions = extract_json(content, 'JSON_START_BASELINE_Q\n', '\nJSON_END_BASELINE_Q')
 q_lookup = {q['questionId']: q for q in baseline_questions}
 
-out = os.path.join(OUT_DIR, 'system_readiness_questions.csv')
+out = os.path.join(CONSTRUCTS_DIR, 'system_readiness_questions.csv')
 with open(out, 'w', newline='', encoding='utf-8') as f:
     w = csv.writer(f)
     w.writerow(['questionId', 'questionText', 'goal', 'description',
@@ -53,7 +54,7 @@ baseline_attempts = extract_json(content, 'JSON_START_BASELINE_A\n', '\nJSON_END
 
 # Flat attempts CSV
 max_q = max(a['responseCount'] for a in baseline_attempts) if baseline_attempts else 0
-out = os.path.join(OUT_DIR, 'system_readiness_attempts.csv')
+out = os.path.join(CONSTRUCTS_DIR, 'system_readiness_attempts.csv')
 with open(out, 'w', newline='', encoding='utf-8') as f:
     w = csv.writer(f)
     header = ['attemptId', 'userId', 'firstName', 'lastName', 'role',
@@ -76,7 +77,7 @@ with open(out, 'w', newline='', encoding='utf-8') as f:
 print(f"Wrote {len(baseline_attempts)} baseline attempts to {out}")
 
 # Detailed responses CSV
-out = os.path.join(OUT_DIR, 'system_readiness_responses_detail.csv')
+out = os.path.join(CONSTRUCTS_DIR, 'system_readiness_responses_detail.csv')
 with open(out, 'w', newline='', encoding='utf-8') as f:
     w = csv.writer(f)
     w.writerow(['userId', 'firstName', 'lastName', 'role', 'branchCode', 'branchName',

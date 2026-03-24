@@ -27,8 +27,8 @@ Self-contained HTML dashboard showing teacher intent survey depth distribution (
 
 | File | Source | Description |
 |------|--------|-------------|
-| `assets/myelin_stat_ro/intent_teacher_english_responses.csv` | `scripts/extract_all_constructs.js` | English intent responses (setCode 1234) |
-| `assets/myelin_stat_ro/intent_teacher_marathi_responses.csv` | `scripts/extract_all_constructs.js` | Marathi intent responses (setCode 103) |
+| `data/extracted/intent/intent_teacher_english_responses.csv` | `scripts/extract_all_constructs.js` | English intent responses (setCode 1234) |
+| `data/extracted/intent/intent_teacher_marathi_responses.csv` | `scripts/extract_all_constructs.js` | Marathi intent responses (setCode 103) |
 
 ## Step-by-Step Regeneration
 
@@ -47,11 +47,11 @@ ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
 # Transfer generated CSVs
 scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/intent_teacher_english_responses.csv \
-  assets/myelin_stat_ro/
+  data/extracted/intent/
 
 scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/intent_teacher_marathi_responses.csv \
-  assets/myelin_stat_ro/
+  data/extracted/intent/
 ```
 
 ### Step 2: Build the HTML dashboard

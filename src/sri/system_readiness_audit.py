@@ -50,7 +50,11 @@ def score_single_attempt(responses, question_id_order=None):
     resp_map = {}
     for r in responses:
         qid = str(r.get("questionId", r.get("_id", "")))
-        resp_map[qid] = r.get("selectedOption", 1)  # default No
+        raw = r.get("selectedOption", 1)
+        try:
+            resp_map[qid] = int(raw)
+        except (ValueError, TypeError):
+            resp_map[qid] = 1  # default No
 
     # Score enablement (E1-E5)
     e_codes = list(TEACHER_ENABLEMENT_CODES.keys())

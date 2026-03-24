@@ -25,8 +25,9 @@ from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STAT = os.path.join(BASE, 'assets', 'myelin_stat_ro')
-OUT  = os.path.join(BASE, 'output')
+INTENT_DIR     = os.path.join(BASE, 'data', 'extracted', 'intent')
+CONSTRUCTS_DIR = os.path.join(BASE, 'data', 'extracted', 'constructs')
+OUT            = os.path.join(BASE, 'output')
 
 # ═══════════════════════════════════════════════════════════
 #  Goal → Focus-Point (FP) mapping
@@ -123,11 +124,11 @@ def build_branch_name_to_code():
     """Build branchName → branchCode from all available response CSVs."""
     mapping = {}
     sources = [
-        os.path.join(STAT, 'system_readiness_responses_detail.csv'),
-        os.path.join(STAT, 'intent_teacher_english_responses.csv'),
-        os.path.join(STAT, 'intent_teacher_marathi_responses.csv'),
-        os.path.join(STAT, 'intent_leader_english_responses.csv'),
-        os.path.join(STAT, 'intent_leader_marathi_responses.csv'),
+        os.path.join(CONSTRUCTS_DIR, 'system_readiness_responses_detail.csv'),
+        os.path.join(INTENT_DIR, 'intent_teacher_english_responses.csv'),
+        os.path.join(INTENT_DIR, 'intent_teacher_marathi_responses.csv'),
+        os.path.join(INTENT_DIR, 'intent_leader_english_responses.csv'),
+        os.path.join(INTENT_DIR, 'intent_leader_marathi_responses.csv'),
     ]
     for src in sources:
         if not os.path.exists(src):
@@ -143,7 +144,7 @@ def build_branch_name_to_code():
 def build_code_to_name():
     """Build branchCode → (branchName, schoolName) lookup."""
     mapping = {}
-    src = os.path.join(STAT, 'system_readiness_responses_detail.csv')
+    src = os.path.join(CONSTRUCTS_DIR, 'system_readiness_responses_detail.csv')
     if os.path.exists(src):
         for row in read_csv(src):
             bc = row['branchCode'].strip()
@@ -156,7 +157,7 @@ def build_code_to_name():
                'intent_teacher_marathi_responses.csv',
                'intent_leader_english_responses.csv',
                'intent_leader_marathi_responses.csv']:
-        p = os.path.join(STAT, fn)
+        p = os.path.join(INTENT_DIR, fn)
         if not os.path.exists(p):
             continue
         for row in read_csv(p):
@@ -198,7 +199,7 @@ def compute_c1():
 
     unmapped_goals = set()
     for fn, role, goal_map in intent_files:
-        path = os.path.join(STAT, fn)
+        path = os.path.join(INTENT_DIR, fn)
         if not os.path.exists(path):
             print(f"  SKIP (not found): {fn}")
             continue
@@ -301,7 +302,7 @@ def compute_c2():
 
     for fn in ['intent_teacher_english_responses.csv',
                'intent_teacher_marathi_responses.csv']:
-        path = os.path.join(STAT, fn)
+        path = os.path.join(INTENT_DIR, fn)
         if not os.path.exists(path):
             continue
         for row in read_csv(path):
@@ -451,7 +452,7 @@ def compute_c4():
     """
     # Build questionId → area code mapping from questions file
     q_area = {}
-    q_path = os.path.join(STAT, 'system_readiness_questions.csv')
+    q_path = os.path.join(CONSTRUCTS_DIR, 'system_readiness_questions.csv')
     for row in read_csv(q_path):
         qid  = row['questionId'].strip()
         desc = row.get('description', '').strip()
@@ -461,7 +462,7 @@ def compute_c4():
     # Accumulate per branch per area
     # branch_area[bc][area] = [binary_values]
     branch_area = defaultdict(lambda: defaultdict(list))
-    r_path = os.path.join(STAT, 'system_readiness_responses_detail.csv')
+    r_path = os.path.join(CONSTRUCTS_DIR, 'system_readiness_responses_detail.csv')
 
     for row in read_csv(r_path):
         bc  = row['branchCode'].strip()

@@ -29,11 +29,11 @@ Self-contained HTML dashboard showing the composite School Readiness Index (SRI)
 
 | File | Source | Description |
 |------|--------|-------------|
-| `assets/myelin_stat_ro/intent_teacher_english_responses.csv` | `extract_all_constructs.js` | C1+C2 teacher intent |
-| `assets/myelin_stat_ro/intent_teacher_marathi_responses.csv` | `extract_all_constructs.js` | C1+C2 teacher intent (Marathi) |
-| `assets/myelin_stat_ro/intent_leader_english_responses.csv` | `extract_all_constructs.js` | C1 leader intent |
-| `assets/myelin_stat_ro/intent_leader_marathi_responses.csv` | `extract_all_constructs.js` | C1 leader intent (Marathi) |
-| `assets/myelin_stat_ro/system_readiness_responses_detail.csv` | `extract_all_constructs.js` | C4 system readiness |
+| `data/extracted/intent/intent_teacher_english_responses.csv` | `extract_all_constructs.js` | C1+C2 teacher intent |
+| `data/extracted/intent/intent_teacher_marathi_responses.csv` | `extract_all_constructs.js` | C1+C2 teacher intent (Marathi) |
+| `data/extracted/intent/intent_leader_english_responses.csv` | `extract_all_constructs.js` | C1 leader intent |
+| `data/extracted/intent/intent_leader_marathi_responses.csv` | `extract_all_constructs.js` | C1 leader intent (Marathi) |
+| `data/extracted/constructs/system_readiness_responses_detail.csv` | `extract_all_constructs.js` | C4 system readiness |
 | `output/mathangle_master.csv` | `scripts/mathangle_csv_dump.py` | C3 capacity scores |
 
 ## Step-by-Step Regeneration
@@ -50,14 +50,18 @@ scp -i $SSH_KEY \
 ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
   'cd ~/myelin_stat_ro && mongosh --port 27017 -u $MONGO_USER -p $MONGO_PASS --authenticationDatabase pdea_pilot pdea_pilot < extract_all_constructs.js > constructs_output.txt 2>&1'
 
-# Transfer ALL generated CSVs
+# Transfer intent CSVs
 for f in intent_teacher_english_responses.csv intent_teacher_marathi_responses.csv \
-         intent_leader_english_responses.csv intent_leader_marathi_responses.csv \
-         system_readiness_responses_detail.csv; do
+         intent_leader_english_responses.csv intent_leader_marathi_responses.csv; do
   scp -i $SSH_KEY \
     $PROD_USER@$PROD_HOST:~/myelin_stat_ro/$f \
-    assets/myelin_stat_ro/
+    data/extracted/intent/
 done
+
+# Transfer system readiness CSV
+scp -i $SSH_KEY \
+  $PROD_USER@$PROD_HOST:~/myelin_stat_ro/system_readiness_responses_detail.csv \
+  data/extracted/constructs/
 ```
 
 ### Step 2: Generate MathAngle capacity scores

@@ -2,8 +2,8 @@
 """Build Stage 2 Intent Survey — Practice Depth Dashboard (D1–D4).
 
 Reads:
-  assets/myelin_stat_ro/intent_teacher_english_responses.csv
-  assets/myelin_stat_ro/intent_teacher_marathi_responses.csv
+  data/extracted/intent/intent_teacher_english_responses.csv
+  data/extracted/intent/intent_teacher_marathi_responses.csv
 
 Writes:
   output/intent_depth_dashboard.html
@@ -19,10 +19,10 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
-BASE = Path(__file__).resolve().parent.parent
+BASE = Path(__file__).resolve().parent.parent.parent
 RESPONSE_CSVS = [
-    BASE / "assets" / "myelin_stat_ro" / "intent_teacher_english_responses.csv",
-    BASE / "assets" / "myelin_stat_ro" / "intent_teacher_marathi_responses.csv",
+    BASE / "data" / "extracted" / "intent" / "intent_teacher_english_responses.csv",
+    BASE / "data" / "extracted" / "intent" / "intent_teacher_marathi_responses.csv",
 ]
 OUTPUT = BASE / "output" / "intent_depth_dashboard.html"
 TODAY = date.today().isoformat()

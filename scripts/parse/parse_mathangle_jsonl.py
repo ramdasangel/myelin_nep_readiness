@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Parse Mathangle extraction output into 3 JSONL files.
 
-Reads:  assets/myelin_stat_ro/mathangle_extraction.txt (raw mongosh output)
+Reads:  data/extracted/mathangle/mathangle_extraction.txt (raw mongosh output)
 Writes: /tmp/mathangle_raw.jsonl
         /tmp/mathangle_exit_levels.jsonl
         /tmp/mathangle_indecision.jsonl
 """
 import os
 
-RAW_FILE = os.path.join(os.path.dirname(__file__), '..', 'assets', 'myelin_stat_ro', 'mathangle_extraction.txt')
+RAW_FILE = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'extracted', 'mathangle', 'mathangle_extraction.txt')
 
 with open(RAW_FILE, 'r', encoding='utf-8') as f:
     content = f.read()

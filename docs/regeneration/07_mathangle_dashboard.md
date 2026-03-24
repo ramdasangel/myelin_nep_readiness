@@ -58,7 +58,7 @@ ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
 # Transfer output
 scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/mathangle_extraction.txt \
-  assets/myelin_stat_ro/mathangle_extraction.txt
+  data/extracted/mathangle/mathangle_extraction.txt
 ```
 
 ### Step 2: Clean mongosh prompts and parse into JSONL
@@ -67,17 +67,17 @@ The raw output contains mongosh connection headers and `pdea_pilot>` prompts. Cl
 
 ```bash
 # Clean the output (strip mongosh prompts and headers)
-cat assets/myelin_stat_ro/mathangle_extraction.txt | \
+cat data/extracted/mathangle/mathangle_extraction.txt | \
   sed 's/^pdea_pilot> //' | \
   sed 's/^\(\.\.\. \)*//' | \
   sed '/^Current Mongosh/d' | \
   sed '/^Connecting to:/d' | \
   sed '/^Using MongoDB/d' | \
   sed '/^Using Mongosh/d' | \
-  sed '/^For mongosh/d' > assets/myelin_stat_ro/mathangle_extraction_clean.txt
+  sed '/^For mongosh/d' > data/extracted/mathangle/mathangle_extraction_clean.txt
 
 # Rename clean version
-mv assets/myelin_stat_ro/mathangle_extraction_clean.txt assets/myelin_stat_ro/mathangle_extraction.txt
+mv data/extracted/mathangle/mathangle_extraction_clean.txt data/extracted/mathangle/mathangle_extraction.txt
 
 # Parse into 3 JSONL files
 python3 scripts/parse_mathangle_jsonl.py

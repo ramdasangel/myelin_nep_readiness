@@ -18,7 +18,7 @@ Self-contained HTML dashboard with keyword-based sentiment analysis on teacher d
 
 | File | Source | Description |
 |------|--------|-------------|
-| `assets/myelin_stat_ro/comments_full.csv` | `scripts/extract_comments.js` | Task comments with userId, taskId, submitDate, comment text |
+| `data/extracted/comments_full.csv` | `scripts/extract_comments.js` | Task comments with userId, taskId, submitDate, comment text |
 | `output/micro_intervention_report.csv` | `scripts/micro_intervention_report.js` | User role/branch metadata |
 
 ## Step-by-Step Regeneration
@@ -38,7 +38,7 @@ ssh -i $SSH_KEY $PROD_USER@$PROD_HOST \
 # Transfer the generated CSV
 scp -i $SSH_KEY \
   $PROD_USER@$PROD_HOST:~/myelin_stat_ro/comments_full.csv \
-  assets/myelin_stat_ro/comments_full.csv
+  data/extracted/comments_full.csv
 ```
 
 ### Step 2: Ensure micro_intervention_report.csv is up to date
