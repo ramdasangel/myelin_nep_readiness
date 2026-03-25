@@ -35,6 +35,7 @@ PAGES = [
     ("04_c4_system.html", "C4 System"),
     ("05_c5_ecosystem.html", "C5 Ecosystem"),
     ("06_set_analysis.html", "SET Analysis"),
+    ("07_branch_coverage.html", "Coverage"),
 ]
 
 

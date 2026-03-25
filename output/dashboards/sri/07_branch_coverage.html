@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branch Coverage — SRI Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f5f6fa;--card:#fff;--border:#e0e3ea;--text:#1a1a2e;--muted:#6b7280;
+--blue:#2563eb;--green:#16a34a;--amber:#d97706;--red:#dc2626;--purple:#7c3aed;--teal:#0d9488;
+--c1:#3b82f6;--c2:#8b5cf6;--c3:#10b981;--c4:#f59e0b;--c5:#ef4444;
+--radius:8px;--shadow:0 1px 3px rgba(0,0,0,.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+.header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+.header .sub{font-size:12px;opacity:.8}
+.nav-bar{display:flex;background:#1e293b;padding:0 24px;gap:2px;overflow-x:auto}
+.nav-pill{padding:8px 14px;font-size:11px;font-weight:600;color:#94a3b8;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
+.nav-pill:hover{color:#e2e8f0;background:rgba(255,255,255,.05)}
+.nav-pill.active{color:#fff;border-bottom-color:#3b82f6;background:rgba(59,130,246,.15)}
+.tabs{display:flex;background:#fff;border-bottom:2px solid var(--border);padding:0 24px;overflow-x:auto;gap:2px;position:sticky;top:0;z-index:100}
+.tab{padding:12px 18px;cursor:pointer;font-weight:600;font-size:13px;border-bottom:3px solid transparent;color:var(--muted);white-space:nowrap;transition:.15s}
+.tab:hover{color:var(--text);background:#f8f9fb}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.content{display:none;padding:24px 32px;max-width:1800px;margin:0 auto}
+.content.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.card .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+.card .value{font-size:28px;font-weight:700}
+.card .sub{font-size:12px;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:12px}
+th{background:#f1f3f8;font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);position:sticky;top:0;white-space:nowrap;cursor:pointer}
+th:hover{background:#e2e5eb}
+td{padding:6px 10px;border-bottom:1px solid var(--border)}
+tr:hover td{background:#f8f9fc}
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius);margin-bottom:24px}
+.bar{height:8px;border-radius:4px;background:#e5e7eb;position:relative;min-width:60px;display:inline-block;width:80px;vertical-align:middle;margin-right:6px}
+.bar-fill{height:100%;border-radius:4px;transition:.3s}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-amber{background:#fef3c7;color:#92400e}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-gray{background:#f3f4f6;color:#6b7280}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-purple{background:#ede9fe;color:#5b21b6}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:24px}
+.chart-box h3{font-size:15px;margin-bottom:12px;color:var(--text)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.section-title{font-size:17px;font-weight:700;margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.section-title:first-child{margin-top:0}
+.info-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:13px;color:#1e40af}
+.no-data{text-align:center;padding:40px 20px;color:var(--muted)}
+.no-data h3{font-size:18px;margin-bottom:8px}
+.btn{display:inline-block;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:#fff;color:var(--text);transition:.15s}
+.btn:hover{background:#f1f3f8}
+.btn-blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-blue:hover{background:#1d4ed8}
+select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;background:#fff}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}.content{padding:16px}}
+@media print{.nav-bar,.tabs{display:none}.content{display:block!important;padding:10px}.header{padding:10px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.cards{grid-template-columns:repeat(3,1fr)}.chart-box{page-break-inside:avoid}canvas{max-height:300px}}
+</style>
+
+</head>
+<body>
+<div class="header">
+<div><h1>Branch Coverage</h1><div class="sub">System Readiness Index — Project Kshitij</div></div>
+<div style="text-align:right"><div style="font-size:12px;opacity:.7">Deccan Education Society</div>
+<div style="font-size:11px;opacity:.5">Generated: 2026-03-25</div></div></div>
+<nav class="nav-bar"><a class="nav-pill" href="./00_sri_summary.html">SRI Summary</a><a class="nav-pill" href="./01_c1_intent.html">C1 Intent</a><a class="nav-pill" href="./02_c2_practice.html">C2 Practice</a><a class="nav-pill" href="./03_c3_capacity.html">C3 Capacity</a><a class="nav-pill" href="./04_c4_system.html">C4 System</a><a class="nav-pill" href="./05_c5_ecosystem.html">C5 Ecosystem</a><a class="nav-pill" href="./06_set_analysis.html">SET Analysis</a><a class="nav-pill active" href="./07_branch_coverage.html">Coverage</a></nav>
+<div class="tabs">
+<div class="tab active" onclick="showTab('overview')">Overview</div>
+<div class="tab" onclick="showTab('roles')">Role Coverage</div>
+<div class="tab" onclick="showTab('matrix')">Coverage Matrix</div>
+<div class="tab" onclick="showTab('respondents')">Respondent Counts</div>
+<div class="tab" onclick="showTab('gaps')">Gap Analysis</div>
+</div>
+
+<!-- OVERVIEW -->
+<div id="overview" class="content active">
+<div class="cards">
+<div class="card">
+<div class="label">C1: Intent Readiness</div>
+<div class="value" style="color:#3b82f6">36.0<span style="font-size:14px;color:var(--muted)">/37</span></div>
+<div class="sub">97% | 36/37 branches | 625 teachers + 77 leaders</div></div>
+<div class="card">
+<div class="label">C2: Practice Readiness</div>
+<div class="value" style="color:#8b5cf6">36.0<span style="font-size:14px;color:var(--muted)">/37</span></div>
+<div class="sub">97% | 36/37 branches | from teacher intent data</div></div>
+<div class="card">
+<div class="label">C3: Capacity Readiness</div>
+<div class="value" style="color:#10b981">28.0<span style="font-size:14px;color:var(--muted)">/37</span></div>
+<div class="sub">76% | 28/37 branches | 109 MathAngle users</div></div>
+<div class="card">
+<div class="label">C4: System Readiness</div>
+<div class="value" style="color:#f59e0b">36.0<span style="font-size:14px;color:var(--muted)">/37</span></div>
+<div class="sub">97% | 36/37 branches | baseline surveys</div></div>
+<div class="card">
+<div class="label">C5: Ecosystem Readiness</div>
+<div class="value" style="color:#ef4444">0.0<span style="font-size:14px;color:var(--muted)">/37</span></div>
+<div class="sub">0% | 0/37 branches | data not yet collected</div></div>
+<div class="card">
+<div class="label">SRI Audit (SRI001)</div>
+<div class="value" style="color:var(--teal)">8<span style="font-size:14px;color:var(--muted)">/37</span></div>
+<div class="sub">8 branches with E1-R5 audit data</div></div>
+</div>
+
+<div class="info-box">
+<strong>Branch Coverage Dashboard</strong> — Shows which branches have data for each SRI construct and instrument.
+C5 (Ecosystem Readiness) has no data yet. Max achievable SRI = 85/100 without C5.
+</div>
+
+<div class="grid-2">
+<div class="chart-box"><h3>Construct Coverage by Branch</h3><canvas id="coverageChart" height="400"></canvas></div>
+<div class="chart-box"><h3>Respondent Distribution</h3><canvas id="respondentChart" height="400"></canvas></div>
+</div>
+</div>
+
+<!-- ROLES -->
+<div id="roles" class="content">
+<h2 class="section-title">Role Coverage: Teacher / Leader / Principal</h2>
+<div class="info-box">
+Shows unique respondent counts per branch by role across each instrument stage.
+<strong>T</strong> = Teacher, <strong>L</strong> = Leader/Principal.
+SRI Audit is completed by Principals/VPs/Academic Coordinators (counted as Leaders).
+</div>
+
+<div class="cards" style="grid-template-columns:repeat(3,1fr)">
+<div class="card" style="border-left:4px solid var(--blue)">
+<div class="label">Total Teachers</div>
+<div class="value" style="color:var(--blue)">1097</div>
+<div class="sub">unique teacher submissions across all instruments</div></div>
+<div class="card" style="border-left:4px solid var(--purple)">
+<div class="label">Total Leaders</div>
+<div class="value" style="color:var(--purple)">197</div>
+<div class="sub">unique leader submissions across all instruments</div></div>
+<div class="card" style="border-left:4px solid var(--teal)">
+<div class="label">SRI Audit (Principal/VP/AC)</div>
+<div class="value" style="color:var(--teal)">10</div>
+<div class="sub">system readiness audit respondents</div></div>
+</div>
+
+<div class="chart-box"><h3>Teacher vs Leader vs Audit by Branch</h3><canvas id="roleChart" height="400"></canvas></div>
+
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th>Branch</th><th>Name</th>
+<th style="text-align:center">Intent EN<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
+<th style="text-align:center">Intent MR<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
+<th style="text-align:center">Baseline EN<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
+<th style="text-align:center">Baseline MR<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
+<th style="text-align:center">SRI Audit<br><span style="font-size:9px;color:var(--muted)">L</span></th>
+<th style="text-align:right">Total</th>
+</tr></thead>
+<tbody><tr><td><strong>M001</strong></td><td style='font-size:11px'>AHILYADEVI HIGH SCHOOL FOR GIR</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">32</span> / <span style="color:var(--purple);font-weight:600">4</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">14</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">21</span> / <span style="color:var(--purple);font-weight:600">5</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">80</td></tr><tr><td><strong>M002</strong></td><td style='font-size:11px'>BALAK MANDIR,SATARA</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">7</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">6</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">15</td></tr><tr><td><strong>M003</strong></td><td style='font-size:11px'>D.E.S. PRIMARY SCHOOL</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">14</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">15</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">22</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">6</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">65</td></tr><tr><td><strong>M004</strong></td><td style='font-size:11px'>D.E.S. SECONDARY SCHOOL</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">28</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">18</span> / <span style="color:var(--purple);font-weight:600">5</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">33</span> / <span style="color:var(--purple);font-weight:600">5</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">12</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">105</td></tr><tr><td><strong>M005</strong></td><td style='font-size:11px'>DATAR-SHENDURE ENGLISH MEDIUM </td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">8</td></tr><tr><td><strong>M006</strong></td><td style='font-size:11px'>DATAR-SHENDURE ENGLISH MEDIUM </td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">7</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">6</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">16</td></tr><tr><td><strong>M007</strong></td><td style='font-size:11px'>DATAR-SHENDURE ENGLISH MEDIUM </td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">11</td></tr><tr><td><strong>M009</strong></td><td style='font-size:11px'>DRAVID HIGH SCHOOL,WAI</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">33</span> / <span style="color:var(--purple);font-weight:600">5</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">10</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">25</span> / <span style="color:var(--purple);font-weight:600">5</span></td><td style="text-align:center"><span style="color:var(--teal);font-weight:600">1</span></td><td style="text-align:right;font-weight:700">82</td></tr><tr><td><strong>M010</strong></td><td style='font-size:11px'>ENGLISH MEDIUM PRE – PRIMARY S</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">2</td></tr><tr><td><strong>M011</strong></td><td style='font-size:11px'>ENGLISH MEDIUM PRIMARY SCHOOL,</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">5</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">11</td></tr><tr><td><strong>M012</strong></td><td style='font-size:11px'>ENGLISH MEDIUM SECONDARY SCHOO</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--teal);font-weight:600">1</span></td><td style="text-align:right;font-weight:700">2</td></tr><tr><td><strong>M013</strong></td><td style='font-size:11px'>HINDUSTAN ANTIBIOTICS SCHOOL (</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">5</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">4</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">12</td></tr><tr><td><strong>M014</strong></td><td style='font-size:11px'>HINDUSTAN ANTIBIOTICS SCHOOL (</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">5</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">15</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">8</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">12</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">43</td></tr><tr><td><strong>M015</strong></td><td style='font-size:11px'>HINDUSTAN ANTIBIOTICS SCHOOL (</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">5</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">33</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">10</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">25</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">82</td></tr><tr><td><strong>M016</strong></td><td style='font-size:11px'>MADHAV SADASHIV GOLWALKAR GURU</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">9</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">9</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">22</td></tr><tr><td><strong>M017</strong></td><td style='font-size:11px'>MADHAV SADASHIV GOLWALKAR GURU</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">19</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">19</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--teal);font-weight:600">2</span></td><td style="text-align:right;font-weight:700">47</td></tr><tr><td><strong>M018</strong></td><td style='font-size:11px'>MADHAV SADASHIV GOLWALKAR GURU</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">14</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">12</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">32</td></tr><tr><td><strong>M019</strong></td><td style='font-size:11px'>MATRUMANDIR SATARA</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">2</td></tr><tr><td><strong>M020</strong></td><td style='font-size:11px'>MURLIDHAR LOHIYA MATRU MANDIR </td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">26</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">5</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">26</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">4</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">70</td></tr><tr><td><strong>M021</strong></td><td style='font-size:11px'>NAVIN MARATHI SHALA, SATARA</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">11</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">4</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">7</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--teal);font-weight:600">2</span></td><td style="text-align:right;font-weight:700">28</td></tr><tr><td><strong>M022</strong></td><td style='font-size:11px'>NAVIN MARATHI SHALA,PUNE</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">20</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">19</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">43</td></tr><tr><td><strong>M023</strong></td><td style='font-size:11px'>NEW ENGLISH MEDIUM SCHOOL (PRE</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">5</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">15</td></tr><tr><td><strong>M024</strong></td><td style='font-size:11px'>NEW ENGLISH MEDIUM SCHOOL (PRI</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">10</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">6</span> / <span style="color:var(--purple);font-weight:600">5</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">10</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">7</span> / <span style="color:var(--purple);font-weight:600">4</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">46</td></tr><tr><td><strong>M025</strong></td><td style='font-size:11px'>NEW ENGLISH MEDIUM SCHOOL SECO</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--teal);font-weight:600">1</span></td><td style="text-align:right;font-weight:700">14</td></tr><tr><td><strong>M026</strong></td><td style='font-size:11px'>NEW ENGLISH SCHOOL, RAMANBAG</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">41</span> / <span style="color:var(--purple);font-weight:600">5</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">8</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">28</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--teal);font-weight:600">1</span></td><td style="text-align:right;font-weight:700">92</td></tr><tr><td><strong>M027</strong></td><td style='font-size:11px'>NEW ENGLISH SCHOOL, SATARA</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">4</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">55</span> / <span style="color:var(--purple);font-weight:600">6</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">22</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">31</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--teal);font-weight:600">1</span></td><td style="text-align:right;font-weight:700">125</td></tr><tr><td><strong>M028</strong></td><td style='font-size:11px'>NEW ENGLISH SCHOOL,TILAK ROAD</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">26</span> / <span style="color:var(--purple);font-weight:600">5</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">10</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">16</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">66</td></tr><tr><td><strong>M029</strong></td><td style='font-size:11px'>NYA.RANADE BALAK MANDIR</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">12</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">10</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">27</td></tr><tr><td><strong>M030</strong></td><td style='font-size:11px'>RAMESH GARWARE SCHOOL (PRE-PRI</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">4</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">5</td></tr><tr><td><strong>M031</strong></td><td style='font-size:11px'>RAMESH GARWARE SCHOOL (PRIMARY</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">7</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">4</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">19</td></tr><tr><td><strong>M032</strong></td><td style='font-size:11px'>RAMESH GARWARE SCHOOL (SECONDA</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">6</td></tr><tr><td><strong>M033</strong></td><td style='font-size:11px'>SHRI KANTILAL PURUSHOTTAMDAS S</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">8</td></tr><tr><td><strong>M034</strong></td><td style='font-size:11px'>SHRI KANTILAL PURUSHOTTAMDAS S</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">6</td></tr><tr><td><strong>M035</strong></td><td style='font-size:11px'>SHRI KANTILAL PURUSHOTTAMDAS S</td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">7</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">16</td></tr><tr><td><strong>M036</strong></td><td style='font-size:11px'>SHRI KANTILAL PURUSHOTTAMDAS S</td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">4</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">17</span> / <span style="color:var(--purple);font-weight:600">8</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">8</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">12</span> / <span style="color:var(--purple);font-weight:600">3</span></td><td style="text-align:center"><span style="color:var(--teal);font-weight:600">1</span></td><td style="text-align:right;font-weight:700">57</td></tr><tr><td><strong>M037</strong></td><td style='font-size:11px'>SHRI. KANTILAL PURUSHOTTAMDAS </td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">3</span> / <span style="color:var(--purple);font-weight:600">2</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">2</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">8</td></tr><tr><td><strong>M038</strong></td><td style='font-size:11px'>SHRI. KANTILAL PURUSHOTTAMDAS </td><td style="text-align:center"><span style="color:#d1d5db">0</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">7</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">1</span> / <span style="color:#d1d5db">0</span></td><td style="text-align:center"><span style="color:var(--blue);font-weight:600">6</span> / <span style="color:var(--purple);font-weight:600">1</span></td><td style="text-align:center"><span style="color:#d1d5db">0</span></td><td style="text-align:right;font-weight:700">16</td></tr></tbody>
+</table></div>
+</div>
+
+<!-- MATRIX -->
+<div id="matrix" class="content">
+<h2 class="section-title">Coverage Matrix</h2>
+<div class="info-box">Green checkmark = data available (number = respondent count). Gray dash = no data. Constructs/5 shows how many of the 5 SRI constructs have data for each branch.</div>
+<button class="btn btn-blue" onclick="downloadCoverageCSV()" style="margin-bottom:12px">Download CSV</button>
+<div class="tbl-wrap"><table id="coverageTable">
+<thead><tr>
+<th onclick="sortTable('coverageTable',0,'str')">Branch</th>
+<th>Name</th>
+<th style="text-align:center" onclick="sortTable('coverageTable',2,'str')">C1</th>
+<th style="text-align:center" onclick="sortTable('coverageTable',3,'str')">C2</th>
+<th style="text-align:center" onclick="sortTable('coverageTable',4,'str')">C3</th>
+<th style="text-align:center" onclick="sortTable('coverageTable',5,'str')">C4</th>
+<th style="text-align:center">C5</th>
+<th style="text-align:center" onclick="sortTable('coverageTable',7,'str')">Audit</th>
+<th style="text-align:center">SET</th>
+<th style="text-align:center">A areas</th>
+<th style="text-align:center">B areas</th>
+<th style="text-align:center" onclick="sortTable('coverageTable',11,'num')">Score</th>
+<th style="text-align:right" onclick="sortTable('coverageTable',12,'num')">SRI</th>
+</tr></thead>
+<tbody><tr>
+<td><strong>M001</strong></td>
+<td style="font-size:11px">AHILYADEVI HIGH SCHOOL FOR GIRLS</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">39</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">39</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">7</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">42</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">66.1</td>
+</tr><tr>
+<td><strong>M002</strong></td>
+<td style="font-size:11px">BALAK MANDIR,SATARA</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#d97706">3/5</td>
+<td style="text-align:right;font-weight:600">25.7</td>
+</tr><tr>
+<td><strong>M003</strong></td>
+<td style="font-size:11px">D.E.S. PRIMARY SCHOOL</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">31</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">31</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">2</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">34</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">66.7</td>
+</tr><tr>
+<td><strong>M004</strong></td>
+<td style="font-size:11px">D.E.S. SECONDARY SCHOOL</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">47</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">47</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">53</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">67.8</td>
+</tr><tr>
+<td><strong>M005</strong></td>
+<td style="font-size:11px">DATAR-SHENDURE ENGLISH MEDIUM PRE-P</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">40.5</td>
+</tr><tr>
+<td><strong>M006</strong></td>
+<td style="font-size:11px">DATAR-SHENDURE ENGLISH MEDIUM PRIMA</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">38.2</td>
+</tr><tr>
+<td><strong>M007</strong></td>
+<td style="font-size:11px">DATAR-SHENDURE ENGLISH MEDIUM SECON</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">6</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">59.0</td>
+</tr><tr>
+<td><strong>M009</strong></td>
+<td style="font-size:11px">DRAVID HIGH SCHOOL,WAI</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">37</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">37</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">10</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">42</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">66.5</td>
+</tr><tr>
+<td><strong>M010</strong></td>
+<td style="font-size:11px">ENGLISH MEDIUM PRE – PRIMARY SCHOOL</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#dc2626">1/5</td>
+<td style="text-align:right;font-weight:600">7.9</td>
+</tr><tr>
+<td><strong>M011</strong></td>
+<td style="font-size:11px">ENGLISH MEDIUM PRIMARY SCHOOL, SHIR</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">9</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#d97706">3/5</td>
+<td style="text-align:right;font-weight:600">42.6</td>
+</tr><tr>
+<td><strong>M012</strong></td>
+<td style="font-size:11px">ENGLISH MEDIUM SECONDARY SCHOOL, SH</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#dc2626">2/5</td>
+<td style="text-align:right;font-weight:600">15.6</td>
+</tr><tr>
+<td><strong>M013</strong></td>
+<td style="font-size:11px">HINDUSTAN ANTIBIOTICS SCHOOL (PRE-P</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">46.7</td>
+</tr><tr>
+<td><strong>M014</strong></td>
+<td style="font-size:11px">HINDUSTAN ANTIBIOTICS SCHOOL (PRIMA</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">21</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">21</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">19</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">22</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">53.4</td>
+</tr><tr>
+<td><strong>M015</strong></td>
+<td style="font-size:11px">HINDUSTAN ANTIBIOTICS SCHOOL (SECON</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">40</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">40</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">2</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">44</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">68.3</td>
+</tr><tr>
+<td><strong>M016</strong></td>
+<td style="font-size:11px">MADHAV SADASHIV GOLWALKAR GURUJI MA</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">11</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">11</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">13</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">67.9</td>
+</tr><tr>
+<td><strong>M017</strong></td>
+<td style="font-size:11px">MADHAV SADASHIV GOLWALKAR GURUJI VI</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">23</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">23</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">2</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">26</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">2</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">66.7</td>
+</tr><tr>
+<td><strong>M018</strong></td>
+<td style="font-size:11px">MADHAV SADASHIV GOLWALKAR GURUJI VI</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">15</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">15</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">17</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">67.1</td>
+</tr><tr>
+<td><strong>M019</strong></td>
+<td style="font-size:11px">MATRUMANDIR SATARA</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#d97706">3/5</td>
+<td style="text-align:right;font-weight:600">21.6</td>
+</tr><tr>
+<td><strong>M020</strong></td>
+<td style="font-size:11px">MURLIDHAR LOHIYA MATRU MANDIR (D.E.</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">33</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">33</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">37</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">68.5</td>
+</tr><tr>
+<td><strong>M021</strong></td>
+<td style="font-size:11px">NAVIN MARATHI SHALA, SATARA</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">13</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">13</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">15</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">2</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">69.8</td>
+</tr><tr>
+<td><strong>M022</strong></td>
+<td style="font-size:11px">NAVIN MARATHI SHALA,PUNE</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">22</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">22</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">23</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">62.0</td>
+</tr><tr>
+<td><strong>M023</strong></td>
+<td style="font-size:11px">NEW ENGLISH MEDIUM SCHOOL (PRE-PRIM</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">7</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">67.5</td>
+</tr><tr>
+<td><strong>M024</strong></td>
+<td style="font-size:11px">NEW ENGLISH MEDIUM SCHOOL (PRIMARY </td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">20</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">20</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">23</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">68.3</td>
+</tr><tr>
+<td><strong>M025</strong></td>
+<td style="font-size:11px">NEW ENGLISH MEDIUM SCHOOL SECONDARY</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">2</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">7</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">68.1</td>
+</tr><tr>
+<td><strong>M026</strong></td>
+<td style="font-size:11px">NEW ENGLISH SCHOOL, RAMANBAG</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">48</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">48</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">53</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">64.2</td>
+</tr><tr>
+<td><strong>M027</strong></td>
+<td style="font-size:11px">NEW ENGLISH SCHOOL, SATARA</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">65</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">65</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">13</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">71</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">65.9</td>
+</tr><tr>
+<td><strong>M028</strong></td>
+<td style="font-size:11px">NEW ENGLISH SCHOOL,TILAK ROAD</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">32</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">32</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">38</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">66.2</td>
+</tr><tr>
+<td><strong>M029</strong></td>
+<td style="font-size:11px">NYA.RANADE BALAK MANDIR</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">13</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">13</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">14</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">65.7</td>
+</tr><tr>
+<td><strong>M030</strong></td>
+<td style="font-size:11px">RAMESH GARWARE SCHOOL (PRE-PRIMARY </td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#d97706">3/5</td>
+<td style="text-align:right;font-weight:600">25.1</td>
+</tr><tr>
+<td><strong>M031</strong></td>
+<td style="font-size:11px">RAMESH GARWARE SCHOOL (PRIMARY UNIT</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">9</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">9</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">10</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">67.3</td>
+</tr><tr>
+<td><strong>M032</strong></td>
+<td style="font-size:11px">RAMESH GARWARE SCHOOL (SECONDARY UN</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#d97706">3/5</td>
+<td style="text-align:right;font-weight:600">21.6</td>
+</tr><tr>
+<td><strong>M033</strong></td>
+<td style="font-size:11px">SHRI KANTILAL PURUSHOTTAMDAS SHAH B</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">2</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">2</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">3</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">65.5</td>
+</tr><tr>
+<td><strong>M034</strong></td>
+<td style="font-size:11px">SHRI KANTILAL PURUSHOTTAMDAS SHAH P</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">6</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">65.6</td>
+</tr><tr>
+<td><strong>M035</strong></td>
+<td style="font-size:11px">SHRI KANTILAL PURUSHOTTAMDAS SHAH P</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">9</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">64.4</td>
+</tr><tr>
+<td><strong>M036</strong></td>
+<td style="font-size:11px">SHRI KANTILAL PURUSHOTTAMDAS SHAH P</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">26</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">26</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">31</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">1</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>3</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#16a34a">4/5</td>
+<td style="text-align:right;font-weight:600">67.5</td>
+</tr><tr>
+<td><strong>M037</strong></td>
+<td style="font-size:11px">SHRI. KANTILAL PURUSHOTTAMDAS SHAH </td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">4</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">5</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>0</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#d97706">3/5</td>
+<td style="text-align:right;font-weight:600">33.5</td>
+</tr><tr>
+<td><strong>M038</strong></td>
+<td style="font-size:11px">SHRI. KANTILAL PURUSHOTTAMDAS SHAH </td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">7</span></td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">7</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span> <span style="font-size:10px;color:var(--muted)">8</span></td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;color:#d1d5db">—</td>
+<td style="text-align:center;background:#f0fdf4"><span style="color:#16a34a;font-weight:700">&#10003;</span></td>
+<td style="text-align:center"><strong>4</strong>/4</td>
+<td style="text-align:center"><strong>1</strong>/4</td>
+<td style="text-align:center;font-weight:700;color:#d97706">3/5</td>
+<td style="text-align:right;font-weight:600">46.6</td>
+</tr></tbody>
+</table></div>
+</div>
+
+<!-- RESPONDENTS -->
+<div id="respondents" class="content">
+<h2 class="section-title">Respondent Counts by Branch</h2>
+<div class="cards" style="grid-template-columns:repeat(4,1fr)">
+<div class="card"><div class="label">Total Teachers</div><div class="value" style="color:var(--blue)">625</div></div>
+<div class="card"><div class="label">Total Leaders</div><div class="value" style="color:var(--purple)">77</div></div>
+<div class="card"><div class="label">MathAngle Users</div><div class="value" style="color:var(--green)">109</div></div>
+<div class="card"><div class="label">SRI Audit Respondents</div><div class="value" style="color:var(--teal)">10</div></div>
+</div>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th>Branch</th><th>Name</th><th style="text-align:right">Teachers</th><th style="text-align:right">Leaders</th><th style="text-align:right">MathAngle</th><th style="text-align:right">Audit</th><th style="text-align:right">Total</th>
+</tr></thead>
+<tbody><tr>
+<td><strong>M027</strong></td>
+<td style="font-size:11px">NEW ENGLISH SCHOOL, SATARA</td>
+<td style="text-align:right">65</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right;font-weight:700">85</td>
+</tr><tr>
+<td><strong>M026</strong></td>
+<td style="font-size:11px">NEW ENGLISH SCHOOL, RAMANBAG</td>
+<td style="text-align:right">48</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right;font-weight:700">59</td>
+</tr><tr>
+<td><strong>M004</strong></td>
+<td style="font-size:11px">D.E.S. SECONDARY SCHOOL</td>
+<td style="text-align:right">47</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">58</td>
+</tr><tr>
+<td><strong>M009</strong></td>
+<td style="font-size:11px">DRAVID HIGH SCHOOL,WAI</td>
+<td style="text-align:right">37</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right;font-weight:700">53</td>
+</tr><tr>
+<td><strong>M001</strong></td>
+<td style="font-size:11px">AHILYADEVI HIGH SCHOOL FOR GIRLS</td>
+<td style="text-align:right">39</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">49</td>
+</tr><tr>
+<td><strong>M015</strong></td>
+<td style="font-size:11px">HINDUSTAN ANTIBIOTICS SCHOOL (SECONDARY </td>
+<td style="text-align:right">40</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">46</td>
+</tr><tr>
+<td><strong>M028</strong></td>
+<td style="font-size:11px">NEW ENGLISH SCHOOL,TILAK ROAD</td>
+<td style="text-align:right">32</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">42</td>
+</tr><tr>
+<td><strong>M014</strong></td>
+<td style="font-size:11px">HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN</td>
+<td style="text-align:right">21</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">19</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">41</td>
+</tr><tr>
+<td><strong>M020</strong></td>
+<td style="font-size:11px">MURLIDHAR LOHIYA MATRU MANDIR (D.E.S. PR</td>
+<td style="text-align:right">33</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">41</td>
+</tr><tr>
+<td><strong>M036</strong></td>
+<td style="font-size:11px">SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA</td>
+<td style="text-align:right">26</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right;font-weight:700">37</td>
+</tr><tr>
+<td><strong>M003</strong></td>
+<td style="font-size:11px">D.E.S. PRIMARY SCHOOL</td>
+<td style="text-align:right">31</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">36</td>
+</tr><tr>
+<td><strong>M017</strong></td>
+<td style="font-size:11px">MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA</td>
+<td style="text-align:right">23</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right;font-weight:700">30</td>
+</tr><tr>
+<td><strong>M022</strong></td>
+<td style="font-size:11px">NAVIN MARATHI SHALA,PUNE</td>
+<td style="text-align:right">22</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">26</td>
+</tr><tr>
+<td><strong>M024</strong></td>
+<td style="font-size:11px">NEW ENGLISH MEDIUM SCHOOL (PRIMARY UNIT)</td>
+<td style="text-align:right">20</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">26</td>
+</tr><tr>
+<td><strong>M018</strong></td>
+<td style="font-size:11px">MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">20</td>
+</tr><tr>
+<td><strong>M021</strong></td>
+<td style="font-size:11px">NAVIN MARATHI SHALA, SATARA</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right;font-weight:700">18</td>
+</tr><tr>
+<td><strong>M029</strong></td>
+<td style="font-size:11px">NYA.RANADE BALAK MANDIR</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">17</td>
+</tr><tr>
+<td><strong>M016</strong></td>
+<td style="font-size:11px">MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">16</td>
+</tr><tr>
+<td><strong>M031</strong></td>
+<td style="font-size:11px">RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">11</td>
+</tr><tr>
+<td><strong>M013</strong></td>
+<td style="font-size:11px">HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">10</td>
+</tr><tr>
+<td><strong>M025</strong></td>
+<td style="font-size:11px">NEW ENGLISH MEDIUM SCHOOL SECONDARY SCHO</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right;font-weight:700">10</td>
+</tr><tr>
+<td><strong>M035</strong></td>
+<td style="font-size:11px">SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">10</td>
+</tr><tr>
+<td><strong>M006</strong></td>
+<td style="font-size:11px">DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">9</td>
+</tr><tr>
+<td><strong>M011</strong></td>
+<td style="font-size:11px">ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">9</td>
+</tr><tr>
+<td><strong>M002</strong></td>
+<td style="font-size:11px">BALAK MANDIR,SATARA</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">8</td>
+</tr><tr>
+<td><strong>M023</strong></td>
+<td style="font-size:11px">NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY U</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">8</td>
+</tr><tr>
+<td><strong>M038</strong></td>
+<td style="font-size:11px">SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">8</td>
+</tr><tr>
+<td><strong>M007</strong></td>
+<td style="font-size:11px">DATAR-SHENDURE ENGLISH MEDIUM SECONDARY </td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">7</td>
+</tr><tr>
+<td><strong>M034</strong></td>
+<td style="font-size:11px">SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">7</td>
+</tr><tr>
+<td><strong>M005</strong></td>
+<td style="font-size:11px">DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">5</td>
+</tr><tr>
+<td><strong>M037</strong></td>
+<td style="font-size:11px">SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">5</td>
+</tr><tr>
+<td><strong>M030</strong></td>
+<td style="font-size:11px">RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">4</td>
+</tr><tr>
+<td><strong>M033</strong></td>
+<td style="font-size:11px">SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK </td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">4</td>
+</tr><tr>
+<td><strong>M032</strong></td>
+<td style="font-size:11px">RAMESH GARWARE SCHOOL (SECONDARY UNIT), </td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">3</td>
+</tr><tr>
+<td><strong>M012</strong></td>
+<td style="font-size:11px">ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right;font-weight:700">2</td>
+</tr><tr>
+<td><strong>M019</strong></td>
+<td style="font-size:11px">MATRUMANDIR SATARA</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">1</td>
+</tr><tr>
+<td><strong>M010</strong></td>
+<td style="font-size:11px">ENGLISH MEDIUM PRE – PRIMARY SCHOOL, SHI</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right;font-weight:700">0</td>
+</tr></tbody>
+</table></div>
+</div>
+
+<!-- GAPS -->
+<div id="gaps" class="content">
+<h2 class="section-title">Gap Analysis</h2>
+<div class="info-box">Identifies branches with missing data, low coverage, or incomplete instrument collection. Prioritise these for follow-up data collection.</div>
+<div class="cards"><div class="card" style="border-left:4px solid var(--red)">
+<div class="label">Missing C3 (MathAngle)</div>
+<div class="value" style="color:var(--red)">9</div>
+<div class="sub">branches without cognitive capacity data</div>
+<div style="margin-top:8px;font-size:10px;color:var(--muted)">M002, M010, M011, M012, M019, M030, M032, M037, M038</div></div><div class="card" style="border-left:4px solid var(--amber)">
+<div class="label">Missing SRI Audit</div>
+<div class="value" style="color:var(--amber)">29</div>
+<div class="sub">branches without system readiness audit (E1-R5)</div>
+<div style="margin-top:8px;font-size:10px;color:var(--muted)">M001, M002, M003, M004, M005, M006, M007, M010, M011, M013, M014, M015, M016, M018, M019...</div></div><div class="card" style="border-left:4px solid var(--purple)">
+<div class="label">Low Leader Coverage (&lt;2)</div>
+<div class="value" style="color:var(--purple)">18</div>
+<div class="sub">branches with fewer than 2 leader responses</div>
+<div style="margin-top:8px;font-size:10px;color:var(--muted)">M002(0), M005(0), M006(0), M010(0), M011(1), M012(0), M013(0), M014(1), M019(0), M022(1)</div></div><div class="card" style="border-left:4px solid var(--green)">
+<div class="label">Full Coverage (4/5 constructs)</div>
+<div class="value" style="color:var(--green)">28</div>
+<div class="sub">of 37 branches have all available constructs</div></div></div>
+
+<div class="chart-box"><h3>Constructs Covered per Branch</h3><canvas id="gapChart" height="250"></canvas></div>
+</div>
+
+<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px">Project Kshitij | Myelin | Generated 2026-03-25</div>
+<script>
+
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.content').forEach(function(c){c.classList.remove('active')});
+  event.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+
+function sortTable(tableId, col, type) {
+  var table = document.getElementById(tableId);
+  var tbody = table.querySelector('tbody');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  var dir = table.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+  table.dataset.sortDir = dir;
+  rows.sort(function(a, b) {
+    var av = a.cells[col].textContent.trim();
+    var bv = b.cells[col].textContent.trim();
+    if (type === 'num') { av = parseFloat(av) || 0; bv = parseFloat(bv) || 0; }
+    if (dir === 'asc') return av > bv ? 1 : -1;
+    return av < bv ? 1 : -1;
+  });
+  rows.forEach(function(r) { tbody.appendChild(r); });
+}
+
+
+function downloadCSV(rows, filename) {
+  var csvContent = rows.map(function(r) {
+    return r.map(function(c) {
+      var s = String(c);
+      return s.indexOf(',') >= 0 || s.indexOf('"') >= 0 ? '"' + s.replace(/"/g, '""') + '"' : s;
+    }).join(',');
+  }).join('\n');
+  var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+// Role chart
+new Chart(document.getElementById('roleChart'), {
+  type: 'bar',
+  data: {
+    labels: ["M001", "M002", "M003", "M004", "M005", "M006", "M007", "M009", "M010", "M011", "M012", "M013", "M014", "M015", "M016", "M017", "M018", "M019", "M020", "M021", "M022", "M023", "M024", "M025", "M026", "M027", "M028", "M029", "M030", "M031", "M032", "M033", "M034", "M035", "M036", "M037", "M038"],
+    datasets: [
+      {label: 'Teachers', data: [70, 14, 57, 91, 8, 16, 6, 70, 2, 10, 1, 10, 40, 73, 18, 39, 27, 2, 61, 22, 40, 9, 33, 4, 80, 112, 53, 24, 5, 14, 6, 3, 3, 13, 41, 6, 14], backgroundColor: '#3b82f6'},
+      {label: 'Leaders', data: [10, 1, 8, 14, 0, 0, 5, 11, 0, 1, 0, 2, 3, 9, 4, 6, 5, 0, 9, 4, 3, 6, 13, 9, 11, 12, 13, 3, 0, 5, 0, 5, 3, 3, 15, 2, 2], backgroundColor: '#8b5cf6'},
+      {label: 'SRI Audit (Principal/VP)', data: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], backgroundColor: '#0d9488'}
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    scales: {x: {stacked: true}, y: {stacked: true}},
+    plugins: {legend: {position: 'top'}}
+  }
+});
+
+// Coverage stacked bar
+new Chart(document.getElementById('coverageChart'), {
+  type: 'bar',
+  data: {
+    labels: ["M001", "M002", "M003", "M004", "M005", "M006", "M007", "M009", "M010", "M011", "M012", "M013", "M014", "M015", "M016", "M017", "M018", "M019", "M020", "M021", "M022", "M023", "M024", "M025", "M026", "M027", "M028", "M029", "M030", "M031", "M032", "M033", "M034", "M035", "M036", "M037", "M038"],
+    datasets: [
+      {label: 'C1 Intent', data: [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], backgroundColor: '#3b82f6'},
+      {label: 'C2 Practice', data: [1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], backgroundColor: '#8b5cf6'},
+      {label: 'C3 Capacity', data: [1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0], backgroundColor: '#10b981'},
+      {label: 'C4 System', data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], backgroundColor: '#f59e0b'},
+      {label: 'SRI Audit', data: [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], backgroundColor: '#0d9488'}
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    scales: {x: {stacked: true, max: 5}, y: {stacked: true}},
+    plugins: {legend: {position: 'top'}}
+  }
+});
+
+// Respondent distribution
+new Chart(document.getElementById('respondentChart'), {
+  type: 'bar',
+  data: {
+    labels: ["M001", "M002", "M003", "M004", "M005", "M006", "M007", "M009", "M010", "M011", "M012", "M013", "M014", "M015", "M016", "M017", "M018", "M019", "M020", "M021", "M022", "M023", "M024", "M025", "M026", "M027", "M028", "M029", "M030", "M031", "M032", "M033", "M034", "M035", "M036", "M037", "M038"],
+    datasets: [
+      {label: 'Teachers', data: [39, 8, 31, 47, 4, 8, 4, 37, 0, 8, 1, 5, 21, 40, 11, 23, 15, 1, 33, 13, 22, 5, 20, 4, 48, 65, 32, 13, 4, 9, 3, 2, 4, 8, 26, 4, 7], backgroundColor: '#3b82f6'},
+      {label: 'Leaders', data: [3, 0, 3, 6, 0, 0, 2, 5, 0, 1, 0, 0, 1, 4, 2, 3, 2, 0, 4, 2, 1, 2, 3, 3, 5, 6, 6, 1, 0, 1, 0, 1, 2, 1, 5, 1, 1], backgroundColor: '#8b5cf6'},
+      {label: 'MathAngle', data: [7, 0, 2, 5, 1, 1, 1, 10, 0, 0, 0, 5, 19, 2, 3, 2, 3, 0, 4, 1, 3, 1, 3, 2, 5, 13, 4, 3, 0, 1, 0, 1, 1, 1, 5, 0, 0], backgroundColor: '#10b981'}
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    scales: {x: {stacked: true}, y: {stacked: true}},
+    plugins: {legend: {position: 'top'}}
+  }
+});
+
+// Gap chart — constructs per branch
+new Chart(document.getElementById('gapChart'), {
+  type: 'bar',
+  data: {
+    labels: ["M001", "M002", "M003", "M004", "M005", "M006", "M007", "M009", "M010", "M011", "M012", "M013", "M014", "M015", "M016", "M017", "M018", "M019", "M020", "M021", "M022", "M023", "M024", "M025", "M026", "M027", "M028", "M029", "M030", "M031", "M032", "M033", "M034", "M035", "M036", "M037", "M038"],
+    datasets: [{
+      label: 'Constructs with data',
+      data: [4, 3, 4, 4, 4, 4, 4, 4, 1, 3, 2, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 4, 4, 4, 4, 3, 3],
+      backgroundColor: ["#16a34a", "#d97706", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#dc2626", "#d97706", "#dc2626", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#d97706", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#d97706", "#16a34a", "#d97706", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#d97706", "#d97706"]
+    }]
+  },
+  options: {
+    scales: {y: {max: 5, ticks: {stepSize: 1}}},
+    plugins: {legend: {display: false}}
+  }
+});
+
+// CSV download
+function downloadCoverageCSV() {
+  var rows = [['BranchCode','BranchName','SchoolName','Teachers','Leaders','C1','C2','C3','C3_Respondents','C4','C5','SRI_Audit','SRI_Audit_Respondents','SET','A_Areas','B_Areas','Constructs_Covered','SRI_Total']];
+  var cov = {"M001": {"branchName": "AHILYADEVI HIGH SCHOOL FOR GIRLS", "schoolName": "Deccan Education Society", "teacher_count": 39, "leader_count": 3, "total_respondents": 49, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 7, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 66.12, "sri_pct": 66.1}, "M002": {"branchName": "BALAK MANDIR,SATARA", "schoolName": "Deccan Education Society", "teacher_count": 8, "leader_count": 0, "total_respondents": 8, "c1_has": true, "c2_has": true, "c3_has": false, "c3_resp": 0, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 3, "sri_total": 25.72, "sri_pct": 25.7}, "M003": {"branchName": "D.E.S. PRIMARY SCHOOL", "schoolName": "Deccan Education Society", "teacher_count": 31, "leader_count": 3, "total_respondents": 36, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 2, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 66.65, "sri_pct": 66.7}, "M004": {"branchName": "D.E.S. SECONDARY SCHOOL", "schoolName": "Deccan Education Society", "teacher_count": 47, "leader_count": 6, "total_respondents": 58, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 5, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 67.76, "sri_pct": 67.8}, "M005": {"branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMARY SCHOOL, SATARA", "schoolName": "Deccan Education Society", "teacher_count": 4, "leader_count": 0, "total_respondents": 5, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 4, "sri_total": 40.51, "sri_pct": 40.5}, "M006": {"branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SCHOOL, SATARA", "schoolName": "Deccan Education Society", "teacher_count": 8, "leader_count": 0, "total_respondents": 9, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 4, "sri_total": 38.24, "sri_pct": 38.2}, "M007": {"branchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY SCHOOL, SATARA", "schoolName": "Deccan Education Society", "teacher_count": 4, "leader_count": 2, "total_respondents": 7, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 58.99, "sri_pct": 59.0}, "M009": {"branchName": "DRAVID HIGH SCHOOL,WAI", "schoolName": "Deccan Education Society", "teacher_count": 37, "leader_count": 5, "total_respondents": 53, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 10, "c4_has": true, "c5_has": false, "audit_has": true, "audit_resp": 1, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 66.48, "sri_pct": 66.5}, "M010": {"branchName": "ENGLISH MEDIUM PRE – PRIMARY SCHOOL, SHIRUR", "schoolName": "Deccan Education Society", "teacher_count": 0, "leader_count": 0, "total_respondents": 0, "c1_has": false, "c2_has": false, "c3_has": false, "c3_resp": 0, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": false, "a_areas": 4, "b_areas": 0, "constructs_covered": 1, "sri_total": 7.94, "sri_pct": 7.9}, "M011": {"branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR", "schoolName": "Deccan Education Society", "teacher_count": 8, "leader_count": 1, "total_respondents": 9, "c1_has": true, "c2_has": true, "c3_has": false, "c3_resp": 0, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 3, "sri_total": 42.58, "sri_pct": 42.6}, "M012": {"branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR", "schoolName": "Deccan Education Society", "teacher_count": 1, "leader_count": 0, "total_respondents": 2, "c1_has": true, "c2_has": true, "c3_has": false, "c3_resp": 0, "c4_has": false, "c5_has": false, "audit_has": true, "audit_resp": 1, "set_has": true, "a_areas": 0, "b_areas": 0, "constructs_covered": 2, "sri_total": 15.62, "sri_pct": 15.6}, "M013": {"branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT)", "schoolName": "Deccan Education Society", "teacher_count": 5, "leader_count": 0, "total_respondents": 10, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 5, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 46.66, "sri_pct": 46.7}, "M014": {"branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT)", "schoolName": "Deccan Education Society", "teacher_count": 21, "leader_count": 1, "total_respondents": 41, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 19, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 4, "sri_total": 53.41, "sri_pct": 53.4}, "M015": {"branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (SECONDARY UNIT)", "schoolName": "Deccan Education Society", "teacher_count": 40, "leader_count": 4, "total_respondents": 46, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 2, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 68.27, "sri_pct": 68.3}, "M016": {"branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAMIK VIDYALAYA", "schoolName": "Deccan Education Society", "teacher_count": 11, "leader_count": 2, "total_respondents": 16, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 3, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 67.94, "sri_pct": 67.9}, "M017": {"branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PRATHAMIK VIBHAG)", "schoolName": "Deccan Education Society", "teacher_count": 23, "leader_count": 3, "total_respondents": 30, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 2, "c4_has": true, "c5_has": false, "audit_has": true, "audit_resp": 2, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 66.69, "sri_pct": 66.7}, "M018": {"branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALAYA (PURVA-PRATHAMIK VIBHAG)", "schoolName": "Deccan Education Society", "teacher_count": 15, "leader_count": 2, "total_respondents": 20, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 3, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 67.13, "sri_pct": 67.1}, "M019": {"branchName": "MATRUMANDIR SATARA", "schoolName": "Deccan Education Society", "teacher_count": 1, "leader_count": 0, "total_respondents": 1, "c1_has": true, "c2_has": true, "c3_has": false, "c3_resp": 0, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 3, "sri_total": 21.58, "sri_pct": 21.6}, "M020": {"branchName": "MURLIDHAR LOHIYA MATRU MANDIR (D.E.S. PRE-PRIMARY) SCHOOL", "schoolName": "Deccan Education Society", "teacher_count": 33, "leader_count": 4, "total_respondents": 41, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 4, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 68.46, "sri_pct": 68.5}, "M021": {"branchName": "NAVIN MARATHI SHALA, SATARA", "schoolName": "Deccan Education Society", "teacher_count": 13, "leader_count": 2, "total_respondents": 18, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": true, "audit_resp": 2, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 69.84, "sri_pct": 69.8}, "M022": {"branchName": "NAVIN MARATHI SHALA,PUNE", "schoolName": "Deccan Education Society", "teacher_count": 22, "leader_count": 1, "total_respondents": 26, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 3, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 61.99, "sri_pct": 62.0}, "M023": {"branchName": "NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY UNIT)", "schoolName": "Deccan Education Society", "teacher_count": 5, "leader_count": 2, "total_respondents": 8, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 67.55, "sri_pct": 67.5}, "M024": {"branchName": "NEW ENGLISH MEDIUM SCHOOL (PRIMARY UNIT)", "schoolName": "Deccan Education Society", "teacher_count": 20, "leader_count": 3, "total_respondents": 26, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 3, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 68.34, "sri_pct": 68.3}, "M025": {"branchName": "NEW ENGLISH MEDIUM SCHOOL SECONDARY SCHOOL", "schoolName": "Deccan Education Society", "teacher_count": 4, "leader_count": 3, "total_respondents": 10, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 2, "c4_has": true, "c5_has": false, "audit_has": true, "audit_resp": 1, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 68.08, "sri_pct": 68.1}, "M026": {"branchName": "NEW ENGLISH SCHOOL, RAMANBAG", "schoolName": "Deccan Education Society", "teacher_count": 48, "leader_count": 5, "total_respondents": 59, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 5, "c4_has": true, "c5_has": false, "audit_has": true, "audit_resp": 1, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 64.23, "sri_pct": 64.2}, "M027": {"branchName": "NEW ENGLISH SCHOOL, SATARA", "schoolName": "Deccan Education Society", "teacher_count": 65, "leader_count": 6, "total_respondents": 85, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 13, "c4_has": true, "c5_has": false, "audit_has": true, "audit_resp": 1, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 65.91, "sri_pct": 65.9}, "M028": {"branchName": "NEW ENGLISH SCHOOL,TILAK ROAD", "schoolName": "Deccan Education Society", "teacher_count": 32, "leader_count": 6, "total_respondents": 42, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 4, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 66.25, "sri_pct": 66.2}, "M029": {"branchName": "NYA.RANADE BALAK MANDIR", "schoolName": "Deccan Education Society", "teacher_count": 13, "leader_count": 1, "total_respondents": 17, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 3, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 65.72, "sri_pct": 65.7}, "M030": {"branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT), WAI", "schoolName": "Deccan Education Society", "teacher_count": 4, "leader_count": 0, "total_respondents": 4, "c1_has": true, "c2_has": true, "c3_has": false, "c3_resp": 0, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 3, "sri_total": 25.1, "sri_pct": 25.1}, "M031": {"branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WAI", "schoolName": "Deccan Education Society", "teacher_count": 9, "leader_count": 1, "total_respondents": 11, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 4, "sri_total": 67.3, "sri_pct": 67.3}, "M032": {"branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT), WAI", "schoolName": "Deccan Education Society", "teacher_count": 3, "leader_count": 0, "total_respondents": 3, "c1_has": true, "c2_has": true, "c3_has": false, "c3_resp": 0, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 3, "sri_total": 21.65, "sri_pct": 21.6}, "M033": {"branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK MANDIR [ENGLISH MEDIUM  PRE-PRIMARY SECTION]", "schoolName": "Deccan Education Society", "teacher_count": 2, "leader_count": 1, "total_respondents": 4, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 65.47, "sri_pct": 65.5}, "M034": {"branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA  ( MARATHI MADHYAM-MADHYAMIK VIBHAG)", "schoolName": "Deccan Education Society", "teacher_count": 4, "leader_count": 2, "total_respondents": 7, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 65.62, "sri_pct": 65.6}, "M035": {"branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM PRIMARY SECTION]", "schoolName": "Deccan Education Society", "teacher_count": 8, "leader_count": 1, "total_respondents": 10, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 1, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 64.38, "sri_pct": 64.4}, "M036": {"branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM SECONDARY SECTION]", "schoolName": "Deccan Education Society", "teacher_count": 26, "leader_count": 5, "total_respondents": 37, "c1_has": true, "c2_has": true, "c3_has": true, "c3_resp": 5, "c4_has": true, "c5_has": false, "audit_has": true, "audit_resp": 1, "set_has": true, "a_areas": 4, "b_areas": 3, "constructs_covered": 4, "sri_total": 67.54, "sri_pct": 67.5}, "M037": {"branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK MANDIR (MARATHI MADHYAM-PURVA-PRATHAMIK VIBHAG)", "schoolName": "Deccan Education Society", "teacher_count": 4, "leader_count": 1, "total_respondents": 5, "c1_has": true, "c2_has": true, "c3_has": false, "c3_resp": 0, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 0, "constructs_covered": 3, "sri_total": 33.47, "sri_pct": 33.5}, "M038": {"branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASHALA (MARATHI MADHYAM-PRATHAMIK VIBHAG)", "schoolName": "Deccan Education Society", "teacher_count": 7, "leader_count": 1, "total_respondents": 8, "c1_has": true, "c2_has": true, "c3_has": false, "c3_resp": 0, "c4_has": true, "c5_has": false, "audit_has": false, "audit_resp": 0, "set_has": true, "a_areas": 4, "b_areas": 1, "constructs_covered": 3, "sri_total": 46.6, "sri_pct": 46.6}};
+  Object.keys(cov).sort().forEach(function(bc) {
+    var c = cov[bc];
+    rows.push([bc, c.branchName, c.schoolName, c.teacher_count, c.leader_count,
+      c.c1_has?'Y':'N', c.c2_has?'Y':'N', c.c3_has?'Y':'N', c.c3_resp,
+      c.c4_has?'Y':'N', c.c5_has?'Y':'N', c.audit_has?'Y':'N', c.audit_resp,
+      c.set_has?'Y':'N', c.a_areas, c.b_areas, c.constructs_covered, c.sri_total]);
+  });
+  downloadCSV(rows, 'sri_branch_coverage.csv');
+}
+
+</script>
+</body>
+</html>
