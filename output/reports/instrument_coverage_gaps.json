@@ -1,950 +1,1873 @@
 {
-  "total_branches": 38,
-  "total_instruments": 9,
-  "total_combinations": 342,
-  "total_gaps": 126,
-  "coverage_pct": 63.2,
-  "gaps": [
-    {
-      "branchCode": "M002",
-      "branchName": "BALAK MANDIR,SATARA",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M002",
-      "branchName": "BALAK MANDIR,SATARA",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M002",
-      "branchName": "BALAK MANDIR,SATARA",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M002",
-      "branchName": "BALAK MANDIR,SATARA",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M002",
-      "branchName": "BALAK MANDIR,SATARA",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M002",
-      "branchName": "BALAK MANDIR,SATARA",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M004",
-      "branchName": "D.E.S. SECONDARY SCHOOL",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M005",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M005",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M005",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M005",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M005",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M006",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M006",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M006",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M006",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M006",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M007",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M007",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M007",
-      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M008",
-      "branchName": "DES Demo",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M008",
-      "branchName": "DES Demo",
-      "instrument": "Intent Teacher MR",
-      "setCode": "103",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M008",
-      "branchName": "DES Demo",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M008",
-      "branchName": "DES Demo",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M008",
-      "branchName": "DES Demo",
-      "instrument": "Baseline Teacher EN",
-      "setCode": "base001",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M008",
-      "branchName": "DES Demo",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M008",
-      "branchName": "DES Demo",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M009",
-      "branchName": "DRAVID HIGH SCHOOL,WAI",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M009",
-      "branchName": "DRAVID HIGH SCHOOL,WAI",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M010",
-      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M010",
-      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
-      "instrument": "Intent Teacher MR",
-      "setCode": "103",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M010",
-      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M010",
-      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M010",
-      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
-      "instrument": "Baseline Teacher MR",
-      "setCode": "base003",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M010",
-      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M010",
-      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M010",
-      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M011",
-      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M011",
-      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
-      "instrument": "Baseline Teacher MR",
-      "setCode": "base003",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M011",
-      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M011",
-      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M011",
-      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M012",
-      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M012",
-      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M012",
-      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M012",
-      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
-      "instrument": "Baseline Teacher EN",
-      "setCode": "base001",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M012",
-      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
-      "instrument": "Baseline Teacher MR",
-      "setCode": "base003",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M012",
-      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M012",
-      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M013",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M013",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M013",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M013",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M013",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M014",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M014",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M014",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M014",
-      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M016",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M016",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M016",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
-      "instrument": "Baseline Teacher EN",
-      "setCode": "base001",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M016",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M016",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M017",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M017",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M018",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M018",
-      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M019",
-      "branchName": "MATRUMANDIR SATARA",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M019",
-      "branchName": "MATRUMANDIR SATARA",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M019",
-      "branchName": "MATRUMANDIR SATARA",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M019",
-      "branchName": "MATRUMANDIR SATARA",
-      "instrument": "Baseline Teacher EN",
-      "setCode": "base001",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M019",
-      "branchName": "MATRUMANDIR SATARA",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M019",
-      "branchName": "MATRUMANDIR SATARA",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M019",
-      "branchName": "MATRUMANDIR SATARA",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M020",
-      "branchName": "MURLIDHAR LOHIYA MATRU MANDIR (D.E.S. PR",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M021",
-      "branchName": "NAVIN MARATHI SHALA, SATARA",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M021",
-      "branchName": "NAVIN MARATHI SHALA, SATARA",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M021",
-      "branchName": "NAVIN MARATHI SHALA, SATARA",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M022",
-      "branchName": "NAVIN MARATHI SHALA,PUNE",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M022",
-      "branchName": "NAVIN MARATHI SHALA,PUNE",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M023",
-      "branchName": "NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY U",
-      "instrument": "Baseline Teacher MR",
-      "setCode": "base003",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M023",
-      "branchName": "NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY U",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M026",
-      "branchName": "NEW ENGLISH SCHOOL, RAMANBAG",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M028",
-      "branchName": "NEW ENGLISH SCHOOL,TILAK ROAD",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M029",
-      "branchName": "NYA.RANADE BALAK MANDIR",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M029",
-      "branchName": "NYA.RANADE BALAK MANDIR",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M029",
-      "branchName": "NYA.RANADE BALAK MANDIR",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M029",
-      "branchName": "NYA.RANADE BALAK MANDIR",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M030",
-      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M030",
-      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M030",
-      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M030",
-      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
-      "instrument": "Baseline Teacher MR",
-      "setCode": "base003",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M030",
-      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M030",
-      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M030",
-      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M031",
-      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M031",
-      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M031",
-      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M031",
-      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M032",
-      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M032",
-      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
-      "instrument": "Intent Leader MR",
-      "setCode": "104",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M032",
-      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M032",
-      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M032",
-      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M033",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M033",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M033",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M033",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M034",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M034",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M034",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M034",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M035",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M035",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M035",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M035",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M036",
-      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M037",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M037",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M037",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M037",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "Baseline Leader MR",
-      "setCode": "base004",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M037",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M038",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH",
-      "instrument": "Intent Teacher EN",
-      "setCode": "1234",
-      "role": "Teacher"
-    },
-    {
-      "branchCode": "M038",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH",
-      "instrument": "Intent Leader EN",
-      "setCode": "7890",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M038",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH",
-      "instrument": "Baseline Leader EN",
-      "setCode": "base002",
-      "role": "Leader"
-    },
-    {
-      "branchCode": "M038",
-      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH",
-      "instrument": "SRI Audit",
-      "setCode": "SRI001",
-      "role": "Leader"
+  "note": "Per-language breakdown (EN and MR counted separately). Use instrument_coverage_gaps_combined.json for combined analysis.",
+  "per_language": {
+    "M001": {
+      "1234": {
+        "count": 3,
+        "roles": {
+          "Teacher": 3
+        }
+      },
+      "103": {
+        "count": 36,
+        "roles": {
+          "Leader": 4,
+          "Teacher": 32
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "base001": {
+        "count": 14,
+        "roles": {
+          "Teacher": 14
+        }
+      },
+      "base003": {
+        "count": 26,
+        "roles": {
+          "Teacher": 21,
+          "Leader": 5
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M002": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 8,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 7
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 6,
+        "roles": {
+          "Teacher": 6
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M003": {
+      "1234": {
+        "count": 15,
+        "roles": {
+          "Teacher": 14,
+          "Leader": 1
+        }
+      },
+      "103": {
+        "count": 16,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 15
+        }
+      },
+      "7890": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "104": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "base001": {
+        "count": 24,
+        "roles": {
+          "Teacher": 22,
+          "Leader": 2
+        }
+      },
+      "base003": {
+        "count": 7,
+        "roles": {
+          "Teacher": 6,
+          "Leader": 1
+        }
+      },
+      "base002": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M004": {
+      "1234": {
+        "count": 29,
+        "roles": {
+          "Teacher": 28,
+          "Leader": 1
+        }
+      },
+      "103": {
+        "count": 18,
+        "roles": {
+          "Teacher": 18
+        }
+      },
+      "7890": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "104": {
+        "count": 5,
+        "roles": {
+          "Leader": 5
+        }
+      },
+      "base001": {
+        "count": 36,
+        "roles": {
+          "Teacher": 33,
+          "Leader": 3
+        }
+      },
+      "base003": {
+        "count": 13,
+        "roles": {
+          "Teacher": 12,
+          "Leader": 1
+        }
+      },
+      "base002": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M005": {
+      "1234": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "103": {
+        "count": 3,
+        "roles": {
+          "Teacher": 3
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 3,
+        "roles": {
+          "Teacher": 3
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M006": {
+      "1234": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "103": {
+        "count": 7,
+        "roles": {
+          "Teacher": 7
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 6,
+        "roles": {
+          "Teacher": 6
+        }
+      },
+      "base003": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M007": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 4,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 3
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base001": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "base003": {
+        "count": 3,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 1
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M009": {
+      "1234": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "103": {
+        "count": 35,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 33
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 5,
+        "roles": {
+          "Leader": 5
+        }
+      },
+      "base001": {
+        "count": 10,
+        "roles": {
+          "Teacher": 10
+        }
+      },
+      "base003": {
+        "count": 30,
+        "roles": {
+          "Leader": 5,
+          "Teacher": 25
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 4,
+        "roles": {
+          "Leader": 4
+        }
+      },
+      "SRI001": {
+        "count": 1,
+        "roles": {}
+      }
+    },
+    "M010": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 0,
+        "roles": {}
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "base003": {
+        "count": 0,
+        "roles": {}
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M011": {
+      "1234": {
+        "count": 3,
+        "roles": {
+          "Teacher": 3
+        }
+      },
+      "103": {
+        "count": 5,
+        "roles": {
+          "Teacher": 5
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base001": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "base003": {
+        "count": 0,
+        "roles": {}
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M012": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 0,
+        "roles": {}
+      },
+      "base003": {
+        "count": 0,
+        "roles": {}
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 1,
+        "roles": {}
+      }
+    },
+    "M013": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 5,
+        "roles": {
+          "Teacher": 5
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 5,
+        "roles": {
+          "Teacher": 4,
+          "Leader": 1
+        }
+      },
+      "base003": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M014": {
+      "1234": {
+        "count": 5,
+        "roles": {
+          "Teacher": 5
+        }
+      },
+      "103": {
+        "count": 16,
+        "roles": {
+          "Teacher": 15,
+          "Leader": 1
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base001": {
+        "count": 8,
+        "roles": {
+          "Teacher": 8
+        }
+      },
+      "base003": {
+        "count": 13,
+        "roles": {
+          "Teacher": 12,
+          "Leader": 1
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M015": {
+      "1234": {
+        "count": 6,
+        "roles": {
+          "Teacher": 5,
+          "Leader": 1
+        }
+      },
+      "103": {
+        "count": 35,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 33
+        }
+      },
+      "7890": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "104": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base001": {
+        "count": 11,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 10
+        }
+      },
+      "base003": {
+        "count": 27,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 25
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M016": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 11,
+        "roles": {
+          "Teacher": 9,
+          "Leader": 2
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base001": {
+        "count": 0,
+        "roles": {}
+      },
+      "base003": {
+        "count": 11,
+        "roles": {
+          "Teacher": 9,
+          "Leader": 2
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M017": {
+      "1234": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "103": {
+        "count": 22,
+        "roles": {
+          "Teacher": 19,
+          "Leader": 3
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "base001": {
+        "count": 0,
+        "roles": {}
+      },
+      "base003": {
+        "count": 22,
+        "roles": {
+          "Teacher": 19,
+          "Leader": 3
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "SRI001": {
+        "count": 2,
+        "roles": {}
+      }
+    },
+    "M018": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 15,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 14
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 14,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 12
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M019": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 0,
+        "roles": {}
+      },
+      "base003": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M020": {
+      "1234": {
+        "count": 27,
+        "roles": {
+          "Teacher": 26,
+          "Leader": 1
+        }
+      },
+      "103": {
+        "count": 6,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 5
+        }
+      },
+      "7890": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "104": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "base001": {
+        "count": 27,
+        "roles": {
+          "Teacher": 26,
+          "Leader": 1
+        }
+      },
+      "base003": {
+        "count": 5,
+        "roles": {
+          "Teacher": 4,
+          "Leader": 1
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M021": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 13,
+        "roles": {
+          "Teacher": 11,
+          "Leader": 2
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base001": {
+        "count": 4,
+        "roles": {
+          "Teacher": 4
+        }
+      },
+      "base003": {
+        "count": 9,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 7
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "SRI001": {
+        "count": 2,
+        "roles": {}
+      }
+    },
+    "M022": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 22,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 20
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 20,
+        "roles": {
+          "Teacher": 19,
+          "Leader": 1
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M023": {
+      "1234": {
+        "count": 3,
+        "roles": {
+          "Teacher": 2,
+          "Leader": 1
+        }
+      },
+      "103": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "7890": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "104": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base001": {
+        "count": 7,
+        "roles": {
+          "Teacher": 5,
+          "Leader": 2
+        }
+      },
+      "base003": {
+        "count": 0,
+        "roles": {}
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M024": {
+      "1234": {
+        "count": 10,
+        "roles": {
+          "Teacher": 10
+        }
+      },
+      "103": {
+        "count": 10,
+        "roles": {
+          "Leader": 4,
+          "Teacher": 6
+        }
+      },
+      "7890": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "104": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "base001": {
+        "count": 11,
+        "roles": {
+          "Teacher": 10,
+          "Leader": 1
+        }
+      },
+      "base003": {
+        "count": 10,
+        "roles": {
+          "Teacher": 7,
+          "Leader": 3
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M025": {
+      "1234": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "103": {
+        "count": 3,
+        "roles": {
+          "Teacher": 2,
+          "Leader": 1
+        }
+      },
+      "7890": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "104": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base001": {
+        "count": 4,
+        "roles": {
+          "Leader": 3,
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base002": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 1,
+        "roles": {}
+      }
+    },
+    "M026": {
+      "1234": {
+        "count": 3,
+        "roles": {
+          "Teacher": 3
+        }
+      },
+      "103": {
+        "count": 45,
+        "roles": {
+          "Leader": 4,
+          "Teacher": 41
+        }
+      },
+      "7890": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "104": {
+        "count": 5,
+        "roles": {
+          "Leader": 5
+        }
+      },
+      "base001": {
+        "count": 8,
+        "roles": {
+          "Teacher": 8
+        }
+      },
+      "base003": {
+        "count": 30,
+        "roles": {
+          "Teacher": 28,
+          "Leader": 2
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "SRI001": {
+        "count": 1,
+        "roles": {}
+      }
+    },
+    "M027": {
+      "1234": {
+        "count": 4,
+        "roles": {
+          "Teacher": 4
+        }
+      },
+      "103": {
+        "count": 61,
+        "roles": {
+          "Leader": 6,
+          "Teacher": 55
+        }
+      },
+      "7890": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "104": {
+        "count": 4,
+        "roles": {
+          "Leader": 4
+        }
+      },
+      "base001": {
+        "count": 23,
+        "roles": {
+          "Teacher": 22,
+          "Leader": 1
+        }
+      },
+      "base003": {
+        "count": 34,
+        "roles": {
+          "Teacher": 31,
+          "Leader": 3
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "SRI001": {
+        "count": 1,
+        "roles": {}
+      }
+    },
+    "M028": {
+      "1234": {
+        "count": 3,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 1
+        }
+      },
+      "103": {
+        "count": 29,
+        "roles": {
+          "Leader": 3,
+          "Teacher": 26
+        }
+      },
+      "7890": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "104": {
+        "count": 5,
+        "roles": {
+          "Leader": 5
+        }
+      },
+      "base001": {
+        "count": 12,
+        "roles": {
+          "Teacher": 10,
+          "Leader": 2
+        }
+      },
+      "base003": {
+        "count": 19,
+        "roles": {
+          "Leader": 3,
+          "Teacher": 16
+        }
+      },
+      "base002": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base004": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M029": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 13,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 12
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base001": {
+        "count": 3,
+        "roles": {
+          "Teacher": 2,
+          "Leader": 1
+        }
+      },
+      "base003": {
+        "count": 10,
+        "roles": {
+          "Teacher": 10
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M030": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 4,
+        "roles": {
+          "Teacher": 4
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 0,
+        "roles": {}
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M031": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 9,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 7
+        }
+      },
+      "7890": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 4,
+        "roles": {
+          "Teacher": 4
+        }
+      },
+      "base003": {
+        "count": 5,
+        "roles": {
+          "Teacher": 3,
+          "Leader": 2
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M032": {
+      "1234": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "103": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 0,
+        "roles": {}
+      },
+      "base001": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "base003": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M033": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 2,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 1
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 3,
+        "roles": {
+          "Teacher": 1,
+          "Leader": 2
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M034": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 4,
+        "roles": {
+          "Leader": 2,
+          "Teacher": 2
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base003": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M035": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 8,
+        "roles": {
+          "Teacher": 7,
+          "Leader": 1
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base001": {
+        "count": 4,
+        "roles": {
+          "Teacher": 3,
+          "Leader": 1
+        }
+      },
+      "base003": {
+        "count": 3,
+        "roles": {
+          "Teacher": 3
+        }
+      },
+      "base002": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M036": {
+      "1234": {
+        "count": 5,
+        "roles": {
+          "Teacher": 4,
+          "Leader": 1
+        }
+      },
+      "103": {
+        "count": 21,
+        "roles": {
+          "Leader": 4,
+          "Teacher": 17
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 5,
+        "roles": {
+          "Leader": 5
+        }
+      },
+      "base001": {
+        "count": 11,
+        "roles": {
+          "Teacher": 8,
+          "Leader": 3
+        }
+      },
+      "base003": {
+        "count": 14,
+        "roles": {
+          "Teacher": 12,
+          "Leader": 2
+        }
+      },
+      "base002": {
+        "count": 3,
+        "roles": {
+          "Leader": 3
+        }
+      },
+      "base004": {
+        "count": 2,
+        "roles": {
+          "Leader": 2
+        }
+      },
+      "SRI001": {
+        "count": 1,
+        "roles": {}
+      }
+    },
+    "M037": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 4,
+        "roles": {
+          "Leader": 1,
+          "Teacher": 3
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 2,
+        "roles": {
+          "Teacher": 2
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 0,
+        "roles": {}
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
+    },
+    "M038": {
+      "1234": {
+        "count": 0,
+        "roles": {}
+      },
+      "103": {
+        "count": 7,
+        "roles": {
+          "Teacher": 7
+        }
+      },
+      "7890": {
+        "count": 0,
+        "roles": {}
+      },
+      "104": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "base001": {
+        "count": 1,
+        "roles": {
+          "Teacher": 1
+        }
+      },
+      "base003": {
+        "count": 7,
+        "roles": {
+          "Teacher": 6,
+          "Leader": 1
+        }
+      },
+      "base002": {
+        "count": 0,
+        "roles": {}
+      },
+      "base004": {
+        "count": 1,
+        "roles": {
+          "Leader": 1
+        }
+      },
+      "SRI001": {
+        "count": 0,
+        "roles": {}
+      }
     }
-  ],
-  "instrument_gaps": {
-    "Intent Teacher EN": 19,
-    "Intent Teacher MR": 2,
-    "Intent Leader EN": 26,
-    "Intent Leader MR": 11,
-    "Baseline Teacher EN": 4,
-    "Baseline Teacher MR": 5,
-    "Baseline Leader EN": 22,
-    "Baseline Leader MR": 15,
-    "SRI Audit": 22
-  },
-  "branch_gaps": {
-    "M001": 0,
-    "M002": 6,
-    "M003": 0,
-    "M004": 1,
-    "M005": 5,
-    "M006": 5,
-    "M007": 3,
-    "M008": 7,
-    "M009": 2,
-    "M010": 8,
-    "M011": 5,
-    "M012": 7,
-    "M013": 5,
-    "M014": 4,
-    "M015": 0,
-    "M016": 5,
-    "M017": 2,
-    "M018": 2,
-    "M019": 7,
-    "M020": 1,
-    "M021": 3,
-    "M022": 2,
-    "M023": 2,
-    "M024": 0,
-    "M025": 0,
-    "M026": 1,
-    "M027": 0,
-    "M028": 1,
-    "M029": 4,
-    "M030": 7,
-    "M031": 4,
-    "M032": 5,
-    "M033": 4,
-    "M034": 4,
-    "M035": 4,
-    "M036": 1,
-    "M037": 5,
-    "M038": 4
-  },
-  "full_coverage_branches": [
-    "M001",
-    "M003",
-    "M015",
-    "M024",
-    "M025",
-    "M027"
-  ]
+  }
 }
