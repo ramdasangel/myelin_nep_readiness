@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C3: Capacity Readiness Detail — SRI Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f5f6fa;--card:#fff;--border:#e0e3ea;--text:#1a1a2e;--muted:#6b7280;
+--blue:#2563eb;--green:#16a34a;--amber:#d97706;--red:#dc2626;--purple:#7c3aed;--teal:#0d9488;
+--c1:#3b82f6;--c2:#8b5cf6;--c3:#10b981;--c4:#f59e0b;--c5:#ef4444;
+--radius:8px;--shadow:0 1px 3px rgba(0,0,0,.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+.header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+.header .sub{font-size:12px;opacity:.8}
+.nav-bar{display:flex;background:#1e293b;padding:0 24px;gap:2px;overflow-x:auto}
+.nav-pill{padding:8px 14px;font-size:11px;font-weight:600;color:#94a3b8;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
+.nav-pill:hover{color:#e2e8f0;background:rgba(255,255,255,.05)}
+.nav-pill.active{color:#fff;border-bottom-color:#3b82f6;background:rgba(59,130,246,.15)}
+.tabs{display:flex;background:#fff;border-bottom:2px solid var(--border);padding:0 24px;overflow-x:auto;gap:2px;position:sticky;top:0;z-index:100}
+.tab{padding:12px 18px;cursor:pointer;font-weight:600;font-size:13px;border-bottom:3px solid transparent;color:var(--muted);white-space:nowrap;transition:.15s}
+.tab:hover{color:var(--text);background:#f8f9fb}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.content{display:none;padding:24px 32px;max-width:1800px;margin:0 auto}
+.content.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.card .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+.card .value{font-size:28px;font-weight:700}
+.card .sub{font-size:12px;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:12px}
+th{background:#f1f3f8;font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);position:sticky;top:0;white-space:nowrap;cursor:pointer}
+th:hover{background:#e2e5eb}
+td{padding:6px 10px;border-bottom:1px solid var(--border)}
+tr:hover td{background:#f8f9fc}
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius);margin-bottom:24px}
+.bar{height:8px;border-radius:4px;background:#e5e7eb;position:relative;min-width:60px;display:inline-block;width:80px;vertical-align:middle;margin-right:6px}
+.bar-fill{height:100%;border-radius:4px;transition:.3s}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-amber{background:#fef3c7;color:#92400e}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-gray{background:#f3f4f6;color:#6b7280}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-purple{background:#ede9fe;color:#5b21b6}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:24px}
+.chart-box h3{font-size:15px;margin-bottom:12px;color:var(--text)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.section-title{font-size:17px;font-weight:700;margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.section-title:first-child{margin-top:0}
+.info-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:13px;color:#1e40af}
+.no-data{text-align:center;padding:40px 20px;color:var(--muted)}
+.no-data h3{font-size:18px;margin-bottom:8px}
+.btn{display:inline-block;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:#fff;color:var(--text);transition:.15s}
+.btn:hover{background:#f1f3f8}
+.btn-blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-blue:hover{background:#1d4ed8}
+select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;background:#fff}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}.content{padding:16px}}
+@media print{.nav-bar,.tabs{display:none}.content{display:block!important;padding:10px}.header{padding:10px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.cards{grid-template-columns:repeat(3,1fr)}.chart-box{page-break-inside:avoid}canvas{max-height:300px}}
+</style>
+
+</head>
+<body>
+<div class="header">
+<div><h1>C3: Capacity Readiness Detail</h1><div class="sub">System Readiness Index — Project Kshitij</div></div>
+<div style="text-align:right"><div style="font-size:12px;opacity:.7">Deccan Education Society</div>
+<div style="font-size:11px;opacity:.5">Generated: 2026-03-25</div></div></div>
+<nav class="nav-bar"><a class="nav-pill" href="./00_sri_summary.html">SRI Summary</a><a class="nav-pill" href="./01_c1_intent.html">C1 Intent</a><a class="nav-pill" href="./02_c2_practice.html">C2 Practice</a><a class="nav-pill active" href="./03_c3_capacity.html">C3 Capacity</a><a class="nav-pill" href="./04_c4_system.html">C4 System</a><a class="nav-pill" href="./05_c5_ecosystem.html">C5 Ecosystem</a><a class="nav-pill" href="./06_set_analysis.html">SET Analysis</a></nav>
+<div class="tabs">
+<div class="tab active" onclick="showTab('tab1')">CPI Overview</div>
+<div class="tab" onclick="showTab('tab2')">CPD Dimensions</div>
+<div class="tab" onclick="showTab('tab3')">User Distribution</div>
+<div class="tab" onclick="showTab('tab4')">Branch Detail</div>
+</div>
+<div id="tab1" class="content active">
+<div class="cards">
+  <div class="card"><div class="label">Avg C3 Score</div><div class="value" style="color:#10b981">15.3<span style="font-size:14px;color:var(--muted)">/20</span></div><div class="sub">77% across 28 branches</div></div>
+  <div class="card"><div class="label">Total Users</div><div class="value">109</div><div class="sub">With micro-intervention data</div></div>
+  <div class="card"><div class="label">Branches with Data</div><div class="value">28</div><div class="sub">Out of 37 total</div></div>
+  <div class="card"><div class="label">Avg CPI</div><div class="value">0.767</div><div class="sub">Composite Performance Index</div></div>
+</div>
+<div class="info-box">CPI (Composite Performance Index) aggregates four capacity dimensions (CPD1-CPD4) into a single 0-1 score per user. Branch CPI is the mean of user CPIs. C3 = CPI x 20.</div>
+<div class="chart-box"><h3>CPI by Branch (sorted)</h3>
+<canvas id="cpiChart" height="80"></canvas></div></div><div id="tab2" class="content">
+<div class="cards"><div class="card">
+<div class="label" style="color:#3b82f6">CPD1: Higher-order Thinking</div>
+<div class="value" style="color:#3b82f6">0.593</div>
+<div class="sub">Measures the proportion of tasks selected that target higher-order cognitive skills (analyse, evaluate, create).</div></div><div class="card">
+<div class="label" style="color:#8b5cf6">CPD2: Decomposition</div>
+<div class="value" style="color:#8b5cf6">0.624</div>
+<div class="sub">Measures how well users break down complex tasks into sub-steps, reflecting planning depth.</div></div><div class="card">
+<div class="label" style="color:#10b981">CPD3: Revision</div>
+<div class="value" style="color:#10b981">0.858</div>
+<div class="sub">Captures revision behavior -- whether users revisit and refine their daily progress entries.</div></div><div class="card">
+<div class="label" style="color:#f59e0b">CPD4: Consistency</div>
+<div class="value" style="color:#f59e0b">0.993</div>
+<div class="sub">Measures sustained engagement across the intervention period, rewarding consistent daily participation.</div></div></div>
+<div class="chart-box"><h3>CPD Dimensions by Branch</h3>
+<div style="overflow-x:auto"><canvas id="cpdChart" height="90"></canvas></div></div></div><div id="tab3" class="content">
+<div class="info-box">Distribution of individual user CPI scores across all 109 users from 28 branches.</div>
+<div class="cards">
+  <div class="card"><div class="label">Total Users</div><div class="value">109</div></div>
+  <div class="card"><div class="label">Mean CPI</div><div class="value">0.768</div></div>
+  <div class="card"><div class="label">Min CPI</div><div class="value">0.445</div></div>
+  <div class="card"><div class="label">Max CPI</div><div class="value">0.915</div></div>
+</div>
+<div class="grid-2">
+<div class="chart-box"><h3>User CPI Histogram</h3>
+<canvas id="histChart" height="250"></canvas></div>
+<div class="chart-box"><h3>Distribution Summary</h3>
+<table><thead><tr><th>Bin</th><th>Count</th><th>%</th></tr></thead><tbody>
+<tr><td>0-0.2</td><td>0</td><td>0.0%</td></tr><tr><td>0.2-0.4</td><td>0</td><td>0.0%</td></tr><tr><td>0.4-0.6</td><td>7</td><td>6.4%</td></tr><tr><td>0.6-0.8</td><td>60</td><td>55.0%</td></tr><tr><td>0.8-1.0</td><td>42</td><td>38.5%</td></tr>
+</tbody></table></div>
+</div></div><div id="tab4" class="content">
+<div style="margin-bottom:12px">
+  <button class="btn btn-blue" onclick="downloadCSV([["Branch", "C3", "CPI", "CPD1", "CPD2", "CPD3", "CPD4", "Respondents"], ["M001", "15.26", "0.7628", "0.6234", "0.5901", "0.8376", "1.0000", "7"], ["M003", "15.85", "0.7926", "0.5454", "0.6250", "1.0000", "1.0000", "2"], ["M004", "15.46", "0.7728", "0.6727", "0.5217", "0.8968", "1.0000", "5"], ["M005", "16.59", "0.8295", "0.8182", "0.5000", "1.0000", "1.0000", "1"], ["M006", "13.60", "0.6801", "0.9091", "0.4286", "0.4737", "0.9091", "1"], ["M007", "9.06", "0.4530", "0.1818", "0.3250", "0.3053", "1.0000", "1"], ["M009", "15.40", "0.7702", "0.6182", "0.4858", "0.9768", "1.0000", "10"], ["M013", "15.25", "0.7623", "0.5091", "0.5867", "0.9537", "1.0000", "5"], ["M014", "15.42", "0.7710", "0.5790", "0.6308", "0.8792", "0.9952", "19"], ["M015", "16.42", "0.8211", "0.6818", "0.7500", "0.8527", "1.0000", "2"], ["M016", "17.26", "0.8631", "0.7273", "0.7250", "1.0000", "1.0000", "3"], ["M017", "16.08", "0.8040", "0.5909", "0.6250", "1.0000", "1.0000", "2"], ["M018", "15.90", "0.7952", "0.6061", "0.8167", "0.7579", "1.0000", "3"], ["M020", "15.76", "0.7878", "0.7954", "0.5188", "0.8368", "1.0000", "4"], ["M021", "16.48", "0.8239", "0.5455", "0.7500", "1.0000", "1.0000", "1"], ["M022", "14.64", "0.7322", "0.4545", "0.6111", "0.8632", "1.0000", "3"], ["M023", "14.14", "0.7071", "0.4545", "0.7000", "0.6737", "1.0000", "1"], ["M024", "15.23", "0.7615", "0.7576", "0.6111", "0.6772", "1.0000", "3"], ["M025", "15.31", "0.7655", "0.5454", "0.5167", "1.0000", "1.0000", "2"], ["M026", "15.87", "0.7936", "0.6000", "0.6250", "0.9495", "1.0000", "5"], ["M027", "14.92", "0.7461", "0.6504", "0.6011", "0.7538", "0.9790", "13"], ["M028", "14.16", "0.7081", "0.6364", "0.5521", "0.6895", "0.9546", "4"], ["M029", "14.65", "0.7324", "0.5454", "0.5722", "0.8421", "0.9697", "3"], ["M031", "15.82", "0.7909", "0.3636", "0.8000", "1.0000", "1.0000", "1"], ["M033", "17.56", "0.8778", "0.6364", "0.8750", "1.0000", "1.0000", "1"], ["M034", "17.68", "0.8841", "0.6364", "0.9000", "1.0000", "1.0000", "1"], ["M035", "14.04", "0.7021", "0.3636", "0.5500", "0.8947", "1.0000", "1"], ["M036", "15.61", "0.7805", "0.5455", "0.6650", "0.9116", "1.0000", "5"]],'c3_capacity_detail.csv')">Download CSV</button>
+</div>
+<div class="tbl-wrap"><table id="detailTable">
+<thead><tr>
+<th onclick="sortTable('detailTable',0,'str')">Branch</th>
+<th onclick="sortTable('detailTable',1,'num')">C3</th>
+<th onclick="sortTable('detailTable',2,'num')">CPI</th>
+<th onclick="sortTable('detailTable',3,'num')">CPD1</th>
+<th onclick="sortTable('detailTable',4,'num')">CPD2</th>
+<th onclick="sortTable('detailTable',5,'num')">CPD3</th>
+<th onclick="sortTable('detailTable',6,'num')">CPD4</th>
+<th onclick="sortTable('detailTable',7,'num')">Respondents</th>
+</tr></thead>
+<tbody><tr>
+<td>M001</td>
+<td><strong>15.26</strong></td>
+<td>0.7628</td>
+<td>0.6234</td><td>0.5901</td><td>0.8376</td><td>1.0000</td>
+<td>7</td>
+</tr><tr>
+<td>M003</td>
+<td><strong>15.85</strong></td>
+<td>0.7926</td>
+<td>0.5454</td><td>0.6250</td><td>1.0000</td><td>1.0000</td>
+<td>2</td>
+</tr><tr>
+<td>M004</td>
+<td><strong>15.46</strong></td>
+<td>0.7728</td>
+<td>0.6727</td><td>0.5217</td><td>0.8968</td><td>1.0000</td>
+<td>5</td>
+</tr><tr>
+<td>M005</td>
+<td><strong>16.59</strong></td>
+<td>0.8295</td>
+<td>0.8182</td><td>0.5000</td><td>1.0000</td><td>1.0000</td>
+<td>1</td>
+</tr><tr>
+<td>M006</td>
+<td><strong>13.60</strong></td>
+<td>0.6801</td>
+<td>0.9091</td><td>0.4286</td><td>0.4737</td><td>0.9091</td>
+<td>1</td>
+</tr><tr>
+<td>M007</td>
+<td><strong>9.06</strong></td>
+<td>0.4530</td>
+<td>0.1818</td><td>0.3250</td><td>0.3053</td><td>1.0000</td>
+<td>1</td>
+</tr><tr>
+<td>M009</td>
+<td><strong>15.40</strong></td>
+<td>0.7702</td>
+<td>0.6182</td><td>0.4858</td><td>0.9768</td><td>1.0000</td>
+<td>10</td>
+</tr><tr>
+<td>M013</td>
+<td><strong>15.25</strong></td>
+<td>0.7623</td>
+<td>0.5091</td><td>0.5867</td><td>0.9537</td><td>1.0000</td>
+<td>5</td>
+</tr><tr>
+<td>M014</td>
+<td><strong>15.42</strong></td>
+<td>0.7710</td>
+<td>0.5790</td><td>0.6308</td><td>0.8792</td><td>0.9952</td>
+<td>19</td>
+</tr><tr>
+<td>M015</td>
+<td><strong>16.42</strong></td>
+<td>0.8211</td>
+<td>0.6818</td><td>0.7500</td><td>0.8527</td><td>1.0000</td>
+<td>2</td>
+</tr><tr>
+<td>M016</td>
+<td><strong>17.26</strong></td>
+<td>0.8631</td>
+<td>0.7273</td><td>0.7250</td><td>1.0000</td><td>1.0000</td>
+<td>3</td>
+</tr><tr>
+<td>M017</td>
+<td><strong>16.08</strong></td>
+<td>0.8040</td>
+<td>0.5909</td><td>0.6250</td><td>1.0000</td><td>1.0000</td>
+<td>2</td>
+</tr><tr>
+<td>M018</td>
+<td><strong>15.90</strong></td>
+<td>0.7952</td>
+<td>0.6061</td><td>0.8167</td><td>0.7579</td><td>1.0000</td>
+<td>3</td>
+</tr><tr>
+<td>M020</td>
+<td><strong>15.76</strong></td>
+<td>0.7878</td>
+<td>0.7954</td><td>0.5188</td><td>0.8368</td><td>1.0000</td>
+<td>4</td>
+</tr><tr>
+<td>M021</td>
+<td><strong>16.48</strong></td>
+<td>0.8239</td>
+<td>0.5455</td><td>0.7500</td><td>1.0000</td><td>1.0000</td>
+<td>1</td>
+</tr><tr>
+<td>M022</td>
+<td><strong>14.64</strong></td>
+<td>0.7322</td>
+<td>0.4545</td><td>0.6111</td><td>0.8632</td><td>1.0000</td>
+<td>3</td>
+</tr><tr>
+<td>M023</td>
+<td><strong>14.14</strong></td>
+<td>0.7071</td>
+<td>0.4545</td><td>0.7000</td><td>0.6737</td><td>1.0000</td>
+<td>1</td>
+</tr><tr>
+<td>M024</td>
+<td><strong>15.23</strong></td>
+<td>0.7615</td>
+<td>0.7576</td><td>0.6111</td><td>0.6772</td><td>1.0000</td>
+<td>3</td>
+</tr><tr>
+<td>M025</td>
+<td><strong>15.31</strong></td>
+<td>0.7655</td>
+<td>0.5454</td><td>0.5167</td><td>1.0000</td><td>1.0000</td>
+<td>2</td>
+</tr><tr>
+<td>M026</td>
+<td><strong>15.87</strong></td>
+<td>0.7936</td>
+<td>0.6000</td><td>0.6250</td><td>0.9495</td><td>1.0000</td>
+<td>5</td>
+</tr><tr>
+<td>M027</td>
+<td><strong>14.92</strong></td>
+<td>0.7461</td>
+<td>0.6504</td><td>0.6011</td><td>0.7538</td><td>0.9790</td>
+<td>13</td>
+</tr><tr>
+<td>M028</td>
+<td><strong>14.16</strong></td>
+<td>0.7081</td>
+<td>0.6364</td><td>0.5521</td><td>0.6895</td><td>0.9546</td>
+<td>4</td>
+</tr><tr>
+<td>M029</td>
+<td><strong>14.65</strong></td>
+<td>0.7324</td>
+<td>0.5454</td><td>0.5722</td><td>0.8421</td><td>0.9697</td>
+<td>3</td>
+</tr><tr>
+<td>M031</td>
+<td><strong>15.82</strong></td>
+<td>0.7909</td>
+<td>0.3636</td><td>0.8000</td><td>1.0000</td><td>1.0000</td>
+<td>1</td>
+</tr><tr>
+<td>M033</td>
+<td><strong>17.56</strong></td>
+<td>0.8778</td>
+<td>0.6364</td><td>0.8750</td><td>1.0000</td><td>1.0000</td>
+<td>1</td>
+</tr><tr>
+<td>M034</td>
+<td><strong>17.68</strong></td>
+<td>0.8841</td>
+<td>0.6364</td><td>0.9000</td><td>1.0000</td><td>1.0000</td>
+<td>1</td>
+</tr><tr>
+<td>M035</td>
+<td><strong>14.04</strong></td>
+<td>0.7021</td>
+<td>0.3636</td><td>0.5500</td><td>0.8947</td><td>1.0000</td>
+<td>1</td>
+</tr><tr>
+<td>M036</td>
+<td><strong>15.61</strong></td>
+<td>0.7805</td>
+<td>0.5455</td><td>0.6650</td><td>0.9116</td><td>1.0000</td>
+<td>5</td>
+</tr></tbody></table></div></div>
+<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px">Project Kshitij | Myelin | Generated 2026-03-25</div>
+<script>
+
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.content').forEach(function(c){c.classList.remove('active')});
+  event.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+
+function sortTable(tableId, col, type) {
+  var table = document.getElementById(tableId);
+  var tbody = table.querySelector('tbody');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  var dir = table.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+  table.dataset.sortDir = dir;
+  rows.sort(function(a, b) {
+    var av = a.cells[col].textContent.trim();
+    var bv = b.cells[col].textContent.trim();
+    if (type === 'num') { av = parseFloat(av) || 0; bv = parseFloat(bv) || 0; }
+    if (dir === 'asc') return av > bv ? 1 : -1;
+    return av < bv ? 1 : -1;
+  });
+  rows.forEach(function(r) { tbody.appendChild(r); });
+}
+
+
+function downloadCSV(rows, filename) {
+  var csvContent = rows.map(function(r) {
+    return r.map(function(c) {
+      var s = String(c);
+      return s.indexOf(',') >= 0 || s.indexOf('"') >= 0 ? '"' + s.replace(/"/g, '""') + '"' : s;
+    }).join(',');
+  }).join('\n');
+  var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+// Tab 1: CPI bar chart
+new Chart(document.getElementById('cpiChart'), {
+  type: 'bar',
+  data: {
+    labels: ["M034", "M033", "M016", "M005", "M021", "M015", "M017", "M018", "M026", "M003", "M031", "M020", "M036", "M004", "M014", "M009", "M025", "M001", "M013", "M024", "M027", "M029", "M022", "M028", "M023", "M035", "M006", "M007"],
+    datasets: [{
+      label: 'CPI',
+      data: [0.8841, 0.8778, 0.8631, 0.8295, 0.8239, 0.8211, 0.804, 0.7952, 0.7936, 0.7926, 0.7909, 0.7878, 0.7805, 0.7728, 0.771, 0.7702, 0.7655, 0.7628, 0.7623, 0.7615, 0.7461, 0.7324, 0.7322, 0.7081, 0.7071, 0.7021, 0.6801, 0.453],
+      backgroundColor: ["#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#16a34a", "#d97706", "#dc2626"]
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, max: 1, title: { display: true, text: 'CPI (0-1)' } } }
+  }
+});
+
+// Tab 2: CPD grouped bar
+new Chart(document.getElementById('cpdChart'), {
+  type: 'bar',
+  data: { labels: ["M001", "M003", "M004", "M005", "M006", "M007", "M009", "M013", "M014", "M015", "M016", "M017", "M018", "M020", "M021", "M022", "M023", "M024", "M025", "M026", "M027", "M028", "M029", "M031", "M033", "M034", "M035", "M036"], datasets: [{"label": "CPD1", "data": [0.6234, 0.5454, 0.6727, 0.8182, 0.9091, 0.1818, 0.6182, 0.5091, 0.579, 0.6818, 0.7273, 0.5909, 0.6061, 0.7954, 0.5455, 0.4545, 0.4545, 0.7576, 0.5454, 0.6, 0.6504, 0.6364, 0.5454, 0.3636, 0.6364, 0.6364, 0.3636, 0.5455], "backgroundColor": "#3b82f6"}, {"label": "CPD2", "data": [0.5901, 0.625, 0.5217, 0.5, 0.4286, 0.325, 0.4858, 0.5867, 0.6308, 0.75, 0.725, 0.625, 0.8167, 0.5188, 0.75, 0.6111, 0.7, 0.6111, 0.5167, 0.625, 0.6011, 0.5521, 0.5722, 0.8, 0.875, 0.9, 0.55, 0.665], "backgroundColor": "#8b5cf6"}, {"label": "CPD3", "data": [0.8376, 1.0, 0.8968, 1.0, 0.4737, 0.3053, 0.9768, 0.9537, 0.8792, 0.8527, 1.0, 1.0, 0.7579, 0.8368, 1.0, 0.8632, 0.6737, 0.6772, 1.0, 0.9495, 0.7538, 0.6895, 0.8421, 1.0, 1.0, 1.0, 0.8947, 0.9116], "backgroundColor": "#10b981"}, {"label": "CPD4", "data": [1.0, 1.0, 1.0, 1.0, 0.9091, 1.0, 1.0, 1.0, 0.9952, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.979, 0.9546, 0.9697, 1.0, 1.0, 1.0, 1.0, 1.0], "backgroundColor": "#f59e0b"}] },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: { y: { beginAtZero: true, max: 1, title: { display: true, text: 'CPD Mean (0-1)' } } }
+  }
+});
+
+// Tab 3: Histogram
+new Chart(document.getElementById('histChart'), {
+  type: 'bar',
+  data: {
+    labels: ["0-0.2", "0.2-0.4", "0.4-0.6", "0.6-0.8", "0.8-1.0"],
+    datasets: [{
+      label: 'Users',
+      data: [0, 0, 7, 60, 42],
+      backgroundColor: ["#dc2626", "#f59e0b", "#d97706", "#2563eb", "#16a34a"],
+      borderWidth: 1,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Number of Users' } },
+      x: { title: { display: true, text: 'CPI Range' } }
+    }
+  }
+});
+
+</script>
+</body>
+</html>

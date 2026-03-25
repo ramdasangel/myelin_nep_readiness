@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C5: Ecosystem Readiness — SRI Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#f5f6fa;--card:#fff;--border:#e0e3ea;--text:#1a1a2e;--muted:#6b7280;
+--blue:#2563eb;--green:#16a34a;--amber:#d97706;--red:#dc2626;--purple:#7c3aed;--teal:#0d9488;
+--c1:#3b82f6;--c2:#8b5cf6;--c3:#10b981;--c4:#f59e0b;--c5:#ef4444;
+--radius:8px;--shadow:0 1px 3px rgba(0,0,0,.08)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+.header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:20px;font-weight:700;letter-spacing:-.3px}
+.header .sub{font-size:12px;opacity:.8}
+.nav-bar{display:flex;background:#1e293b;padding:0 24px;gap:2px;overflow-x:auto}
+.nav-pill{padding:8px 14px;font-size:11px;font-weight:600;color:#94a3b8;text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
+.nav-pill:hover{color:#e2e8f0;background:rgba(255,255,255,.05)}
+.nav-pill.active{color:#fff;border-bottom-color:#3b82f6;background:rgba(59,130,246,.15)}
+.tabs{display:flex;background:#fff;border-bottom:2px solid var(--border);padding:0 24px;overflow-x:auto;gap:2px;position:sticky;top:0;z-index:100}
+.tab{padding:12px 18px;cursor:pointer;font-weight:600;font-size:13px;border-bottom:3px solid transparent;color:var(--muted);white-space:nowrap;transition:.15s}
+.tab:hover{color:var(--text);background:#f8f9fb}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.content{display:none;padding:24px 32px;max-width:1800px;margin:0 auto}
+.content.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.card .label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+.card .value{font-size:28px;font-weight:700}
+.card .sub{font-size:12px;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-size:12px}
+th{background:#f1f3f8;font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);position:sticky;top:0;white-space:nowrap;cursor:pointer}
+th:hover{background:#e2e5eb}
+td{padding:6px 10px;border-bottom:1px solid var(--border)}
+tr:hover td{background:#f8f9fc}
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius);margin-bottom:24px}
+.bar{height:8px;border-radius:4px;background:#e5e7eb;position:relative;min-width:60px;display:inline-block;width:80px;vertical-align:middle;margin-right:6px}
+.bar-fill{height:100%;border-radius:4px;transition:.3s}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-amber{background:#fef3c7;color:#92400e}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-gray{background:#f3f4f6;color:#6b7280}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-purple{background:#ede9fe;color:#5b21b6}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:24px}
+.chart-box h3{font-size:15px;margin-bottom:12px;color:var(--text)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.section-title{font-size:17px;font-weight:700;margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.section-title:first-child{margin-top:0}
+.info-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:13px;color:#1e40af}
+.no-data{text-align:center;padding:40px 20px;color:var(--muted)}
+.no-data h3{font-size:18px;margin-bottom:8px}
+.btn{display:inline-block;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:#fff;color:var(--text);transition:.15s}
+.btn:hover{background:#f1f3f8}
+.btn-blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-blue:hover{background:#1d4ed8}
+select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;background:#fff}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}.content{padding:16px}}
+@media print{.nav-bar,.tabs{display:none}.content{display:block!important;padding:10px}.header{padding:10px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.cards{grid-template-columns:repeat(3,1fr)}.chart-box{page-break-inside:avoid}canvas{max-height:300px}}
+</style>
+
+</head>
+<body>
+<div class="header">
+<div><h1>C5: Ecosystem Readiness</h1><div class="sub">System Readiness Index — Project Kshitij</div></div>
+<div style="text-align:right"><div style="font-size:12px;opacity:.7">Deccan Education Society</div>
+<div style="font-size:11px;opacity:.5">Generated: 2026-03-25</div></div></div>
+<nav class="nav-bar"><a class="nav-pill" href="./00_sri_summary.html">SRI Summary</a><a class="nav-pill" href="./01_c1_intent.html">C1 Intent</a><a class="nav-pill" href="./02_c2_practice.html">C2 Practice</a><a class="nav-pill" href="./03_c3_capacity.html">C3 Capacity</a><a class="nav-pill" href="./04_c4_system.html">C4 System</a><a class="nav-pill active" href="./05_c5_ecosystem.html">C5 Ecosystem</a><a class="nav-pill" href="./06_set_analysis.html">SET Analysis</a></nav>
+<div class="tabs">
+      <div class="tab active" onclick="showTab('tab-status')">Status</div>
+      <div class="tab" onclick="showTab('tab-methodology')">Methodology</div>
+      <div class="tab" onclick="showTab('tab-student')">Student Signals</div>
+    </div>
+
+    <div id="tab-status" class="content active"><div style="background:#fef3c7;border:2px solid #f59e0b;border-radius:12px;padding:32px;text-align:center;margin-bottom:24px">
+      <div style="font-size:48px;margin-bottom:12px;color:#d97706">&#9888;</div>
+      <h2 style="font-size:22px;color:#92400e;margin-bottom:8px">Parent Validation data collection has not yet started.</h2>
+      <p style="font-size:14px;color:#92400e">C5 Ecosystem Readiness scores will be calculated once parent survey responses are collected.</p>
+    </div><div class="cards">
+      <div class="card"><div class="label">Responses Collected</div><div class="value" style="color:var(--muted)">0</div><div class="sub">No data yet</div></div>
+      <div class="card"><div class="label">Branches Covered</div><div class="value" style="color:var(--muted)">0</div><div class="sub">Target: all 37 branches</div></div>
+      <div class="card"><div class="label">Survey Instrument</div><div class="value" style="font-size:18px">P1-P5</div><div class="sub">5-item Likert survey</div></div>
+      <div class="card"><div class="label">Min Response Rate</div><div class="value" style="font-size:18px">30%</div><div class="sub">Required for valid branch score</div></div>
+    </div></div>
+    <div id="tab-methodology" class="content"><div class="section-title">Parent Validation Questions (P1-P5)</div>
+    <div class="tbl-wrap"><table><thead><tr>
+      <th>Code</th><th>English</th><th>Marathi</th><th>Purpose</th>
+    </tr></thead><tbody><tr>
+          <td><strong>P1</strong></td>
+          <td>I understand what my child is expected to learn beyond examination marks.</td>
+          <td style="font-size:11px">माझ्या पाल्याला परीक्षेतील गुणांपलीकडे काय शिकायला हवे, याची मला कल्पना आहे.</td>
+          <td style="font-size:11px;color:var(--muted)">Measures clarity of learning intent communication.</td>
+        </tr><tr>
+          <td><strong>P2</strong></td>
+          <td>I receive structured feedback that helps me understand my child's strengths and areas of improvement.</td>
+          <td style="font-size:11px">मला शाळेकडून पाल्याची बलस्थाने आणि कुठे सुधारणा करावी लागेल हे विस्तृत आणि स्पष्टपणे कळवले जाते.</td>
+          <td style="font-size:11px;color:var(--muted)">Validates transparency of assessment practice.</td>
+        </tr><tr>
+          <td><strong>P3</strong></td>
+          <td>My child is asked to explain reasoning or solve problems in different ways.</td>
+          <td style="font-size:11px">माझ्या पाल्याला शिक्षणाबाबत शिक्षक योग्य अध्यापनीय निर्णय घेतात यावर माझा विश्वास आहे.</td>
+          <td style="font-size:11px;color:var(--muted)">Signals perceived cognitive demand shift.</td>
+        </tr><tr>
+          <td><strong>P4</strong></td>
+          <td>I trust my child's teacher to make instructional decisions in the best interest of learning.</td>
+          <td style="font-size:11px">माझ्या पाल्याला शिक्षणाबाबत शिक्षक योग्य निर्णय घेतात यावर माझा विश्वास आहे.</td>
+          <td style="font-size:11px;color:var(--muted)">Trust is ecosystem validation.</td>
+        </tr><tr>
+          <td><strong>P5</strong></td>
+          <td>The school provides meaningful academic communication opportunities with parents.</td>
+          <td style="font-size:11px">शाळा पालकांना शैक्षणिक विषयांवर अर्थपूर्ण संवादाची संधी उपलब्ध करून देते.</td>
+          <td style="font-size:11px;color:var(--muted)">Validates communication loop existence.</td>
+        </tr></tbody></table></div><div class="section-title">Scoring</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="label">Likert Response Scoring</div>
+        <table><thead><tr><th>Response</th><th>Option Index</th><th>Score</th></tr></thead>
+        <tbody><tr><td>Strongly Disagree</td><td style="text-align:center">0</td><td style="text-align:center;font-weight:700">0.00</td></tr><tr><td>Disagree</td><td style="text-align:center">1</td><td style="text-align:center;font-weight:700">0.25</td></tr><tr><td>Neutral</td><td style="text-align:center">2</td><td style="text-align:center;font-weight:700">0.50</td></tr><tr><td>Agree</td><td style="text-align:center">3</td><td style="text-align:center;font-weight:700">0.75</td></tr><tr><td>Strongly Agree</td><td style="text-align:center">4</td><td style="text-align:center;font-weight:700">1.00</td></tr></tbody></table>
+      </div>
+      <div class="card">
+        <div class="label">Formula</div>
+        <div style="font-size:14px;padding:16px;background:#f8f9fb;border-radius:8px;margin-top:8px">
+          <p style="margin-bottom:8px"><strong>ParentIndex</strong> = mean(P1, P2, P3, P4, P5)</p>
+          <p style="margin-bottom:8px">Each P<sub>i</sub> in [0, 1]</p>
+          <p style="font-size:16px;font-weight:700;color:var(--c5)">ParentReadiness (0-7) = 7 &times; ParentIndex</p>
+          <p style="margin-top:12px;font-size:12px;color:var(--muted)">C5 weight in SRI: 15 points</p>
+        </div>
+      </div>
+    </div><div class="section-title">Interpretation Bands</div>
+    <div class="tbl-wrap"><table><thead><tr><th>Score Range</th><th>Band</th><th>Label</th></tr></thead>
+    <tbody><tr><td>0 - 2</td><td><span class="badge badge-red">Weak</span></td><td>Weak Parent Alignment</td></tr><tr><td>2 - 4</td><td><span class="badge badge-amber">Partial</span></td><td>Partial Visibility</td></tr><tr><td>4 - 6</td><td><span class="badge badge-blue">Strong</span></td><td>Strong Communication Trust</td></tr><tr><td>6 - 7</td><td><span class="badge badge-green">High</span></td><td>High Ecosystem Validation</td></tr></tbody></table></div></div>
+    <div id="tab-student" class="content"><div class="card" style="max-width:600px;margin:24px auto;text-align:center;padding:32px">
+      <div style="font-size:36px;margin-bottom:12px;color:var(--c5)">&#128218;</div>
+      <h3 style="margin-bottom:12px">Student Cognitive Assessment Data</h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">
+        Student cognitive assessment data from MathAngle Sharable exams is available in the MathAngle dashboard.
+        This data provides complementary signals about student-level learning outcomes that will feed into the C5 ecosystem validation
+        once parent survey data is also collected.
+      </p>
+      <a href="./07_mathangle_dashboard.html" class="btn btn-blue" style="text-decoration:none">View MathAngle Dashboard</a>
+    </div>
+    <div class="info-box">
+      <strong>Note:</strong> C5 Ecosystem Readiness will combine:
+      <ul style="margin-top:8px;padding-left:20px">
+        <li><strong>Parent Validation Signal</strong> (P1-P5 Likert survey) &mdash; not yet collected</li>
+        <li><strong>Student Cognitive Signal</strong> (MathAngle data) &mdash; available</li>
+      </ul>
+      Both signals are required for a complete C5 score.
+    </div></div>
+    
+<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px">Project Kshitij | Myelin | Generated 2026-03-25</div>
+<script>
+
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.content').forEach(function(c){c.classList.remove('active')});
+  event.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+
+function sortTable(tableId, col, type) {
+  var table = document.getElementById(tableId);
+  var tbody = table.querySelector('tbody');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  var dir = table.dataset.sortDir === 'asc' ? 'desc' : 'asc';
+  table.dataset.sortDir = dir;
+  rows.sort(function(a, b) {
+    var av = a.cells[col].textContent.trim();
+    var bv = b.cells[col].textContent.trim();
+    if (type === 'num') { av = parseFloat(av) || 0; bv = parseFloat(bv) || 0; }
+    if (dir === 'asc') return av > bv ? 1 : -1;
+    return av < bv ? 1 : -1;
+  });
+  rows.forEach(function(r) { tbody.appendChild(r); });
+}
+
+
+function downloadCSV(rows, filename) {
+  var csvContent = rows.map(function(r) {
+    return r.map(function(c) {
+      var s = String(c);
+      return s.indexOf(',') >= 0 || s.indexOf('"') >= 0 ? '"' + s.replace(/"/g, '""') + '"' : s;
+    }).join(',');
+  }).join('\n');
+  var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+</script>
+</body>
+</html>
