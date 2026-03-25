@@ -1,0 +1,950 @@
+{
+  "total_branches": 38,
+  "total_instruments": 9,
+  "total_combinations": 342,
+  "total_gaps": 126,
+  "coverage_pct": 63.2,
+  "gaps": [
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M004",
+      "branchName": "D.E.S. SECONDARY SCHOOL",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M005",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M005",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M005",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M005",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M005",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMAR",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M006",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M006",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M006",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M006",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M006",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SC",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M007",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M007",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M007",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M008",
+      "branchName": "DES Demo",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M008",
+      "branchName": "DES Demo",
+      "instrument": "Intent Teacher MR",
+      "setCode": "103",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M008",
+      "branchName": "DES Demo",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M008",
+      "branchName": "DES Demo",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M008",
+      "branchName": "DES Demo",
+      "instrument": "Baseline Teacher EN",
+      "setCode": "base001",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M008",
+      "branchName": "DES Demo",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M008",
+      "branchName": "DES Demo",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M009",
+      "branchName": "DRAVID HIGH SCHOOL,WAI",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M009",
+      "branchName": "DRAVID HIGH SCHOOL,WAI",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
+      "instrument": "Intent Teacher MR",
+      "setCode": "103",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
+      "instrument": "Baseline Teacher MR",
+      "setCode": "base003",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHI",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M011",
+      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M011",
+      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Teacher MR",
+      "setCode": "base003",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M011",
+      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M011",
+      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M011",
+      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Teacher EN",
+      "setCode": "base001",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Teacher MR",
+      "setCode": "base003",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M013",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M013",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M013",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M013",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M013",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMAR",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M014",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M014",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M014",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M014",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UN",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M016",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M016",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M016",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
+      "instrument": "Baseline Teacher EN",
+      "setCode": "base001",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M016",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M016",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAM",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M017",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M017",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M018",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M018",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI VIDYALA",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "Baseline Teacher EN",
+      "setCode": "base001",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M020",
+      "branchName": "MURLIDHAR LOHIYA MATRU MANDIR (D.E.S. PR",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M021",
+      "branchName": "NAVIN MARATHI SHALA, SATARA",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M021",
+      "branchName": "NAVIN MARATHI SHALA, SATARA",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M021",
+      "branchName": "NAVIN MARATHI SHALA, SATARA",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M022",
+      "branchName": "NAVIN MARATHI SHALA,PUNE",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M022",
+      "branchName": "NAVIN MARATHI SHALA,PUNE",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M023",
+      "branchName": "NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY U",
+      "instrument": "Baseline Teacher MR",
+      "setCode": "base003",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M023",
+      "branchName": "NEW ENGLISH MEDIUM SCHOOL (PRE-PRIMARY U",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M026",
+      "branchName": "NEW ENGLISH SCHOOL, RAMANBAG",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M028",
+      "branchName": "NEW ENGLISH SCHOOL,TILAK ROAD",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M029",
+      "branchName": "NYA.RANADE BALAK MANDIR",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M029",
+      "branchName": "NYA.RANADE BALAK MANDIR",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M029",
+      "branchName": "NYA.RANADE BALAK MANDIR",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M029",
+      "branchName": "NYA.RANADE BALAK MANDIR",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "Baseline Teacher MR",
+      "setCode": "base003",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M031",
+      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M031",
+      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M031",
+      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M031",
+      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WA",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M032",
+      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M032",
+      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
+      "instrument": "Intent Leader MR",
+      "setCode": "104",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M032",
+      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M032",
+      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M032",
+      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT),",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M033",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M033",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M033",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M033",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M034",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M034",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M034",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M034",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M035",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M035",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M035",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M035",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M036",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHA",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M037",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M037",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M037",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M037",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "Baseline Leader MR",
+      "setCode": "base004",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M037",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M038",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH",
+      "instrument": "Intent Teacher EN",
+      "setCode": "1234",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M038",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH",
+      "instrument": "Intent Leader EN",
+      "setCode": "7890",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M038",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH",
+      "instrument": "Baseline Leader EN",
+      "setCode": "base002",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M038",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASH",
+      "instrument": "SRI Audit",
+      "setCode": "SRI001",
+      "role": "Leader"
+    }
+  ],
+  "instrument_gaps": {
+    "Intent Teacher EN": 19,
+    "Intent Teacher MR": 2,
+    "Intent Leader EN": 26,
+    "Intent Leader MR": 11,
+    "Baseline Teacher EN": 4,
+    "Baseline Teacher MR": 5,
+    "Baseline Leader EN": 22,
+    "Baseline Leader MR": 15,
+    "SRI Audit": 22
+  },
+  "branch_gaps": {
+    "M001": 0,
+    "M002": 6,
+    "M003": 0,
+    "M004": 1,
+    "M005": 5,
+    "M006": 5,
+    "M007": 3,
+    "M008": 7,
+    "M009": 2,
+    "M010": 8,
+    "M011": 5,
+    "M012": 7,
+    "M013": 5,
+    "M014": 4,
+    "M015": 0,
+    "M016": 5,
+    "M017": 2,
+    "M018": 2,
+    "M019": 7,
+    "M020": 1,
+    "M021": 3,
+    "M022": 2,
+    "M023": 2,
+    "M024": 0,
+    "M025": 0,
+    "M026": 1,
+    "M027": 0,
+    "M028": 1,
+    "M029": 4,
+    "M030": 7,
+    "M031": 4,
+    "M032": 5,
+    "M033": 4,
+    "M034": 4,
+    "M035": 4,
+    "M036": 1,
+    "M037": 5,
+    "M038": 4
+  },
+  "full_coverage_branches": [
+    "M001",
+    "M003",
+    "M015",
+    "M024",
+    "M025",
+    "M027"
+  ]
+}
