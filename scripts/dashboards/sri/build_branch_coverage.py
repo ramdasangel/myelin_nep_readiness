@@ -239,12 +239,14 @@ def build_html(data):
 <div class="value" style="color:var(--green)">{full_coverage}</div>
 <div class="sub">of {total} branches have all available constructs</div></div>"""
 
-    # ── Role coverage table ──
-    # Per-branch: Teacher/Leader/Principal counts per instrument
-    instruments = ["Stage-1 Intent (EN)", "Stage-1 Intent (MR)", "Stage-2 Baseline (EN)", "Stage-2 Baseline (MR)"]
+    # ── Role coverage table (EN+MR combined per stage) ──
+    # Combined instruments: Intent (EN+MR), Baseline (EN+MR), SRI Audit
+    combined_stages = [
+        ("Intent", ["Stage-1 Intent (EN)", "Stage-1 Intent (MR)"]),
+        ("Baseline", ["Stage-2 Baseline (EN)", "Stage-2 Baseline (MR)"]),
+    ]
     role_rows = ""
     total_by_role = {"Teacher": 0, "Leader": 0}
-    total_by_inst = {inst: {"Teacher": 0, "Leader": 0} for inst in instruments}
 
     for bc in bcs:
         rc = role_counts.get(bc, {})
@@ -253,23 +255,24 @@ def build_html(data):
         bc_teachers = 0
         bc_leaders = 0
 
-        for inst in instruments:
-            inst_roles = rc.get(inst, {})
-            t = inst_roles.get("Teacher", 0)
-            l = inst_roles.get("Leader", 0)
+        for stage_name, sub_insts in combined_stages:
+            # Sum EN+MR for this stage
+            t = sum(rc.get(inst, {}).get("Teacher", 0) for inst in sub_insts)
+            l = sum(rc.get(inst, {}).get("Leader", 0) for inst in sub_insts)
             bc_teachers += t
             bc_leaders += l
-            total_by_inst[inst]["Teacher"] += t
-            total_by_inst[inst]["Leader"] += l
 
+            has_data = t > 0 or l > 0
+            bg = "background:#f0fdf4;" if has_data else ""
             t_cell = f'<span style="color:var(--blue);font-weight:600">{t}</span>' if t > 0 else '<span style="color:#d1d5db">0</span>'
             l_cell = f'<span style="color:var(--purple);font-weight:600">{l}</span>' if l > 0 else '<span style="color:#d1d5db">0</span>'
-            cells += f'<td style="text-align:center">{t_cell} / {l_cell}</td>'
+            cells += f'<td style="text-align:center;{bg}">{t_cell}T / {l_cell}L</td>'
 
         # SRI Audit (leaders only)
         audit_n = coverage[bc]["audit_resp"]
+        audit_bg = "background:#f0fdf4;" if audit_n > 0 else ""
         audit_cell = f'<span style="color:var(--teal);font-weight:600">{audit_n}</span>' if audit_n > 0 else '<span style="color:#d1d5db">0</span>'
-        cells += f'<td style="text-align:center">{audit_cell}</td>'
+        cells += f'<td style="text-align:center;{audit_bg}">{audit_cell}</td>'
 
         # Totals
         total_by_role["Teacher"] += bc_teachers
@@ -281,8 +284,9 @@ def build_html(data):
         role_rows += f"<tr>{cells}</tr>"
 
     # Role summary chart data
-    role_chart_teachers = jdumps([sum(role_counts.get(bc, {}).get(inst, {}).get("Teacher", 0) for inst in instruments) for bc in bcs])
-    role_chart_leaders = jdumps([sum(role_counts.get(bc, {}).get(inst, {}).get("Leader", 0) for inst in instruments) for bc in bcs])
+    all_inst_keys = ["Stage-1 Intent (EN)", "Stage-1 Intent (MR)", "Stage-2 Baseline (EN)", "Stage-2 Baseline (MR)"]
+    role_chart_teachers = jdumps([sum(role_counts.get(bc, {}).get(inst, {}).get("Teacher", 0) for inst in all_inst_keys) for bc in bcs])
+    role_chart_leaders = jdumps([sum(role_counts.get(bc, {}).get(inst, {}).get("Leader", 0) for inst in all_inst_keys) for bc in bcs])
     role_chart_audit = jdumps([coverage[bc]["audit_resp"] for bc in bcs])
 
     # ── Build HTML ──
@@ -324,7 +328,7 @@ C5 (Ecosystem Readiness) has no data yet. Max achievable SRI = 85/100 without C5
 <div id="roles" class="content">
 <h2 class="section-title">Role Coverage: Teacher / Leader / Principal</h2>
 <div class="info-box">
-Shows unique respondent counts per branch by role across each instrument stage.
+Shows unique respondent counts per branch by role. EN + MR are combined per stage.
 <strong>T</strong> = Teacher, <strong>L</strong> = Leader/Principal.
 SRI Audit is completed by Principals/VPs/Academic Coordinators (counted as Leaders).
 </div>
@@ -349,10 +353,8 @@ SRI Audit is completed by Principals/VPs/Academic Coordinators (counted as Leade
 <div class="tbl-wrap"><table>
 <thead><tr>
 <th>Branch</th><th>Name</th>
-<th style="text-align:center">Intent EN<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
-<th style="text-align:center">Intent MR<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
-<th style="text-align:center">Baseline EN<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
-<th style="text-align:center">Baseline MR<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
+<th style="text-align:center">Intent (EN+MR)<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
+<th style="text-align:center">Baseline (EN+MR)<br><span style="font-size:9px;color:var(--muted)">T / L</span></th>
 <th style="text-align:center">SRI Audit<br><span style="font-size:9px;color:var(--muted)">L</span></th>
 <th style="text-align:right">Total</th>
 </tr></thead>
