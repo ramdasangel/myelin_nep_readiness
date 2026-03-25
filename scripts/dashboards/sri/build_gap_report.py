@@ -11,19 +11,17 @@ BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.a
 sys.path.insert(0, BASE)
 from scripts.dashboards.sri.html_utils import *
 
-DATA_PATH = os.path.join(BASE, "output", "reports", "instrument_coverage_gaps.json")
+DATA_PATH = os.path.join(BASE, "output", "reports", "instrument_coverage_gaps_combined.json")
+RAW_DATA_PATH = os.path.join(BASE, "output", "reports", "instrument_coverage_gaps.json")
 UNIFIED_PATH = os.path.join(BASE, "output", "reports", "sri_unified.json")
 OUT_PATH = os.path.join(BASE, "output", "reports", "instrument_gap_report.html")
 
+# Combined instruments (EN + MR = same purpose)
 INSTRUMENTS = [
-    ("Intent Teacher EN", "1234", "Teacher"),
-    ("Intent Teacher MR", "103", "Teacher"),
-    ("Intent Leader EN", "7890", "Leader"),
-    ("Intent Leader MR", "104", "Leader"),
-    ("Baseline Teacher EN", "base001", "Teacher"),
-    ("Baseline Teacher MR", "base003", "Teacher"),
-    ("Baseline Leader EN", "base002", "Leader"),
-    ("Baseline Leader MR", "base004", "Leader"),
+    ("Intent Teacher", "1234 / 103", "Teacher"),
+    ("Intent Leader", "7890 / 104", "Leader"),
+    ("Baseline Teacher", "base001 / base003", "Teacher"),
+    ("Baseline Leader", "base002 / base004", "Leader"),
     ("SRI Audit", "SRI001", "Leader/Principal"),
 ]
 
@@ -34,9 +32,15 @@ def main():
     with open(UNIFIED_PATH) as f:
         unified = json.load(f)
 
+    # Also load raw (per-language) data for the detail breakdown
+    raw_gap_data = {}
+    if os.path.exists(RAW_DATA_PATH):
+        with open(RAW_DATA_PATH) as f:
+            raw_gap_data = json.load(f)
+
     branches = unified["branches"]
     all_bcs = sorted(branches.keys())
-    gaps = gap_data["gaps"]
+    gaps = gap_data["gaps_detail"]
     gap_set = set((g["branchCode"], g["instrument"]) for g in gaps)
 
     total = gap_data["total_combinations"]
@@ -135,9 +139,9 @@ def main():
 </div>
 
 <div class="info-box">
-This report identifies <strong>{total_gaps} gaps</strong> where a branch has <strong>zero submitted responses</strong> for an instrument.
-Most critical gaps: <strong>Intent Leader EN (68%)</strong>, <strong>Baseline Leader EN (58%)</strong>, and <strong>SRI Audit (58%)</strong> — all leader/principal instruments.
-Full coverage branches: <strong>{', '.join(full_branches)}</strong>
+This report identifies <strong>{total_gaps} gaps</strong> across {total} branch-instrument combinations where a branch has <strong>zero submitted responses</strong> (EN + MR counted together as one instrument).
+Most critical: <strong>SRI Audit (59% missing)</strong>, <strong>Baseline Leader (30%)</strong>, <strong>Intent Leader (24%)</strong> — all leader/principal instruments.
+<strong>{len(full_branches)}</strong> branches have full coverage: {', '.join(full_branches)}
 </div>
 
 <!-- Charts -->

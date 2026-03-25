@@ -1,0 +1,341 @@
+{
+  "total_branches": 37,
+  "instruments": [
+    "Intent Teacher",
+    "Intent Leader",
+    "Baseline Teacher",
+    "Baseline Leader",
+    "SRI Audit"
+  ],
+  "total_combinations": 185,
+  "total_gaps": 44,
+  "coverage_pct": 76.2,
+  "instrument_gaps": {
+    "Intent Teacher": 1,
+    "Intent Leader": 9,
+    "Baseline Teacher": 1,
+    "Baseline Leader": 11,
+    "SRI Audit": 22
+  },
+  "branch_gaps": {
+    "M001": 0,
+    "M002": 3,
+    "M003": 0,
+    "M004": 1,
+    "M005": 3,
+    "M006": 3,
+    "M007": 1,
+    "M009": 0,
+    "M010": 4,
+    "M011": 2,
+    "M012": 3,
+    "M013": 2,
+    "M014": 2,
+    "M015": 0,
+    "M016": 1,
+    "M017": 0,
+    "M018": 0,
+    "M019": 3,
+    "M020": 1,
+    "M021": 0,
+    "M022": 0,
+    "M023": 0,
+    "M024": 0,
+    "M025": 0,
+    "M026": 0,
+    "M027": 0,
+    "M028": 1,
+    "M029": 1,
+    "M030": 3,
+    "M031": 1,
+    "M032": 3,
+    "M033": 1,
+    "M034": 1,
+    "M035": 1,
+    "M036": 0,
+    "M037": 2,
+    "M038": 1
+  },
+  "full_coverage_branches": [
+    "M001",
+    "M003",
+    "M009",
+    "M015",
+    "M017",
+    "M018",
+    "M021",
+    "M022",
+    "M023",
+    "M024",
+    "M025",
+    "M026",
+    "M027",
+    "M036"
+  ],
+  "gaps_detail": [
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M002",
+      "branchName": "BALAK MANDIR,SATARA",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M004",
+      "branchName": "D.E.S. SECONDARY SCHOOL",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M005",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMARY SCHOOL, SATARA",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M005",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMARY SCHOOL, SATARA",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M005",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRE-PRIMARY SCHOOL, SATARA",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M006",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SCHOOL, SATARA",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M006",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SCHOOL, SATARA",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M006",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM PRIMARY SCHOOL, SATARA",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M007",
+      "branchName": "DATAR-SHENDURE ENGLISH MEDIUM SECONDARY SCHOOL, SATARA",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHIRUR",
+      "instrument": "Intent Teacher",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHIRUR",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M010",
+      "branchName": "ENGLISH MEDIUM PRE \u2013 PRIMARY SCHOOL, SHIRUR",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M011",
+      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M011",
+      "branchName": "ENGLISH MEDIUM PRIMARY SCHOOL, SHIRUR",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Teacher",
+      "role": "Teacher"
+    },
+    {
+      "branchCode": "M012",
+      "branchName": "ENGLISH MEDIUM SECONDARY SCHOOL, SHIRUR",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M013",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M013",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRE-PRIMARY UNIT)",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M014",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT)",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M014",
+      "branchName": "HINDUSTAN ANTIBIOTICS SCHOOL (PRIMARY UNIT)",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M016",
+      "branchName": "MADHAV SADASHIV GOLWALKAR GURUJI MADHYAMIK VIDYALAYA",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M019",
+      "branchName": "MATRUMANDIR SATARA",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M020",
+      "branchName": "MURLIDHAR LOHIYA MATRU MANDIR (D.E.S. PRE-PRIMARY) SCHOOL",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M028",
+      "branchName": "NEW ENGLISH SCHOOL,TILAK ROAD",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M029",
+      "branchName": "NYA.RANADE BALAK MANDIR",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT), WAI",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT), WAI",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M030",
+      "branchName": "RAMESH GARWARE SCHOOL (PRE-PRIMARY UNIT), WAI",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M031",
+      "branchName": "RAMESH GARWARE SCHOOL (PRIMARY UNIT), WAI",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M032",
+      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT), WAI",
+      "instrument": "Intent Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M032",
+      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT), WAI",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M032",
+      "branchName": "RAMESH GARWARE SCHOOL (SECONDARY UNIT), WAI",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M033",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH BALAK MANDIR [ENGLISH MEDIUM  PRE-PRIMARY SECTION]",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M034",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA  ( MARATHI MADHYAM-MADHYAMIK VIBHAG)",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M035",
+      "branchName": "SHRI KANTILAL PURUSHOTTAMDAS SHAH PRASHALA [ENGLISH MEDIUM PRIMARY SECTION]",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M037",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK MANDIR (MARATHI MADHYAM-PURVA-PRATHAMIK VIBHAG)",
+      "instrument": "Baseline Leader",
+      "role": "Leader"
+    },
+    {
+      "branchCode": "M037",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH BALAK MANDIR (MARATHI MADHYAM-PURVA-PRATHAMIK VIBHAG)",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    },
+    {
+      "branchCode": "M038",
+      "branchName": "SHRI. KANTILAL PURUSHOTTAMDAS SHAH PRASHALA (MARATHI MADHYAM-PRATHAMIK VIBHAG)",
+      "instrument": "SRI Audit",
+      "role": "Leader/Principal"
+    }
+  ]
+}
