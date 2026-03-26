@@ -47,22 +47,22 @@ def build_html(data):
     total_leaders = sum(r.get("leader_count", 0) for r in rows)
     high_align = sum(1 for r in rows if r.get("alignment", 0) >= 0.8)
 
-    # Overall FP distribution (sum teacher ADV across branches)
+    # Overall FP distribution (sum teacher orientation across branches)
     fp_totals = {fp: 0 for fp in FPS}
     for r in rows:
-        tadv = r.get("teacher_adv", {})
+        t_ori = r.get("teacher_orientation", r.get("teacher_adv", {}))
         for fp in FPS:
-            fp_totals[fp] += tadv.get(fp, 0)
+            fp_totals[fp] += t_ori.get(fp, 0)
 
     # Use only branches with valid data for charts
     valid_bcs = [r["bc"] for r in rows]
 
-    # --- Tab 1: ADV Overview ---
+    # --- Tab 1: Orientation Overview ---
     tab1_labels = jdumps(valid_bcs)
     fp_datasets = []
     fp_colors = ["#3b82f6", "#8b5cf6", "#10b981", "#f59e0b", "#ef4444"]
     for i, fp in enumerate(FPS):
-        vals = [branches[bc]["c1_detail"]["teacher_adv"].get(fp, 0) for bc in valid_bcs]
+        vals = [(branches[bc]["c1_detail"].get("teacher_orientation") or branches[bc]["c1_detail"].get("teacher_adv", {})).get(fp, 0) for bc in valid_bcs]
         fp_datasets.append({
             "label": fp,
             "data": vals,
@@ -76,9 +76,9 @@ def build_html(data):
   <div class="card"><div class="label">Total Teachers</div><div class="value">{total_teachers}</div><div class="sub">Across {len(rows)} branches</div></div>
   <div class="card"><div class="label">Total Leaders</div><div class="value">{total_leaders}</div><div class="sub">Across {len(rows)} branches</div></div>
 </div>
-<div class="info-box">ADV (Aggregate Direction Value) measures the proportion of respondents who agree/strongly agree with each Focus Priority. Values range 0-1.</div>
-<div class="chart-box"><h3>Teacher ADV by Branch and Focus Priority</h3>
-<div style="overflow-x:auto"><canvas id="advChart" height="90"></canvas></div></div>
+<div class="info-box">FP Orientation Score measures the mean depth of responses per Focus Priority section. Values range 0-1. Higher = deeper orientation.</div>
+<div class="chart-box"><h3>Teacher Orientation Score by Branch and Focus Priority</h3>
+<div style="overflow-x:auto"><canvas id="orientChart" height="90"></canvas></div></div>
 </div>'''
 
     # --- Tab 2: Alignment ---
@@ -123,7 +123,7 @@ def build_html(data):
     # Per-branch stacked bar data
     stacked_datasets = []
     for i, fp in enumerate(FPS):
-        vals = [round(branches[bc]["c1_detail"]["teacher_adv"].get(fp, 0), 4) for bc in valid_bcs]
+        vals = [round((branches[bc]["c1_detail"].get("teacher_orientation") or branches[bc]["c1_detail"].get("teacher_adv", {})).get(fp, 0), 4) for bc in valid_bcs]
         stacked_datasets.append({
             "label": fp,
             "data": vals,
@@ -132,14 +132,14 @@ def build_html(data):
 
     tab3 = f'''<div id="tab3" class="content">
 <div class="grid-2">
-<div class="chart-box"><h3>Overall Teacher FP Distribution (Sum ADV)</h3>
+<div class="chart-box"><h3>Overall Teacher FP Distribution (Sum Orientation)</h3>
 <canvas id="fpDoughnut" height="250"></canvas></div>
 <div class="chart-box"><h3>FP Legend</h3>
-<table><thead><tr><th>FP</th><th>Focus Priority</th><th>Total ADV</th></tr></thead><tbody>
+<table><thead><tr><th>FP</th><th>Focus Priority</th><th>Total Score</th></tr></thead><tbody>
 {"".join(f'<tr><td><span class="badge" style="background:{fp_colors[i]};color:#fff">{FPS[i]}</span></td><td>{FP_LABELS.get(FPS[i],"")}</td><td>{fp_total_vals[i]:.2f}</td></tr>' for i in range(5))}
 </tbody></table></div>
 </div>
-<div class="chart-box"><h3>Per-Branch Stacked ADV</h3>
+<div class="chart-box"><h3>Per-Branch Stacked Orientation Score</h3>
 <div style="overflow-x:auto"><canvas id="stackedBar" height="80"></canvas></div></div>
 </div>'''
 
@@ -149,13 +149,13 @@ def build_html(data):
                  "T_Coverage", "L_Coverage", "T_Balance", "L_Balance",
                  "FP1", "FP2", "FP3", "FP4", "FP5", "Teachers", "Leaders"]]
     for r in rows:
-        tadv = r.get("teacher_adv", {})
+        t_ori = r.get("teacher_orientation", r.get("teacher_adv", {}))
         csv_row = [
             r["bc"], f'{r["C1"]:.2f}', f'{r.get("teacher_score",0):.3f}',
             f'{r.get("leader_score",0):.3f}', f'{r.get("alignment",0):.3f}',
             f'{r.get("teacher_coverage",0):.3f}', f'{r.get("leader_coverage",0):.3f}',
             f'{r.get("teacher_balance",0):.3f}', f'{r.get("leader_balance",0):.3f}',
-            *[f'{tadv.get(fp,0):.4f}' for fp in FPS],
+            *[f'{t_ori.get(fp,0):.4f}' for fp in FPS],
             str(r.get("teacher_count", 0)), str(r.get("leader_count", 0))
         ]
         csv_data.append(csv_row)
@@ -169,7 +169,7 @@ def build_html(data):
 <td>{r.get("leader_coverage",0):.3f}</td>
 <td>{r.get("teacher_balance",0):.3f}</td>
 <td>{r.get("leader_balance",0):.3f}</td>
-{"".join(f'<td>{tadv.get(fp,0):.4f}</td>' for fp in FPS)}
+{"".join(f'<td>{t_ori.get(fp,0):.4f}</td>' for fp in FPS)}
 <td>{r.get("teacher_count",0)}</td>
 <td>{r.get("leader_count",0)}</td>
 </tr>'''
@@ -201,7 +201,7 @@ def build_html(data):
 
     # Tabs bar
     tabs_html = '''<div class="tabs">
-<div class="tab active" onclick="showTab('tab1')">ADV Overview</div>
+<div class="tab active" onclick="showTab('tab1')">Orientation Overview</div>
 <div class="tab" onclick="showTab('tab2')">Alignment</div>
 <div class="tab" onclick="showTab('tab3')">FP Distribution</div>
 <div class="tab" onclick="showTab('tab4')">Branch Detail</div>
@@ -210,14 +210,14 @@ def build_html(data):
     content_html = tab1 + tab2 + tab3 + tab4
 
     extra_js = f"""
-// Tab 1: ADV grouped bar
-new Chart(document.getElementById('advChart'), {{
+// Tab 1: Orientation grouped bar
+new Chart(document.getElementById('orientChart'), {{
   type: 'bar',
   data: {{ labels: {tab1_labels}, datasets: {jdumps(fp_datasets)} }},
   options: {{
     responsive: true,
     plugins: {{ legend: {{ position: 'top' }} }},
-    scales: {{ y: {{ beginAtZero: true, max: 1, title: {{ display: true, text: 'ADV (0-1)' }} }} }}
+    scales: {{ y: {{ beginAtZero: true, max: 1, title: {{ display: true, text: 'Orientation Score (0-1)' }} }} }}
   }}
 }});
 
@@ -256,7 +256,7 @@ new Chart(document.getElementById('stackedBar'), {{
     plugins: {{ legend: {{ position: 'top' }} }},
     scales: {{
       x: {{ stacked: true }},
-      y: {{ stacked: true, title: {{ display: true, text: 'Cumulative ADV' }} }}
+      y: {{ stacked: true, title: {{ display: true, text: 'Cumulative Orientation Score' }} }}
     }}
   }}
 }});

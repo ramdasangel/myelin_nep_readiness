@@ -175,12 +175,12 @@ def build_code_to_name():
 
 def compute_c1():
     """
-    ADV (Aspirational Depth Vector): for each FP, the mean selectedOption / 3
+    FP Orientation Score: for each FP, the mean selectedOption / 3
     gives a [0,1] depth score.
 
-    Coverage  = fraction of FPs with ADV > τ  (τ = 0.10)
-    Balance   = 1 − Var(ADV) / 0.16           (0.16 = max variance for 5 bins)
-    Alignment = cosine similarity between teacher ADV and leader ADV
+    Coverage  = fraction of FPs with orientation > τ  (τ = 0.10)
+    Balance   = 1 − Var(orientation) / 0.16           (0.16 = max variance for 5 bins)
+    Alignment = cosine similarity between teacher orientation and leader orientation
 
     TeacherScore = TeacherCoverage × TeacherBalance × Alignment
     LeaderScore  = LeaderCoverage  × LeaderBalance  × Alignment
@@ -226,22 +226,22 @@ def compute_c1():
     scores = {}
 
     for bc in all_branches:
-        # Teacher ADV
-        t_adv = []
+        # Teacher orientation
+        t_orient = []
         for fp in FPS:
             vals = teacher_fp[bc].get(fp, [])
-            t_adv.append(sum(vals) / (len(vals) * 3.0) if vals else 0.0)
+            t_orient.append(sum(vals) / (len(vals) * 3.0) if vals else 0.0)
 
-        # Leader ADV
-        l_adv = []
+        # Leader orientation
+        l_orient = []
         for fp in FPS:
             vals = leader_fp[bc].get(fp, [])
-            l_adv.append(sum(vals) / (len(vals) * 3.0) if vals else 0.0)
+            l_orient.append(sum(vals) / (len(vals) * 3.0) if vals else 0.0)
 
         # Coverage (fraction of FPs above threshold)
         tau = 0.10
-        t_cov = sum(1 for v in t_adv if v > tau) / 5.0
-        l_cov = sum(1 for v in l_adv if v > tau) / 5.0
+        t_cov = sum(1 for v in t_orient if v > tau) / 5.0
+        l_cov = sum(1 for v in l_orient if v > tau) / 5.0
 
         # Balance (1 − variance / max_variance)
         def variance(vec):
@@ -250,11 +250,11 @@ def compute_c1():
             mu = sum(vec) / len(vec)
             return sum((v - mu) ** 2 for v in vec) / len(vec)
 
-        t_bal = max(0.0, 1 - variance(t_adv) / 0.16)
-        l_bal = max(0.0, 1 - variance(l_adv) / 0.16)
+        t_bal = max(0.0, 1 - variance(t_orient) / 0.16)
+        l_bal = max(0.0, 1 - variance(l_orient) / 0.16)
 
         # Alignment
-        align = cosine_sim(t_adv, l_adv)
+        align = cosine_sim(t_orient, l_orient)
 
         # Scores
         t_score = t_cov * t_bal * align

@@ -51,7 +51,7 @@ REPORTS = os.path.join(BASE, 'output', 'reports')
 # ═══════════════════════════════════════════════════════════
 
 def compute_c1_detail():
-    """C1 with per-branch ADV vectors, coverage, balance, alignment."""
+    """C1 with per-branch FP orientation scores, coverage, balance, alignment."""
     teacher_fp = defaultdict(lambda: defaultdict(list))
     leader_fp = defaultdict(lambda: defaultdict(list))
     teacher_counts = defaultdict(int)
@@ -111,13 +111,13 @@ def compute_c1_detail():
     details = {}
 
     for bc in all_branches:
-        t_adv = {fp: (sum(teacher_fp[bc].get(fp, [])) / (len(teacher_fp[bc].get(fp, [])) * 3.0)
-                      if teacher_fp[bc].get(fp) else 0.0) for fp in FPS}
-        l_adv = {fp: (sum(leader_fp[bc].get(fp, [])) / (len(leader_fp[bc].get(fp, [])) * 3.0)
-                      if leader_fp[bc].get(fp) else 0.0) for fp in FPS}
+        t_orientation = {fp: (sum(teacher_fp[bc].get(fp, [])) / (len(teacher_fp[bc].get(fp, [])) * 3.0)
+                              if teacher_fp[bc].get(fp) else 0.0) for fp in FPS}
+        l_orientation = {fp: (sum(leader_fp[bc].get(fp, [])) / (len(leader_fp[bc].get(fp, [])) * 3.0)
+                              if leader_fp[bc].get(fp) else 0.0) for fp in FPS}
 
-        t_vec = [t_adv[fp] for fp in FPS]
-        l_vec = [l_adv[fp] for fp in FPS]
+        t_vec = [t_orientation[fp] for fp in FPS]
+        l_vec = [l_orientation[fp] for fp in FPS]
 
         tau = 0.10
         t_cov = sum(1 for v in t_vec if v > tau) / 5.0
@@ -132,8 +132,8 @@ def compute_c1_detail():
 
         details[bc] = {
             "C1": round(c1, 2),
-            "teacher_adv": {fp: round(v, 4) for fp, v in t_adv.items()},
-            "leader_adv": {fp: round(v, 4) for fp, v in l_adv.items()},
+            "teacher_orientation": {fp: round(v, 4) for fp, v in t_orientation.items()},
+            "leader_orientation": {fp: round(v, 4) for fp, v in l_orientation.items()},
             "teacher_coverage": round(t_cov, 4),
             "leader_coverage": round(l_cov, 4),
             "teacher_balance": round(t_bal, 4),

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-03-25T19:32:38.701503",
+    "generated": "2026-03-26T22:14:27.298339",
     "total_branches": 37,
     "sri_max": 100,
     "construct_weights": {
@@ -26,14 +26,14 @@
       },
       "c1_detail": {
         "C1": 19.6,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5363,
           "FP2": 0.4679,
           "FP3": 0.4639,
           "FP4": 0.5145,
           "FP5": 0.5097
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.6444,
           "FP2": 0.5556,
           "FP3": 0.5778,
@@ -455,14 +455,14 @@
       },
       "c1_detail": {
         "C1": 0.0,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4792,
           "FP2": 0.5521,
           "FP3": 0.6068,
           "FP4": 0.5333,
           "FP5": 0.5591
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.0,
           "FP2": 0.0,
           "FP3": 0.0,
@@ -891,14 +891,14 @@
       },
       "c1_detail": {
         "C1": 18.58,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5027,
           "FP2": 0.4597,
           "FP3": 0.4892,
           "FP4": 0.471,
           "FP5": 0.542
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.4815,
           "FP2": 0.7619,
           "FP3": 0.5714,
@@ -1315,14 +1315,14 @@
       },
       "c1_detail": {
         "C1": 19.47,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5142,
           "FP2": 0.5035,
           "FP3": 0.5277,
           "FP4": 0.5035,
           "FP5": 0.4894
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.4762,
           "FP2": 0.5833,
           "FP3": 0.5699,
@@ -1742,14 +1742,14 @@
       },
       "c1_detail": {
         "C1": 0.0,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5,
           "FP2": 0.5,
           "FP3": 0.4333,
           "FP4": 0.55,
           "FP5": 0.3333
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.0,
           "FP2": 0.0,
           "FP3": 0.0,
@@ -2189,14 +2189,14 @@
       },
       "c1_detail": {
         "C1": 0.0,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4271,
           "FP2": 0.625,
           "FP3": 0.5417,
           "FP4": 0.5667,
           "FP5": 0.4688
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.0,
           "FP2": 0.0,
           "FP3": 0.0,
@@ -2636,14 +2636,14 @@
       },
       "c1_detail": {
         "C1": 18.14,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.375,
           "FP2": 0.5417,
           "FP3": 0.4167,
           "FP4": 0.3833,
           "FP5": 0.5833
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.3667,
           "FP2": 0.6667,
           "FP3": 0.3,
@@ -3059,14 +3059,14 @@
       },
       "c1_detail": {
         "C1": 18.93,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5225,
           "FP2": 0.509,
           "FP3": 0.4918,
           "FP4": 0.4865,
           "FP5": 0.484
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.52,
           "FP2": 0.6,
           "FP3": 0.64,
@@ -3612,14 +3612,14 @@
       },
       "c1_detail": {
         "C1": 19.18,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5729,
           "FP2": 0.4479,
           "FP3": 0.55,
           "FP4": 0.5833,
           "FP5": 0.5729
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.4667,
           "FP2": 0.5556,
           "FP3": 0.4,
@@ -4046,14 +4046,14 @@
       },
       "c1_detail": {
         "C1": 0.0,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4167,
           "FP2": 0.25,
           "FP3": 0.6667,
           "FP4": 0.6667,
           "FP5": 0.5833
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.0,
           "FP2": 0.0,
           "FP3": 0.0,
@@ -4549,14 +4549,14 @@
       },
       "c1_detail": {
         "C1": 0.0,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4833,
           "FP2": 0.55,
           "FP3": 0.6533,
           "FP4": 0.5333,
           "FP5": 0.4667
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.0,
           "FP2": 0.0,
           "FP3": 0.0,
@@ -4996,14 +4996,14 @@
       },
       "c1_detail": {
         "C1": 14.97,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4325,
           "FP2": 0.5,
           "FP3": 0.4857,
           "FP4": 0.4667,
           "FP5": 0.4921
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.6,
           "FP2": 1.0,
           "FP3": 0.6,
@@ -5461,14 +5461,14 @@
       },
       "c1_detail": {
         "C1": 18.6,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5589,
           "FP2": 0.502,
           "FP3": 0.509,
           "FP4": 0.5122,
           "FP5": 0.5432
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5208,
           "FP2": 0.5625,
           "FP3": 0.5909,
@@ -5885,14 +5885,14 @@
       },
       "c1_detail": {
         "C1": 17.93,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4242,
           "FP2": 0.553,
           "FP3": 0.4606,
           "FP4": 0.5576,
           "FP5": 0.5606
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5,
           "FP2": 0.6667,
           "FP3": 0.4,
@@ -6330,14 +6330,14 @@
       },
       "c1_detail": {
         "C1": 17.63,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5254,
           "FP2": 0.5435,
           "FP3": 0.4638,
           "FP4": 0.487,
           "FP5": 0.4457
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.6444,
           "FP2": 0.2222,
           "FP3": 0.5556,
@@ -6794,14 +6794,14 @@
       },
       "c1_detail": {
         "C1": 19.45,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4667,
           "FP2": 0.4833,
           "FP3": 0.4865,
           "FP4": 0.4844,
           "FP5": 0.5085
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5333,
           "FP2": 0.3889,
           "FP3": 0.6,
@@ -7219,14 +7219,14 @@
       },
       "c1_detail": {
         "C1": 0.0,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4167,
           "FP2": 0.3333,
           "FP3": 0.4667,
           "FP4": 0.5333,
           "FP5": 0.4167
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.0,
           "FP2": 0.0,
           "FP3": 0.0,
@@ -7653,14 +7653,14 @@
       },
       "c1_detail": {
         "C1": 19.14,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4924,
           "FP2": 0.5076,
           "FP3": 0.5051,
           "FP4": 0.4848,
           "FP5": 0.4899
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5556,
           "FP2": 0.614,
           "FP3": 0.642,
@@ -8079,14 +8079,14 @@
       },
       "c1_detail": {
         "C1": 19.5,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5064,
           "FP2": 0.5513,
           "FP3": 0.5179,
           "FP4": 0.5282,
           "FP5": 0.5449
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.4,
           "FP2": 0.3889,
           "FP3": 0.5333,
@@ -8542,14 +8542,14 @@
       },
       "c1_detail": {
         "C1": 16.43,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.3826,
           "FP2": 0.5379,
           "FP3": 0.4771,
           "FP4": 0.5,
           "FP5": 0.4406
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.6,
           "FP2": 0.6667,
           "FP3": 0.4667,
@@ -8987,14 +8987,14 @@
       },
       "c1_detail": {
         "C1": 19.25,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5333,
           "FP2": 0.5333,
           "FP3": 0.4667,
           "FP4": 0.52,
           "FP5": 0.5167
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5641,
           "FP2": 0.7273,
           "FP3": 0.625,
@@ -9410,14 +9410,14 @@
       },
       "c1_detail": {
         "C1": 19.42,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4708,
           "FP2": 0.5458,
           "FP3": 0.5185,
           "FP4": 0.46,
           "FP5": 0.5443
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5238,
           "FP2": 0.614,
           "FP3": 0.5432,
@@ -9835,14 +9835,14 @@
       },
       "c1_detail": {
         "C1": 18.49,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.375,
           "FP2": 0.4583,
           "FP3": 0.6833,
           "FP4": 0.4667,
           "FP5": 0.5208
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.4359,
           "FP2": 0.5455,
           "FP3": 0.5417,
@@ -10279,14 +10279,14 @@
       },
       "c1_detail": {
         "C1": 19.35,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4878,
           "FP2": 0.4531,
           "FP3": 0.5378,
           "FP4": 0.5028,
           "FP5": 0.5246
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.4412,
           "FP2": 0.3333,
           "FP3": 0.4651,
@@ -10744,14 +10744,14 @@
       },
       "c1_detail": {
         "C1": 19.54,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5449,
           "FP2": 0.5026,
           "FP3": 0.4685,
           "FP4": 0.4985,
           "FP5": 0.531
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.3846,
           "FP2": 0.4545,
           "FP3": 0.5417,
@@ -11199,14 +11199,14 @@
       },
       "c1_detail": {
         "C1": 19.8,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5286,
           "FP2": 0.5052,
           "FP3": 0.475,
           "FP4": 0.5521,
           "FP5": 0.474
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5812,
           "FP2": 0.5051,
           "FP3": 0.5069,
@@ -11625,14 +11625,14 @@
       },
       "c1_detail": {
         "C1": 18.52,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.609,
           "FP2": 0.4679,
           "FP3": 0.5312,
           "FP4": 0.5333,
           "FP5": 0.4183
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.3333,
           "FP2": 0.4444,
           "FP3": 0.6,
@@ -12081,14 +12081,14 @@
       },
       "c1_detail": {
         "C1": 0.0,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5417,
           "FP2": 0.5,
           "FP3": 0.65,
           "FP4": 0.4667,
           "FP5": 0.625
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.0,
           "FP2": 0.0,
           "FP3": 0.0,
@@ -12515,14 +12515,14 @@
       },
       "c1_detail": {
         "C1": 18.26,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.537,
           "FP2": 0.537,
           "FP3": 0.4961,
           "FP4": 0.6222,
           "FP5": 0.4902
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.2222,
           "FP2": 0.5333,
           "FP3": 0.2778,
@@ -12958,14 +12958,14 @@
       },
       "c1_detail": {
         "C1": 0.0,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4722,
           "FP2": 0.3889,
           "FP3": 0.3778,
           "FP4": 0.4667,
           "FP5": 0.5833
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.0,
           "FP2": 0.0,
           "FP3": 0.0,
@@ -13394,14 +13394,14 @@
       },
       "c1_detail": {
         "C1": 15.33,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4167,
           "FP2": 0.4583,
           "FP3": 0.4333,
           "FP4": 0.7667,
           "FP5": 0.3333
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.4667,
           "FP2": 0.7778,
           "FP3": 0.2667,
@@ -13839,14 +13839,14 @@
       },
       "c1_detail": {
         "C1": 18.75,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5,
           "FP2": 0.7083,
           "FP3": 0.5833,
           "FP4": 0.5,
           "FP5": 0.6042
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5,
           "FP2": 0.6667,
           "FP3": 0.4,
@@ -14277,14 +14277,14 @@
       },
       "c1_detail": {
         "C1": 18.36,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.6042,
           "FP2": 0.5208,
           "FP3": 0.4583,
           "FP4": 0.5083,
           "FP5": 0.4583
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.6667,
           "FP2": 0.3333,
           "FP3": 0.6,
@@ -14700,14 +14700,14 @@
       },
       "c1_detail": {
         "C1": 19.53,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.4647,
           "FP2": 0.5385,
           "FP3": 0.5077,
           "FP4": 0.5462,
           "FP5": 0.4936
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.5467,
           "FP2": 0.5778,
           "FP3": 0.5467,
@@ -15147,14 +15147,14 @@
       },
       "c1_detail": {
         "C1": 11.24,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.7292,
           "FP2": 0.4792,
           "FP3": 0.3833,
           "FP4": 0.3667,
           "FP5": 0.5208
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.4,
           "FP2": 0.1111,
           "FP3": 0.4667,
@@ -15583,14 +15583,14 @@
       },
       "c1_detail": {
         "C1": 14.63,
-        "teacher_adv": {
+        "teacher_orientation": {
           "FP1": 0.5357,
           "FP2": 0.4167,
           "FP3": 0.4952,
           "FP4": 0.5619,
           "FP5": 0.4167
         },
-        "leader_adv": {
+        "leader_orientation": {
           "FP1": 0.6667,
           "FP2": 0.8889,
           "FP3": 0.8667,

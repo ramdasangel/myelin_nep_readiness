@@ -68,10 +68,10 @@ select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-si
 <div class="header">
 <div><h1>C1: Intent Readiness Detail</h1><div class="sub">System Readiness Index — Project Kshitij</div></div>
 <div style="text-align:right"><div style="font-size:12px;opacity:.7">Deccan Education Society</div>
-<div style="font-size:11px;opacity:.5">Generated: 2026-03-25</div></div></div>
+<div style="font-size:11px;opacity:.5">Generated: 2026-03-26</div></div></div>
 <nav class="nav-bar"><a class="nav-pill" href="./00_sri_summary.html">SRI Summary</a><a class="nav-pill active" href="./01_c1_intent.html">C1 Intent</a><a class="nav-pill" href="./02_c2_practice.html">C2 Practice</a><a class="nav-pill" href="./03_c3_capacity.html">C3 Capacity</a><a class="nav-pill" href="./04_c4_system.html">C4 System</a><a class="nav-pill" href="./05_c5_ecosystem.html">C5 Ecosystem</a><a class="nav-pill" href="./06_set_analysis.html">SET Analysis</a><a class="nav-pill" href="./07_branch_coverage.html">Coverage</a></nav>
 <div class="tabs">
-<div class="tab active" onclick="showTab('tab1')">ADV Overview</div>
+<div class="tab active" onclick="showTab('tab1')">Orientation Overview</div>
 <div class="tab" onclick="showTab('tab2')">Alignment</div>
 <div class="tab" onclick="showTab('tab3')">FP Distribution</div>
 <div class="tab" onclick="showTab('tab4')">Branch Detail</div>
@@ -83,9 +83,9 @@ select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-si
   <div class="card"><div class="label">Total Teachers</div><div class="value">625</div><div class="sub">Across 36 branches</div></div>
   <div class="card"><div class="label">Total Leaders</div><div class="value">77</div><div class="sub">Across 36 branches</div></div>
 </div>
-<div class="info-box">ADV (Aggregate Direction Value) measures the proportion of respondents who agree/strongly agree with each Focus Priority. Values range 0-1.</div>
-<div class="chart-box"><h3>Teacher ADV by Branch and Focus Priority</h3>
-<div style="overflow-x:auto"><canvas id="advChart" height="90"></canvas></div></div>
+<div class="info-box">FP Orientation Score measures the mean depth of responses per Focus Priority section. Values range 0-1. Higher = deeper orientation.</div>
+<div class="chart-box"><h3>Teacher Orientation Score by Branch and Focus Priority</h3>
+<div style="overflow-x:auto"><canvas id="orientChart" height="90"></canvas></div></div>
 </div><div id="tab2" class="content">
 <div class="info-box">Alignment measures how well teacher and leader intent priorities match. Coverage = fraction of FPs with respondents. Balance = evenness across FPs.</div>
 <div class="chart-box"><h3>Alignment Score by Branch</h3>
@@ -428,14 +428,14 @@ select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-si
 <td>1</td>
 </tr></tbody></table></div></div><div id="tab3" class="content">
 <div class="grid-2">
-<div class="chart-box"><h3>Overall Teacher FP Distribution (Sum ADV)</h3>
+<div class="chart-box"><h3>Overall Teacher FP Distribution (Sum Orientation)</h3>
 <canvas id="fpDoughnut" height="250"></canvas></div>
 <div class="chart-box"><h3>FP Legend</h3>
-<table><thead><tr><th>FP</th><th>Focus Priority</th><th>Total ADV</th></tr></thead><tbody>
+<table><thead><tr><th>FP</th><th>Focus Priority</th><th>Total Score</th></tr></thead><tbody>
 <tr><td><span class="badge" style="background:#3b82f6;color:#fff">FP1</span></td><td>Holistic Development</td><td>17.89</td></tr><tr><td><span class="badge" style="background:#8b5cf6;color:#fff">FP2</span></td><td>Foundational Literacy & Numeracy</td><td>17.93</td></tr><tr><td><span class="badge" style="background:#10b981;color:#fff">FP3</span></td><td>Competency-Based Learning</td><td>18.28</td></tr><tr><td><span class="badge" style="background:#f59e0b;color:#fff">FP4</span></td><td>Inclusive Education</td><td>18.69</td></tr><tr><td><span class="badge" style="background:#ef4444;color:#fff">FP5</span></td><td>Multilingual Education</td><td>18.09</td></tr>
 </tbody></table></div>
 </div>
-<div class="chart-box"><h3>Per-Branch Stacked ADV</h3>
+<div class="chart-box"><h3>Per-Branch Stacked Orientation Score</h3>
 <div style="overflow-x:auto"><canvas id="stackedBar" height="80"></canvas></div></div>
 </div><div id="tab4" class="content">
 <div style="margin-bottom:12px">
@@ -929,7 +929,7 @@ select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-si
 <td>7</td>
 <td>1</td>
 </tr></tbody></table></div></div>
-<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px">Project Kshitij | Myelin | Generated 2026-03-25</div>
+<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px">Project Kshitij | Myelin | Generated 2026-03-26</div>
 <script>
 
 function showTab(id){
@@ -972,14 +972,14 @@ function downloadCSV(rows, filename) {
 }
 
 
-// Tab 1: ADV grouped bar
-new Chart(document.getElementById('advChart'), {
+// Tab 1: Orientation grouped bar
+new Chart(document.getElementById('orientChart'), {
   type: 'bar',
   data: { labels: ["M001", "M002", "M003", "M004", "M005", "M006", "M007", "M009", "M011", "M012", "M013", "M014", "M015", "M016", "M017", "M018", "M019", "M020", "M021", "M022", "M023", "M024", "M025", "M026", "M027", "M028", "M029", "M030", "M031", "M032", "M033", "M034", "M035", "M036", "M037", "M038"], datasets: [{"label": "FP1", "data": [0.5363, 0.4792, 0.5027, 0.5142, 0.5, 0.4271, 0.375, 0.5225, 0.5729, 0.4167, 0.4833, 0.4325, 0.5589, 0.4242, 0.5254, 0.4667, 0.4167, 0.4924, 0.5064, 0.3826, 0.5333, 0.4708, 0.375, 0.4878, 0.5449, 0.5286, 0.609, 0.5417, 0.537, 0.4722, 0.4167, 0.5, 0.6042, 0.4647, 0.7292, 0.5357], "backgroundColor": "#3b82f6"}, {"label": "FP2", "data": [0.4679, 0.5521, 0.4597, 0.5035, 0.5, 0.625, 0.5417, 0.509, 0.4479, 0.25, 0.55, 0.5, 0.502, 0.553, 0.5435, 0.4833, 0.3333, 0.5076, 0.5513, 0.5379, 0.5333, 0.5458, 0.4583, 0.4531, 0.5026, 0.5052, 0.4679, 0.5, 0.537, 0.3889, 0.4583, 0.7083, 0.5208, 0.5385, 0.4792, 0.4167], "backgroundColor": "#8b5cf6"}, {"label": "FP3", "data": [0.4639, 0.6068, 0.4892, 0.5277, 0.4333, 0.5417, 0.4167, 0.4918, 0.55, 0.6667, 0.6533, 0.4857, 0.509, 0.4606, 0.4638, 0.4865, 0.4667, 0.5051, 0.5179, 0.4771, 0.4667, 0.5185, 0.6833, 0.5378, 0.4685, 0.475, 0.5312, 0.65, 0.4961, 0.3778, 0.4333, 0.5833, 0.4583, 0.5077, 0.3833, 0.4952], "backgroundColor": "#10b981"}, {"label": "FP4", "data": [0.5145, 0.5333, 0.471, 0.5035, 0.55, 0.5667, 0.3833, 0.4865, 0.5833, 0.6667, 0.5333, 0.4667, 0.5122, 0.5576, 0.487, 0.4844, 0.5333, 0.4848, 0.5282, 0.5, 0.52, 0.46, 0.4667, 0.5028, 0.4985, 0.5521, 0.5333, 0.4667, 0.6222, 0.4667, 0.7667, 0.5, 0.5083, 0.5462, 0.3667, 0.5619], "backgroundColor": "#f59e0b"}, {"label": "FP5", "data": [0.5097, 0.5591, 0.542, 0.4894, 0.3333, 0.4688, 0.5833, 0.484, 0.5729, 0.5833, 0.4667, 0.4921, 0.5432, 0.5606, 0.4457, 0.5085, 0.4167, 0.4899, 0.5449, 0.4406, 0.5167, 0.5443, 0.5208, 0.5246, 0.531, 0.474, 0.4183, 0.625, 0.4902, 0.5833, 0.3333, 0.6042, 0.4583, 0.4936, 0.5208, 0.4167], "backgroundColor": "#ef4444"}] },
   options: {
     responsive: true,
     plugins: { legend: { position: 'top' } },
-    scales: { y: { beginAtZero: true, max: 1, title: { display: true, text: 'ADV (0-1)' } } }
+    scales: { y: { beginAtZero: true, max: 1, title: { display: true, text: 'Orientation Score (0-1)' } } }
   }
 });
 
@@ -1018,7 +1018,7 @@ new Chart(document.getElementById('stackedBar'), {
     plugins: { legend: { position: 'top' } },
     scales: {
       x: { stacked: true },
-      y: { stacked: true, title: { display: true, text: 'Cumulative ADV' } }
+      y: { stacked: true, title: { display: true, text: 'Cumulative Orientation Score' } }
     }
   }
 });

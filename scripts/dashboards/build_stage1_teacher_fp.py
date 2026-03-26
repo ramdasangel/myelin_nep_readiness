@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Stage-1 Teacher Intent — ADV (Aspirational Depth Vector) Dashboard
+Stage-1 Teacher Intent — FP Orientation Dashboard
 setCodes: 1234 (English) + 103 (Marathi)
-ADV[FP] = mean(selectedOption for responses in that FP section) / 3
-Range: 0-1.  Higher = deeper aspiration within that FP section.
+FP Orientation Score = mean(selectedOption) / 3 per FP section.
+Range: 0-1.  Higher = deeper orientation within that FP section.
 """
 
 import csv
@@ -98,63 +98,63 @@ def load_data():
                 overall_fp_raw[fp] += 1
                 total_raw += 1
 
-    # Compute ADV per branch per FP
+    # Compute orientation score per branch per FP
     branch_users = defaultdict(set)
     branch_lang = defaultdict(lambda: {"English": set(), "Marathi": set()})
-    # Collect per-user ADV: {uid: {fp: adv}}
-    user_adv = {}
+    # Collect per-user FP scores: {uid: {fp: score}}
+    user_fp_scores = {}
 
     for uid, u in users.items():
         bc = u["bc"]
         branch_users[bc].add(uid)
         branch_lang[bc][u["lang"]].add(uid)
-        user_adv[uid] = {}
+        user_fp_scores[uid] = {}
         for fp in FPS:
             opts = u["fp_opts"].get(fp, [])
             if opts:
-                user_adv[uid][fp] = sum(opts) / len(opts) / 3.0
+                user_fp_scores[uid][fp] = sum(opts) / len(opts) / 3.0
             else:
-                user_adv[uid][fp] = None
+                user_fp_scores[uid][fp] = None
 
-    # Branch ADV: mean of per-user ADVs
-    branch_adv = {}
+    # Branch FP scores: mean of per-user scores
+    branch_fp_scores = {}
     for bc in branch_users:
-        branch_adv[bc] = {}
+        branch_fp_scores[bc] = {}
         for fp in FPS:
-            vals = [user_adv[uid][fp] for uid in branch_users[bc] if user_adv[uid][fp] is not None]
-            branch_adv[bc][fp] = sum(vals) / len(vals) if vals else 0.0
+            vals = [user_fp_scores[uid][fp] for uid in branch_users[bc] if user_fp_scores[uid][fp] is not None]
+            branch_fp_scores[bc][fp] = sum(vals) / len(vals) if vals else 0.0
 
-    # Overall ADV
-    overall_adv = {}
+    # Overall FP scores
+    overall_fp_scores = {}
     for fp in FPS:
-        vals = [user_adv[uid][fp] for uid in user_adv if user_adv[uid][fp] is not None]
-        overall_adv[fp] = sum(vals) / len(vals) if vals else 0.0
+        vals = [user_fp_scores[uid][fp] for uid in user_fp_scores if user_fp_scores[uid][fp] is not None]
+        overall_fp_scores[fp] = sum(vals) / len(vals) if vals else 0.0
 
-    return (branch_adv, branch_users, branch_lang, overall_adv,
-            branch_fp_raw, overall_fp_raw, total_raw, users, user_adv)
+    return (branch_fp_scores, branch_users, branch_lang, overall_fp_scores,
+            branch_fp_raw, overall_fp_raw, total_raw, users, user_fp_scores)
 
 
-def build_html(branch_adv, branch_users, branch_lang, overall_adv,
-               branch_fp_raw, overall_fp_raw, total_raw, users, user_adv, branch_names):
+def build_html(branch_fp_scores, branch_users, branch_lang, overall_fp_scores,
+               branch_fp_raw, overall_fp_raw, total_raw, users, user_fp_scores, branch_names):
     j = json.dumps
-    all_bcs = sorted(branch_adv.keys())
+    all_bcs = sorted(branch_fp_scores.keys())
     total_users = sum(len(v) for v in branch_users.values())
     total_en = sum(len(v["English"]) for v in branch_lang.values())
     total_mr = sum(len(v["Marathi"]) for v in branch_lang.values())
 
-    # Find highest-ADV FP overall
-    best_fp = max(FPS, key=lambda fp: overall_adv[fp])
+    # Find highest-scoring FP overall
+    best_fp = max(FPS, key=lambda fp: overall_fp_scores[fp])
 
     # ---- Overview FP cards ----
     fp_cards = ""
     for i, fp in enumerate(FPS):
-        adv = overall_adv[fp]
+        score = overall_fp_scores[fp]
         fp_cards += (
             '<div class="card" style="border-left:4px solid %s">'
             '<div class="label">%s: %s</div>'
             '<div class="value" style="color:%s">%.3f</div>'
-            '<div class="sub">ADV (0-1 scale)</div></div>'
-        ) % (FP_COLORS[i], fp, FP_NAMES[fp], FP_COLORS[i], adv)
+            '<div class="sub">Orientation Score (0-1)</div></div>'
+        ) % (FP_COLORS[i], fp, FP_NAMES[fp], FP_COLORS[i], score)
 
     # ---- Branch FP Profile table ----
     profile_rows = ""
@@ -163,8 +163,8 @@ def build_html(branch_adv, branch_users, branch_lang, overall_adv,
         n_users = len(branch_users[bc])
         en = len(branch_lang[bc]["English"])
         mr = len(branch_lang[bc]["Marathi"])
-        advs = [branch_adv[bc][fp] for fp in FPS]
-        hi_fp = FPS[advs.index(max(advs))] if max(advs) > 0 else "-"
+        scores = [branch_fp_scores[bc][fp] for fp in FPS]
+        hi_fp = FPS[scores.index(max(scores))] if max(scores) > 0 else "-"
         hi_idx = FPS.index(hi_fp) if hi_fp != "-" else 0
 
         cells = '<td><strong>%s</strong></td><td style="font-size:11px">%s</td>' % (bc, bname)
@@ -172,12 +172,12 @@ def build_html(branch_adv, branch_users, branch_lang, overall_adv,
         cells += '<td style="text-align:center;font-size:10px">%dE/%dM</td>' % (en, mr)
 
         for idx, fp in enumerate(FPS):
-            adv = branch_adv[bc][fp]
-            # Color intensity: 0..1 ADV maps to 0..0.4 opacity
-            intensity = min(adv * 0.4, 0.4)
+            fp_val = branch_fp_scores[bc][fp]
+            # Color intensity: 0..1 score maps to 0..0.4 opacity
+            intensity = min(fp_val * 0.4, 0.4)
             r, g, b_val = int(FP_COLORS[idx][1:3], 16), int(FP_COLORS[idx][3:5], 16), int(FP_COLORS[idx][5:7], 16)
             bg = "background:rgba(%d,%d,%d,%.2f)" % (r, g, b_val, intensity)
-            cells += '<td style="text-align:center;%s"><strong>%.3f</strong></td>' % (bg, adv)
+            cells += '<td style="text-align:center;%s"><strong>%.3f</strong></td>' % (bg, fp_val)
 
         hi_color = FP_COLORS[hi_idx]
         cells += '<td style="text-align:center;font-weight:700;color:%s">%s</td>' % (hi_color, hi_fp)
@@ -202,20 +202,20 @@ def build_html(branch_adv, branch_users, branch_lang, overall_adv,
         raw_rows += "<tr>%s</tr>" % cells
 
     # ---- Chart data ----
-    overall_adv_vals = j([round(overall_adv[fp], 3) for fp in FPS])
+    overall_fp_vals = j([round(overall_fp_scores[fp], 3) for fp in FPS])
 
-    # Grouped bar: branches x FP ADV
+    # Grouped bar: branches x FP orientation scores
     grouped_datasets = j([{
         "label": "%s: %s" % (fp, FP_NAMES[fp]),
-        "data": [round(branch_adv[bc][fp], 3) for bc in all_bcs],
+        "data": [round(branch_fp_scores[bc][fp], 3) for bc in all_bcs],
         "backgroundColor": FP_COLORS[i],
     } for i, fp in enumerate(FPS)])
 
-    # Doughnut: highest ADV FP distribution (count of branches where each FP is highest)
+    # Doughnut: dominant FP distribution (count of branches where each FP is highest)
     fp_highest_counts = {fp: 0 for fp in FPS}
     for bc in all_bcs:
-        advs = [branch_adv[bc][fp] for fp in FPS]
-        hi = FPS[advs.index(max(advs))] if max(advs) > 0 else None
+        scores = [branch_fp_scores[bc][fp] for fp in FPS]
+        hi = FPS[scores.index(max(scores))] if max(scores) > 0 else None
         if hi:
             fp_highest_counts[hi] += 1
     doughnut_vals = j([fp_highest_counts[fp] for fp in FPS])
@@ -223,11 +223,11 @@ def build_html(branch_adv, branch_users, branch_lang, overall_adv,
     # Per-branch radar data
     branch_radar = {}
     for bc in all_bcs:
-        branch_radar[bc] = [round(branch_adv[bc][fp], 3) for fp in FPS]
+        branch_radar[bc] = [round(branch_fp_scores[bc][fp], 3) for fp in FPS]
 
     # Build table headers (avoid backslash in f-strings)
     fp_th_profile = "".join(
-        '<th style="text-align:center;color:%s" onclick="sortTbl(%d,&quot;n&quot;,&quot;profileTable&quot;)">%s ADV</th>' % (FP_COLORS[i], 4 + i, fp)
+        '<th style="text-align:center;color:%s" onclick="sortTbl(%d,&quot;n&quot;,&quot;profileTable&quot;)">%s</th>' % (FP_COLORS[i], 4 + i, fp)
         for i, fp in enumerate(FPS)
     )
 
@@ -246,7 +246,7 @@ def build_html(branch_adv, branch_users, branch_lang, overall_adv,
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stage-1 Teacher Intent — ADV Dashboard</title>
+<title>Stage-1 Teacher Intent — FP Orientation Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 :root{--bg:#f5f6fa;--card:#fff;--border:#e0e3ea;--text:#1a1a2e;--muted:#6b7280;--blue:#2563eb;--green:#16a34a;--amber:#d97706;--red:#dc2626;--purple:#7c3aed;--teal:#0d9488;--radius:8px;--shadow:0 1px 3px rgba(0,0,0,.08)}
@@ -281,8 +281,8 @@ select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-si
 <body>
 
 <div class="header">
-<div><h1>Stage-1 Teacher Intent — Aspirational Depth (ADV)</h1>
-<div class="sub">ADV = mean(selectedOption) / 3 per FP section | setCodes: 1234 (EN) + 103 (MR) | Teachers Only</div></div>
+<div><h1>Stage-1 Teacher Intent — FP Orientation</h1>
+<div class="sub">Orientation Score = mean(selectedOption) / 3 per FP section | setCodes: 1234 (EN) + 103 (MR) | Teachers Only</div></div>
 <div style="text-align:right"><div style="font-size:12px;opacity:.7">Deccan Education Society</div>
 <div style="font-size:11px;opacity:.5">Generated: %(today)s</div></div></div>
 
@@ -298,26 +298,26 @@ select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-si
 <div class="cards">
 <div class="card"><div class="label">Teachers</div><div class="value" style="color:var(--blue)">%(total_users)d</div><div class="sub">%(total_en)d English + %(total_mr)d Marathi</div></div>
 <div class="card"><div class="label">Branches</div><div class="value" style="color:var(--teal)">%(n_branches)d</div><div class="sub">with teacher intent data</div></div>
-<div class="card"><div class="label">Highest ADV</div><div class="value" style="color:var(--green)">%(best_fp)s</div><div class="sub">%(best_fp_adv).3f across all teachers</div></div>
+<div class="card"><div class="label">Dominant FP</div><div class="value" style="color:var(--green)">%(best_fp)s</div><div class="sub">%(best_fp_score).3f across all teachers</div></div>
 %(fp_cards)s
 </div>
 
 <div class="info-box">
-<strong>Aspirational Depth Vector (ADV):</strong> For each FP section, ADV = mean(selectedOption) / 3.
-This ranges from 0 (shallowest) to 1 (deepest aspiration). Unlike raw counts, ADV is independent of the number of questions per FP section.
+<strong>FP Orientation Score</strong> = mean(selectedOption) / 3 per FP section. Higher = deeper orientation within that FP.
+This ranges from 0 to 1. Unlike raw counts, the orientation score is independent of the number of questions per FP section.
 <a href="./12b_stage1_leader_fp.html" style="font-weight:600">View Leader Dashboard &rarr;</a>
 </div>
 
 <div class="grid-2">
-<div class="chart-box"><h3>Overall ADV per FP Section</h3><canvas id="overallBar" height="250"></canvas></div>
-<div class="chart-box"><h3>Branches by Highest-ADV FP</h3><canvas id="overallDoughnut" height="250"></canvas></div>
+<div class="chart-box"><h3>Overall Orientation Score per FP Section</h3><canvas id="overallBar" height="250"></canvas></div>
+<div class="chart-box"><h3>Branches by Dominant FP</h3><canvas id="overallDoughnut" height="250"></canvas></div>
 </div>
 </div>
 
 <!-- BRANCH FP PROFILE -->
 <div id="profile" class="content">
-<h2 class="section-title">Branch FP Profile — ADV Values (0-1 scale)</h2>
-<div class="chart-box"><h3>ADV by Branch (grouped bar)</h3><canvas id="groupedBar" height="500"></canvas></div>
+<h2 class="section-title">Branch FP Profile — Orientation Scores (0-1 scale)</h2>
+<div class="chart-box"><h3>Orientation Score by Branch (grouped bar)</h3><canvas id="groupedBar" height="500"></canvas></div>
 <div class="tbl-wrap"><table id="profileTable">
 <thead><tr>
 <th onclick="sortTbl(0,'s','profileTable')">Branch</th><th>Name</th>
@@ -347,7 +347,7 @@ This ranges from 0 (shallowest) to 1 (deepest aspiration). Unlike raw counts, AD
 <div class="warn-box">
 <strong>Note:</strong> Raw counts reflect the question structure, not teacher orientation.
 FP3 and FP4 always have more counts because they have 5 questions each, while FP1, FP2, and FP5 have only 4 questions each.
-These counts are identical in proportion for every user. Use the ADV metric (Overview / Branch Profile tabs) for meaningful comparisons.
+These counts are identical in proportion for every user. Use the Orientation Score (Overview / Branch Profile tabs) for meaningful comparisons.
 </div>
 <div class="tbl-wrap"><table id="rawTable">
 <thead><tr>
@@ -358,7 +358,7 @@ These counts are identical in proportion for every user. Use the ADV metric (Ove
 </table></div>
 </div>
 
-<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px">Stage-1 Teacher Intent (ADV) | Project Kshitij | Myelin | %(today)s</div>
+<div style="text-align:center;padding:20px;color:var(--muted);font-size:11px">Stage-1 Teacher Intent (FP Orientation) | Project Kshitij | Myelin | %(today)s</div>
 
 <script>
 function showTab(id){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.content').forEach(c=>c.classList.remove('active'));event.target.classList.add('active');document.getElementById(id).classList.add('active')}
@@ -366,11 +366,11 @@ function sortTbl(col,type,tblId){var t=document.getElementById(tblId),b=t.queryS
 
 var FPS=%(fps_json)s, FP_NAMES=%(fp_names_json)s, FP_COLORS=%(fp_colors_json)s;
 
-new Chart(document.getElementById('overallBar'),{type:'bar',data:{labels:FP_NAMES,datasets:[{data:%(overall_adv_vals)s,backgroundColor:FP_COLORS}]},options:{plugins:{legend:{display:false}},scales:{y:{min:0,max:1,title:{display:true,text:'ADV (0-1)'}}}}});
+new Chart(document.getElementById('overallBar'),{type:'bar',data:{labels:FP_NAMES,datasets:[{data:%(overall_fp_vals)s,backgroundColor:FP_COLORS}]},options:{plugins:{legend:{display:false}},scales:{y:{min:0,max:1,title:{display:true,text:'Orientation Score (0-1)'}}}}});
 
-new Chart(document.getElementById('overallDoughnut'),{type:'doughnut',data:{labels:FP_NAMES,datasets:[{data:%(doughnut_vals)s,backgroundColor:FP_COLORS}]},options:{plugins:{legend:{position:'right'},title:{display:true,text:'# branches where this FP has highest ADV'}}}});
+new Chart(document.getElementById('overallDoughnut'),{type:'doughnut',data:{labels:FP_NAMES,datasets:[{data:%(doughnut_vals)s,backgroundColor:FP_COLORS}]},options:{plugins:{legend:{position:'right'},title:{display:true,text:'# branches where this FP is dominant'}}}});
 
-new Chart(document.getElementById('groupedBar'),{type:'bar',data:{labels:%(all_bcs_json)s,datasets:%(grouped_datasets)s},options:{indexAxis:'y',scales:{x:{min:0,max:1,title:{display:true,text:'ADV (0-1)'}}},plugins:{legend:{position:'top'}}}});
+new Chart(document.getElementById('groupedBar'),{type:'bar',data:{labels:%(all_bcs_json)s,datasets:%(grouped_datasets)s},options:{indexAxis:'y',scales:{x:{min:0,max:1,title:{display:true,text:'Orientation Score (0-1)'}}},plugins:{legend:{position:'top'}}}});
 
 var BRANCH_RADAR=%(branch_radar_json)s;
 var radarChart=new Chart(document.getElementById('radarChart'),{type:'radar',data:{labels:FPS,datasets:[]},options:{scales:{r:{min:0,max:1,ticks:{stepSize:0.2}}}}});
@@ -393,7 +393,7 @@ function updateRadar(){
         "total_mr": total_mr,
         "n_branches": len(all_bcs),
         "best_fp": best_fp,
-        "best_fp_adv": overall_adv[best_fp],
+        "best_fp_score": overall_fp_scores[best_fp],
         "fp_cards": fp_cards,
         "fp_th_profile": fp_th_profile,
         "fp_th_raw": fp_th_raw,
@@ -403,7 +403,7 @@ function updateRadar(){
         "fps_json": j(FPS),
         "fp_names_json": j(["%s: %s" % (fp, FP_NAMES[fp]) for fp in FPS]),
         "fp_colors_json": j(FP_COLORS),
-        "overall_adv_vals": j([round(overall_adv[fp], 3) for fp in FPS]),
+        "overall_fp_vals": j([round(overall_fp_scores[fp], 3) for fp in FPS]),
         "doughnut_vals": j([fp_highest_counts[fp] for fp in FPS]),
         "all_bcs_json": j(all_bcs),
         "grouped_datasets": grouped_datasets,
@@ -412,16 +412,16 @@ function updateRadar(){
 
 
 def main():
-    print("Loading Stage-1 Teacher intent data (ADV)...")
-    (branch_adv, branch_users, branch_lang, overall_adv,
-     branch_fp_raw, overall_fp_raw, total_raw, users, user_adv) = load_data()
+    print("Loading Stage-1 Teacher intent data (FP Orientation)...")
+    (branch_fp_scores, branch_users, branch_lang, overall_fp_scores,
+     branch_fp_raw, overall_fp_raw, total_raw, users, user_fp_scores) = load_data()
     branch_names = load_branch_names()
     total_users = sum(len(v) for v in branch_users.values())
-    print("  %d teachers, %d branches" % (total_users, len(branch_adv)))
+    print("  %d teachers, %d branches" % (total_users, len(branch_fp_scores)))
     for fp in FPS:
-        print("  %s ADV = %.3f" % (fp, overall_adv[fp]))
-    html = build_html(branch_adv, branch_users, branch_lang, overall_adv,
-                      branch_fp_raw, overall_fp_raw, total_raw, users, user_adv, branch_names)
+        print("  %s Orientation = %.3f" % (fp, overall_fp_scores[fp]))
+    html = build_html(branch_fp_scores, branch_users, branch_lang, overall_fp_scores,
+                      branch_fp_raw, overall_fp_raw, total_raw, users, user_fp_scores, branch_names)
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w") as f:
         f.write(html)
