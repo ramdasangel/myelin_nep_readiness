@@ -26,6 +26,14 @@ FP_NAMES = {
 FPS = ["FP1", "FP2", "FP3", "FP4", "FP5"]
 FP_COLORS = ["#3b82f6", "#8b5cf6", "#10b981", "#f59e0b", "#ef4444"]
 
+# Questions per FP in each instrument (for normalization)
+# Teacher EN (1234): FP1=4, FP2=4, FP3=5, FP4=5, FP5=4 (22 total)
+# Teacher MR (103):  same structure → 22 Qs
+# Leader EN (7890):  FP1=3, FP2=5, FP3=6, FP4=3, FP5=3 (20 total)
+# Leader MR (104):   same structure → 20 Qs
+TEACHER_QS_PER_FP = {"FP1": 4, "FP2": 4, "FP3": 5, "FP4": 5, "FP5": 4}
+LEADER_QS_PER_FP = {"FP1": 3, "FP2": 5, "FP3": 6, "FP4": 3, "FP5": 3}
+
 # Goal → FP mappings
 TEACHER_GOAL_FP = {
     "Each Child is Unique": "FP1", "Competency-Based Learning": "FP2",
@@ -91,9 +99,17 @@ def load_data():
                     continue
 
                 if uid not in users:
-                    users[uid] = {"bc": bc, "role": csv_role, "lang": lang, "fp_votes": defaultdict(int), "responses": 0}
+                    users[uid] = {"bc": bc, "role": csv_role, "lang": lang,
+                                  "fp_votes": defaultdict(int), "fp_opt_values": defaultdict(list),
+                                  "responses": 0}
                 users[uid]["fp_votes"][fp] += 1
                 users[uid]["responses"] += 1
+                # Store selectedOption value per FP for ADV computation
+                try:
+                    opt_val = int(row.get("selectedOption", ""))
+                    users[uid]["fp_opt_values"][fp].append(opt_val)
+                except (ValueError, TypeError):
+                    pass
 
     return users
 
@@ -106,9 +122,32 @@ def build_html(users, branch_names):
     all_bcs = sorted(set(u["bc"] for u in users.values()))
 
     def get_dominant_fp(u):
-        if not u["fp_votes"]:
-            return "FP1"
-        return max(u["fp_votes"], key=u["fp_votes"].get)
+        """
+        Dominant FP using ADV (Aspirational Depth Vector) method.
+        ADV[FP] = mean(selectedOption for responses tagged with that FP) / 3.
+        Higher ADV = deeper aspiration for that FP.
+        This correctly handles unequal question-per-FP distributions.
+        """
+        fp_opts = u.get("fp_opt_values", {})
+        if not fp_opts:
+            # Fallback to raw vote count
+            if not u["fp_votes"]:
+                return "FP1"
+            return max(u["fp_votes"], key=u["fp_votes"].get)
+        adv = {}
+        for fp in FPS:
+            opts = fp_opts.get(fp, [])
+            adv[fp] = (sum(opts) / (len(opts) * 3.0)) if opts else 0.0
+        return max(adv, key=adv.get)
+
+    def get_fp_adv(u):
+        """Return ADV dict for a user."""
+        fp_opts = u.get("fp_opt_values", {})
+        adv = {}
+        for fp in FPS:
+            opts = fp_opts.get(fp, [])
+            adv[fp] = round((sum(opts) / (len(opts) * 3.0)) if opts else 0.0, 4)
+        return adv
 
     # ── Overall FP distribution ──
     def fp_dist(user_set):
